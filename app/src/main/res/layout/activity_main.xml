@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/lin1"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+    <RadioGroup
+        android:id="@+id/rg_main_tab"
+        android:layout_width="fill_parent"
+        android:layout_height="56dp"
+        android:paddingTop="5dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+       >
+
+        <RadioButton
+            android:id="@+id/tab_01"
+            style="@style/ac_main_tab_style"
+            android:checked="true"
+            android:textColor="@drawable/selecter_main_text"
+            android:drawableTop="@drawable/selecter_main_drawable"
+            android:text="消息"/>
+
+        <RadioButton
+            android:id="@+id/tab_02"
+            style="@style/ac_main_tab_style"
+            android:textColor="@drawable/selecter_main_text"
+            android:drawableTop="@drawable/selecter_main_drawable"
+            android:text="总览"/>
+        <ImageView
+            android:src="@drawable/icon_center"
+            android:id="@+id/tv_center"
+            style="@style/ac_main_tab_style"
+            android:layout_margin="10dp"
+           />
+
+        <RadioButton
+            android:id="@+id/tab_03"
+            style="@style/ac_main_tab_style"
+            android:textColor="@drawable/selecter_main_text"
+
+            android:drawableTop="@drawable/selecter_main_drawable"
+            android:text="设备"/>
+        <RadioButton
+            android:id="@+id/tab_04"
+            style="@style/ac_main_tab_style"
+            android:textColor="@drawable/selecter_main_text"
+
+            android:drawableTop="@drawable/selecter_main_drawable"
+            android:text="我的"/>
+    </RadioGroup>
+
+
+
+</LinearLayout>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">app</string>
+    <string name="msg">开奖时间间隔设定</string>
+    <string name="et_put">本期投注金额</string>
+    <string name="btn_confirm">确定</string>
+    <string name="et_put_number">投注数字</string>
+    <string name="btn_confirm2">增额投注</string>
+</resources>
