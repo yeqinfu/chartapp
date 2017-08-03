@@ -21,6 +21,7 @@ class FG_OverView :FG_Base(){
             it.minValue=0f
             it.maxValue=100f
         }
+
         add.setOnClickListener {
             val resources = resources
             val values = ArrayList<FitChartValue>()
