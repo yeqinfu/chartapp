@@ -13,6 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <FrameLayout
@@ -91,6 +93,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Add Values"/>
+
+            <com.ppandroid.app.graphical.demoview.PieChart01View
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
             
         </LinearLayout>
     </ScrollView>
