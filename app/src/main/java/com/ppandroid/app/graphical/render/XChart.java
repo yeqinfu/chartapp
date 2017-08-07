@@ -191,7 +191,7 @@ public class XChart implements IRender {
 	 * 返回主图表区基类
 	 * 
 	 * @return 主图表区基类
-	 */
+	 *///
 	public PlotArea getPlotArea() {
 		if(null == plotArea)plotArea = new PlotAreaRender();
 		return plotArea;

@@ -33,6 +33,7 @@ import android.view.MotionEvent;
 import com.ppandroid.app.graphical.chart.PieChart;
 import com.ppandroid.app.graphical.chart.PieData;
 import com.ppandroid.app.graphical.common.DensityUtil;
+import com.ppandroid.app.graphical.common.MathHelper;
 import com.ppandroid.app.graphical.event.click.ArcPosition;
 import com.ppandroid.app.graphical.render.XEnum;
 import com.ppandroid.app.graphical.render.info.PlotLegend;
@@ -49,7 +50,7 @@ public class PieChart01View extends DemoView implements Runnable{
 	
 	private String TAG = "PieChart01View";
 	private PieChart chart = new PieChart();
-	private ArrayList<PieData> chartData = new ArrayList<PieData>();
+	private ArrayList<PieData> chartData = new ArrayList();
 	private int mSelectedID = -1;
 	
 
@@ -100,8 +101,8 @@ public class PieChart01View extends DemoView implements Runnable{
 			//chart.setInitialAngle(90);	
 			
 			//标签显示(隐藏，显示在中间，显示在扇区外面)
-			chart.setLabelStyle(XEnum.SliceLabelStyle.INSIDE);
-			chart.getLabelPaint().setColor(Color.WHITE);
+			chart.setLabelStyle(XEnum.SliceLabelStyle.OUTSIDE);
+			chart.getLabelPaint().setColor(Color.RED);
 			
 			//标题
 			chart.setTitle("饼图-Pie Chart");
@@ -206,9 +207,8 @@ public class PieChart01View extends DemoView implements Runnable{
 		  
 	}
 	
-	/*
-	 * 另一种动画
-	private void chartAnimation()
+	// * 另一种动画
+	private void chartAnimation2()
 	{
 		  try {       
 			 
@@ -251,8 +251,7 @@ public class PieChart01View extends DemoView implements Runnable{
           }       
 		  
 	}
-	*/
-		
+
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
