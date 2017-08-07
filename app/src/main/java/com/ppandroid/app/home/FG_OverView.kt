@@ -31,6 +31,9 @@ class FG_OverView :FG_Base(){
         btn_start.setOnClickListener {
             v_dount_view.startAnim()
         }
+        btn_hp.setOnClickListener {
+            v_hp.startAnim()
+        }
     }
 
 }
