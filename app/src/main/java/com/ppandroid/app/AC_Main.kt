@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import com.ppandroid.app.base.AC_ContentFG
+import com.ppandroid.app.home.FG_Center
 import com.ppandroid.app.home.FG_Devices
 import com.ppandroid.app.home.FG_News
 import com.ppandroid.app.home.FG_OverView
@@ -30,7 +31,7 @@ class AC_Main : AppCompatActivity() {
             }
         }
         tv_center.setOnClickListener {
-            toast("TODO...")
+           startAC(FG_Center::class.java.name)
         }
     }
 
