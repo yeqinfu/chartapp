@@ -28,6 +28,9 @@ class FG_OverView :FG_Base(){
             values.add(FitChartValue(40f, resources.getColor(R.color.chart_value_1)))
             fitChart?.setValues(values)
         }
+        btn_start.setOnClickListener {
+            v_dount_view.startAnim()
+        }
     }
 
 }
