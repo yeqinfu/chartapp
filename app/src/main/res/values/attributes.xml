@@ -33,4 +33,12 @@
             <enum name="overdraw" value="1" />
         </attr>
     </declare-styleable>
+    <declare-styleable name="headview">
+        <attr name="backText" format="string|reference" />
+        <attr name="centerText" format="string|reference" />
+        <attr name="titleTheme">
+            <enum name="white" value="0" />
+            <enum name="black" value="1" />
+        </attr>
+    </declare-styleable>
 </resources>

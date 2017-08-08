@@ -25,4 +25,5 @@
     <color name="chart_value_3">#8fc026</color>
     <color name="chart_value_4">#B5CC84</color>
     <color name="white">@android:color/white</color>
+    <color name="orange">#FC9426</color>
 </resources>
