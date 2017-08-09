@@ -4,10 +4,42 @@
               android:background="@color/color_05"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/textView3"
+    <RelativeLayout
+        android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="devices"/>
+        android:gravity="center"
+        android:layout_height="44dp">
+        <TextView
+            android:layout_centerInParent="true"
+            android:id="@+id/tv_center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="设备列表"
+            android:textSize="18sp"/>
+        <ImageView
+            android:id="@+id/iv_setting"
+            android:layout_marginRight="15dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/icon_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+    <View
+        android:background="#EAEAEA"
+        android:layout_width="match_parent"
+        android:layout_height="7dp"/>
+    <ExpandableListView
+        android:id="@+id/lv_ex"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="#00000000"
+        android:divider="#EAEAEA"
+        android:dividerHeight="7dp"
+        android:childDivider="@color/color_03">
+    </ExpandableListView>
+
+
 </LinearLayout>

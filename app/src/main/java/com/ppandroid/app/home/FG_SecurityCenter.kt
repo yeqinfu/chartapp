@@ -90,7 +90,7 @@ class FG_SecurityCenter:FG_Base(){
         rl_content.getLocationInWindow(location) //获取在当前窗口内的绝对坐标
         // view 移动
         val out = ObjectAnimator.ofFloat(ll_before, "translationY",0f, ll_content.height.toFloat())
-        val int = ObjectAnimator.ofFloat(ll_after, "translationY",ll_content.height.toFloat(),0f  )
+        val int = ObjectAnimator.ofFloat(ll_after, "translationY",ll_content.height.toFloat(),-200f  )
         val animator3 = ObjectAnimator.ofFloat(tv_score, "textSize",px2sp(tv_score.textSize).toFloat(),(px2sp(tv_score.textSize)-6).toFloat())
         val animator4 = ObjectAnimator.ofFloat(rl_move, "translationY",0f,-head_view.height.toFloat())
         out.duration=500

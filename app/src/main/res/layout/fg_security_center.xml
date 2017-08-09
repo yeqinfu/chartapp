@@ -88,7 +88,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"
-                    android:src="@drawable/icon_check"/>
+                    android:src="@drawable/icon_ok"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -113,7 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"
-                    android:src="@drawable/icon_check"/>
+                    android:src="@drawable/icon_ok"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -138,7 +138,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"
-                    android:src="@drawable/icon_check"/>
+                    android:src="@drawable/icon_ok"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -163,7 +163,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"
-                    android:src="@drawable/icon_check"/>
+                    android:src="@drawable/icon_ok"/>
 
                 <TextView
                     android:layout_width="0dp"
