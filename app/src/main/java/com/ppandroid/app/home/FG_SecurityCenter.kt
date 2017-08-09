@@ -34,6 +34,7 @@ class FG_SecurityCenter:FG_Base(){
             override fun change(progress: Float) {
                 async {
                     uiThread {
+
                         tv_score.text=(progress*100).toInt().toString()
                         if (progress>=0.99){
                             ll_content.setBackgroundResource(R.color.orange)

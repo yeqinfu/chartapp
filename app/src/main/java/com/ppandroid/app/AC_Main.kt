@@ -22,6 +22,7 @@ class AC_Main : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         rg_main_tab.setOnCheckedChangeListener { radioGroup, i ->
             when (i) {
                 R.id.tab_01 -> replaceTab(0)
@@ -30,6 +31,13 @@ class AC_Main : AppCompatActivity() {
                 R.id.tab_04 -> replaceTab(3)
             }
         }
+        tab_01.postDelayed(object :Runnable{
+            override fun run() {
+                tab_01.isChecked=true
+            }
+
+        },500)
+
         tv_center.setOnClickListener {
            startAC(FG_Center::class.java.name)
         }
