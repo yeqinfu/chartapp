@@ -5,6 +5,7 @@ import com.ppandroid.app.widget.wheelview.FitChartHalf
 import com.ppandroid.app.widget.wheelview.FitChartValue
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_over_view.*
+import kotlinx.android.synthetic.main.yellowchartview.*
 import org.jetbrains.anko.find
 import java.util.*
 
@@ -21,7 +22,9 @@ class FG_OverView :FG_Base(){
             it.minValue=0f
             it.maxValue=100f
         }
-
+        btn_start_anim.setOnClickListener {
+            v_yellow_chart.startAnim()
+        }
         add.setOnClickListener {
             val resources = resources
             val values = ArrayList<FitChartValue>()

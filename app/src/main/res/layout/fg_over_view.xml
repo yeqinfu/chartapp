@@ -19,6 +19,14 @@
             android:gravity="center"
             android:orientation="vertical">
 
+
+           <include layout="@layout/yellowchartview"/>
+            <Button
+                android:id="@+id/btn_start_anim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="START"/>
+
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">

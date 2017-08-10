@@ -300,7 +300,7 @@ public class XEnum {
 		 * 动态线类型 
 		 * Cross 指定交叉的水平线和垂直线。
 		 * BackwardDiagonal 从右上到左下的对角线的线条图案。
-		 * Vertical		垂直线
+		 * VerticalView		垂直线
 		 * Horizontal 水平线
 		 * @author XCL
 		 *

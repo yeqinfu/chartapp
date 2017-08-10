@@ -34,22 +34,32 @@ class FG_SecurityCenter:FG_Base(){
             override fun change(progress: Float) {
                 async {
                     uiThread {
+                            isDestroy?.let {
+                                if (it){
+                                }else{
+                                    tv_score.text=(progress*100).toInt().toString()
+                                    if (progress>=0.99){
+                                        ll_content.setBackgroundResource(R.color.orange)
+                                        rotate?.cancel()
+                                        iv_check.setImageResource(R.drawable.icon_ok)
+                                        iv_check2.setImageResource(R.drawable.icon_ok)
+                                        iv_check3.setImageResource(R.drawable.icon_ok)
+                                        changeView()
 
-                        tv_score.text=(progress*100).toInt().toString()
-                        if (progress>=0.99){
-                            ll_content.setBackgroundResource(R.color.orange)
-                            rotate?.cancel()
-                            iv_check.setImageResource(R.drawable.icon_ok)
-                            iv_check2.setImageResource(R.drawable.icon_ok)
-                            iv_check3.setImageResource(R.drawable.icon_ok)
-                            changeView()
-
-                        }
+                                    }
+                                }
+                            }
                     }
                 }
             }
         }
         excute()
+    }
+
+    private var isDestroy=false
+    override fun onDestroy() {
+        isDestroy=true
+        super.onDestroy()
     }
 
     private fun excute() {
