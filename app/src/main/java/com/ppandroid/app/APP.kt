@@ -2,6 +2,8 @@ package com.ppandroid.im
 
 import android.app.Application
 import android.content.Context
+import android.content.Intent
+import com.ppandroid.app.AC_Login
 import com.ppandroid.app.utils.AppExceptionHandler
 import org.greenrobot.eventbus.EventBus
 
@@ -18,6 +20,11 @@ class APP : Application() {
         fun getContext(): Context? {
             return context
         }
+        fun toLogin(){
+            var it= Intent()
+            it.setClass(context,AC_Login::class.java)
+            context?.startActivity(it)
+        }
     }
 
     override fun onCreate() {
@@ -32,6 +39,7 @@ class APP : Application() {
         }
         super.onCreate()
     }
+
 
 
 }

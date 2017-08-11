@@ -13,6 +13,7 @@ public class BN_Vertical {
 	float	realHeight=0.0f;
 	int		lineColor	= Color.WHITE;
 
+
 	public String getTopText() {
 		return topText;
 	}

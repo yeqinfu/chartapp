@@ -7,4 +7,6 @@
     <string name="btn_confirm2">增额投注</string>
     <string name="company_name">福建省一山还比一山高公司</string>
     <string name="str_msg_energy">能耗信息</string>
+    <string name="service_error">服务器异常</string>
+    <string name="token_invalid">登录过期请从新登陆！</string>
 </resources>

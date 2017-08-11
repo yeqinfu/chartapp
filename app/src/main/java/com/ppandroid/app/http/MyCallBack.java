@@ -1,12 +1,12 @@
 package com.ppandroid.app.http;
 
-import com.ppandroid.im.bean.BN_Base;
+import com.ppandroid.im.bean.BaseBody;
 
 /**
  * Created by yeqinfu on 2017/7/31.
  */
 
-public interface MyCallBack<T extends BN_Base> {
+public interface MyCallBack<T extends BaseBody> {
 	void onResponse(T response);
-	void  onError(BN_Base error);
+	void  onError(BaseBody error);
 }

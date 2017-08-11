@@ -8,7 +8,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 
 import com.ppandroid.app.R;
-import com.ppandroid.app.graphical.view.GraphicalView;
+import com.ppandroid.app.widget.graphical.view.GraphicalView;
 
 /**
  * Created by yeqinfu on 2017/8/7.

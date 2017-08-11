@@ -727,6 +727,7 @@
                 android:textSize="@dimen/time_text"/>
 
             <LinearLayout
+                android:orientation="vertical"
                 android:paddingBottom="30dp"
                 android:paddingTop="37dp"
                 android:background="@color/color_08"
@@ -735,6 +736,14 @@
                 android:layout_height="wrap_content">
                 <ImageView
                     android:src="@drawable/icon_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_marginTop="6dp"
+                    android:textSize="@dimen/bar_title"
+                    android:textColor="@color/color_04"
+                    android:text="自定义模块"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
