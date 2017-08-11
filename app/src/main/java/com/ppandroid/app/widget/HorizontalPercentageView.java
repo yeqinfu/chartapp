@@ -1,11 +1,13 @@
 package com.ppandroid.app.widget;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 
+import com.ppandroid.app.R;
 import com.ppandroid.app.graphical.view.GraphicalView;
 
 /**
@@ -23,12 +25,23 @@ public class HorizontalPercentageView extends GraphicalView implements Runnable 
 
     public HorizontalPercentageView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        readAttributes(attrs);
         init();
     }
 
     public HorizontalPercentageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        readAttributes(attrs);
         init();
+    }
+
+    private void readAttributes(AttributeSet attrs) {
+        if (attrs != null) {
+            TypedArray attributes = getContext()
+                    .getTheme().obtainStyledAttributes(attrs, R.styleable.verticalview, 0, 0);
+            colorId=attributes.getColor(R.styleable.verticalview_lineColor,getResources().getColor(R.color.color_01));
+            attributes.recycle();
+        }
     }
 
     private int colorId=Color.RED;
