@@ -1,5 +1,6 @@
 package com.ppandroid.app.http;
 
+import com.ppandroid.app.bean.ErrorBody;
 import com.ppandroid.im.bean.BaseBody;
 
 /**
@@ -8,5 +9,5 @@ import com.ppandroid.im.bean.BaseBody;
 
 public interface MyCallBack<T extends BaseBody> {
 	void onResponse(T response);
-	void  onError(BaseBody error);
+	void  onError(ErrorBody error);
 }

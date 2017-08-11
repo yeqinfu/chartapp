@@ -54,7 +54,8 @@ public class OKUtils {
                 if (isGoodJson(response)){
                     ErrorBody errorBody = parseErrorBody(response);
                     if (errorBody==null){
-                        callBack.onResponse((T) parseJson(response,tt));
+                        Gson gson = new Gson();
+                        callBack.onResponse(gson.fromJson(response,tt));
                     }else{
                         callBack.onError(errorBody);
                         parseError(mWeakContext.get(), errorBody);
