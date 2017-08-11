@@ -5,4 +5,6 @@
     <string name="btn_confirm">确定</string>
     <string name="et_put_number">投注数字</string>
     <string name="btn_confirm2">增额投注</string>
+    <string name="company_name">福建省一山还比一山高公司</string>
+    <string name="str_msg_energy">能耗信息</string>
 </resources>

@@ -3,10 +3,30 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/color_05"
+              android:background="@color/white"
               android:gravity="center"
               android:orientation="vertical"
-              android:padding="8dp">
+    >
+    <!--title bar-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/company_name"
+            android:textColor="@color/color_07"
+            android:textSize="@dimen/bar_title"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/color_03"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -19,30 +39,54 @@
             android:gravity="center"
             android:orientation="vertical">
 
-
-           <include layout="@layout/yellowchartview"/>
-            <Button
-                android:id="@+id/btn_start_anim"
+            <!--能耗信息-->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="START"/>
+                android:gravity="center"
+                android:orientation="horizontal">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_energy"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="39dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:text="@string/str_msg_energy"
+                    android:textColor="@color/color_07"
+                    android:textSize="@dimen/first_title"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_03"/>
+
+            <!--能耗图表-->
             <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
 
+                <!--图表-->
                 <com.ppandroid.app.widget.wheelview.FitChartHalf
                     android:id="@+id/fitChart"
-                    style="@style/chart_style"
+                    android:layout_width="217dp"
+                    android:layout_height="180dp"
                     android:layout_gravity="center"
                     app:animationMode="overdraw"
-                    app:strokeSize="10dp"/>
+                    app:strokeSize="10dp"
+                    app:valueStrokeColor="@color/color_01"/>
 
+                <!--图表上戳-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -52,22 +96,23 @@
                         android:gravity="center"
                         android:maxWidth="200dp"
                         android:text="今日用电"
-                        android:textColor="#212121"
-                        android:textSize="14sp"/>
+                        android:textColor="@color/color_07"
+                        android:textSize="@dimen/normal_text"/>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="45dp"
+                        android:layout_marginTop="20dp"
                         android:gravity="center">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:gravity="bottom"
                             android:text="24.54"
-                            android:textColor="@color/chart_value_1"
-                            android:textSize="30sp"/>
+                            android:textColor="@color/color_01"
+                            android:textSize="46sp"/>
 
                         <TextView
                             android:id="@+id/textView2"
@@ -75,7 +120,8 @@
                             android:layout_height="match_parent"
                             android:gravity="bottom"
                             android:padding="4dp"
-                            android:text="万kwh"/>
+                            android:text="万kwh"
+                            android:textColor="@color/color_01"/>
 
                     </LinearLayout>
 
@@ -85,8 +131,8 @@
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:text="累计：144765元"
-                        android:textColor="#757575"
-                        android:textSize="15sp"/>
+                        android:textColor="@color/color_04"
+                        android:textSize="@dimen/bar_title"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -94,60 +140,513 @@
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:text="碳排放：192612.3kg"
-                        android:textColor="#757575"
-                        android:textSize="15sp"/>
+                        android:textColor="@color/color_04"
+                        android:textSize="@dimen/bar_title"/>
 
                 </LinearLayout>
             </FrameLayout>
 
-            <Button
-                android:id="@+id/add"
-                android:layout_width="wrap_content"
+
+            <!--表格信息-->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Add Values"/>
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="75dp"
+                android:orientation="horizontal">
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-
-                <com.ppandroid.app.graphical.demoview.DountChart01View
-                    android:id="@+id/v_dount_view"
-                    android:layout_centerInParent="true"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:background="@color/white"/>
+                <!--第一栏-->
                 <LinearLayout
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:layout_centerInParent="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:text="本日用电"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_huan"/>
+
                     <TextView
-                        android:text="10.39"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="37dp"
+                        android:drawablePadding="6dp"
+                        android:drawableRight="@drawable/icon_down_yellow"
+                        android:gravity="center"
+                        android:text="9%"
+                        android:textColor="@color/color_07"
+                        android:textSize="@dimen/normal_text"/>
+
                     <TextView
-                        android:text="万kwh"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:text="环比昨日"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/icon_tong"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="37dp"
+                        android:drawablePadding="6dp"
+                        android:drawableRight="@drawable/icon_up_blue"
+                        android:gravity="center"
+                        android:text="6%"
+                        android:textColor="@color/color_07"
+                        android:textSize="@dimen/normal_text"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="同比上月"/>
+
                 </LinearLayout>
 
+                <!--第二栏-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_huan"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="37dp"
+                        android:drawablePadding="6dp"
+                        android:drawableRight="@drawable/icon_up_blue"
+                        android:gravity="center"
+                        android:text="35%"
+                        android:textColor="@color/color_07"
+                        android:textSize="@dimen/normal_text"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="环比上月"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/icon_tong"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="37dp"
+                        android:drawablePadding="6dp"
+                        android:drawableRight="@drawable/icon_down_yellow"
+                        android:gravity="center"
+                        android:text="0%"
+                        android:textColor="@color/color_07"
+                        android:textSize="@dimen/normal_text"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="同比去年"/>
+
+                </LinearLayout>
+
+                <!--第三栏-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_dian"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="37dp"
+                        android:gravity="center"
+                        android:text="334.83万kwh"
+                        android:textColor="@color/color_07"
+                        android:textSize="@dimen/normal_text"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="本月用能"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/icon_qian"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="37dp"
+                        android:drawablePadding="6dp"
+                        android:drawableRight="@drawable/icon_up_blue"
+                        android:gravity="center"
+                        android:text="197.55万元"
+                        android:textColor="@color/color_07"
+                        android:textSize="@dimen/normal_text"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="本月累计"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/color_03"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="查看更多"
+                android:textColor="@color/color_04"
+                android:textSize="@dimen/time_text"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="7dp"
+                android:background="@color/color_08"/>
+
+
+            <!--分享用电统计-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_share_statistics"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="39dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:text="分享用电统计"
+                    android:textColor="@color/color_07"
+                    android:textSize="@dimen/first_title"/>
+            </LinearLayout>
+
+            <!--分享用电统计viewpager 统计图-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="165dp">
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+                <ImageView
+                    android:id="@+id/iv_next"
+                    android:layout_marginRight="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_forward"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <ImageView
+                    android:id="@+id/iv_forward"
+                    android:layout_marginLeft="15dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
             </RelativeLayout>
+
+            <!--分享用电统计数据详情-->
+
+            <LinearLayout
+                android:paddingRight="15dp"
+                android:paddingLeft="15dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="47dp">
+                    <ImageView
+                        android:src="@drawable/icon_gaoya"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/time_text"
+                        android:textColor="@color/color_07"
+                        android:text="高压离心空压机"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/time_text"
+                        android:textColor="@color/color_07"
+                        android:text="3800万kwh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/color_03"/>
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="47dp">
+                    <ImageView
+                        android:src="@drawable/icon_gaoya02"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/time_text"
+                        android:textColor="@color/color_07"
+                        android:text="高压离心式制冷机"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/time_text"
+                        android:textColor="@color/color_07"
+                        android:text="3800kwh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/color_03"/>
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="47dp">
+                    <ImageView
+                        android:src="@drawable/icon_gaoya03"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/time_text"
+                        android:textColor="@color/color_07"
+                        android:text="高压冷却水泵"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/time_text"
+                        android:textColor="@color/color_07"
+                        android:text="3800kwh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/color_03"/>
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="47dp">
+                    <ImageView
+                        android:src="@drawable/icon_gaoya04"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/time_text"
+                        android:textColor="@color/color_07"
+                        android:text="高压寿力螺杆空压机"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/time_text"
+                        android:textColor="@color/color_07"
+                        android:text="3800kwh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/color_03"/>
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="47dp">
+                    <ImageView
+                        android:src="@drawable/icon_gaoya05"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/time_text"
+                        android:textColor="@color/color_07"
+                        android:text="空调系统冷却塔"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/time_text"
+                        android:textColor="@color/color_07"
+                        android:text="3800kwh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/color_03"/>
+
+            </LinearLayout>
+            <!--查看更多-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="查看更多"
+                android:textColor="@color/color_04"
+                android:textSize="@dimen/time_text"/>
+
+            <!--分割-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="7dp"
+                android:background="@color/color_08"/>
+
+            <!--区域用电统计-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_quyu"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="39dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:text="区域用电统计"
+                    android:textColor="@color/color_07"
+                    android:textSize="@dimen/first_title"/>
+            </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <com.ppandroid.app.widget.MultipleVerticalView
+                android:id="@+id/v_multiple_view"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@color/chart_value_1"/>
+
             <Button
-                android:id="@+id/btn_start"
+                android:id="@+id/btn_multi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="START"/>
+
+            <include layout="@layout/yellowchartview"/>
+
+            <Button
+                android:id="@+id/btn_start_anim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="START"/>
+
+
+
+
+
             <com.ppandroid.app.widget.HorizontalPercentageView
                 android:id="@+id/v_hp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+
             <Button
                 android:id="@+id/btn_hp"
                 android:layout_width="match_parent"
@@ -155,8 +654,6 @@
                 android:text="START"/>
         </LinearLayout>
     </ScrollView>
-
-
 
 
 </LinearLayout>

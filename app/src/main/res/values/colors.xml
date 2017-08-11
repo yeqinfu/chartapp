@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- 1号 APP基础色 -->
-    <color name="color_01">#ff1632</color>
+    <color name="color_01">#FF6308</color>
     <!-- 2号  文字-->
     <color name="color_02">#4b4b4b</color>
     <!-- 3号  分割线-->
@@ -13,6 +13,11 @@
     <color name="color_05">#fafafa</color>
     <!-- 6号 -->
     <color name="color_06">#c5c5c5</color>
+    <!-- 7号 -->
+    <color name="color_07">#1b1b1b</color>
+    <!-- 8号 -->
+    <color name="color_08">#EBEBEB</color>
+
 
     <color name="default_back_color">@android:color/transparent</color>
     <color name="default_back_stroke_color">#f0f0f0</color>
