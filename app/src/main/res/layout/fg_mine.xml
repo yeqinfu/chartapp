@@ -6,10 +6,27 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <ImageView
-        android:src="@drawable/pic_youling"
-        android:id="@+id/textView4"
+
+    <com.ppandroid.app.widget.MultipleVerticalView
+        android:id="@+id/v_multiple_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/chart_value_1"/>
+
+    <Button
+        android:id="@+id/btn_multi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="mine"/>
+        android:text="START"/>
+
+    <include layout="@layout/yellowchartview"/>
+
+    <Button
+        android:id="@+id/btn_start_anim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="START"/>
+
+
+
 </LinearLayout>

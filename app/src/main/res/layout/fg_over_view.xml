@@ -595,63 +595,173 @@
                     android:textColor="@color/color_07"
                     android:textSize="@dimen/first_title"/>
             </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <com.ppandroid.app.widget.MultipleVerticalView
-                android:id="@+id/v_multiple_view"
+            <com.ppandroid.app.widget.common.PagerSlidingTab
+                android:id="@+id/title_indicator"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@color/chart_value_1"/>
-
-            <Button
-                android:id="@+id/btn_multi"
+                android:layout_height="40dp"
+                android:background="@color/white"/>
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="START"/>
+                android:layout_height="0.5dp"
+                android:background="@color/color_03"/>
 
-            <include layout="@layout/yellowchartview"/>
+            <android.support.v4.view.ViewPager
+                android:id="@+id/view_pager_energy"
+                android:layout_width="match_parent"
+                android:layout_height="131dp"
+              />
+            <!--查看更多-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="查看更多"
+                android:textColor="@color/color_04"
+                android:textSize="@dimen/time_text"/>
 
-            <Button
-                android:id="@+id/btn_start_anim"
+            <!--分割-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="7dp"
+                android:background="@color/color_08"/>
+
+            <!--重点设备用电统计-->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="START"/>
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_zhongdian"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="39dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:text="重点设备用电统计"
+                    android:textColor="@color/color_07"
+                    android:textSize="@dimen/first_title"/>
+            </LinearLayout>
 
 
-
-
-
-            <com.ppandroid.app.widget.HorizontalPercentageView
-                android:id="@+id/v_hp"
+            <com.ppandroid.app.widget.common.PagerSlidingTab
+                android:id="@+id/title_indicator2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="40dp"
+                android:background="@color/white"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_03"/>
 
-            <Button
-                android:id="@+id/btn_hp"
+            <android.support.v4.view.ViewPager
+                android:id="@+id/view_pager_zhongdian"
+                android:layout_width="match_parent"
+                android:layout_height="330dp"
+                />
+            <!--查看更多-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="查看更多"
+                android:textColor="@color/color_04"
+                android:textSize="@dimen/time_text"/>
+
+            <!--分割-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="7dp"
+                android:background="@color/color_08"/>
+
+
+            <!--仪表电统计-->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="START"/>
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_zhongdian"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="39dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:text="仪表电统计"
+                    android:textColor="@color/color_07"
+                    android:textSize="@dimen/first_title"/>
+            </LinearLayout>
+
+
+            <com.ppandroid.app.widget.common.PagerSlidingTab
+                android:id="@+id/title_indicator3"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_03"/>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/view_pager_3"
+                android:layout_width="match_parent"
+                android:layout_height="330dp"
+                />
+            <!--查看更多-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="查看更多"
+                android:textColor="@color/color_04"
+                android:textSize="@dimen/time_text"/>
+
+            <LinearLayout
+                android:paddingBottom="30dp"
+                android:paddingTop="37dp"
+                android:background="@color/color_08"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/icon_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </LinearLayout>
     </ScrollView>
 

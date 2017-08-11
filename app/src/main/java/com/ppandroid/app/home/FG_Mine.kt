@@ -4,6 +4,7 @@ import com.ppandroid.app.R
 import com.ppandroid.app.bean.BN_Vertical
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_mine.*
+import kotlinx.android.synthetic.main.yellowchartview.*
 import java.util.*
 
 /**
@@ -36,6 +37,9 @@ class FG_Mine: FG_Base() {
 
         }
 
+        btn_start_anim.setOnClickListener {
+            v_yellow_chart.startAnim()
+        }
 
 
     }
