@@ -11,8 +11,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ppandroid.app.base.AC_ContentFG
-import com.ppandroid.app.utils.SnackbarUtils
 import com.ppandroid.app.utils.Utils_SharedPreferences
+import com.ppandroid.app.utils.toast.ToastUtil
 import java.io.UnsupportedEncodingException
 import java.net.URLEncoder
 
@@ -72,14 +72,17 @@ abstract class FG_Base : Fragment() {
     }
 
 
-    protected fun toast(msg: String) {
-        if (!TextUtils.isEmpty(msg)) {
-            SnackbarUtils.with(getContentView(activity)).setMessage(msg).show()
+    protected fun toast(msg: String?) {
+        msg?.let {
+            if (!TextUtils.isEmpty(msg)) {
+                ToastUtil.toast(activity,it)
+            }
         }
+
     }
 
     protected fun toast(resId: Int) {
-        SnackbarUtils.with(getContentView(activity)).setMessage(getString(resId)).show()
+        ToastUtil.toast(activity,resId)
     }
 
     companion object {

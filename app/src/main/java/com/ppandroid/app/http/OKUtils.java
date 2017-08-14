@@ -38,6 +38,7 @@ public class OKUtils {
 
 	public static <T extends BaseBody>  void get(final Context context, String url, final Class<T> tt, final MyCallBack<T> callBack) {
         final WeakReference<Context> mWeakContext=new WeakReference<Context>(context);
+        url=addBaseParams(context,url);
         if (!url.startsWith("http")){
             url=  Contants.Companion.getBaseUrl()+url;
         }
@@ -71,7 +72,8 @@ public class OKUtils {
 		});
 	}
 
-	public static <T extends BaseBody> void post(final Context context, String url, final Map<String, String> params, final Class<T> tt, final MyCallBack<T> callBack) {
+	public static <T extends BaseBody> void post(final Context context, String url,  Map<String, String> params, final Class<T> tt, final MyCallBack<T> callBack) {
+        params=addBaseParams(context,params);
         final WeakReference<Context> mWeakContext=new WeakReference<Context>(context);
         if (!url.startsWith("http")){
             url=  Contants.Companion.getBaseUrl()+url;
@@ -121,6 +123,7 @@ public class OKUtils {
                 break;
             case Http.TOKEN_BLANK_ERROR://TOKEN 为空
                 toast(context, R.string.token_invalid);
+             //   Utils_UserInfo.clearUserInfo(context);
                 //clear mine page
                 EventBus.getDefault().post(new ET_Refresh(ET_Refresh.TASKID_REFRESH_LOGINOUT));
                 APP.Companion.toLogin();
@@ -253,4 +256,41 @@ public class OKUtils {
             return false;
         }
     }
+
+    /**
+     * 添加基本参数post
+     *
+     * @param params
+     * @return
+     */
+    private static Map<String, String> addBaseParams(Context context, Map<String, String> params) {
+        Utils_SharedPreferences sp = new Utils_SharedPreferences(context);
+        if (!TextUtils.isEmpty(sp.getString("Token", ""))) {
+            params.put("X-Auth-Token", sp.getString("Token", ""));
+        }
+        return params;
+    }
+
+    /**
+     * 添加基本参数get
+     *
+     * @param context
+     * @param url
+     * @return
+     */
+    public static String addBaseParams(Context context, String url) {
+        Utils_SharedPreferences sp = new Utils_SharedPreferences(context);
+        if (!url.contains("X-Auth-Token=") && (!TextUtils.isEmpty(sp.getString("Token", "")))) {
+            if (url.contains("?")) {
+                url += "&X-Auth-Token=" + sp.getString("Token", "");
+            }
+            else {
+                url += "?X-Auth-Token=" + sp.getString("Token", "");
+            }
+
+        }
+
+        return url;
+    }
+
 }

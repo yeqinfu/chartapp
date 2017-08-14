@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import com.ppandroid.app.AC_Login
 import com.ppandroid.app.utils.AppExceptionHandler
-import org.greenrobot.eventbus.EventBus
+import com.ppandroid.app.utils.DebugLog
 
 
 /**
@@ -28,16 +28,18 @@ class APP : Application() {
     }
 
     override fun onCreate() {
-        context = this@APP
+        super.onCreate()
+        context = this
+        DebugLog.d("+++++++++++++++++++++++++++++++++++++++++++context is"+ context)
         /*****************************************************************
          * 闪退处理
          *****************************************************************/
         val mReportAppError = AppExceptionHandler.getInstance()
         mReportAppError.init(this)
-        if (!EventBus.getDefault().isRegistered(this)) {
+       /* if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this)
-        }
-        super.onCreate()
+        }*/
+
     }
 
 

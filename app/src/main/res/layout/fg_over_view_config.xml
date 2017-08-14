@@ -2,12 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="@color/color_03"
               android:orientation="vertical">
-    <include layout="@layout/layout_head_view"/>
+    <include
+        layout="@layout/layout_head_view"/>
+    <TextView
+        android:background="@color/color_03"
+        android:paddingLeft="15dp"
+        android:gravity="center_vertical"
+        android:text="已添加模块"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"/>
     <com.ppandroid.app.widget.draglist.DragListView
+        android:background="@color/white"
         android:id="@+id/drag_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
+    <TextView
+        android:background="@color/color_03"
+        android:paddingLeft="15dp"
+        android:gravity="center_vertical"
+        android:text="未添加模块"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"/>
+    <ListView
+        android:background="@color/white"
+        android:id="@+id/lv_nochoosed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

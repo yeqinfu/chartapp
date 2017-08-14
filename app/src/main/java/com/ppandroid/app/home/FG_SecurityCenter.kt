@@ -28,6 +28,7 @@ class FG_SecurityCenter:FG_Base(){
     var rotate:RotateAnimation?=null
     override fun fgRes(): Int= R.layout.fg_security_center
     override fun afterViews() {
+        head_view.setBackgroundResource(android.R.color.transparent)
         head_view.setBackText("返回")
         head_view.init(activity)
         head_view.setCenterTitle("智能监测")
