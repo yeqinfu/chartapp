@@ -69,6 +69,7 @@
             android:id="@+id/et_password"
             android:layout_marginLeft="18dp"
             android:textColor="@color/color_07"
+            android:inputType="textPassword"
             android:textSize="@dimen/bar_title"
             android:hint="请输入密码"
             android:background="@null"
