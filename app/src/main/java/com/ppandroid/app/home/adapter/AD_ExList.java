@@ -83,14 +83,13 @@ public class AD_ExList extends BaseExpandableListAdapter {
 		}
         ImageView iv_arrow = (ImageView) view.findViewById(R.id.iv_arrow);
         if (parentList.get(parentPos).isOpen()) {
-
             iv_arrow.setImageResource(R.drawable.icon_arrar);
         }
         else {
             Resources res = mContext.getResources();
             Bitmap img = BitmapFactory.decodeResource(res, R.drawable.icon_arrar);
             Matrix matrix = new Matrix();
-            matrix.postRotate(180); /*翻转180度*/
+            matrix.postRotate(180); //翻转180度
             int width = img.getWidth();
             int height = img.getHeight();
             Bitmap img_a = Bitmap.createBitmap(img, 0, 0, width, height, matrix, true);
@@ -100,6 +99,8 @@ public class AD_ExList extends BaseExpandableListAdapter {
 		view.setTag(R.layout.child_item, -1);
 		TextView text = (TextView) view.findViewById(R.id.parent_title);
 		text.setText(parentList.get(parentPos).getTitle());
+        ImageView icon= (ImageView) view.findViewById(R.id.group_icon);
+        icon.setImageResource(parentList.get(parentPos).getIconId());
 		return view;
 	}
 

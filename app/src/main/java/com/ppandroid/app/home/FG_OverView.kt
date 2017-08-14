@@ -21,6 +21,11 @@ class FG_OverView : FG_Base() {
     override fun fgRes(): Int = R.layout.fg_over_view
 
     override fun afterViews() {
+        /**添加自定义模块*/
+        iv_add_model.setOnClickListener {
+
+
+        }
 
         view?.postDelayed({
             val resources = resources

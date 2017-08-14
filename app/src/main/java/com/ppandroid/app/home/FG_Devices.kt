@@ -41,9 +41,15 @@ class FG_Devices :FG_Base(){
     }
 
     private fun initialData() {
-        parentList.add(BN_Ex(false,"高压离心式空压机"))
-        parentList.add(BN_Ex(false,"空调系统-冷却塔"))
-        parentList.add(BN_Ex(false,"空调系统-冷冻泵"))
+        var group01=BN_Ex(false,"高压离心式空压机")
+        group01.iconId=R.drawable.icon_gaoya02
+        parentList.add(group01)
+        var group02=BN_Ex(false,"空调系统-冷却塔")
+        group02.iconId=R.drawable.icon_gaoya05
+        parentList.add(group02)
+        var group03=BN_Ex(false,"空调系统-冷冻泵")
+        group03.iconId=R.drawable.icon_gaoya05
+        parentList.add(group03)
         childrenList1.add(parentList[0].title + "-" + "first")
         childrenList1.add(parentList[0].title + "-" + "second")
         childrenList1.add(parentList[0].title+ "-" + "third")

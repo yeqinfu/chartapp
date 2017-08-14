@@ -3,20 +3,17 @@ package com.ppandroid.app
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
-import android.support.v7.app.AppCompatActivity
-import android.text.TextUtils
 import com.ppandroid.app.base.AC_ContentFG
 import com.ppandroid.app.home.FG_Center
 import com.ppandroid.app.home.FG_Devices
 import com.ppandroid.app.home.FG_News
 import com.ppandroid.app.home.FG_OverView
-import com.ppandroid.app.utils.SnackbarUtils
 import com.ppandroid.im.FG_Mine
-import com.ppandroid.im.base.FG_Base
+import com.ppandroid.im.base.AC_Base
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class AC_Main : AppCompatActivity() {
+class AC_Main : AC_Base() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -111,9 +108,5 @@ class AC_Main : AppCompatActivity() {
         startActivity(it)
     }
 
-    private fun toast(msg: String) {
-        if (!TextUtils.isEmpty(msg)) {
-            SnackbarUtils.with(FG_Base.getContentView(this)).setMessage(msg).show()
-        }
-    }
+
 }

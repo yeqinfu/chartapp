@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.SnackbarUtils
+import com.ppandroid.app.utils.activitymanager.ActivityManager
+
+
 
 /**
  * Created by Administrator on 2017/3/13. 所有通用页面的基类
@@ -42,8 +45,14 @@ open class AC_Base : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        ActivityManager.getActivityManager().popActivity(this)
 
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        ActivityManager.getActivityManager().pushActivity(this)
     }
 
 

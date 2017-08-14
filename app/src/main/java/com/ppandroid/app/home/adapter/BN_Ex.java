@@ -7,6 +7,15 @@ package com.ppandroid.app.home.adapter;
 public class BN_Ex {
     private boolean isOpen=false;
     private   String title="";
+    private int iconId;
+
+    public int getIconId() {
+        return iconId;
+    }
+
+    public void setIconId(int iconId) {
+        this.iconId = iconId;
+    }
 
     public BN_Ex(boolean isOpen, String title) {
         this.isOpen = isOpen;
