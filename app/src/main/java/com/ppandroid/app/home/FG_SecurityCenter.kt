@@ -9,6 +9,7 @@ import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import com.ppandroid.app.R
 import com.ppandroid.app.widget.CheckView
+import com.ppandroid.app.widget.HeadViewLayout
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_security_center.*
 import kotlinx.android.synthetic.main.layout_head_view.*
@@ -30,6 +31,7 @@ class FG_SecurityCenter:FG_Base(){
         head_view.setBackText("返回")
         head_view.init(activity)
         head_view.setCenterTitle("智能监测")
+        head_view.theme= HeadViewLayout.THEME_WHITE
         v_check_view.listener = object : CheckView.ProgreesListener {
             override fun change(progress: Float) {
                 async {

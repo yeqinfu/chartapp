@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager
 import android.view.View
 import com.ppandroid.app.R
 import com.ppandroid.app.home.adapter.AD_ViewPager
+import com.ppandroid.app.home.overview.FG_OverViewConfig
 import com.ppandroid.app.widget.wheelview.FitChartValue
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_over_view.*
@@ -23,8 +24,7 @@ class FG_OverView : FG_Base() {
     override fun afterViews() {
         /**添加自定义模块*/
         iv_add_model.setOnClickListener {
-
-
+            startAC(FG_OverViewConfig::class.java.name)
         }
 
         view?.postDelayed({

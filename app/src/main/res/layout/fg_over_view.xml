@@ -735,6 +735,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
+                    android:id="@+id/iv_add_model"
                     android:src="@drawable/icon_add"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>

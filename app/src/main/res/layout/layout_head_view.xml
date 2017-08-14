@@ -12,6 +12,7 @@
         android:layout_marginLeft="15dp"
         android:drawableLeft="@drawable/back_white"
         android:drawablePadding="3dp"
+        android:text="返回"
         android:gravity="center_vertical"
         android:textColor="@color/white"/>
 
@@ -23,5 +24,15 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="18sp"/>
+    <TextView
+        android:id="@+id/tv_right"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginRight="15dp"
+        android:visibility="gone"
+        android:drawablePadding="3dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/white"/>
 
 </com.ppandroid.app.widget.HeadViewLayout>
