@@ -122,9 +122,12 @@ class FG_SecurityCenter:FG_Base(){
             override fun onAnimationRepeat(p0: Animator?) {
             }
             override fun onAnimationEnd(p0: Animator?) {
-                ll_before.visibility= View.GONE
-                ll_after.visibility=View.VISIBLE
-
+                isDestroy?.let {
+                    if (!it){
+                        ll_before.visibility= View.GONE
+                        ll_after.visibility=View.VISIBLE
+                    }
+                }
             }
             override fun onAnimationStart(p0: Animator?) {
             }

@@ -1,5 +1,6 @@
 package com.ppandroid.app.http;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -8,18 +9,17 @@ import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import com.ppandroid.app.R;
-import com.ppandroid.app.bean.ET_Refresh;
 import com.ppandroid.app.bean.ErrorBody;
 import com.ppandroid.app.bean.login.MD5Body;
 import com.ppandroid.app.http.callback.StringCallback;
 import com.ppandroid.app.utils.DebugLog;
 import com.ppandroid.app.utils.Utils_SharedPreferences;
+import com.ppandroid.app.utils.activitymanager.ActivityManager;
 import com.ppandroid.app.utils.info.Utils_UserInfo;
 import com.ppandroid.im.APP;
 import com.ppandroid.im.bean.BaseBody;
 import com.ppandroid.im.utils.Contants;
 
-import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -123,19 +123,14 @@ public class OKUtils {
                 break;
             case Http.TOKEN_BLANK_ERROR://TOKEN 为空
                 toast(context, R.string.token_invalid);
-             //   Utils_UserInfo.clearUserInfo(context);
-                //clear mine page
-                EventBus.getDefault().post(new ET_Refresh(ET_Refresh.TASKID_REFRESH_LOGINOUT));
-                APP.Companion.toLogin();
+                clearInfoAndLogin(context);
                 break;
             case Http.TOKEN_INVALID_ERROR://TOKEN失效 尝试MD5
                 getTokenByMD5(context);
                 break;
             case Http.RELOAAGIN_MD5_INVALID_ERROR://自动登录已过期，请重新登录
                 toast(context, errorBody.getMessage());
-                APP.Companion.toLogin();
-                //清除数据
-                Utils_UserInfo.clearUserInfo(context);
+                clearInfoAndLogin(context);
                 break;
             case Http.BLANK_ERROR://校验数据为空 比如验证码输入为空，评论输入为空
                 toast(context, errorBody.getMessage());
@@ -152,6 +147,14 @@ public class OKUtils {
         }
 
     }
+
+    private static void clearInfoAndLogin(Context context) {
+        Utils_UserInfo.clearUserInfo(context);
+        APP.Companion.toLogin();
+        ActivityManager.getActivityManager().popAllActivity();
+        ((Activity)context).finish();
+    }
+
     private static boolean  isAutoCheck=false;
     /**
      * 用md5获取新的token

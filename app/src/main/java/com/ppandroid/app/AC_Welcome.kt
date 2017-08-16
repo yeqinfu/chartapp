@@ -10,7 +10,7 @@ class AC_Welcome : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ac__welcome)
-        var it=Intent()
+        var it= Intent()
         if (Utils_UserInfo.isLogined(this)){
             it.setClass(this,AC_Main::class.java)
         }else{
@@ -18,5 +18,10 @@ class AC_Welcome : AppCompatActivity() {
         }
         startActivity(it)
         finish()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 }
