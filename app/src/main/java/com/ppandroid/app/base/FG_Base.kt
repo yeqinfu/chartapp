@@ -3,12 +3,14 @@ package com.ppandroid.im.base
 
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.ppandroid.app.AC_Login
 import com.ppandroid.app.base.AC_ContentFG
 import com.ppandroid.app.utils.Utils_SharedPreferences
 import com.ppandroid.app.utils.toast.ToastUtil
@@ -68,6 +70,11 @@ abstract class FG_Base : Fragment() {
     protected fun isLogined(): Boolean {
         val string = sp.getString("Token", null)
         return TextUtils.isEmpty(string)
+    }
+    protected fun toLogin(){
+        var it= Intent()
+        it.setClass(activity,AC_Login::class.java)
+        startActivity(it)
     }
 
 

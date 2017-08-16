@@ -52,6 +52,7 @@ class AC_Login : AppCompatActivity() {
                     var it= Intent()
                     it.setClass(this@AC_Login,AC_Main::class.java)
                     startActivity(it)
+                    finish()
                 }
             }
             override fun onError(error: ErrorBody) {

@@ -5,6 +5,11 @@
               android:background="@color/color_05"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+    <Button
+        android:id="@+id/btn_login_out"
+        android:text="登出"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 
     <com.ppandroid.app.widget.MultipleVerticalView

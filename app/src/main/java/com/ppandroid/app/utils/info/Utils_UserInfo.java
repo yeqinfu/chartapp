@@ -1,6 +1,7 @@
 package com.ppandroid.app.utils.info;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.ppandroid.app.bean.login.LoginBody;
 import com.ppandroid.app.bean.login.MD5Body;
@@ -25,6 +26,10 @@ public class Utils_UserInfo {
     public static String getUserId(Context context){
         Utils_SharedPreferences sp=new Utils_SharedPreferences(context);
         return sp.getString("userID","16311");
+    }
+    public static String getUserMD5(Context context){
+        Utils_SharedPreferences sp=new Utils_SharedPreferences(context);
+        return sp.getString("MD5","");
     }
     public static void saveReloginInfo(Context context,MD5Body body){
         Utils_SharedPreferences sp=new Utils_SharedPreferences(context);
@@ -55,7 +60,7 @@ public class Utils_UserInfo {
         Utils_SharedPreferences sp=new Utils_SharedPreferences(context);
         boolean logined = false;
         String string = sp.getString("Token", null);
-        if (string == null) {
+        if (TextUtils.isEmpty(string)) {
             logined = false;
         } else {
             logined = true;
