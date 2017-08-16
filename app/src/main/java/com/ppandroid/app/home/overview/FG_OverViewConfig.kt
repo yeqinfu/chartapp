@@ -41,7 +41,7 @@ class FG_OverViewConfig:FG_Base(){
                     lv_nochoosed.adapter=adapter2
                     adapter.setListener { pos ->
                         var list=adapter.ts
-                        var item=list.get(pos)
+                        var item= list[pos]
                         list.remove(item)
                         adapter.notifyDataSetChanged()
                         var list2=adapter2.ts
@@ -51,7 +51,7 @@ class FG_OverViewConfig:FG_Base(){
 
                     adapter2.setListener { pos ->
                         var list=adapter2.ts
-                        var item=list.get(pos)
+                        var item= list[pos]
                         list.remove(item)
                         adapter2.notifyDataSetChanged()
                         var list2=adapter.ts
