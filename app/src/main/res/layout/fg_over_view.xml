@@ -689,7 +689,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/icon_zhongdian"/>
+                    android:src="@drawable/icon_yibiao"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -736,7 +736,7 @@
                 android:layout_height="wrap_content">
                 <ImageView
                     android:id="@+id/iv_add_model"
-                    android:src="@drawable/icon_add"
+                    android:src="@drawable/icon_add_model"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 

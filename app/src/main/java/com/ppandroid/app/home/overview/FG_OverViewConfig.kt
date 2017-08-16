@@ -25,6 +25,7 @@ class FG_OverViewConfig:FG_Base(){
         }
         adapter = DragAdapter(activity)
         adapter2 = DragAdapter(activity)
+        adapter2.delIcon=R.drawable.icon_add
         loadContent()
 
     }
@@ -36,7 +37,6 @@ class FG_OverViewConfig:FG_Base(){
                 response?.let {
                     adapter.setDatas(it.message.choosed)
                     drag_list.adapter=adapter
-
                     adapter2.setDatas(it.message.noChoosed)
                     lv_nochoosed.adapter=adapter2
                     adapter.setListener { pos ->

@@ -17,10 +17,24 @@ import com.ppandroid.app.widget.draglist.AD_DragBase;
 
 public class DragAdapter extends AD_DragBase<BN_OverViewConfig.MessageBean.ChoosedBean> {
 
+    int[] icons={
+            R.drawable.icon_yibiao,
+            R.drawable.icon_zhongdian,
+            R.drawable.icon_energy
+    };
     LayoutInflater inflater;
     public DragAdapter(Context context) {
         super(context);
         inflater=LayoutInflater.from(context);
+    }
+    private int delIcon=-1;
+
+    public int getDelIcon() {
+        return delIcon;
+    }
+
+    public void setDelIcon(int delIcon) {
+        this.delIcon = delIcon;
     }
 
     @Override
@@ -29,6 +43,10 @@ public class DragAdapter extends AD_DragBase<BN_OverViewConfig.MessageBean.Choos
         TextView tv= (TextView) item.findViewById(R.id.tv_content);
         tv.setText(ts.get(position).getName());
         ImageView iv_del= (ImageView) item.findViewById(R.id.iv_del);
+        if (delIcon!=-1){
+            iv_del.setImageResource(delIcon);
+        }
+        ImageView iv_icon= (ImageView) item.findViewById(R.id.iv_icon);
         iv_del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -37,6 +55,13 @@ public class DragAdapter extends AD_DragBase<BN_OverViewConfig.MessageBean.Choos
                 }
             }
         });
+        if (ts.get(position).getId()==2){//能耗
+            iv_icon.setImageResource(icons[2]);
+        }else if (ts.get(position).getId()==3){//仪表用能统计图
+            iv_icon.setImageResource(icons[0]);
+        }else if (ts.get(position).getId()==4){
+            iv_icon.setImageResource(icons[1]);
+        }
 
         return item;
     }
