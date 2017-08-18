@@ -34,6 +34,7 @@
         android:scrollbars="none">
 
         <LinearLayout
+            android:id="@+id/ll_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -169,6 +170,7 @@
                         android:src="@drawable/icon_huan"/>
 
                     <TextView
+                        android:id="@+id/tv_compareToYesterday"
                         android:layout_width="wrap_content"
                         android:layout_height="37dp"
                         android:drawablePadding="6dp"
@@ -190,6 +192,7 @@
                         android:src="@drawable/icon_tong"/>
 
                     <TextView
+                        android:id="@+id/tv_compareToLastMonthToday"
                         android:layout_width="wrap_content"
                         android:layout_height="37dp"
                         android:drawablePadding="6dp"
@@ -220,6 +223,7 @@
                         android:src="@drawable/icon_huan"/>
 
                     <TextView
+                        android:id="@+id/tv_compareToLastMonth"
                         android:layout_width="wrap_content"
                         android:layout_height="37dp"
                         android:drawablePadding="6dp"
@@ -241,6 +245,7 @@
                         android:src="@drawable/icon_tong"/>
 
                     <TextView
+                        android:id="@+id/tv_cmpareToLastYearToday"
                         android:layout_width="wrap_content"
                         android:layout_height="37dp"
                         android:drawablePadding="6dp"
@@ -271,6 +276,7 @@
                         android:src="@drawable/icon_dian"/>
 
                     <TextView
+                        android:id="@+id/tv_energyUseThisMonth"
                         android:layout_width="wrap_content"
                         android:layout_height="37dp"
                         android:gravity="center"
@@ -290,6 +296,7 @@
                         android:src="@drawable/icon_qian"/>
 
                     <TextView
+                        android:id="@+id/tv_totalMoneyMonth"
                         android:layout_width="wrap_content"
                         android:layout_height="37dp"
                         android:drawablePadding="6dp"
@@ -624,6 +631,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="7dp"
                 android:background="@color/color_08"/>
+
+
+            //============================================
 
             <!--重点设备用电统计-->
             <LinearLayout

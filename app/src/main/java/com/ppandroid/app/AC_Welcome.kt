@@ -17,7 +17,7 @@ class AC_Welcome : AppCompatActivity() {
             it.setClass(this,AC_Login::class.java)
         }
         startActivity(it)
-        finish()
+       finish()
 
     }
 

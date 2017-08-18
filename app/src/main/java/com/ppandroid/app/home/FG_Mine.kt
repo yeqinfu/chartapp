@@ -1,8 +1,11 @@
 package com.ppandroid.im
 
+import android.content.Intent
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.BN_Vertical
 import com.ppandroid.app.bean.ErrorBody
+import com.ppandroid.app.demo.AC_ADemo
+import com.ppandroid.app.demo.AC_BDemo
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.http.OKUtils
 import com.ppandroid.app.utils.activitymanager.ActivityManager
@@ -20,6 +23,16 @@ class FG_Mine: FG_Base() {
     override fun fgRes(): Int= R.layout.fg_mine
 
     override fun afterViews() {
+        btn_a.setOnClickListener {
+            var it= Intent()
+            it.setClass(activity,AC_ADemo::class.java)
+            startActivity(it)
+        }
+        btn_b.setOnClickListener {
+            var it= Intent()
+            it.setClass(activity, AC_BDemo::class.java)
+            startActivity(it)
+        }
         btn_login_out.setOnClickListener {
             loginOut()
         }
@@ -56,6 +69,7 @@ class FG_Mine: FG_Base() {
     private fun loginOut() {
         if (!isLogined()){
             toast("您还没登录")
+            return
         }
         var url="user/logout.json?id="+Utils_UserInfo.getUserId(activity)+"&md5="+Utils_UserInfo.getUserMD5(activity)
         OKUtils.get(activity,url,BaseBody::class.java,object :MyCallBack<BaseBody>{

@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.ppandroid.app.AC_Login
 import com.ppandroid.app.base.AC_ContentFG
+import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.utils.Utils_SharedPreferences
 import com.ppandroid.app.utils.toast.ToastUtil
 import java.io.UnsupportedEncodingException
@@ -69,7 +70,7 @@ abstract class FG_Base : Fragment() {
      */
     protected fun isLogined(): Boolean {
         val string = sp.getString("Token", null)
-        return TextUtils.isEmpty(string)
+        return !TextUtils.isEmpty(string)
     }
     protected fun toLogin(){
         var it= Intent()
@@ -77,6 +78,9 @@ abstract class FG_Base : Fragment() {
         startActivity(it)
     }
 
+    protected fun toast(error: ErrorBody?) {
+        toast(error?.message?:"")
+    }
 
     protected fun toast(msg: String?) {
         msg?.let {
