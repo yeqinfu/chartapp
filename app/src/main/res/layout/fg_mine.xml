@@ -1,50 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:gravity="center"
-              android:background="@color/color_05"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical">
 
-    <Button
-        android:layout_marginTop="85dp"
-        android:id="@+id/btn_a"
-        android:text="A"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <Button
-        android:id="@+id/btn_b"
-        android:text="B"
+        android:layout_height="44dp"
+        android:background="@color/white"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tv_center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="管理中心"
+            android:textSize="18sp"/>
+
+    </RelativeLayout>
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <Button
-        android:id="@+id/btn_login_out"
-        android:text="登出"
+        android:layout_height="7dp"
+        android:background="@color/color_03"/>
+
+    <!--个人信息-->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="74dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
+
+        <ImageView
+            android:id="@+id/iv_head"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/shape_oval_head_color03"/>
+
+        <View
+            android:id="@+id/v_split"
+            android:layout_width="0.5dp"
+            android:layout_height="34dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:layout_toRightOf="@+id/iv_head"
+            android:background="@color/color_03"/>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:layout_toRightOf="@+id/v_split"
+            android:text="系统管理员"
+            android:textColor="@color/color_04"
+            android:textSize="@dimen/bar_title"/>
+
+        <TextView
+            android:id="@+id/tv_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_name"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/v_split"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/ic_renz"
+            android:text="已认证"
+            android:textColor="@color/color_07"
+            android:textSize="@dimen/sub_title"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/forward_right"/>
 
 
+    </RelativeLayout>
 
-    <com.ppandroid.app.widget.MultipleVerticalView
-        android:id="@+id/v_multiple_view"
+    <!--服务商-->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/chart_value_1"/>
+        android:layout_height="44dp"
+        android:background="#F9D3B4"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
 
-    <Button
-        android:id="@+id/btn_multi"
+        <ImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_fws"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="福建智能优化"
+            android:textColor="@color/color_07"
+            android:textSize="@dimen/bar_title"/>
+
+
+    </LinearLayout>
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="START"/>
-
-    <include layout="@layout/yellowchartview"/>
-
-    <Button
-        android:id="@+id/btn_start_anim"
+        android:layout_height="16dp"
+        android:background="@color/color_03"/>
+    <TextView
+        android:paddingLeft="12dp"
+        android:drawablePadding="12dp"
+        android:drawableLeft="@drawable/icon_ynfw"
+        android:textColor="@color/color_07"
+        android:textSize="@dimen/bar_title"
+        android:gravity="center_vertical"
+        android:text="优能服务"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="START"/>
+        android:layout_height="41dp"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <TextView
+            android:drawablePadding="23dp"
+            android:gravity="center"
+            android:drawableTop="@drawable/ic_xitong"
+            android:text="系统设置"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:drawablePadding="23dp"
+            android:gravity="center"
+            android:drawableTop="@drawable/ic_tuandui"
+            android:text="团队管理"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:drawablePadding="23dp"
+            android:gravity="center"
+            android:drawableTop="@drawable/ic_chaobiao"
+            android:text="抄表管理"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:drawablePadding="23dp"
+            android:gravity="center"
+            android:drawableTop="@drawable/ic_hujiao"
+            android:text="我的呼叫"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingBottom="7dp"
+        android:paddingTop="15dp"
+        android:weightSum="4"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:drawablePadding="23dp"
+            android:gravity="center"
+            android:drawableTop="@drawable/ic_yibiao"
+            android:text="仪表检测"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:drawablePadding="23dp"
+            android:gravity="center"
+            android:drawableTop="@drawable/ic_nenghao"
+            android:text="能耗分析"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
 
 
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="7dp"
+        android:background="@color/color_03"/>
 
+    <TextView
+
+        android:paddingRight="12dp"
+        android:drawablePadding="12dp"
+        android:paddingLeft="12dp"
+        android:gravity="center_vertical"
+        android:drawableRight="@drawable/forward_right"
+        android:drawableLeft="@drawable/ic_sz"
+        android:text="设置"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_03"/>
 </LinearLayout>
