@@ -3,12 +3,14 @@ package com.ppandroid.app.home.overview
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.overview.BN_OverViewConfig
+import com.ppandroid.app.home.FG_OverView
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.http.OKUtils
 import com.ppandroid.im.base.FG_Base
 import com.ppandroid.im.bean.BaseBody
 import kotlinx.android.synthetic.main.fg_over_view_config.*
 import kotlinx.android.synthetic.main.layout_head_view.*
+import org.greenrobot.eventbus.EventBus
 
 /**
  * Created by yeqinfu on 2017/8/14.
@@ -82,6 +84,7 @@ class FG_OverViewConfig:FG_Base(){
                 response?.let {
                     if (it.isSuccess){
                         toast("保存成功")
+                        EventBus.getDefault().post(FG_OverView.ET_OverView(FG_OverView.ET_OverView.TASKID_REFRESH))
                         finish()
                     }
                 }

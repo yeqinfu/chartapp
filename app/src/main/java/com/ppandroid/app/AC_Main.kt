@@ -4,17 +4,14 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import com.ppandroid.app.base.AC_ContentFG
-import com.ppandroid.app.bean.ErrorBody
-import com.ppandroid.app.bean.overview.BN_OverViewConfig
 import com.ppandroid.app.home.FG_Center
 import com.ppandroid.app.home.FG_Devices
 import com.ppandroid.app.home.FG_News
 import com.ppandroid.app.home.FG_OverView
-import com.ppandroid.app.http.MyCallBack
-import com.ppandroid.app.http.OKUtils
 import com.ppandroid.im.FG_Mine
 import com.ppandroid.im.base.AC_Base
 import kotlinx.android.synthetic.main.activity_main.*
+import org.greenrobot.eventbus.EventBus
 
 
 class AC_Main : AC_Base() {
@@ -75,6 +72,7 @@ class AC_Main : AC_Base() {
                 } else {
                     fragmentTransaction.show(fragementOver)
                 }
+                EventBus.getDefault().post(FG_OverView.ET_OverView(FG_OverView.ET_OverView.TASKID_REFRESH))
             }
             2 -> {
                 if (fragementDevices == null) {

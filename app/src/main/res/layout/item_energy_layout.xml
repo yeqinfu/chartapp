@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:background="@color/white"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
     <!--能耗信息-->
     <LinearLayout
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -35,7 +35,6 @@
 
     <!--能耗图表-->
     <FrameLayout
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
@@ -119,15 +118,15 @@
 
 
     <!--表格信息-->
+
+
     <LinearLayout
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:layout_marginTop="75dp"
         android:orientation="horizontal">
 
-        <!--第一栏-->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -141,6 +140,7 @@
                 android:src="@drawable/icon_huan"/>
 
             <TextView
+                android:id="@+id/tv_compareToYesterday"
                 android:layout_width="wrap_content"
                 android:layout_height="37dp"
                 android:drawablePadding="6dp"
@@ -162,6 +162,7 @@
                 android:src="@drawable/icon_tong"/>
 
             <TextView
+                android:id="@+id/tv_compareToLastMonthToday"
                 android:layout_width="wrap_content"
                 android:layout_height="37dp"
                 android:drawablePadding="6dp"
@@ -178,7 +179,6 @@
 
         </LinearLayout>
 
-        <!--第二栏-->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -192,6 +192,7 @@
                 android:src="@drawable/icon_huan"/>
 
             <TextView
+                android:id="@+id/tv_compareToLastMonth"
                 android:layout_width="wrap_content"
                 android:layout_height="37dp"
                 android:drawablePadding="6dp"
@@ -213,6 +214,7 @@
                 android:src="@drawable/icon_tong"/>
 
             <TextView
+                android:id="@+id/tv_cmpareToLastYearToday"
                 android:layout_width="wrap_content"
                 android:layout_height="37dp"
                 android:drawablePadding="6dp"
@@ -229,7 +231,6 @@
 
         </LinearLayout>
 
-        <!--第三栏-->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -243,6 +244,7 @@
                 android:src="@drawable/icon_dian"/>
 
             <TextView
+                android:id="@+id/tv_energyUseThisMonth"
                 android:layout_width="wrap_content"
                 android:layout_height="37dp"
                 android:gravity="center"
@@ -262,6 +264,7 @@
                 android:src="@drawable/icon_qian"/>
 
             <TextView
+                android:id="@+id/tv_totalMoneyMonth"
                 android:layout_width="wrap_content"
                 android:layout_height="37dp"
                 android:drawablePadding="6dp"
@@ -280,6 +283,7 @@
 
 
     </LinearLayout>
+
 
     <View
         android:layout_width="match_parent"
@@ -323,7 +327,6 @@
             android:textColor="@color/color_07"
             android:textSize="@dimen/first_title"/>
     </LinearLayout>
-
     <!--分享用电统计viewpager 统计图-->
     <RelativeLayout
         android:visibility="gone"
@@ -350,188 +353,227 @@
             android:layout_height="wrap_content"/>
 
     </RelativeLayout>
-
     <!--分享用电统计数据详情-->
-
     <LinearLayout
-        android:paddingRight="15dp"
-        android:paddingLeft="15dp"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
 
         <LinearLayout
-            android:gravity="center_vertical"
-            android:paddingRight="5dp"
-            android:paddingLeft="5dp"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="47dp">
+            android:layout_height="47dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
             <ImageView
-                android:src="@drawable/icon_gaoya"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_gaoya"/>
+
             <TextView
+                android:id="@+id/tv_info01"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
+                android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:textSize="@dimen/time_text"
-                android:textColor="@color/color_07"
                 android:text="高压离心空压机"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"/>
+                android:textColor="@color/color_07"
+                android:textSize="@dimen/time_text"/>
+
             <TextView
+                android:id="@+id/tv_value01"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
                 android:gravity="center_vertical"
-                android:textSize="@dimen/time_text"
-                android:textColor="@color/color_07"
                 android:text="3800万kwh"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:textColor="@color/color_07"
+                android:textSize="@dimen/time_text"/>
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/color_03"/>
+
         <LinearLayout
-            android:gravity="center_vertical"
-            android:paddingRight="5dp"
-            android:paddingLeft="5dp"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="47dp">
+            android:layout_height="47dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
             <ImageView
-                android:src="@drawable/icon_gaoya02"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_gaoya02"/>
+
             <TextView
+                android:id="@+id/tv_info02"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
+                android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:textSize="@dimen/time_text"
-                android:textColor="@color/color_07"
                 android:text="高压离心式制冷机"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"/>
+                android:textColor="@color/color_07"
+                android:textSize="@dimen/time_text"/>
+
             <TextView
+                android:id="@+id/tv_value02"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
                 android:gravity="center_vertical"
-                android:textSize="@dimen/time_text"
-                android:textColor="@color/color_07"
                 android:text="3800kwh"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:textColor="@color/color_07"
+                android:textSize="@dimen/time_text"/>
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/color_03"/>
+
         <LinearLayout
-            android:gravity="center_vertical"
-            android:paddingRight="5dp"
-            android:paddingLeft="5dp"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="47dp">
+            android:layout_height="47dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
             <ImageView
-                android:src="@drawable/icon_gaoya03"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_gaoya03"/>
+
             <TextView
+                android:id="@+id/tv_info03"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
+                android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:textSize="@dimen/time_text"
-                android:textColor="@color/color_07"
                 android:text="高压冷却水泵"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"/>
+                android:textColor="@color/color_07"
+                android:textSize="@dimen/time_text"/>
+
             <TextView
+                android:id="@+id/tv_value03"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
                 android:gravity="center_vertical"
-                android:textSize="@dimen/time_text"
-                android:textColor="@color/color_07"
                 android:text="3800kwh"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:textColor="@color/color_07"
+                android:textSize="@dimen/time_text"/>
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/color_03"/>
+
         <LinearLayout
-            android:gravity="center_vertical"
-            android:paddingRight="5dp"
-            android:paddingLeft="5dp"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="47dp">
+            android:layout_height="47dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
             <ImageView
-                android:src="@drawable/icon_gaoya04"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_gaoya04"/>
+
             <TextView
+                android:id="@+id/tv_info04"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
+                android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:textSize="@dimen/time_text"
-                android:textColor="@color/color_07"
                 android:text="高压寿力螺杆空压机"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"/>
+                android:textColor="@color/color_07"
+                android:textSize="@dimen/time_text"/>
+
             <TextView
+                android:id="@+id/tv_value04"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
                 android:gravity="center_vertical"
-                android:textSize="@dimen/time_text"
-                android:textColor="@color/color_07"
                 android:text="3800kwh"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:textColor="@color/color_07"
+                android:textSize="@dimen/time_text"/>
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/color_03"/>
+
         <LinearLayout
-            android:gravity="center_vertical"
-            android:paddingRight="5dp"
-            android:paddingLeft="5dp"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="47dp">
+            android:layout_height="47dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
             <ImageView
-                android:src="@drawable/icon_gaoya05"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_gaoya05"/>
+
             <TextView
-                android:layout_marginLeft="15dp"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/time_text"
-                android:textColor="@color/color_07"
-                android:text="空调系统冷却塔"
-                android:layout_weight="1"
+                android:id="@+id/tv_info05"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="空调系统冷却塔"
+                android:textColor="@color/color_07"
+                android:textSize="@dimen/time_text"/>
+
             <TextView
+                android:id="@+id/tv_value05"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
                 android:gravity="center_vertical"
-                android:textSize="@dimen/time_text"
-                android:textColor="@color/color_07"
                 android:text="3800kwh"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+                android:textColor="@color/color_07"
+                android:textSize="@dimen/time_text"/>
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/color_03"/>
 
     </LinearLayout>
+
+
+
+
+
+
+
     <!--查看更多-->
     <TextView
         android:layout_width="match_parent"

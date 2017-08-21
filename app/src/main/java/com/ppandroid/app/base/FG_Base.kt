@@ -1,4 +1,3 @@
-
 package com.ppandroid.im.base
 
 
@@ -15,6 +14,7 @@ import com.ppandroid.app.base.AC_ContentFG
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.utils.Utils_SharedPreferences
 import com.ppandroid.app.utils.toast.ToastUtil
+import org.greenrobot.eventbus.EventBus
 import java.io.UnsupportedEncodingException
 import java.net.URLEncoder
 
@@ -24,8 +24,16 @@ import java.net.URLEncoder
  */
 abstract class FG_Base : Fragment() {
     protected lateinit var sp: Utils_SharedPreferences
-    protected abstract fun fgRes():Int
+    protected abstract fun fgRes(): Int
     protected abstract fun afterViews()
+    protected var isNeedEventBus = false
+        set(value) {
+            field = value
+            if (!EventBus.getDefault().isRegistered(this) && isNeedEventBus) {
+                EventBus.getDefault().register(this)
+            }
+        }
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(fgRes(), container, false)
         sp = Utils_SharedPreferences(activity)
@@ -43,8 +51,8 @@ abstract class FG_Base : Fragment() {
         activity.finish()
     }
 
-    protected fun startAC(fragment:String){
-        var it= AC_ContentFG.createIntent(activity,fragment)
+    protected fun startAC(fragment: String) {
+        var it = AC_ContentFG.createIntent(activity, fragment)
         startActivity(it)
     }
 
@@ -64,7 +72,6 @@ abstract class FG_Base : Fragment() {
     }
 
 
-
     /**
      * @return  是否为登录状态
      */
@@ -72,32 +79,42 @@ abstract class FG_Base : Fragment() {
         val string = sp.getString("Token", null)
         return !TextUtils.isEmpty(string)
     }
-    protected fun toLogin(){
-        var it= Intent()
-        it.setClass(activity,AC_Login::class.java)
+
+    protected fun toLogin() {
+        var it = Intent()
+        it.setClass(activity, AC_Login::class.java)
         startActivity(it)
     }
 
     protected fun toast(error: ErrorBody?) {
-        toast(error?.message?:"")
+        toast(error?.message ?: "")
     }
 
     protected fun toast(msg: String?) {
         msg?.let {
             if (!TextUtils.isEmpty(msg)) {
-                ToastUtil.toast(activity,it)
+                ToastUtil.toast(activity, it)
             }
         }
 
     }
 
     protected fun toast(resId: Int) {
-        ToastUtil.toast(activity,resId)
+        ToastUtil.toast(activity, resId)
     }
 
     companion object {
         fun getContentView(context: Activity): View {
             return (context.findViewById(android.R.id.content) as ViewGroup).getChildAt(0)
         }
+    }
+
+    override fun onDestroy() {
+        if (isNeedEventBus && EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this)
+        }
+        System.gc()
+        super.onDestroy()
+
     }
 }

@@ -11,6 +11,13 @@ import com.ppandroid.app.bean.overview.BN_OverView
  * Created by yeqinfu on 2017/8/11.
  */
 class AD_AreaEnergy(ac: Activity, list: List<BN_OverView.MessageBean.OverviewConsumptionInformationBean.AreaInformationListBean>): PagerAdapter(){
+    /**横条图viewpager*/
+    var arrays_title = arrayOf(
+            "今日",
+            "本月",
+            "本年"
+
+    )
     var views = ArrayList<View>()// 将要分页显示的View装入数组中
     var list: List<BN_OverView.MessageBean.OverviewConsumptionInformationBean.AreaInformationListBean>?=null
     var ac: Activity?=null
@@ -46,7 +53,7 @@ class AD_AreaEnergy(ac: Activity, list: List<BN_OverView.MessageBean.OverviewCon
     }
 
     override fun getPageTitle(position: Int): CharSequence {
-        return ""
+        return arrays_title[position]
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {

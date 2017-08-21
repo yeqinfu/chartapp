@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <!--重点设备用电统计-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_zhongdian"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="重点设备用电统计"
+            android:textColor="@color/color_07"
+            android:textSize="@dimen/first_title"/>
+    </LinearLayout>
+
+
+    <com.ppandroid.app.widget.common.PagerSlidingTab
+        android:id="@+id/title_indicator_zhongdian"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/color_03"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager_zhongdian"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <!--查看更多-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="查看更多"
+        android:textColor="@color/color_04"
+        android:textSize="@dimen/time_text"/>
+
+</LinearLayout>

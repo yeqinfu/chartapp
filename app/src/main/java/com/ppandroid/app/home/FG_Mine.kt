@@ -2,12 +2,14 @@ package com.ppandroid.im
 
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ErrorBody
+import com.ppandroid.app.demo.FG_Demo02
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.http.OKUtils
 import com.ppandroid.app.utils.activitymanager.ActivityManager
 import com.ppandroid.app.utils.info.Utils_UserInfo
 import com.ppandroid.im.base.FG_Base
 import com.ppandroid.im.bean.BaseBody
+import kotlinx.android.synthetic.main.fg_mine.*
 
 /**
  * Created by yeqinfu on 2017/7/28.
@@ -16,7 +18,9 @@ class FG_Mine: FG_Base() {
     override fun fgRes(): Int= R.layout.fg_mine
 
     override fun afterViews() {
-
+        tv_settings.setOnClickListener{
+            startAC(FG_Demo02::class.java.name)
+        }
     }
 
     private fun loginOut() {

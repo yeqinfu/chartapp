@@ -1,6 +1,5 @@
 package com.ppandroid.app.bean.overview;
 
-import com.google.gson.annotations.SerializedName;
 import com.ppandroid.im.bean.BaseBody;
 
 import java.util.List;
@@ -11,8 +10,9 @@ import java.util.List;
 
 public class BN_OverView extends BaseBody {
 
+
     /**
-     * message : {"overviewConsumptionInformation":{"totalKwh":"915kwh","totalMoney":"622元","carbonEmission":"878kg","compareToYesterday":"-32.00%","compareToLastMonth":"-1.50%","energyUseThisMonth":"1.75万kwh","compareToLastMonthToday":"-32.00%","cmpareToLastYearToday":"0%","totalMoneyMonth":"1.19万元","classificationInformationList":[{"totalKwh":"915kwh","classificationKwhMap":{"制冷机":"915kwh","冷冻泵":"0kwh","冷却塔":"0kwh","冷干机":"0kwh","空调系统冷却泵":"0kwh","高压冷却水泵":"0kwh","高压冷却泵":"0kwh","高压寿力螺杆空压机":"0kwh","高压式离心式制冷机":"0kwh","高压离心式制冷机":"0kwh"}},{"totalKwh":"1.75万kwh","classificationKwhMap":{"制冷机":"1.75万kwh","冷冻泵":"0kwh","冷却塔":"0kwh","冷干机":"0kwh","空调系统冷却泵":"0kwh","高压冷却水泵":"0kwh","高压冷却泵":"0kwh","高压寿力螺杆空压机":"0kwh","高压式离心式制冷机":"0kwh","高压离心式制冷机":"0kwh"}},{"totalKwh":"24.48万kwh","classificationKwhMap":{"制冷机":"24.48万kwh","冷冻泵":"0kwh","冷却塔":"0kwh","冷干机":"0kwh","空调系统冷却泵":"0kwh","高压冷却水泵":"0kwh","高压冷却泵":"0kwh","高压寿力螺杆空压机":"0kwh","高压式离心式制冷机":"0kwh","高压离心式制冷机":"0kwh"}}],"areaInformationList":[{"areaKwhMap":{"高压动力站":"915kwh"}},{"areaKwhMap":{"高压动力站":"1.75万kwh"}},{"areaKwhMap":{"高压动力站":"24.48万kwh"}}]},"instrumentInfomationList":[{"instrumentMap":{"CH01-1约克离心式制冷机":"452kwh","CH01-2约克离心式制冷机":"463kwh"}},{"instrumentMap":{"CH01-1约克离心式制冷机":"1.75万kwh","CH01-2约克离心式制冷机":"1.76万kwh"}},{"instrumentMap":{"CH01-1约克离心式制冷机":"24.48万kwh","CH01-2约克离心式制冷机":"24.44万kwh"}}],"deviceInformationList":[{"deviceKwhMap":{"CH01-1离心式制冷机":"452kwh","CH01-2离心式制冷机":"463kwh"}},{"deviceKwhMap":{"CH01-1离心式制冷机":"1.75万kwh","CH01-2离心式制冷机":"1.76万kwh"}},{"deviceKwhMap":{"CH01-1离心式制冷机":"24.48万kwh","CH01-2离心式制冷机":"24.44万kwh"}}]}
+     * message : {"overviewConsumptionInformation":{"totalKwh":"0kwh","totalMoney":"0元","carbonEmission":"0g","compareToYesterday":"-100.00%","compareToLastMonth":"-7.00%","energyUseThisMonth":"1.75万kwh","compareToLastMonthToday":"-100.00%","cmpareToLastYearToday":"0%","totalMoneyMonth":"1.19万元","classificationInformationList":[{"totalKwh":"0kwh","classificationKwhMapList":[{"key":"冷冻泵","value":"0kwh"},{"key":"冷却塔","value":"0kwh"},{"key":"冷干机","value":"0kwh"},{"key":"制冷机","value":"0kwh"},{"key":"空调系统冷却泵","value":"0kwh"}]},{"totalKwh":"1.75万kwh","classificationKwhMapList":[{"key":"制冷机","value":"1.75万kwh"},{"key":"冷冻泵","value":"0kwh"},{"key":"冷却塔","value":"0kwh"},{"key":"冷干机","value":"0kwh"},{"key":"空调系统冷却泵","value":"0kwh"}]},{"totalKwh":"24.48万kwh","classificationKwhMapList":[{"key":"制冷机","value":"24.48万kwh"},{"key":"冷冻泵","value":"0kwh"},{"key":"冷却塔","value":"0kwh"},{"key":"冷干机","value":"0kwh"},{"key":"空调系统冷却泵","value":"0kwh"}]}],"areaInformationList":[{"areaKwhMapList":[{"key":"高压动力站","value":"0kwh"}]},{"areaKwhMapList":[{"key":"高压动力站","value":"1.75万kwh"}]},{"areaKwhMapList":[{"key":"高压动力站","value":"24.48万kwh"}]}]},"instrumentInfomationList":[{"instrumentMapList":[{"key":"CH01-1约克离心式制冷机","value":"0kwh"},{"key":"CH01-2约克离心式制冷机","value":"0kwh"}]},{"instrumentMapList":[{"key":"CH01-2约克离心式制冷机","value":"1.76万kwh"},{"key":"CH01-1约克离心式制冷机","value":"1.75万kwh"}]},{"instrumentMapList":[{"key":"CH01-1约克离心式制冷机","value":"24.48万kwh"},{"key":"CH01-2约克离心式制冷机","value":"24.44万kwh"}]}],"deviceInformationList":[{"deviceKwhMapList":[{"key":"CH01-1离心式制冷机","value":"0kwh"},{"key":"CH01-2离心式制冷机","value":"0kwh"}]},{"deviceKwhMapList":[{"key":"CH01-2离心式制冷机","value":"1.76万kwh"},{"key":"CH01-1离心式制冷机","value":"1.75万kwh"}]},{"deviceKwhMapList":[{"key":"CH01-1离心式制冷机","value":"24.48万kwh"},{"key":"CH01-2离心式制冷机","value":"24.44万kwh"}]}]}
      */
 
     private MessageBean message;
@@ -27,9 +27,9 @@ public class BN_OverView extends BaseBody {
 
     public static class MessageBean {
         /**
-         * overviewConsumptionInformation : {"totalKwh":"915kwh","totalMoney":"622元","carbonEmission":"878kg","compareToYesterday":"-32.00%","compareToLastMonth":"-1.50%","energyUseThisMonth":"1.75万kwh","compareToLastMonthToday":"-32.00%","cmpareToLastYearToday":"0%","totalMoneyMonth":"1.19万元","classificationInformationList":[{"totalKwh":"915kwh","classificationKwhMap":{"制冷机":"915kwh","冷冻泵":"0kwh","冷却塔":"0kwh","冷干机":"0kwh","空调系统冷却泵":"0kwh","高压冷却水泵":"0kwh","高压冷却泵":"0kwh","高压寿力螺杆空压机":"0kwh","高压式离心式制冷机":"0kwh","高压离心式制冷机":"0kwh"}},{"totalKwh":"1.75万kwh","classificationKwhMap":{"制冷机":"1.75万kwh","冷冻泵":"0kwh","冷却塔":"0kwh","冷干机":"0kwh","空调系统冷却泵":"0kwh","高压冷却水泵":"0kwh","高压冷却泵":"0kwh","高压寿力螺杆空压机":"0kwh","高压式离心式制冷机":"0kwh","高压离心式制冷机":"0kwh"}},{"totalKwh":"24.48万kwh","classificationKwhMap":{"制冷机":"24.48万kwh","冷冻泵":"0kwh","冷却塔":"0kwh","冷干机":"0kwh","空调系统冷却泵":"0kwh","高压冷却水泵":"0kwh","高压冷却泵":"0kwh","高压寿力螺杆空压机":"0kwh","高压式离心式制冷机":"0kwh","高压离心式制冷机":"0kwh"}}],"areaInformationList":[{"areaKwhMap":{"高压动力站":"915kwh"}},{"areaKwhMap":{"高压动力站":"1.75万kwh"}},{"areaKwhMap":{"高压动力站":"24.48万kwh"}}]}
-         * instrumentInfomationList : [{"instrumentMap":{"CH01-1约克离心式制冷机":"452kwh","CH01-2约克离心式制冷机":"463kwh"}},{"instrumentMap":{"CH01-1约克离心式制冷机":"1.75万kwh","CH01-2约克离心式制冷机":"1.76万kwh"}},{"instrumentMap":{"CH01-1约克离心式制冷机":"24.48万kwh","CH01-2约克离心式制冷机":"24.44万kwh"}}]
-         * deviceInformationList : [{"deviceKwhMap":{"CH01-1离心式制冷机":"452kwh","CH01-2离心式制冷机":"463kwh"}},{"deviceKwhMap":{"CH01-1离心式制冷机":"1.75万kwh","CH01-2离心式制冷机":"1.76万kwh"}},{"deviceKwhMap":{"CH01-1离心式制冷机":"24.48万kwh","CH01-2离心式制冷机":"24.44万kwh"}}]
+         * overviewConsumptionInformation : {"totalKwh":"0kwh","totalMoney":"0元","carbonEmission":"0g","compareToYesterday":"-100.00%","compareToLastMonth":"-7.00%","energyUseThisMonth":"1.75万kwh","compareToLastMonthToday":"-100.00%","cmpareToLastYearToday":"0%","totalMoneyMonth":"1.19万元","classificationInformationList":[{"totalKwh":"0kwh","classificationKwhMapList":[{"key":"冷冻泵","value":"0kwh"},{"key":"冷却塔","value":"0kwh"},{"key":"冷干机","value":"0kwh"},{"key":"制冷机","value":"0kwh"},{"key":"空调系统冷却泵","value":"0kwh"}]},{"totalKwh":"1.75万kwh","classificationKwhMapList":[{"key":"制冷机","value":"1.75万kwh"},{"key":"冷冻泵","value":"0kwh"},{"key":"冷却塔","value":"0kwh"},{"key":"冷干机","value":"0kwh"},{"key":"空调系统冷却泵","value":"0kwh"}]},{"totalKwh":"24.48万kwh","classificationKwhMapList":[{"key":"制冷机","value":"24.48万kwh"},{"key":"冷冻泵","value":"0kwh"},{"key":"冷却塔","value":"0kwh"},{"key":"冷干机","value":"0kwh"},{"key":"空调系统冷却泵","value":"0kwh"}]}],"areaInformationList":[{"areaKwhMapList":[{"key":"高压动力站","value":"0kwh"}]},{"areaKwhMapList":[{"key":"高压动力站","value":"1.75万kwh"}]},{"areaKwhMapList":[{"key":"高压动力站","value":"24.48万kwh"}]}]}
+         * instrumentInfomationList : [{"instrumentMapList":[{"key":"CH01-1约克离心式制冷机","value":"0kwh"},{"key":"CH01-2约克离心式制冷机","value":"0kwh"}]},{"instrumentMapList":[{"key":"CH01-2约克离心式制冷机","value":"1.76万kwh"},{"key":"CH01-1约克离心式制冷机","value":"1.75万kwh"}]},{"instrumentMapList":[{"key":"CH01-1约克离心式制冷机","value":"24.48万kwh"},{"key":"CH01-2约克离心式制冷机","value":"24.44万kwh"}]}]
+         * deviceInformationList : [{"deviceKwhMapList":[{"key":"CH01-1离心式制冷机","value":"0kwh"},{"key":"CH01-2离心式制冷机","value":"0kwh"}]},{"deviceKwhMapList":[{"key":"CH01-2离心式制冷机","value":"1.76万kwh"},{"key":"CH01-1离心式制冷机","value":"1.75万kwh"}]},{"deviceKwhMapList":[{"key":"CH01-1离心式制冷机","value":"24.48万kwh"},{"key":"CH01-2离心式制冷机","value":"24.44万kwh"}]}]
          */
 
         private OverviewConsumptionInformationBean overviewConsumptionInformation;
@@ -62,17 +62,17 @@ public class BN_OverView extends BaseBody {
 
         public static class OverviewConsumptionInformationBean {
             /**
-             * totalKwh : 915kwh
-             * totalMoney : 622元
-             * carbonEmission : 878kg
-             * compareToYesterday : -32.00%
-             * compareToLastMonth : -1.50%
+             * totalKwh : 0kwh
+             * totalMoney : 0元
+             * carbonEmission : 0g
+             * compareToYesterday : -100.00%
+             * compareToLastMonth : -7.00%
              * energyUseThisMonth : 1.75万kwh
-             * compareToLastMonthToday : -32.00%
+             * compareToLastMonthToday : -100.00%
              * cmpareToLastYearToday : 0%
              * totalMoneyMonth : 1.19万元
-             * classificationInformationList : [{"totalKwh":"915kwh","classificationKwhMap":{"制冷机":"915kwh","冷冻泵":"0kwh","冷却塔":"0kwh","冷干机":"0kwh","空调系统冷却泵":"0kwh","高压冷却水泵":"0kwh","高压冷却泵":"0kwh","高压寿力螺杆空压机":"0kwh","高压式离心式制冷机":"0kwh","高压离心式制冷机":"0kwh"}},{"totalKwh":"1.75万kwh","classificationKwhMap":{"制冷机":"1.75万kwh","冷冻泵":"0kwh","冷却塔":"0kwh","冷干机":"0kwh","空调系统冷却泵":"0kwh","高压冷却水泵":"0kwh","高压冷却泵":"0kwh","高压寿力螺杆空压机":"0kwh","高压式离心式制冷机":"0kwh","高压离心式制冷机":"0kwh"}},{"totalKwh":"24.48万kwh","classificationKwhMap":{"制冷机":"24.48万kwh","冷冻泵":"0kwh","冷却塔":"0kwh","冷干机":"0kwh","空调系统冷却泵":"0kwh","高压冷却水泵":"0kwh","高压冷却泵":"0kwh","高压寿力螺杆空压机":"0kwh","高压式离心式制冷机":"0kwh","高压离心式制冷机":"0kwh"}}]
-             * areaInformationList : [{"areaKwhMap":{"高压动力站":"915kwh"}},{"areaKwhMap":{"高压动力站":"1.75万kwh"}},{"areaKwhMap":{"高压动力站":"24.48万kwh"}}]
+             * classificationInformationList : [{"totalKwh":"0kwh","classificationKwhMapList":[{"key":"冷冻泵","value":"0kwh"},{"key":"冷却塔","value":"0kwh"},{"key":"冷干机","value":"0kwh"},{"key":"制冷机","value":"0kwh"},{"key":"空调系统冷却泵","value":"0kwh"}]},{"totalKwh":"1.75万kwh","classificationKwhMapList":[{"key":"制冷机","value":"1.75万kwh"},{"key":"冷冻泵","value":"0kwh"},{"key":"冷却塔","value":"0kwh"},{"key":"冷干机","value":"0kwh"},{"key":"空调系统冷却泵","value":"0kwh"}]},{"totalKwh":"24.48万kwh","classificationKwhMapList":[{"key":"制冷机","value":"24.48万kwh"},{"key":"冷冻泵","value":"0kwh"},{"key":"冷却塔","value":"0kwh"},{"key":"冷干机","value":"0kwh"},{"key":"空调系统冷却泵","value":"0kwh"}]}]
+             * areaInformationList : [{"areaKwhMapList":[{"key":"高压动力站","value":"0kwh"}]},{"areaKwhMapList":[{"key":"高压动力站","value":"1.75万kwh"}]},{"areaKwhMapList":[{"key":"高压动力站","value":"24.48万kwh"}]}]
              */
 
             private String totalKwh;
@@ -177,12 +177,12 @@ public class BN_OverView extends BaseBody {
 
             public static class ClassificationInformationListBean {
                 /**
-                 * totalKwh : 915kwh
-                 * classificationKwhMap : {"制冷机":"915kwh","冷冻泵":"0kwh","冷却塔":"0kwh","冷干机":"0kwh","空调系统冷却泵":"0kwh","高压冷却水泵":"0kwh","高压冷却泵":"0kwh","高压寿力螺杆空压机":"0kwh","高压式离心式制冷机":"0kwh","高压离心式制冷机":"0kwh"}
+                 * totalKwh : 0kwh
+                 * classificationKwhMapList : [{"key":"冷冻泵","value":"0kwh"},{"key":"冷却塔","value":"0kwh"},{"key":"冷干机","value":"0kwh"},{"key":"制冷机","value":"0kwh"},{"key":"空调系统冷却泵","value":"0kwh"}]
                  */
 
                 private String totalKwh;
-                private ClassificationKwhMapBean classificationKwhMap;
+                private List<ClassificationKwhMapListBean> classificationKwhMapList;
 
                 public String getTotalKwh() {
                     return totalKwh;
@@ -192,238 +192,152 @@ public class BN_OverView extends BaseBody {
                     this.totalKwh = totalKwh;
                 }
 
-                public ClassificationKwhMapBean getClassificationKwhMap() {
-                    return classificationKwhMap;
+                public List<ClassificationKwhMapListBean> getClassificationKwhMapList() {
+                    return classificationKwhMapList;
                 }
 
-                public void setClassificationKwhMap(ClassificationKwhMapBean classificationKwhMap) {
-                    this.classificationKwhMap = classificationKwhMap;
+                public void setClassificationKwhMapList(List<ClassificationKwhMapListBean> classificationKwhMapList) {
+                    this.classificationKwhMapList = classificationKwhMapList;
                 }
 
-                public static class ClassificationKwhMapBean {
+                public static class ClassificationKwhMapListBean {
                     /**
-                     * 制冷机 : 915kwh
-                     * 冷冻泵 : 0kwh
-                     * 冷却塔 : 0kwh
-                     * 冷干机 : 0kwh
-                     * 空调系统冷却泵 : 0kwh
-                     * 高压冷却水泵 : 0kwh
-                     * 高压冷却泵 : 0kwh
-                     * 高压寿力螺杆空压机 : 0kwh
-                     * 高压式离心式制冷机 : 0kwh
-                     * 高压离心式制冷机 : 0kwh
+                     * key : 冷冻泵
+                     * value : 0kwh
                      */
 
-                    private String 制冷机;
-                    private String 冷冻泵;
-                    private String 冷却塔;
-                    private String 冷干机;
-                    private String 空调系统冷却泵;
-                    private String 高压冷却水泵;
-                    private String 高压冷却泵;
-                    private String 高压寿力螺杆空压机;
-                    private String 高压式离心式制冷机;
-                    private String 高压离心式制冷机;
+                    private String key;
+                    private String value;
 
-                    public String get制冷机() {
-                        return 制冷机;
+                    public String getKey() {
+                        return key;
                     }
 
-                    public void set制冷机(String 制冷机) {
-                        this.制冷机 = 制冷机;
+                    public void setKey(String key) {
+                        this.key = key;
                     }
 
-                    public String get冷冻泵() {
-                        return 冷冻泵;
+                    public String getValue() {
+                        return value;
                     }
 
-                    public void set冷冻泵(String 冷冻泵) {
-                        this.冷冻泵 = 冷冻泵;
-                    }
-
-                    public String get冷却塔() {
-                        return 冷却塔;
-                    }
-
-                    public void set冷却塔(String 冷却塔) {
-                        this.冷却塔 = 冷却塔;
-                    }
-
-                    public String get冷干机() {
-                        return 冷干机;
-                    }
-
-                    public void set冷干机(String 冷干机) {
-                        this.冷干机 = 冷干机;
-                    }
-
-                    public String get空调系统冷却泵() {
-                        return 空调系统冷却泵;
-                    }
-
-                    public void set空调系统冷却泵(String 空调系统冷却泵) {
-                        this.空调系统冷却泵 = 空调系统冷却泵;
-                    }
-
-                    public String get高压冷却水泵() {
-                        return 高压冷却水泵;
-                    }
-
-                    public void set高压冷却水泵(String 高压冷却水泵) {
-                        this.高压冷却水泵 = 高压冷却水泵;
-                    }
-
-                    public String get高压冷却泵() {
-                        return 高压冷却泵;
-                    }
-
-                    public void set高压冷却泵(String 高压冷却泵) {
-                        this.高压冷却泵 = 高压冷却泵;
-                    }
-
-                    public String get高压寿力螺杆空压机() {
-                        return 高压寿力螺杆空压机;
-                    }
-
-                    public void set高压寿力螺杆空压机(String 高压寿力螺杆空压机) {
-                        this.高压寿力螺杆空压机 = 高压寿力螺杆空压机;
-                    }
-
-                    public String get高压式离心式制冷机() {
-                        return 高压式离心式制冷机;
-                    }
-
-                    public void set高压式离心式制冷机(String 高压式离心式制冷机) {
-                        this.高压式离心式制冷机 = 高压式离心式制冷机;
-                    }
-
-                    public String get高压离心式制冷机() {
-                        return 高压离心式制冷机;
-                    }
-
-                    public void set高压离心式制冷机(String 高压离心式制冷机) {
-                        this.高压离心式制冷机 = 高压离心式制冷机;
+                    public void setValue(String value) {
+                        this.value = value;
                     }
                 }
             }
 
             public static class AreaInformationListBean {
-                /**
-                 * areaKwhMap : {"高压动力站":"915kwh"}
-                 */
+                private List<AreaKwhMapListBean> areaKwhMapList;
 
-                private AreaKwhMapBean areaKwhMap;
-
-                public AreaKwhMapBean getAreaKwhMap() {
-                    return areaKwhMap;
+                public List<AreaKwhMapListBean> getAreaKwhMapList() {
+                    return areaKwhMapList;
                 }
 
-                public void setAreaKwhMap(AreaKwhMapBean areaKwhMap) {
-                    this.areaKwhMap = areaKwhMap;
+                public void setAreaKwhMapList(List<AreaKwhMapListBean> areaKwhMapList) {
+                    this.areaKwhMapList = areaKwhMapList;
                 }
 
-                public static class AreaKwhMapBean {
+                public static class AreaKwhMapListBean {
                     /**
-                     * 高压动力站 : 915kwh
+                     * key : 高压动力站
+                     * value : 0kwh
                      */
 
-                    private String 高压动力站;
+                    private String key;
+                    private String value;
 
-                    public String get高压动力站() {
-                        return 高压动力站;
+                    public String getKey() {
+                        return key;
                     }
 
-                    public void set高压动力站(String 高压动力站) {
-                        this.高压动力站 = 高压动力站;
+                    public void setKey(String key) {
+                        this.key = key;
+                    }
+
+                    public String getValue() {
+                        return value;
+                    }
+
+                    public void setValue(String value) {
+                        this.value = value;
                     }
                 }
             }
         }
 
         public static class InstrumentInfomationListBean {
-            /**
-             * instrumentMap : {"CH01-1约克离心式制冷机":"452kwh","CH01-2约克离心式制冷机":"463kwh"}
-             */
+            private List<InstrumentMapListBean> instrumentMapList;
 
-            private InstrumentMapBean instrumentMap;
-
-            public InstrumentMapBean getInstrumentMap() {
-                return instrumentMap;
+            public List<InstrumentMapListBean> getInstrumentMapList() {
+                return instrumentMapList;
             }
 
-            public void setInstrumentMap(InstrumentMapBean instrumentMap) {
-                this.instrumentMap = instrumentMap;
+            public void setInstrumentMapList(List<InstrumentMapListBean> instrumentMapList) {
+                this.instrumentMapList = instrumentMapList;
             }
 
-            public static class InstrumentMapBean {
+            public static class InstrumentMapListBean {
                 /**
-                 * CH01-1约克离心式制冷机 : 452kwh
-                 * CH01-2约克离心式制冷机 : 463kwh
+                 * key : CH01-1约克离心式制冷机
+                 * value : 0kwh
                  */
 
-                @SerializedName("CH01-1约克离心式制冷机")
-                private String CH011约克离心式制冷机;
-                @SerializedName("CH01-2约克离心式制冷机")
-                private String CH012约克离心式制冷机;
+                private String key;
+                private String value;
 
-                public String getCH011约克离心式制冷机() {
-                    return CH011约克离心式制冷机;
+                public String getKey() {
+                    return key;
                 }
 
-                public void setCH011约克离心式制冷机(String CH011约克离心式制冷机) {
-                    this.CH011约克离心式制冷机 = CH011约克离心式制冷机;
+                public void setKey(String key) {
+                    this.key = key;
                 }
 
-                public String getCH012约克离心式制冷机() {
-                    return CH012约克离心式制冷机;
+                public String getValue() {
+                    return value;
                 }
 
-                public void setCH012约克离心式制冷机(String CH012约克离心式制冷机) {
-                    this.CH012约克离心式制冷机 = CH012约克离心式制冷机;
+                public void setValue(String value) {
+                    this.value = value;
                 }
             }
         }
 
         public static class DeviceInformationListBean {
-            /**
-             * deviceKwhMap : {"CH01-1离心式制冷机":"452kwh","CH01-2离心式制冷机":"463kwh"}
-             */
+            private List<DeviceKwhMapListBean> deviceKwhMapList;
 
-            private DeviceKwhMapBean deviceKwhMap;
-
-            public DeviceKwhMapBean getDeviceKwhMap() {
-                return deviceKwhMap;
+            public List<DeviceKwhMapListBean> getDeviceKwhMapList() {
+                return deviceKwhMapList;
             }
 
-            public void setDeviceKwhMap(DeviceKwhMapBean deviceKwhMap) {
-                this.deviceKwhMap = deviceKwhMap;
+            public void setDeviceKwhMapList(List<DeviceKwhMapListBean> deviceKwhMapList) {
+                this.deviceKwhMapList = deviceKwhMapList;
             }
 
-            public static class DeviceKwhMapBean {
+            public static class DeviceKwhMapListBean {
                 /**
-                 * CH01-1离心式制冷机 : 452kwh
-                 * CH01-2离心式制冷机 : 463kwh
+                 * key : CH01-1离心式制冷机
+                 * value : 0kwh
                  */
 
-                @SerializedName("CH01-1离心式制冷机")
-                private String CH011离心式制冷机;
-                @SerializedName("CH01-2离心式制冷机")
-                private String CH012离心式制冷机;
+                private String key;
+                private String value;
 
-                public String getCH011离心式制冷机() {
-                    return CH011离心式制冷机;
+                public String getKey() {
+                    return key;
                 }
 
-                public void setCH011离心式制冷机(String CH011离心式制冷机) {
-                    this.CH011离心式制冷机 = CH011离心式制冷机;
+                public void setKey(String key) {
+                    this.key = key;
                 }
 
-                public String getCH012离心式制冷机() {
-                    return CH012离心式制冷机;
+                public String getValue() {
+                    return value;
                 }
 
-                public void setCH012离心式制冷机(String CH012离心式制冷机) {
-                    this.CH012离心式制冷机 = CH012离心式制冷机;
+                public void setValue(String value) {
+                    this.value = value;
                 }
             }
         }
