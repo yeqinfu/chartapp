@@ -5,6 +5,7 @@ import android.widget.TextView
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.demo.FG_Demo02
+import com.ppandroid.app.home.mine.FG_SystemSetting
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.http.OKUtils
 import com.ppandroid.app.utils.activitymanager.ActivityManager
@@ -20,6 +21,9 @@ class FG_Mine: FG_Base() {
     override fun fgRes(): Int= R.layout.fg_mine
 
     override fun afterViews() {
+        tv_system_setting.setOnClickListener {
+            startAC(FG_SystemSetting::class.java.name)
+        }
         tv_settings.setOnClickListener{
             startAC(FG_Demo02::class.java.name)
         }

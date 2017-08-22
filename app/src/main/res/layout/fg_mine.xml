@@ -130,6 +130,7 @@
         android:layout_height="wrap_content">
         
         <TextView
+            android:id="@+id/tv_system_setting"
             android:drawablePadding="23dp"
             android:gravity="center"
             android:drawableTop="@drawable/ic_xitong"
