@@ -19,6 +19,6 @@ class Contants {
         /** 校验数据错误 如验证码输入错误，评论输入错误  */
         val CHECK_ERROR = "007"
 
-        var baseUrl = "http://192.168.25.203/"
+        var baseUrl = "http://192.168.25.110:9010/"
     }
 }

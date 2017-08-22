@@ -47,6 +47,9 @@ public class Http {
 			@Override
 			public void onError(Call call, Exception e, int id) {
 				e.printStackTrace();
+                ErrorBody errorBody=new ErrorBody();
+                errorBody.setMessage(e.getMessage());
+                callBack.onError(errorBody);
 			}
 
 			@Override

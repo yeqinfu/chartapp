@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -35,12 +36,14 @@ public class HeadViewLayout extends RelativeLayout {
     private TextView tv_back;
     private TextView tv_center;
     private TextView tv_right;
+    private ImageView iv_right;
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
         tv_back = (TextView) findViewById(R.id.tv_back);
         tv_center = (TextView) findViewById(R.id.tv_center);
         tv_right = (TextView) findViewById(R.id.tv_right);
+        iv_right = (ImageView) findViewById(R.id.iv_right);
         initTheme();
     }
 
@@ -76,6 +79,13 @@ public class HeadViewLayout extends RelativeLayout {
     public void setBackText(String msg){
         if (tv_back!=null&& !TextUtils.isEmpty(msg)){
             tv_back.setText(msg);
+        }
+    }
+    public void setIvRight(int rsid,OnClickListener listener){
+        if (iv_right!=null){
+            iv_right.setVisibility(VISIBLE);
+            iv_right.setImageResource(rsid);
+            iv_right.setOnClickListener(listener);
         }
     }
     public void setCenterTitle(String msg){

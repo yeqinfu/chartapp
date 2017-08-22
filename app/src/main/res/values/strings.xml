@@ -10,4 +10,5 @@
     <string name="service_error">服务器异常</string>
     <string name="token_invalid">登录过期请从新登陆！</string>
     <string name="save">保存</string>
+    <string name="input_msg">请输入</string>
 </resources>

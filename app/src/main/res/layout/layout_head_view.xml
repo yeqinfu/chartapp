@@ -35,5 +35,17 @@
         android:drawablePadding="3dp"
         android:gravity="center_vertical"
         android:textColor="@color/white"/>
+    <ImageView
+        android:padding="10dp"
+        android:id="@+id/iv_right"
+        android:visibility="gone"
+        android:src="@drawable/ic_add_model"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="15dp"
+        android:gravity="center_vertical"
+      />
 
 </com.ppandroid.app.widget.HeadViewLayout>

@@ -1,6 +1,8 @@
 package com.ppandroid.app.home.mine
 
 import android.graphics.Typeface
+import android.support.v4.view.ViewPager
+import android.view.View
 import com.ppandroid.app.R
 import com.ppandroid.app.home.mine.adapter.AD_SystemSetting
 import com.ppandroid.im.base.FG_Base
@@ -18,6 +20,10 @@ class FG_SystemSetting:FG_Base(){
     override fun afterViews() {
         head_view.setCenterTitle("系统设置")
         head_view.init(activity)
+        head_view.setIvRight(R.drawable.ic_add_model, View.OnClickListener {
+            addModelByPosition()
+
+        })
         var adapter=AD_SystemSetting(activity,childFragmentManager)
         view_pager.setAdapter(adapter)
         adapter.notifyDataSetChanged()
@@ -27,6 +33,28 @@ class FG_SystemSetting:FG_Base(){
         title_indicator.setIndicatorColorResource(R.color.color_01)
         title_indicator.setTypeface(null, Typeface.NORMAL)
         title_indicator.setTextSize((14 * density).toInt())
+        title_indicator.setOnPageChangeListener(object :ViewPager.OnPageChangeListener{
+            override fun onPageScrollStateChanged(state: Int) {
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            }
+
+            override fun onPageSelected(position: Int) {
+                Position=position
+            }
+
+        })
     }
+
+    private fun addModelByPosition() {
+        when(Position){
+            0->{//仪表添加
+                startAC(FG_AddInstrument::class.java.name)
+            }
+        }
+    }
+
+    private var Position:Int=0
 
 }
