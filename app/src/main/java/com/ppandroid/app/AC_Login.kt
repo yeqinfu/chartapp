@@ -7,7 +7,7 @@ import android.text.TextUtils
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.login.LoginBody
 import com.ppandroid.app.http.MyCallBack
-import com.ppandroid.app.http.OKUtils
+import com.ppandroid.app.http.Http
 import com.ppandroid.app.utils.info.Utils_UserInfo
 import com.ppandroid.app.utils.toast.ToastUtil
 import kotlinx.android.synthetic.main.activity_ac__login.*
@@ -45,7 +45,7 @@ class AC_Login : AppCompatActivity() {
 
     private fun beginLogin(account: String, password: String) {
         var url= "user/login/check.json?username=$account&password=$password"
-        OKUtils.get(this@AC_Login, url, LoginBody::class.java, object : MyCallBack<LoginBody> {
+        Http.get(this@AC_Login, url, LoginBody::class.java, object : MyCallBack<LoginBody> {
             override fun onResponse(response: LoginBody) {
                 response?.let {
                     Utils_UserInfo.saveInfo(this@AC_Login,response)

@@ -5,7 +5,7 @@ import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.overview.BN_OverViewConfig
 import com.ppandroid.app.home.FG_OverView
 import com.ppandroid.app.http.MyCallBack
-import com.ppandroid.app.http.OKUtils
+import com.ppandroid.app.http.Http
 import com.ppandroid.im.base.FG_Base
 import com.ppandroid.im.bean.BaseBody
 import kotlinx.android.synthetic.main.fg_over_view_config.*
@@ -34,7 +34,7 @@ class FG_OverViewConfig:FG_Base(){
 
     private fun loadContent() {
         var url="user/overview/modular.json"
-        OKUtils.get(activity,url, BN_OverViewConfig::class.java,object: MyCallBack<BN_OverViewConfig> {
+        Http.get(activity,url, BN_OverViewConfig::class.java,object: MyCallBack<BN_OverViewConfig> {
             override fun onResponse(response: BN_OverViewConfig?) {
                 response?.let {
                     adapter.setDatas(it.message.choosed)
@@ -79,7 +79,7 @@ class FG_OverViewConfig:FG_Base(){
             url+="ids="+item.id.toString()+"&"
         }
         url=url.substring(0,url.length-1)
-        OKUtils.get(activity,url,BaseBody::class.java,object :MyCallBack<BaseBody>{
+        Http.get(activity,url,BaseBody::class.java,object :MyCallBack<BaseBody>{
             override fun onResponse(response: BaseBody?) {
                 response?.let {
                     if (it.isSuccess){

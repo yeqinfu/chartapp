@@ -5,7 +5,7 @@ import com.ppandroid.app.R
 import com.ppandroid.app.bean.BN_Vertical
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.http.MyCallBack
-import com.ppandroid.app.http.OKUtils
+import com.ppandroid.app.http.Http
 import com.ppandroid.app.utils.activitymanager.ActivityManager
 import com.ppandroid.app.utils.info.Utils_UserInfo
 import com.ppandroid.im.base.FG_Base
@@ -70,7 +70,7 @@ class FG_Demo02 : FG_Base() {
             return
         }
         var url="user/logout.json?id="+ Utils_UserInfo.getUserId(activity) +"&md5="+ Utils_UserInfo.getUserMD5(activity)
-        OKUtils.get(activity, url, BaseBody::class.java, object : MyCallBack<BaseBody> {
+        Http.get(activity, url, BaseBody::class.java, object : MyCallBack<BaseBody> {
             override fun onResponse(response: BaseBody?) {
                 response?.let {
                     if (it.isSuccess) {

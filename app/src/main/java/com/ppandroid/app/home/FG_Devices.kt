@@ -6,7 +6,7 @@ import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.devices.BN_Devices
 import com.ppandroid.app.home.adapter.AD_ExList
 import com.ppandroid.app.http.MyCallBack
-import com.ppandroid.app.http.OKUtils
+import com.ppandroid.app.http.Http
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_devices.*
 
@@ -27,7 +27,7 @@ class FG_Devices : FG_Base() {
 
     private fun loadContent() {
         var url = "user/device/index.json"
-        OKUtils.get(activity, url, BN_Devices::class.java, object : MyCallBack<BN_Devices> {
+        Http.get(activity, url, BN_Devices::class.java, object : MyCallBack<BN_Devices> {
             override fun onResponse(response: BN_Devices?) {
                 refreshLayout.finishRefresh()
                 response?.let {

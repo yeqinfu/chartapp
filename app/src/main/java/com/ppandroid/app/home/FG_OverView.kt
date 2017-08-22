@@ -20,7 +20,7 @@ import com.ppandroid.app.home.adapter.AD_Instrument
 import com.ppandroid.app.home.adapter.AD_Zhongdian
 import com.ppandroid.app.home.overview.FG_OverViewConfig
 import com.ppandroid.app.http.MyCallBack
-import com.ppandroid.app.http.OKUtils
+import com.ppandroid.app.http.Http
 import com.ppandroid.app.utils.DensityUtil
 import com.ppandroid.app.utils.Utils_Dialog
 import com.ppandroid.app.widget.common.PagerSlidingTab
@@ -78,7 +78,7 @@ class FG_OverView : FG_Base() {
 
     private fun loadContent() {
         var url = "user/overview/index.json"
-        OKUtils.get(activity, url, BN_OverView::class.java, object : MyCallBack<BN_OverView> {
+        Http.get(activity, url, BN_OverView::class.java, object : MyCallBack<BN_OverView> {
             override fun onResponse(response: BN_OverView?) {
                 response?.let {
                     body = it
@@ -344,7 +344,7 @@ class FG_OverView : FG_Base() {
      */
     private fun loadOverViewConfig() {
         var url = "user/overview/modular.json"
-        OKUtils.get(activity, url, BN_OverViewConfig::class.java, object : MyCallBack<BN_OverViewConfig> {
+        Http.get(activity, url, BN_OverViewConfig::class.java, object : MyCallBack<BN_OverViewConfig> {
             override fun onResponse(response: BN_OverViewConfig?) {
                 Utils_Dialog.disMissLoading()
                 refreshLayout.finishRefresh()
