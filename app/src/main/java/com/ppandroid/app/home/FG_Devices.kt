@@ -2,8 +2,11 @@ package com.ppandroid.app.home
 
 import android.animation.ObjectAnimator
 import com.ppandroid.app.R
+import com.ppandroid.app.bean.ErrorBody
+import com.ppandroid.app.bean.devices.BN_Devices
 import com.ppandroid.app.home.adapter.AD_ExList
-import com.ppandroid.app.home.adapter.BN_Ex
+import com.ppandroid.app.http.MyCallBack
+import com.ppandroid.app.http.OKUtils
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_devices.*
 
@@ -11,57 +14,50 @@ import kotlinx.android.synthetic.main.fg_devices.*
 /**
  * Created by yeqinfu on 2017/8/3.
  */
-class FG_Devices :FG_Base(){
-    override fun fgRes():Int= R.layout.fg_devices
-    private val dataset = HashMap<BN_Ex,List<String>>()
-    private val parentList =ArrayList<BN_Ex>()
-    private val childrenList1 = ArrayList<String>()
-    private val childrenList2 = ArrayList<String>()
-    private val childrenList3 = ArrayList<String>()
-
+class FG_Devices : FG_Base() {
+    override fun fgRes(): Int = R.layout.fg_devices
     override fun afterViews() {
-        initialData()
-        val adapter= AD_ExList(dataset,parentList,activity)
-        lv_ex.setAdapter(adapter)
-        lv_ex.setOnGroupCollapseListener {var1->
-            parentList[var1].isOpen=false
-            adapter.notifyDataSetChanged()
-            val animator = ObjectAnimator.ofFloat(iv_setting, "rotation", 0f, 180f)
-            animator.duration=(500)
-            animator.start()
+        loadContent()
+        refreshLayout.setOnRefreshListener {
+            loadContent()
         }
-        lv_ex.setOnGroupExpandListener {var1->
-            parentList[var1].isOpen=true
-            adapter.notifyDataSetChanged()
-            val animator = ObjectAnimator.ofFloat(iv_setting, "rotation", 0f, 180f)
-            animator.duration=(500)
-            animator.start()
-        }
+        refreshLayout.isEnableLoadmore = false
 
     }
 
-    private fun initialData() {
-        var group01=BN_Ex(false,"高压离心式空压机")
-        group01.iconId=R.drawable.icon_gaoya02
-        parentList.add(group01)
-        var group02=BN_Ex(false,"空调系统-冷却塔")
-        group02.iconId=R.drawable.icon_gaoya05
-        parentList.add(group02)
-        var group03=BN_Ex(false,"空调系统-冷冻泵")
-        group03.iconId=R.drawable.icon_gaoya05
-        parentList.add(group03)
-        childrenList1.add(parentList[0].title + "-" + "first")
-        childrenList1.add(parentList[0].title + "-" + "second")
-        childrenList1.add(parentList[0].title+ "-" + "third")
-        childrenList2.add(parentList[1].title + "-" + "first")
-        childrenList2.add(parentList[1].title + "-" + "second")
-        childrenList2.add(parentList[1].title+ "-" + "third")
-        childrenList3.add(parentList[2].title+ "-" + "first")
-        childrenList3.add(parentList[2].title+ "-" + "second")
-        childrenList3.add(parentList[2].title+ "-" + "third")
-        dataset.put(parentList[0], childrenList1)
-        dataset.put(parentList[1], childrenList2)
-        dataset.put(parentList[2], childrenList3)
+    private fun loadContent() {
+        var url = "user/device/index.json"
+        OKUtils.get(activity, url, BN_Devices::class.java, object : MyCallBack<BN_Devices> {
+            override fun onResponse(response: BN_Devices?) {
+                refreshLayout.finishRefresh()
+                response?.let {
+                    val adapter = AD_ExList(it.message.deviceCateList, activity)
+                    lv_ex.setAdapter(adapter)
+                    lv_ex.setOnGroupCollapseListener { var1 ->
+                        it.message.deviceCateList[var1].isOpen = false
+                        adapter.notifyDataSetChanged()
+                        val animator = ObjectAnimator.ofFloat(iv_setting, "rotation", 0f, 180f)
+                        animator.duration = (500)
+                        animator.start()
+                    }
+                    lv_ex.setOnGroupExpandListener { var1 ->
+                        it.message.deviceCateList[var1].isOpen = true
+                        adapter.notifyDataSetChanged()
+                        val animator = ObjectAnimator.ofFloat(iv_setting, "rotation", 0f, 180f)
+                        animator.duration = (500)
+                        animator.start()
+                    }
+                }
+
+            }
+
+            override fun onError(error: ErrorBody?) {
+                refreshLayout.finishRefresh()
+                toast(error)
+            }
+
+        })
+
     }
 
 

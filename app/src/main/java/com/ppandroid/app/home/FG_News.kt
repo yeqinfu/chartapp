@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.ppandroid.app.R
+import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_news.*
 import org.jetbrains.anko.find
@@ -31,6 +32,10 @@ class FG_News :FG_Base(){
         dataSet.add(item)
         dataSet.add(item1)
         lv_list.adapter=AD_List(activity,dataSet)
+        refreshLayout.setOnRefreshListener { layout->
+            DebugLog.d("++++++++++++++++++++++++++refresh yeqinfu")
+            layout.finishRefresh(1000)
+        }
     }
     class BN_Data{
         var title:String?=null

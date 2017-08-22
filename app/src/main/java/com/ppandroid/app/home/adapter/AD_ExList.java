@@ -11,49 +11,53 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ppandroid.app.R;
+import com.ppandroid.app.bean.devices.BN_Devices;
+import com.ppandroid.app.utils.glide.GlideUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class AD_ExList extends BaseExpandableListAdapter {
-	private Map<BN_Ex, List<String>>	dataset		= new HashMap<>();
-	private ArrayList<BN_Ex>			parentList	= new ArrayList<>();
+	List<BN_Devices.MessageBean.DeviceCateListBean>	deviceCateList;
 
-	private Context						mContext;
+    private int[] images={
+            R.drawable.icon_gaoya,
+            R.drawable.icon_gaoya02,
+            R.drawable.icon_gaoya03,
+            R.drawable.icon_gaoya04,
+            R.drawable.icon_gaoya05
+    };
 
-	public AD_ExList(Map<BN_Ex, List<String>> dataset, ArrayList<BN_Ex> parentList, Context context) {
-		this.dataset = dataset;
-		this.parentList = parentList;
+	private Context									mContext;
+
+	public AD_ExList(List<BN_Devices.MessageBean.DeviceCateListBean> deviceCateList, Context context) {
+		this.deviceCateList = deviceCateList;
 		mContext = context;
 	}
 
 	//  获得某个父项的某个子项
 	@Override
 	public Object getChild(int parentPos, int childPos) {
-		return dataset.get(parentList.get(parentPos)).get(childPos);
+		return deviceCateList.get(parentPos).getDeviceList().get(childPos);
 	}
 
 	//  获得父项的数量
 	@Override
 	public int getGroupCount() {
-		return dataset.size();
+		return deviceCateList.size();
 	}
 
 	//  获得某个父项的子项数目
 	@Override
 	public int getChildrenCount(int parentPos) {
-		return dataset.get(parentList.get(parentPos)).size();
+		return deviceCateList.get(parentPos).getDeviceList().size();
 	}
 
 	//  获得某个父项
 	@Override
 	public Object getGroup(int parentPos) {
-		return dataset.get(parentList.get(parentPos));
+		return deviceCateList.get(parentPos);
 	}
 
 	//  获得某个父项的id
@@ -81,26 +85,26 @@ public class AD_ExList extends BaseExpandableListAdapter {
 			LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			view = inflater.inflate(R.layout.parent_item, null);
 		}
-        ImageView iv_arrow = (ImageView) view.findViewById(R.id.iv_arrow);
-        if (parentList.get(parentPos).isOpen()) {
-            iv_arrow.setImageResource(R.drawable.icon_arrar);
-        }
-        else {
-            Resources res = mContext.getResources();
-            Bitmap img = BitmapFactory.decodeResource(res, R.drawable.icon_arrar);
-            Matrix matrix = new Matrix();
-            matrix.postRotate(180); //翻转180度
-            int width = img.getWidth();
-            int height = img.getHeight();
-            Bitmap img_a = Bitmap.createBitmap(img, 0, 0, width, height, matrix, true);
-            iv_arrow.setImageBitmap(img_a);
-        }
+		ImageView iv_arrow = (ImageView) view.findViewById(R.id.iv_arrow);
+		if (deviceCateList.get(parentPos).isOpen()) {
+			iv_arrow.setImageResource(R.drawable.icon_arrar);
+		}
+		else {
+			Resources res = mContext.getResources();
+			Bitmap img = BitmapFactory.decodeResource(res, R.drawable.icon_arrar);
+			Matrix matrix = new Matrix();
+			matrix.postRotate(180); //翻转180度
+			int width = img.getWidth();
+			int height = img.getHeight();
+			Bitmap img_a = Bitmap.createBitmap(img, 0, 0, width, height, matrix, true);
+			iv_arrow.setImageBitmap(img_a);
+		}
 		view.setTag(R.layout.parent_item, parentPos);
 		view.setTag(R.layout.child_item, -1);
 		TextView text = (TextView) view.findViewById(R.id.parent_title);
-		text.setText(parentList.get(parentPos).getTitle());
-        ImageView icon= (ImageView) view.findViewById(R.id.group_icon);
-        icon.setImageResource(parentList.get(parentPos).getIconId());
+		text.setText(deviceCateList.get(parentPos).getName());
+		ImageView icon = (ImageView) view.findViewById(R.id.group_icon);
+		icon.setImageResource(images[parentPos%images.length]);
 		return view;
 	}
 
@@ -113,14 +117,15 @@ public class AD_ExList extends BaseExpandableListAdapter {
 		}
 		view.setTag(R.layout.parent_item, parentPos);
 		view.setTag(R.layout.child_item, childPos);
-		TextView text = (TextView) view.findViewById(R.id.child_title);
-		text.setText(dataset.get(parentList.get(parentPos)).get(childPos));
-		text.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Toast.makeText(mContext, "点到了内置的textview", Toast.LENGTH_SHORT).show();
-			}
-		});
+		ImageView iv_icon = (ImageView) view.findViewById(R.id.iv_icon);
+		TextView tv_name = (TextView) view.findViewById(R.id.tv_name);
+		TextView tv_num = (TextView) view.findViewById(R.id.tv_num);
+		TextView btn_action = (TextView) view.findViewById(R.id.btn_action);
+		BN_Devices.MessageBean.DeviceCateListBean.DeviceListBean item = deviceCateList.get(parentPos).getDeviceList().get(childPos);
+		GlideUtils.displayImage(mContext, item.getPhoto(), iv_icon);
+        tv_name.setText(item.getName());
+        tv_num.setText(item.getModel());
+        btn_action.setText(item.getStatusString());
 		return view;
 	}
 

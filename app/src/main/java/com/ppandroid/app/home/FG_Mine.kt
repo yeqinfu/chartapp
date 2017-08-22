@@ -1,5 +1,7 @@
 package com.ppandroid.im
 
+import android.graphics.drawable.Drawable
+import android.widget.TextView
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.demo.FG_Demo02
@@ -21,6 +23,18 @@ class FG_Mine: FG_Base() {
         tv_settings.setOnClickListener{
             startAC(FG_Demo02::class.java.name)
         }
+        setUpDownIcon(tv_name,"df")
+    }
+
+    private fun setUpDownIcon(textView: TextView, str: String?) {
+        var drawable: Drawable = if (str?.startsWith("-") == true) {
+            resources.getDrawable(R.drawable.icon_down_yellow)
+        } else {
+            resources.getDrawable(R.drawable.icon_up_blue)
+        }
+        drawable.setBounds(0, 0, textView.minimumWidth, textView.minimumHeight)
+        textView.setCompoundDrawables(null, null, drawable, null)
+
     }
 
     private fun loginOut() {

@@ -1,6 +1,10 @@
 package com.ppandroid.app.home
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Matrix
 import android.graphics.Typeface
+import android.graphics.drawable.Drawable
 import android.support.v4.view.ViewPager
 import android.view.View
 import android.widget.ImageView
@@ -17,13 +21,18 @@ import com.ppandroid.app.home.adapter.AD_Zhongdian
 import com.ppandroid.app.home.overview.FG_OverViewConfig
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.http.OKUtils
+import com.ppandroid.app.utils.DensityUtil
+import com.ppandroid.app.utils.Utils_Dialog
 import com.ppandroid.app.widget.common.PagerSlidingTab
+import com.ppandroid.app.widget.wheelview.FitChartValue
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_over_view.*
+import kotlinx.android.synthetic.main.item_energy_layout.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import org.jetbrains.anko.find
 import java.util.*
+import java.util.regex.Pattern
 
 
 /**
@@ -34,15 +43,25 @@ class FG_OverView : FG_Base() {
 
 
     override fun afterViews() {
+        Utils_Dialog.showLoading(activity)
+        loadOverViewConfig()
         isNeedEventBus = true
+
+        refreshLayout.setOnRefreshListener {
+            loadOverViewConfig()
+
+        }
+        refreshLayout.isEnableLoadmore=false
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(event: ET_OverView) {
-        if (event.taskId===ET_OverView.TASKID_REFRESH){
+        if (event.taskId === ET_OverView.TASKID_REFRESH) {
             loadOverViewConfig()
         }
 
     }
+
     class ET_OverView(taskId: Int) : ET_Base(taskId) {
         companion object {
             /**刷新 */
@@ -96,6 +115,7 @@ class FG_OverView : FG_Base() {
             }
             var view = addModule()
             ll_content.addView(view)
+            sv.smoothScrollTo(0, 0)
         }
 
 
@@ -121,6 +141,10 @@ class FG_OverView : FG_Base() {
             /**添加仪表用能统计图*/
             var adapter = AD_Zhongdian(activity, it)
             var view_pager_zhongdian = view.find<ViewPager>(R.id.view_pager_zhongdian)
+            //为ViewPager设置高度
+            val params = view_pager_zhongdian.getLayoutParams()
+            params.height = DensityUtil.dip2px(activity, 65f) * it[0].deviceKwhMapList.size
+            view_pager_zhongdian.setLayoutParams(params)
             view_pager_zhongdian.adapter = adapter
             var title_indicator_zhongdian = view.find<PagerSlidingTab>(R.id.title_indicator_zhongdian)
             val density = resources.displayMetrics.density
@@ -146,6 +170,10 @@ class FG_OverView : FG_Base() {
             /**添加仪表用能统计图*/
             var adapter = AD_Instrument(activity, it)
             var view_pager_instruemnt = view.find<ViewPager>(R.id.view_pager_instruemnt)
+            //为ViewPager设置高度
+            val params = view_pager_instruemnt.getLayoutParams()
+            params.height = DensityUtil.dip2px(activity, 65f) * it[0].instrumentMapList.size
+            view_pager_instruemnt.setLayoutParams(params)
             view_pager_instruemnt.adapter = adapter
             var title_indicator2 = view.find<PagerSlidingTab>(R.id.title_indicator2)
             val density = resources.displayMetrics.density
@@ -166,24 +194,66 @@ class FG_OverView : FG_Base() {
         var energyBody = body?.message?.overviewConsumptionInformation
         energyBody?.let {
             var tv_totalKwh = view.find<TextView>(R.id.tv_totalKwh)
-            tv_totalKwh.text = it.totalKwh
+            val regEx = "kwh$|万kwh$"
+            val p = Pattern.compile(regEx)
+            val m = p.matcher(it.totalKwh)
+            tv_totalKwh.text = m.replaceAll("")
+            var tv_unit = view.find<TextView>(R.id.tv_unit)
+            m.reset()
+            if (m.find()) {
+                tv_unit.text = m.group()
+            }
+            view?.postDelayed({
+                val resources = resources
+                val values = ArrayList<FitChartValue>()
+                values.add(FitChartValue(40f, resources.getColor(R.color.color_01)))
+                fitChart?.setValues(values)
+
+            }, 1000)
+
             var tv_totalMoney = view.find<TextView>(R.id.tv_totalMoney)
             tv_totalMoney.text = "累计：" + it.totalMoney
             var tv_carbonEmission = view.find<TextView>(R.id.tv_carbonEmission)
             tv_carbonEmission.text = "碳排放：" + it.carbonEmission
+
             var tv_compareToYesterday = view.find<TextView>(R.id.tv_compareToYesterday)
-            tv_compareToYesterday.text = it.compareToYesterday
+            tv_compareToYesterday.text =it.compareToYesterday
+            setUpDownIcon(tv_compareToYesterday, it.compareToYesterday)
+
             var tv_compareToLastMonth = view.find<TextView>(R.id.tv_compareToLastMonth)
             tv_compareToLastMonth.text = it.compareToLastMonth
+            setUpDownIcon(tv_compareToLastMonth, it.compareToLastMonth)
+
             var tv_energyUseThisMonth = view.find<TextView>(R.id.tv_energyUseThisMonth)
             tv_energyUseThisMonth.text = it.energyUseThisMonth
+
             var tv_compareToLastMonthToday = view.find<TextView>(R.id.tv_compareToLastMonthToday)
             tv_compareToLastMonthToday.text = it.compareToLastMonthToday
+            setUpDownIcon(tv_compareToLastMonthToday, it.compareToLastMonthToday)
+
             var tv_cmpareToLastYearToday = view.find<TextView>(R.id.tv_cmpareToLastYearToday)
             tv_cmpareToLastYearToday.text = it.cmpareToLastYearToday
+            setUpDownIcon(tv_cmpareToLastYearToday, it.cmpareToLastYearToday)
+
             var tv_totalMoneyMonth = view.find<TextView>(R.id.tv_totalMoneyMonth)
             tv_totalMoneyMonth.text = it.totalMoneyMonth
+
+            setUpDownIcon(tv_cmpareToLastYearToday, it.cmpareToLastYearToday)
             /**饼图 分享用电统计*/
+
+            val res = activity.resources
+            val img = BitmapFactory.decodeResource(res, R.drawable.icon_forward)
+            val matrix = Matrix()
+            matrix.postRotate(180f) /*翻转180度*/
+            val width = img.width
+            val height = img.height
+            val img_a = Bitmap.createBitmap(img, 0, 0, width, height, matrix, true)
+            var iv_forward = view.find<ImageView>(R.id.iv_forward)
+            var iv_next = view.find<ImageView>(R.id.iv_next)
+            iv_forward.setImageBitmap(img_a)
+            iv_forward.visibility = View.GONE
+
+
             var view_pager = view.find<ViewPager>(R.id.view_pager)
             var adapter = AD_Energy(activity, it.classificationInformationList)
             view_pager.adapter = adapter
@@ -195,6 +265,17 @@ class FG_OverView : FG_Base() {
                 }
 
                 override fun onPageSelected(position: Int) {
+                    if (position == 0) {
+                        iv_forward.visibility = View.GONE
+                    }
+                    if (position == it.classificationInformationList.size - 1) {
+                        iv_next.visibility = View.GONE
+                    }
+                    if (position > 0 && position < it.classificationInformationList.size - 1) {
+                        iv_forward.visibility = View.VISIBLE
+                        iv_next.visibility = View.VISIBLE
+                    }
+
                     setEnergyInfo(view, it.classificationInformationList[position].classificationKwhMapList)
                 }
 
@@ -210,9 +291,19 @@ class FG_OverView : FG_Base() {
             title_indicator.setTabSelectedTextColorResource(R.color.color_01)
             title_indicator.setIndicatorColorResource(R.color.color_01)
             title_indicator.setTypeface(null, Typeface.NORMAL)
-            title_indicator.setTextSize((14 * density).toInt())
+            title_indicator.textSize = (14 * density).toInt()
         }
         return view
+    }
+
+    private fun setUpDownIcon(textView: TextView, str: String?) {
+        var drawable: Drawable = if (str?.startsWith("-") == true) {
+            resources.getDrawable(R.drawable.icon_down_yellow)
+        } else {
+            resources.getDrawable(R.drawable.icon_up_blue)
+        }
+        drawable.setBounds(0, 0, drawable.minimumWidth, drawable.minimumHeight)
+        textView.setCompoundDrawables(null, null, drawable, null)
     }
 
     private fun setEnergyInfo(view: View, list: List<BN_OverView.MessageBean.OverviewConsumptionInformationBean.ClassificationInformationListBean.ClassificationKwhMapListBean>) {
@@ -250,6 +341,8 @@ class FG_OverView : FG_Base() {
         var url = "user/overview/modular.json"
         OKUtils.get(activity, url, BN_OverViewConfig::class.java, object : MyCallBack<BN_OverViewConfig> {
             override fun onResponse(response: BN_OverViewConfig?) {
+                Utils_Dialog.disMissLoading()
+                refreshLayout.finishRefresh()
                 response?.let {
                     choosed = it.message.choosed
                     loadContent()
@@ -257,6 +350,8 @@ class FG_OverView : FG_Base() {
             }
 
             override fun onError(error: ErrorBody?) {
+                refreshLayout.finishRefresh()
+                Utils_Dialog.disMissLoading()
                 toast(error?.message ?: "")
             }
 

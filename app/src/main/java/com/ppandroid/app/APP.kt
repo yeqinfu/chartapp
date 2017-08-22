@@ -4,8 +4,15 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import com.ppandroid.app.AC_Login
+import com.ppandroid.app.R
 import com.ppandroid.app.utils.AppExceptionHandler
 import com.ppandroid.app.utils.DebugLog
+import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter
+import com.scwang.smartrefresh.layout.header.ClassicsHeader
+
+
 
 
 /**
@@ -29,6 +36,18 @@ class APP : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        //设置全局的Header构建器
+        SmartRefreshLayout.setDefaultRefreshHeaderCreater { context, layout ->
+            layout.setPrimaryColorsId(R.color.colorPrimary, android.R.color.white)//全局设置主题颜色
+            ClassicsHeader(context).setSpinnerStyle(SpinnerStyle.Translate)//指定为经典Header，默认是 贝塞尔雷达Header
+        }
+        //设置全局的Footer构建器
+        SmartRefreshLayout.setDefaultRefreshFooterCreater { context, layout ->
+            //指定为经典Footer，默认是 BallPulseFooter
+            ClassicsFooter(context).setSpinnerStyle(SpinnerStyle.Translate)
+        }
+
         context = this
         DebugLog.d("+++++++++++++++++++++++++++++++++++++++++++context is"+ context)
         /*****************************************************************

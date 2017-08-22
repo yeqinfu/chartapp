@@ -11,7 +11,6 @@ import com.ppandroid.app.home.FG_OverView
 import com.ppandroid.im.FG_Mine
 import com.ppandroid.im.base.AC_Base
 import kotlinx.android.synthetic.main.activity_main.*
-import org.greenrobot.eventbus.EventBus
 
 
 class AC_Main : AC_Base() {
@@ -72,7 +71,6 @@ class AC_Main : AC_Base() {
                 } else {
                     fragmentTransaction.show(fragementOver)
                 }
-                EventBus.getDefault().post(FG_OverView.ET_OverView(FG_OverView.ET_OverView.TASKID_REFRESH))
             }
             2 -> {
                 if (fragementDevices == null) {

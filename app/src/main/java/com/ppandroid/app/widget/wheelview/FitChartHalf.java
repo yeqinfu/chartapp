@@ -38,6 +38,7 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
 import com.ppandroid.app.R;
+import com.ppandroid.app.utils.DebugLog;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -111,6 +112,7 @@ public class FitChartHalf extends View {
             offsetSweepAngle += sweepAngle;
             maxSweepAngle += sweepAngle;
         }
+        DebugLog.d("yeqinfu===========chartValues.size()==>"+chartValues.size());
         playAnimation();
     }
 
@@ -120,6 +122,7 @@ public class FitChartHalf extends View {
 
     void setAnimationSeek(float value) {
         animationProgress = value;
+        DebugLog.d("animationProgress--->"+value);
         invalidate();
     }
 
@@ -261,6 +264,7 @@ public class FitChartHalf extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        DebugLog.d("animationProgress--->onDraw");
         renderBack(canvas);
         renderValues(canvas);
     }
@@ -282,8 +286,11 @@ public class FitChartHalf extends View {
      * @param canvas
      */
     private void renderValues(Canvas canvas) {
+
+        DebugLog.d("yeqinfu renderValues(Canvas canvas) ============");
         if (!isInEditMode()) {
             int valuesCounter = (chartValues.size() - 1);
+            DebugLog.d("yeqinfu======valuesCounter=>"+valuesCounter);
             for (int index = valuesCounter; index >= 0; index--) {
                 renderValue(canvas, chartValues.get(index));
             }
@@ -293,6 +300,8 @@ public class FitChartHalf extends View {
     }
 
     private void renderValue(Canvas canvas, FitChartValue value) {
+
+        DebugLog.d("yeqinfu================renderValue=====");
         if (!isInEditMode()) {
             float animationSeek = calculateAnimationSeek();
             Renderer renderer = RendererFactory.getRenderer(animationMode, value, drawingArea);
@@ -301,6 +310,8 @@ public class FitChartHalf extends View {
                 canvas.drawPath(path, value.getPaint());
             }
         } else {
+
+
             Path path = new Path();
             path.addArc(drawingArea, START_ANGLE, DESIGN_MODE_SWEEP_ANGLE);
             canvas.drawPath(path, valueDesignPaint);
@@ -324,12 +335,15 @@ public class FitChartHalf extends View {
     }
 
     private void playAnimation() {
+        this.clearAnimation();
         ObjectAnimator animator = ObjectAnimator.ofFloat(this, "animationSeek", 0.0f, 1.0f);
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.setDuration(ANIMATION_DURATION);
         animatorSet.setInterpolator(new DecelerateInterpolator());
         animatorSet.setTarget(this);
         animatorSet.play(animator);
+        DebugLog.d("yeqinfu===========start amin)==>"+chartValues.size());
         animatorSet.start();
+        DebugLog.d("yeqinfu===========end amin)==>"+chartValues.size());
     }
 }
