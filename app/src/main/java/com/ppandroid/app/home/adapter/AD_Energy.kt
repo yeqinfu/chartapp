@@ -27,6 +27,8 @@ class AD_Energy(ac: Activity, list: List<ClassificationInformationListBean>): Pa
         }
     }
 
+
+
     override fun isViewFromObject(arg0: View, arg1: Any): Boolean {
 
         return arg0 === arg1

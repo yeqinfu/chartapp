@@ -1,20 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:gravity="center_vertical"
-              android:background="#FEFEFE"
-              android:paddingLeft="15dp"
-              android:layout_width="match_parent"
-              android:layout_height="50dp">
-<ImageView
-    android:src="@drawable/icon_center"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
-<TextView
-    android:id="@+id/child_title"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textSize="15sp"
-    android:textStyle="bold"
-    android:text="这是ziitem"
-    android:layout_margin="5dp"/>
-</LinearLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp">
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_toRightOf="@+id/iv_icon"
+        android:gravity="center_vertical"
+        android:textColor="@color/color_09"
+        android:textSize="@dimen/bar_title"
+        />
+
+    <TextView
+        android:id="@+id/tv_num"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_name"
+        android:layout_toRightOf="@+id/iv_icon"
+        android:gravity="center_vertical"
+        android:textColor="@color/color_04"
+        android:textSize="@dimen/sub_title"
+        />
+
+    <TextView
+        android:background="@drawable/shape_oval_solid_color_blue"
+        android:textColor="@color/white"
+        android:id="@+id/btn_action"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="15dp"
+        android:gravity="center"
+        android:text="停止"
+        android:textSize="@dimen/bar_title"/>
+
+</RelativeLayout>

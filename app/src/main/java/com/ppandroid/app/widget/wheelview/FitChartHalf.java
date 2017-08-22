@@ -112,7 +112,6 @@ public class FitChartHalf extends View {
             offsetSweepAngle += sweepAngle;
             maxSweepAngle += sweepAngle;
         }
-        DebugLog.d("yeqinfu===========chartValues.size()==>"+chartValues.size());
         playAnimation();
     }
 
@@ -122,7 +121,7 @@ public class FitChartHalf extends View {
 
     void setAnimationSeek(float value) {
         animationProgress = value;
-        DebugLog.d("animationProgress--->"+value);
+        DebugLog.d("yeqinfu invalidate--->"+value);
         invalidate();
     }
 
@@ -263,8 +262,7 @@ public class FitChartHalf extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        DebugLog.d("animationProgress--->onDraw");
+        DebugLog.d("yeqinfu--->onDraw");
         renderBack(canvas);
         renderValues(canvas);
     }
@@ -287,10 +285,8 @@ public class FitChartHalf extends View {
      */
     private void renderValues(Canvas canvas) {
 
-        DebugLog.d("yeqinfu renderValues(Canvas canvas) ============");
         if (!isInEditMode()) {
             int valuesCounter = (chartValues.size() - 1);
-            DebugLog.d("yeqinfu======valuesCounter=>"+valuesCounter);
             for (int index = valuesCounter; index >= 0; index--) {
                 renderValue(canvas, chartValues.get(index));
             }
@@ -301,7 +297,6 @@ public class FitChartHalf extends View {
 
     private void renderValue(Canvas canvas, FitChartValue value) {
 
-        DebugLog.d("yeqinfu================renderValue=====");
         if (!isInEditMode()) {
             float animationSeek = calculateAnimationSeek();
             Renderer renderer = RendererFactory.getRenderer(animationMode, value, drawingArea);

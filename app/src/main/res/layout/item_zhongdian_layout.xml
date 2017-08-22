@@ -50,5 +50,9 @@
         android:text="查看更多"
         android:textColor="@color/color_04"
         android:textSize="@dimen/time_text"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="7dp"
+        android:background="@color/color_08"/>
 
 </LinearLayout>

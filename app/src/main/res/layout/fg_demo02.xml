@@ -1,50 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:gravity="center"
-              android:background="@color/color_05"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-
-    <Button
-        android:layout_marginTop="85dp"
-        android:id="@+id/btn_a"
-        android:text="A"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <Button
-        android:id="@+id/btn_b"
-        android:text="B"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <Button
-        android:id="@+id/btn_login_out"
-        android:text="登出"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_05"
+            android:gravity="center"
+            android:orientation="vertical">
 
 
-
-    <com.ppandroid.app.widget.MultipleVerticalView
-        android:id="@+id/v_multiple_view"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/chart_value_1"/>
-
-    <Button
-        android:id="@+id/btn_multi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="START"/>
-
-    <include layout="@layout/yellowchartview"/>
-
-    <Button
-        android:id="@+id/btn_start_anim"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="START"/>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:background="@color/color_05"
+                  android:gravity="center"
+                  android:orientation="vertical">
 
 
+        <TextView
+            android:id="@+id/tv_test"
+            android:text="fdasf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/btn_a"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="85dp"
+            android:text="A"/>
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btn_b"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="B"/>
+
+        <Button
+            android:id="@+id/btn_login_out"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="登出"/>
+
+
+        <com.ppandroid.app.widget.MultipleVerticalView
+            android:id="@+id/v_multiple_view"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/chart_value_1"/>
+
+        <Button
+            android:id="@+id/btn_multi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="START"/>
+
+        <include layout="@layout/yellowchartview"/>
+
+        <Button
+            android:id="@+id/btn_start_anim"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="START"/>
+
+
+    </LinearLayout>
+</ScrollView>

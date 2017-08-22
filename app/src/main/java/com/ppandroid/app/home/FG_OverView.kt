@@ -24,10 +24,11 @@ import com.ppandroid.app.http.OKUtils
 import com.ppandroid.app.utils.DensityUtil
 import com.ppandroid.app.utils.Utils_Dialog
 import com.ppandroid.app.widget.common.PagerSlidingTab
+import com.ppandroid.app.widget.graphical.demoview.DountChart01View
+import com.ppandroid.app.widget.wheelview.FitChartHalf
 import com.ppandroid.app.widget.wheelview.FitChartValue
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_over_view.*
-import kotlinx.android.synthetic.main.item_energy_layout.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import org.jetbrains.anko.find
@@ -143,7 +144,7 @@ class FG_OverView : FG_Base() {
             var view_pager_zhongdian = view.find<ViewPager>(R.id.view_pager_zhongdian)
             //为ViewPager设置高度
             val params = view_pager_zhongdian.getLayoutParams()
-            params.height = DensityUtil.dip2px(activity, 65f) * it[0].deviceKwhMapList.size
+            params.height = DensityUtil.dip2px(activity, 65f) * it[0].deviceKwhMapList.size-1
             view_pager_zhongdian.setLayoutParams(params)
             view_pager_zhongdian.adapter = adapter
             var title_indicator_zhongdian = view.find<PagerSlidingTab>(R.id.title_indicator_zhongdian)
@@ -203,13 +204,15 @@ class FG_OverView : FG_Base() {
             if (m.find()) {
                 tv_unit.text = m.group()
             }
+            var fitChart=view.find<FitChartHalf>(R.id.fitChart)
+            fitChart.setWillNotDraw(false)
             view?.postDelayed({
                 val resources = resources
                 val values = ArrayList<FitChartValue>()
                 values.add(FitChartValue(40f, resources.getColor(R.color.color_01)))
                 fitChart?.setValues(values)
-
             }, 1000)
+
 
             var tv_totalMoney = view.find<TextView>(R.id.tv_totalMoney)
             tv_totalMoney.text = "累计：" + it.totalMoney
@@ -265,6 +268,8 @@ class FG_OverView : FG_Base() {
                 }
 
                 override fun onPageSelected(position: Int) {
+                    var v_dount_view=adapter.views[position].find<DountChart01View>(R.id.v_dount_view)
+                    v_dount_view.startAnim()
                     if (position == 0) {
                         iv_forward.visibility = View.GONE
                     }
