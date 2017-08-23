@@ -46,7 +46,7 @@ public class BN_InstrumentList extends BaseBody {
          * helfCount : 0
          */
 
-        private int id;
+        private long id;
         private boolean deleteStatus;
         private int version;
         private Object createTime;
@@ -69,11 +69,11 @@ public class BN_InstrumentList extends BaseBody {
         private int status;
         private int helfCount;
 
-        public int getId() {
+        public long getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(long id) {
             this.id = id;
         }
 

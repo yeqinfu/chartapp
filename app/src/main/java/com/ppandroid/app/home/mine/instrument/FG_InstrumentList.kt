@@ -36,6 +36,11 @@ class FG_InstrumentList:FG_Base(){
                 response?.let {
                     var adapter=AD_List(activity,it.message)
                     lv_list.adapter=adapter
+                    lv_list.setOnItemClickListener { _, _, i, _ ->
+                        var b=FG_InstrumentDetail.createBundle(it.message[i].id,it.message[i].name)
+                        startAC(FG_InstrumentDetail::class.java.name,b)
+
+                    }
 
                 }
             }
