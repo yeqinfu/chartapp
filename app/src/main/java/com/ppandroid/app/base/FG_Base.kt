@@ -55,6 +55,10 @@ abstract class FG_Base : Fragment() {
         var it = AC_ContentFG.createIntent(activity, fragment)
         startActivity(it)
     }
+    protected fun startAC(fragment: String,bundle: Bundle) {
+        var it = AC_ContentFG.createIntent(activity, fragment,bundle)
+        startActivity(it)
+    }
 
 
     /**

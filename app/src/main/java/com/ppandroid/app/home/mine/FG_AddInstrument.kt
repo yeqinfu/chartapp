@@ -25,7 +25,10 @@ class FG_AddInstrument:FG_Base(){
             postInfo()
         }
         tv_choose_instruemnt.setOnClickListener {
-            startAC(FG_ChooseInstrument::class.java.name)
+            if (deviceId !== -1L) {
+                var b=FG_ChooseInstrument.createBundle(deviceId)
+                startAC(FG_ChooseInstrument::class.java.name,b)
+            }
         }
     }
 
@@ -48,7 +51,7 @@ class FG_AddInstrument:FG_Base(){
     /** 编码地址  */
     private val codeAddress: String? = null
     /** 重点设备id  */
-    private var deviceId: Long? = null
+    private var deviceId: Long = -1L
     /** 关联设备区域id  */
     private val deviceAreaId: Long? = null
     /** 关联设备分项id  */

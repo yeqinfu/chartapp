@@ -1,6 +1,7 @@
 package com.ppandroid.app.home.mine
 
 import android.app.Activity
+import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -24,13 +25,23 @@ import org.jetbrains.anko.find
 class FG_ChooseInstrument : FG_Base() {
     override fun fgRes(): Int = R.layout.fg_choose_instruemnt
 
+    companion object {
+        fun createBundle(chooseId:Long):Bundle{
+            var b=Bundle()
+            b.putLong("chooseId",chooseId)
+            return b
+        }
+    }
+    private var chooseId:Long=-1L
     override fun afterViews() {
+        chooseId=arguments.getLong("chooseId",-1L)
         loadContent()
         head_view.init(activity)
         head_view.setCenterTitle("选择重点设备")
         head_view.setRightText("保存") {
             saveInfo()
         }
+
     }
 
     var adapter: AD_List? = null
@@ -42,6 +53,16 @@ class FG_ChooseInstrument : FG_Base() {
                 response?.let {
                     body = it
                     adapter = AD_List(activity, it.message)
+                    if (chooseId!=-1L){
+                       for(i in it.message.iterator()){
+
+                       }
+                        for (item in it.message){
+                            if (item.id==chooseId){
+                                adapter?.checkPos=1
+                            }
+                        }
+                    }
                     lv_list.adapter = adapter
                 }
 
