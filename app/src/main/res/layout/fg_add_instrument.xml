@@ -146,6 +146,7 @@
                     android:textSize="@dimen/bar_title"/>
 
                 <EditText
+                    android:id="@+id/et_name"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -179,6 +180,7 @@
                     android:textSize="@dimen/bar_title"/>
 
                 <EditText
+                    android:id="@+id/et_position"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -212,6 +214,7 @@
                     android:textSize="@dimen/bar_title"/>
 
                 <EditText
+                    android:id="@+id/et_charge"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -245,6 +248,7 @@
                     android:textSize="@dimen/bar_title"/>
 
                 <EditText
+                    android:id="@+id/et_rate"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -279,6 +283,7 @@
                     android:textSize="@dimen/bar_title"/>
 
                 <EditText
+                    android:id="@+id/et_codeAddress"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

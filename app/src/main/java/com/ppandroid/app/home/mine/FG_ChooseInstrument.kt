@@ -54,12 +54,10 @@ class FG_ChooseInstrument : FG_Base() {
                     body = it
                     adapter = AD_List(activity, it.message)
                     if (chooseId!=-1L){
-                       for(i in it.message.iterator()){
-
-                       }
-                        for (item in it.message){
-                            if (item.id==chooseId){
-                                adapter?.checkPos=1
+                        for (i in 0 until it.message.size) {
+                            if (it.message[i].id == chooseId) {
+                                adapter?.checkPos=i
+                                break
                             }
                         }
                     }

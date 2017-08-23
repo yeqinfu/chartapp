@@ -3,12 +3,18 @@ package com.ppandroid.app.home.mine
 import android.text.TextUtils
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ET_Base
+import com.ppandroid.app.bean.ErrorBody
+import com.ppandroid.app.bean.mine.setting.BN_EnergyClasses
+import com.ppandroid.app.http.Http
+import com.ppandroid.app.http.MyCallBack
+import com.ppandroid.app.widget.popwindow.Pop_ChooseSimple
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_add_instrument.*
 import kotlinx.android.synthetic.main.layout_head_view.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.util.*
+import kotlin.collections.HashMap
 
 /**
  * Created by yeqinfu on 2017/8/22.
@@ -25,11 +31,52 @@ class FG_AddInstrument:FG_Base(){
             postInfo()
         }
         tv_choose_instruemnt.setOnClickListener {
-            if (deviceId !== -1L) {
                 var b=FG_ChooseInstrument.createBundle(deviceId)
                 startAC(FG_ChooseInstrument::class.java.name,b)
+        }
+        tv_choose_class.setOnClickListener {
+            showPopChoose()
+        }
+        loadEnergyClasses()
+    }
+
+    /**
+     * 查询能源分类
+     */
+    private fun loadEnergyClasses() {
+        var url="user/sysSet/energyClassification/search.json"
+        Http.get(activity,url,BN_EnergyClasses::class.java,object :MyCallBack<BN_EnergyClasses>{
+            override fun onResponse(response: BN_EnergyClasses?) {
+                response?.let {
+                    for (item in it.message){
+                        list.add(item.name)
+                        listMap.put(item.name,item.id)
+                    }
+                }
+            }
+
+            override fun onError(error: ErrorBody?) {
+                toast(error)
+            }
+
+        })
+    }
+    var list=ArrayList<String>()
+    var listMap=HashMap<String,Long>()
+    private fun showPopChoose() {
+        if (list.isEmpty()){
+            loadEnergyClasses()
+            return
+        }
+        var pop=Pop_ChooseSimple(activity,list)
+        pop.listener=object :Pop_ChooseSimple.IChooseListener{
+            override fun choose(item: String) {
+                energyClassificationId= listMap[item]
+                tv_choose_class.text=item
+                pop.dismiss()
             }
         }
+        pop.showPopupWindow()
     }
 
     /** 层级，1是最高级  */
@@ -39,17 +86,17 @@ class FG_AddInstrument:FG_Base(){
     /** 编号  */
     private var code: String? = null
     /** 能源分类：水、电、煤气、蒸汽  */
-    private val energyClassificationId: Long? = null
+    private var energyClassificationId: Long? = null
     /** 别名  */
-    private val name: String? = null
+    private var name: String? = null
     /** 位置  */
-    private val position: String? = null
+    private var position: String? = null
     /** 负荷  */
-    private val charge: String? = null
+    private var charge: String? = null
     /** 倍率  */
-    private val rate: String? = null
+    private var rate: String? = null
     /** 编码地址  */
-    private val codeAddress: String? = null
+    private var codeAddress: String? = null
     /** 重点设备id  */
     private var deviceId: Long = -1L
     /** 关联设备区域id  */
@@ -64,7 +111,41 @@ class FG_AddInstrument:FG_Base(){
             toast("请输入能源编号")
             return
         }
+        if (energyClassificationId==null){
+            toast("请选择能源分类")
+            return
+        }
+        if (TextUtils.isEmpty(et_name.text)){
+            toast("请输入别名")
+            return
+        }
+        if (TextUtils.isEmpty(et_position.text)){
+            toast("请输入位置")
+            return
+        }
+        if (TextUtils.isEmpty(et_charge.text)){
+            toast("请输入负载")
+            return
+        }
+        if (TextUtils.isEmpty(et_rate.text)){
+            toast("请输入赔率")
+            return
+        }
+        if (TextUtils.isEmpty(et_codeAddress.text)){
+            toast("请输入编码地址")
+            return
+        }
+
         code= et_code.text.toString()
+        name= et_name.text.toString()
+        position= et_position.text.toString()
+        charge= et_charge.text.toString()
+        rate= et_rate.text.toString()
+        codeAddress= et_codeAddress.text.toString()
+
+
+
+
 
     }
 
