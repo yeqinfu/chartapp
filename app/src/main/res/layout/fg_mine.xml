@@ -29,6 +29,7 @@
 
     <!--个人信息-->
     <RelativeLayout
+        android:id="@+id/rl_userinfo"
         android:layout_width="match_parent"
         android:layout_height="74dp"
         android:paddingLeft="12dp"

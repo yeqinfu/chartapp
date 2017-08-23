@@ -2,12 +2,15 @@ package com.ppandroid.im
 
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ErrorBody
+import com.ppandroid.app.bean.mine.BN_UserInfo
 import com.ppandroid.app.demo.FG_Demo02
 import com.ppandroid.app.home.mine.FG_SystemSetting
 import com.ppandroid.app.home.mine.instrument.FG_InstrumentList
+import com.ppandroid.app.home.mine.userinfo.FG_UserInfo
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.activitymanager.ActivityManager
+import com.ppandroid.app.utils.glide.GlideUtils
 import com.ppandroid.app.utils.info.Utils_UserInfo
 import com.ppandroid.im.base.FG_Base
 import com.ppandroid.im.bean.BaseBody
@@ -29,6 +32,32 @@ class FG_Mine: FG_Base() {
         tv_instrument_list.setOnClickListener {
             startAC(FG_InstrumentList::class.java.name)
         }
+
+        rl_userinfo.setOnClickListener {
+            startAC(FG_UserInfo::class.java.name)
+        }
+        loadContent()
+
+    }
+
+    private fun loadContent(){
+        var url="user/personal/get.json"
+        Http.get(activity,url, BN_UserInfo::class.java,object :MyCallBack<BN_UserInfo>{
+            override fun onResponse(response: BN_UserInfo?) {
+                response?.let {
+                    tv_name.text=it.message.realName
+                    it.message.headPhoto?.let {
+                        GlideUtils.displayImage(activity,it,iv_head)
+                    }
+                }
+
+            }
+
+            override fun onError(error: ErrorBody?) {
+                toast(error)
+            }
+
+        })
 
     }
 

@@ -24,9 +24,6 @@ class FG_InstrumentList:FG_Base(){
     override fun afterViews() {
         head_view.init(activity)
         head_view.setCenterTitle("仪表检测")
-        head_view.setIvRight(R.drawable.ic_head_inst_list){
-            toast("hahahhah")
-        }
         loadContent()
     }
     private fun loadContent(){

@@ -63,7 +63,7 @@
                 android:layout_height="27dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="22dp"
-                android:text="5404"
+                android:text="0"
                 android:textColor="@color/color_01"
                 android:textSize="@dimen/second_title"/>
             <TextView
@@ -100,7 +100,7 @@
                 android:layout_height="27dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="22dp"
-                android:text="5404"
+                android:text="0"
                 android:textColor="@color/color_01"
                 android:textSize="@dimen/second_title"/>
             <TextView
@@ -137,7 +137,7 @@
                 android:layout_height="27dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="22dp"
-                android:text="5404"
+                android:text="0"
                 android:textColor="@color/color_01"
                 android:textSize="@dimen/second_title"/>
             <TextView
@@ -190,7 +190,7 @@
                 android:layout_height="27dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="22dp"
-                android:text="5404"
+                android:text="0"
                 android:textColor="@color/color_01"
                 android:textSize="@dimen/second_title"/>
             <TextView
@@ -227,7 +227,7 @@
                 android:layout_height="27dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="22dp"
-                android:text="5404"
+                android:text="0"
                 android:textColor="@color/color_01"
                 android:textSize="@dimen/second_title"/>
             <TextView
@@ -264,7 +264,7 @@
                 android:layout_height="27dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="22dp"
-                android:text="5404"
+                android:text="0"
                 android:textColor="@color/color_01"
                 android:textSize="@dimen/second_title"/>
             <TextView
@@ -318,7 +318,7 @@
                 android:layout_height="27dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="22dp"
-                android:text="5404"
+                android:text="0"
                 android:textColor="@color/color_01"
                 android:textSize="@dimen/second_title"/>
             <TextView
@@ -370,7 +370,7 @@
                 android:layout_height="27dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="22dp"
-                android:text="5404"
+                android:text="0"
                 android:textColor="@color/color_01"
                 android:textSize="@dimen/second_title"/>
             <TextView
@@ -422,7 +422,7 @@
                 android:layout_height="27dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="22dp"
-                android:text="5404"
+                android:text="0"
                 android:textColor="@color/color_01"
                 android:textSize="@dimen/second_title"/>
         </LinearLayout>
@@ -467,7 +467,7 @@
                 android:layout_height="27dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="22dp"
-                android:text="5404"
+                android:text="0"
                 android:textColor="@color/color_01"
                 android:textSize="@dimen/second_title"/>
             <TextView
