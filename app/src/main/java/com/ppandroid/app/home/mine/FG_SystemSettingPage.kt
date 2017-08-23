@@ -1,6 +1,7 @@
 package com.ppandroid.app.home.mine
 
 import android.app.Activity
+import android.support.v7.app.AlertDialog
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -12,6 +13,7 @@ import com.ppandroid.app.bean.mine.BN_SystemSettingPage01
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.im.base.FG_Base
+import com.ppandroid.im.bean.BaseBody
 import kotlinx.android.synthetic.main.fg_system_setting_page.*
 import kotlinx.android.synthetic.main.layout_network_error.*
 import org.jetbrains.anko.find
@@ -24,9 +26,45 @@ class FG_SystemSettingPage : FG_Base() {
 
     override fun afterViews() {
         loadContent()
-        network_error.setListener {
-            loadContent()
+        network_error.setListener { loadContent() }
+
+        lv_list.setOnItemLongClickListener { adapterView, view, i, l ->
+            message?.let {
+                showConfirmDialog(it[i].id)
+            }
+            false
         }
+    }
+
+    private fun showConfirmDialog(id: Int) {
+        val builder = AlertDialog.Builder(activity).setMessage("确定删除吗？").setCancelable(false)
+        builder.setPositiveButton("确定") { _, _ ->
+            deleteInstrument(id)
+        }
+        builder.setNegativeButton("取消") { _, _ ->
+            builder.create().dismiss()
+        }
+        builder.create().show()
+
+    }
+
+    private fun deleteInstrument(id: Int) {
+        var url = "user/sysSet/instrument/delete.json?id=" + id
+        Http.get(activity, url, BaseBody::class.java, object : MyCallBack<BaseBody> {
+            override fun onResponse(response: BaseBody?) {
+                response?.let {
+                    if (it.isSuccess) {
+                        toast("删除成功")
+                        loadContent()
+                    }
+                }
+            }
+
+            override fun onError(error: ErrorBody?) {
+                toast(error)
+            }
+
+        })
     }
 
     private fun loadContent() {
@@ -35,11 +73,12 @@ class FG_SystemSettingPage : FG_Base() {
             override fun onResponse(response: BN_SystemSettingPage01?) {
                 response?.let {
                     if (response.message.isEmpty()) {
-                        network_error.setViewType(NetWorkErrorView.NOT_DATA)
+                        network_error?.setViewType(NetWorkErrorView.NOT_DATA)
                     } else {
-                        network_error.setViewType(NetWorkErrorView.NORMAL_VIEW)
-                        var adapter=AD_List(activity,it.message)
-                        lv_list.adapter=adapter
+                        network_error?.setViewType(NetWorkErrorView.NORMAL_VIEW)
+                        message = it.message
+                        var adapter = AD_List(activity, it.message)
+                        lv_list.adapter = adapter
                     }
 
                 }
@@ -59,6 +98,8 @@ class FG_SystemSettingPage : FG_Base() {
         var tv_number: TextView? = null
 
     }
+
+    private var message: List<BN_SystemSettingPage01.MessageBean>? = null
 
     class AD_List(ac: Activity, message: List<BN_SystemSettingPage01.MessageBean>) : BaseAdapter() {
         private var ac: Activity
@@ -83,9 +124,9 @@ class FG_SystemSettingPage : FG_Base() {
                 holder.tv_name = layout.find(R.id.tv_name)
                 layout.tag = holder
             }
-            holder?.tv_name?.text= message?.get(pos)?.name?:""
-            holder?.tv_level?.text=( message?.get(pos)?.level?:1).toString()+"级"
-            holder?.tv_number?.text= message?.get(pos)?.code?:""
+            holder?.tv_name?.text = message?.get(pos)?.name ?: ""
+            holder?.tv_level?.text = (message?.get(pos)?.level ?: 1).toString() + "级"
+            holder?.tv_number?.text = message?.get(pos)?.code ?: ""
             return layout
         }
 

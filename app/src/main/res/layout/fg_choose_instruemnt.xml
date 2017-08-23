@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
+              android:background="@color/color_08"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
     <include layout="@layout/layout_head_view"/>
 
+
     <ListView
+        android:layout_marginTop="7dp"
+        android:background="@color/white"
         android:id="@+id/lv_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

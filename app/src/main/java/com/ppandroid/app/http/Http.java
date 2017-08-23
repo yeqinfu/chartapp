@@ -11,7 +11,6 @@ import com.google.gson.JsonParser;
 import com.ppandroid.app.R;
 import com.ppandroid.app.bean.ErrorBody;
 import com.ppandroid.app.bean.login.MD5Body;
-import com.ppandroid.app.bean.mine.BN_ChooseInstrument;
 import com.ppandroid.app.http.callback.StringCallback;
 import com.ppandroid.app.utils.DebugLog;
 import com.ppandroid.app.utils.Utils_SharedPreferences;
@@ -38,14 +37,7 @@ import static org.jetbrains.anko.DialogsKt.toast;
 public class Http {
 
     private void test(){
-        BN_ChooseInstrument bn=new BN_ChooseInstrument();
-        int dd=-1;
-        int count=0;
-        for(int i=0;i<bn.getMessage().size();i++){
-            if (bn.getMessage().get(i).getId()==dd){
-                count=i;
-            }
-        }
+
     }
 
 	public static <T extends BaseBody>  void get(final Context context, String url, final Class<T> tt, final MyCallBack<T> callBack) {
@@ -106,7 +98,8 @@ public class Http {
                 if (isGoodJson(response)){
                     ErrorBody errorBody = parseErrorBody(response);
                     if (errorBody==null){
-                        callBack.onResponse((T) parseJson(response,tt));
+                        Gson gson = new Gson();
+                        callBack.onResponse(gson.fromJson(response,tt));
                     }else{
                         callBack.onError(errorBody);
                         parseError(mWeakContext.get(), errorBody);

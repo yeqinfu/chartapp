@@ -125,6 +125,13 @@ public class AD_ExList extends BaseExpandableListAdapter {
 		GlideUtils.displayImage(mContext, item.getPhoto(), iv_icon);
         tv_name.setText(item.getName());
         tv_num.setText(item.getModel());
+        if (item.getStatus()==2){
+            btn_action.setBackgroundResource(R.drawable.shape_oval_solid_color_blue);
+        }else if (item.getStatus()==3){
+            btn_action.setBackgroundResource(R.drawable.shape_oval_solid_color_green);
+        }else{
+            btn_action.setBackgroundResource(R.drawable.shape_oval_solid_color_grey);
+        }
         btn_action.setText(item.getStatusString());
 		return view;
 	}

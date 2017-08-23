@@ -83,6 +83,15 @@ public class BN_Devices extends BaseBody {
                 private String name;
                 private String model;
                 private String statusString;
+                private int status;
+
+                public int getStatus() {
+                    return status;
+                }
+
+                public void setStatus(int status) {
+                    this.status = status;
+                }
 
                 public int getId() {
                     return id;

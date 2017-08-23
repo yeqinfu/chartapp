@@ -9,6 +9,7 @@ import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.widget.popwindow.Pop_ChooseSimple
 import com.ppandroid.im.base.FG_Base
+import com.ppandroid.im.bean.BaseBody
 import kotlinx.android.synthetic.main.fg_add_instrument.*
 import kotlinx.android.synthetic.main.layout_head_view.*
 import org.greenrobot.eventbus.Subscribe
@@ -69,6 +70,7 @@ class FG_AddInstrument:FG_Base(){
             return
         }
         var pop=Pop_ChooseSimple(activity,list)
+        pop.setAutoShowInputMethod(false)
         pop.listener=object :Pop_ChooseSimple.IChooseListener{
             override fun choose(item: String) {
                 energyClassificationId= listMap[item]
@@ -76,6 +78,7 @@ class FG_AddInstrument:FG_Base(){
                 pop.dismiss()
             }
         }
+
         pop.showPopupWindow()
     }
 
@@ -142,6 +145,38 @@ class FG_AddInstrument:FG_Base(){
         charge= et_charge.text.toString()
         rate= et_rate.text.toString()
         codeAddress= et_codeAddress.text.toString()
+
+        var map=TreeMap<String,String>()
+        map.apply {
+            put("level",level.toString())
+            put("parentId",parentId.toString())
+            put("code",code.toString())
+            put("name",name.toString())
+            put("position",position.toString())
+            put("charge",charge.toString())
+            put("rate",rate.toString())
+            put("codeAddress",codeAddress.toString())
+            put("deviceId",deviceId.toString())
+            put("energyClassificationId",energyClassificationId.toString())
+        }
+        var url="user/sysSet/instrument/add.json"
+        Http.post(activity,url,map, BaseBody::class.java,object :MyCallBack<BaseBody>{
+            override fun onResponse(response: BaseBody?) {
+                response?.let {
+                    if (it.isSuccess){
+                        toast("添加成功")
+                        finish()
+                    }else{
+                        toast(it.title)
+                    }
+                }
+            }
+
+            override fun onError(error: ErrorBody?) {
+                toast(error)
+            }
+
+        })
 
 
 
