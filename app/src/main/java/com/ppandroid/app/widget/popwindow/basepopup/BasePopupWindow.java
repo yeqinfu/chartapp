@@ -57,7 +57,7 @@ public abstract class BasePopupWindow implements BasePopup, PopupWindow.OnDismis
     private PopupWindowProxy mPopupWindow;
     //popup视图
     private View mPopupView;
-    private Activity mContext;
+    protected Activity mContext;
     protected View mAnimaView;
     protected View mDismissView;
     //是否自动弹出输入框(default:false)

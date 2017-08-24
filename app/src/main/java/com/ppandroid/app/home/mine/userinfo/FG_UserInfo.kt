@@ -16,6 +16,7 @@ import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.BitmapUtils
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.widget.CustomDialog
+import com.ppandroid.app.widget.popwindow.Pop_ChooseArea
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_user_info.*
 import kotlinx.android.synthetic.main.layout_head_view.*
@@ -43,6 +44,24 @@ class FG_UserInfo : FG_Base() {
         rl_gender.setOnClickListener {
             showGenderDialog()
         }
+        rl_area.setOnClickListener {
+            showAreaDialog()
+        }
+    }
+
+    private fun showAreaDialog() {
+        var pop= Pop_ChooseArea(activity)
+        pop.setAutoShowInputMethod(false)
+        pop.listener=object : Pop_ChooseArea.IChooseListener{
+            override fun choose(item: String, provinceId: String, cityId: String, contryId: String) {
+                toast(item)
+                pop.dismiss()
+
+            }
+
+        }
+
+        pop.showPopupWindow()
     }
 
     internal var dialog: CustomDialog? = null
@@ -99,7 +118,7 @@ class FG_UserInfo : FG_Base() {
 
     private fun takeGalley() {
         dialog?.dismiss()
-        val intent: Intent = Intent(Intent.ACTION_PICK)
+        val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
         startActivityForResult(intent, PHOTO_REQUEST_GALLERY)
     }
@@ -182,6 +201,13 @@ class FG_UserInfo : FG_Base() {
         })
 
     }
+
+    /**地理位置选择*/
+    private var provinceId = -1
+    private var cityId = -1
+    private var countryId = -1
+
+
 
 
 }
