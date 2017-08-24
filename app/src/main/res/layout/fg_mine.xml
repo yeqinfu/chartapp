@@ -35,13 +35,13 @@
         android:paddingLeft="12dp"
         android:paddingRight="12dp">
 
-        <ImageView
+           <com.ppandroid.app.widget.CircleImageView
             android:id="@+id/iv_head"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
-            android:src="@drawable/shape_oval_head_color03"/>
+            />
 
         <View
             android:id="@+id/v_split"

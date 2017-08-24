@@ -1,6 +1,7 @@
 package com.ppandroid.im
 
 import com.ppandroid.app.R
+import com.ppandroid.app.bean.ET_Refresh
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.mine.BN_UserInfo
 import com.ppandroid.app.demo.FG_Demo02
@@ -15,6 +16,8 @@ import com.ppandroid.app.utils.info.Utils_UserInfo
 import com.ppandroid.im.base.FG_Base
 import com.ppandroid.im.bean.BaseBody
 import kotlinx.android.synthetic.main.fg_mine.*
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 /**
  * Created by yeqinfu on 2017/7/28.
@@ -23,6 +26,7 @@ class FG_Mine: FG_Base() {
     override fun fgRes(): Int= R.layout.fg_mine
 
     override fun afterViews() {
+        isNeedEventBus=true
         tv_system_setting.setOnClickListener {
             startAC(FG_SystemSetting::class.java.name)
         }
@@ -45,8 +49,8 @@ class FG_Mine: FG_Base() {
         Http.get(activity,url, BN_UserInfo::class.java,object :MyCallBack<BN_UserInfo>{
             override fun onResponse(response: BN_UserInfo?) {
                 response?.let {
-                    tv_name.text=it.message.realName
-                    it.message.headPhoto?.let {
+                    tv_name.text=it.message.employeeEntity.realName
+                    it.message.employeeEntity.headPhoto?.let {
                         GlideUtils.displayImage(activity,it,iv_head)
                     }
                 }
@@ -61,6 +65,14 @@ class FG_Mine: FG_Base() {
 
     }
 
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: ET_Refresh) {
+        if (event.taskId === ET_Refresh.TASKID_REFRESH_MINE) {
+            loadContent()
+        }
+
+    }
 
 
     private fun loginOut() {
