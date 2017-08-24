@@ -13,6 +13,12 @@ class FG_AddEmployee:FG_Base(){
     override fun afterViews() {
         head_view.init(activity)
         head_view.setCenterTitle("添加员工")
+        head_view.setRightText("保存"){
+            postInfo()
+        }
+    }
+
+    private fun postInfo() {
     }
 
 }

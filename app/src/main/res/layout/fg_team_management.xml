@@ -15,7 +15,7 @@
         android:paddingRight="15dp"
         android:textSize="@dimen/sub_title"
         android:textColor="@color/color_07"
-        android:text="我的团队"/>
+        android:text="我的部门"/>
 
     <ListView
         android:layout_marginTop="0.5dp"

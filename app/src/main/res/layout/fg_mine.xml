@@ -144,7 +144,7 @@
             android:drawablePadding="23dp"
             android:gravity="center"
             android:drawableTop="@drawable/ic_tuandui"
-            android:text="团队管理"
+            android:text="部门管理"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>

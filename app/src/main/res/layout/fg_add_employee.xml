@@ -1,8 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:background="@color/color_03"
+              android:orientation="vertical">
+
     <include layout="@layout/layout_head_view"/>
+
+    <!--姓名-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="7dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="姓名"/>
+
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_name"
+            android:background="@null"
+            android:gravity="right"
+            android:hint="请输入姓名"
+            android:singleLine="true"
+            android:textSize="@dimen/bar_title"/>
+
+
+    </RelativeLayout>
+    <!--手机号-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="0.5dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:id="@+id/tv_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="手机号"/>
+
+        <EditText
+            android:id="@+id/et_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_phone"
+            android:background="@null"
+            android:gravity="right"
+            android:hint="请输入手机号"
+            android:singleLine="true"
+            android:textSize="@dimen/bar_title"/>
+
+
+    </RelativeLayout>
+
+    <!--职位-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="7dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:id="@+id/tv_job"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="职位"/>
+
+        <EditText
+            android:id="@+id/et_job"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_job"
+            android:background="@null"
+            android:gravity="right"
+            android:hint="请输入职位"
+            android:singleLine="true"
+            android:textSize="@dimen/bar_title"/>
+
+
+    </RelativeLayout>
+
+    <!--权限-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="0.5dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:id="@+id/tv_jurisdiction"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="权限"/>
+
+        <TextView
+            android:id="@+id/et_jurisdiction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_jurisdiction"
+            android:background="@null"
+            android:drawablePadding="5dp"
+            android:drawableRight="@drawable/forward_right"
+            android:gravity="right"
+            android:singleLine="true"
+            android:text="请选择权限"
+            android:textSize="@dimen/bar_title"/>
+
+
+    </RelativeLayout>
+    <!--部门-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="0.5dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:id="@+id/tv_team"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="部门"/>
+
+        <TextView
+            android:id="@+id/et_team"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_team"
+            android:background="@null"
+            android:drawablePadding="5dp"
+            android:drawableRight="@drawable/forward_right"
+            android:gravity="right"
+            android:singleLine="true"
+            android:text="请选择部门"
+            android:textSize="@dimen/bar_title"/>
+
+
+    </RelativeLayout>
 
 </LinearLayout>

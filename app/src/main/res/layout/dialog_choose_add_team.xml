@@ -9,6 +9,7 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/rl_add_e"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
@@ -29,6 +30,7 @@
         </RelativeLayout>
 
         <View
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/color_03"/>
@@ -47,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="添加团队"
+                android:text="添加部门"
                 android:textColor="@color/color_07"
                 android:textSize="14sp"/>
         </RelativeLayout>
