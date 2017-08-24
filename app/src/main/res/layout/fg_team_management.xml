@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/color_03"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include layout="@layout/layout_head_view"/>
+    <TextView
+        android:layout_marginTop="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textSize="@dimen/sub_title"
+        android:textColor="@color/color_07"
+        android:text="我的团队"/>
+
+    <ListView
+        android:layout_marginTop="0.5dp"
+        android:id="@+id/lv_list"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

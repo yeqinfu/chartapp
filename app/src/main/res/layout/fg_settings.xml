@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/color_03"
+              android:orientation="vertical">
+
+    <include layout="@layout/layout_head_view"/>
+
+    <TextView
+        android:id="@+id/tv_modified_password"
+        android:layout_marginTop="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/white"
+        android:drawableRight="@drawable/forward_right"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="修改密码"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/color_03"/>
+
+    <TextView
+        android:id="@+id/tv_check_update"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/white"
+        android:drawableRight="@drawable/forward_right"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="检查更新"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/color_03"/>
+
+    <TextView
+        android:id="@+id/tv_about_app"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/white"
+        android:drawableRight="@drawable/forward_right"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="关于节效通"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/color_03"/>
+
+    <TextView
+        android:id="@+id/tv_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/white"
+        android:drawableRight="@drawable/forward_right"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="意见反馈"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/color_03"/>
+
+    <LinearLayout
+        android:id="@+id/ll_clear_cache"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+        <TextView
+            android:id="@+id/tv_clear_cache"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="44dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="缓存清理"/>
+        <TextView
+            android:id="@+id/tv_cache_value"
+            android:textColor="@color/color_01"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="0"/>
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/color_03"/>
+
+    <TextView
+        android:id="@+id/tv_logout"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/white"
+        android:drawableRight="@drawable/forward_right"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="退出"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/color_03"/>
+
+</LinearLayout>

@@ -140,6 +140,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/tv_team_manager"
             android:drawablePadding="23dp"
             android:gravity="center"
             android:drawableTop="@drawable/ic_tuandui"
