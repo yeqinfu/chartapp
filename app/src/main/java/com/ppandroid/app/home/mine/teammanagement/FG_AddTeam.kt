@@ -1,6 +1,7 @@
 package com.ppandroid.app.home.mine.teammanagement
 
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.text.TextUtils
 import android.view.View
 import com.ppandroid.app.R
@@ -41,7 +42,7 @@ class FG_AddTeam : FG_Base(){
             btn_del.visibility= View.VISIBLE
         }
         btn_del.setOnClickListener {
-            deleteTeam()
+            showConfirmDialog()
         }
         head_view.init(activity)
         if (TextUtils.isEmpty(title)){
@@ -51,6 +52,17 @@ class FG_AddTeam : FG_Base(){
         head_view.setRightText("保存"){
             postInfo()
         }
+    }
+    private fun showConfirmDialog() {
+        val builder = AlertDialog.Builder(activity).setMessage("确定删除吗？").setCancelable(false)
+        builder.setPositiveButton("确定") { _, _ ->
+            deleteTeam()
+        }
+        builder.setNegativeButton("取消") { _, _ ->
+            builder.create().dismiss()
+        }
+        builder.create().show()
+
     }
 
     private fun deleteTeam() {

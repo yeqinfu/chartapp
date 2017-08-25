@@ -73,6 +73,18 @@ class FG_TeamDetail : FG_Base() {
                     it.message.employeeList?.let {
                         var employeeAdapter = AD_Employee(it, activity)
                         lv_list_emp.adapter = employeeAdapter
+                        lv_list_emp.setOnItemClickListener { _, _, i, _ ->
+                            var b=FG_AddEmployee.createBundle(
+                                    it[i].id?.toString(),
+                                    it[i].departmentId?.toString(),
+                                    it[i].roleId?.toString(),
+                                    it[i].realName,
+                                    it[i].mobile,
+                                    it[i].job
+                                    )
+                            startAC(FG_AddEmployee::class.java.name,b)
+
+                        }
                     }
 
                 }
@@ -116,7 +128,8 @@ class FG_TeamDetail : FG_Base() {
 
             }
             R.id.rl_add_e -> {
-                startAC(FG_AddEmployee::class.java.name)
+                var b=FG_AddEmployee.createBundle(id.toString())
+                startAC(FG_AddEmployee::class.java.name,b)
                 dialog?.dismiss()
             }
 
