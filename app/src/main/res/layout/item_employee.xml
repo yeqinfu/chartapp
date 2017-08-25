@@ -17,8 +17,9 @@
         android:textSize="@dimen/bar_title"
         android:textColor="@color/color_07"
         android:text="fdsaf"
+        android:gravity="center_vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="48dp"/>
 
     <TextView
 

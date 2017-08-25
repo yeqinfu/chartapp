@@ -1,6 +1,8 @@
 package com.ppandroid.app.home.mine.teammanagement
 
+import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ET_Refresh
 import com.ppandroid.app.bean.ErrorBody
@@ -14,19 +16,64 @@ import org.greenrobot.eventbus.EventBus
 
 /**
  * Created by yeqinfu on 2017/8/24.
+ * 添加部门和修改部门共用页面，如果parentId不是-1说明是修改部门
  */
 class FG_AddTeam : FG_Base(){
     override fun fgRes(): Int= R.layout.fg_add_team
 
+    companion object {
+        fun createBundle(parentId:String,title:String): Bundle {
+            var b=Bundle()
+            b.putString("parentId",parentId)
+            b.putString("title",title)
+            return b
+        }
+    }
+
     override fun afterViews() {
+        arguments?.let {
+            parentId=it.getString("parentId","-1")
+            title=it.getString("title","添加部门")
+        }
+        if (parentId == "-1"){//是新增部门
+            btn_del.visibility= View.GONE
+        }else{
+            btn_del.visibility= View.VISIBLE
+        }
+        btn_del.setOnClickListener {
+            deleteTeam()
+        }
         head_view.init(activity)
-        head_view.setCenterTitle("添加部门")
+        if (TextUtils.isEmpty(title)){
+            title="添加部门"
+        }
+        head_view.setCenterTitle(title)
         head_view.setRightText("保存"){
             postInfo()
         }
     }
 
+    private fun deleteTeam() {
+        var url="user/team/department/delete.json?id=$parentId"
+        Http.get(activity,url,BaseBody::class.java,object :MyCallBack<BaseBody>{
+            override fun onResponse(response: BaseBody?) {
+                response?.let {
+                    toast("删除成功")
+                    EventBus.getDefault().post(ET_Refresh(ET_Refresh.TASKID_REFRESH_TEAM_MANAGEMENT))
+                    EventBus.getDefault().post(ET_Refresh(ET_Refresh.TASKID_REFRESH_TEAM_DETAIL))
+                    finish()
+                }
+            }
+
+            override fun onError(error: ErrorBody?) {
+                toast(error)
+            }
+
+        })
+    }
+
     private var parentId="-1"
+    private var title="添加部门"
     private fun postInfo() {
         if (TextUtils.isEmpty(et_name.text)){
             toast("请输入部门名称")
@@ -39,6 +86,7 @@ class FG_AddTeam : FG_Base(){
                 response?.let {
                     toast("添加成功")
                     EventBus.getDefault().post(ET_Refresh(ET_Refresh.TASKID_REFRESH_TEAM_MANAGEMENT))
+                    EventBus.getDefault().post(ET_Refresh(ET_Refresh.TASKID_REFRESH_TEAM_DETAIL_REFRESH))
                     finish()
                 }
             }

@@ -18,6 +18,10 @@ public class ET_Refresh extends ET_Base {
     public static final int TASKID_REFRESH_MY_HOME = UUID.randomUUID().hashCode();
     /**刷新部门管理*/
     public static final int TASKID_REFRESH_TEAM_MANAGEMENT = UUID.randomUUID().hashCode();
+    /**部门详情关闭*/
+    public static final int TASKID_REFRESH_TEAM_DETAIL = UUID.randomUUID().hashCode();
+    /**部门详情刷新*/
+    public static final int TASKID_REFRESH_TEAM_DETAIL_REFRESH = UUID.randomUUID().hashCode();
 
     public ET_Refresh(int taskId) {
         super(taskId);

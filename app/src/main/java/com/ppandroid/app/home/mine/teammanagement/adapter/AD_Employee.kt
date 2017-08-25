@@ -1,6 +1,7 @@
 package com.ppandroid.app.home.mine.teammanagement.adapter
 
 import android.app.Activity
+import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -31,6 +32,9 @@ class AD_Employee(message: List<BN_Employee>, ac: Activity) : BaseAdapter() {
         }
         holder?.let {
             it.tv_name?.text = message[pos].realName
+            if (TextUtils.isEmpty(message[pos].roleName)){
+                it.tv_tag?.visibility=View.GONE
+            }
             it.tv_tag?.text = message[pos].roleName
             GlideUtils.displayImage(ac,message[pos].headPhoto,it.iv_head)
         }

@@ -38,4 +38,18 @@
 
     </RelativeLayout>
 
+
+    <Button
+        android:id="@+id/btn_del"
+        android:visibility="gone"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shape_solid_color01_corner_20dp"
+        android:text="删除部门"
+        android:textColor="@color/white"
+        android:textSize="@dimen/first_title"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"/>
+
 </LinearLayout>
