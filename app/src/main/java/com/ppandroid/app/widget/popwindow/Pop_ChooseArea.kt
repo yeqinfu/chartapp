@@ -14,7 +14,7 @@ import android.widget.ListView
 import android.widget.TextView
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ErrorBody
-import com.ppandroid.app.bean.mine.BN_Area
+import com.ppandroid.app.bean.mine.systemsetting.BN_Area
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.DimensUtils

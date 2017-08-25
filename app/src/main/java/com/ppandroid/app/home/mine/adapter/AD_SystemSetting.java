@@ -8,7 +8,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.ppandroid.app.R;
-import com.ppandroid.app.home.mine.systemsetting.FG_SystemSettingPage;
+import com.ppandroid.app.home.mine.systemsetting.FG_DeviceCatePage;
+import com.ppandroid.app.home.mine.systemsetting.FG_InstrumentPage;
 
 /**
  * Created by yeqinfu on 2015/12/31.
@@ -48,11 +49,11 @@ public class AD_SystemSetting extends FragmentStatePagerAdapter {
 	public void initFragment() {
 		this.arrays_title = mContext.getResources().getStringArray(R.array.fg_setting);
 		fragments = new Fragment[arrays_title.length];
-		fragments[0] = new FG_SystemSettingPage();//我的收藏图库
-		fragments[1] = new FG_SystemSettingPage();//攻略
-		fragments[2] = new FG_SystemSettingPage();//装修案例
-		fragments[3] = new FG_SystemSettingPage();//日记
-		fragments[4] = new FG_SystemSettingPage();//小区
+		fragments[0] = new FG_InstrumentPage();//仪表数据
+		fragments[1] = new FG_DeviceCatePage();//分项数据
+		fragments[2] = new FG_InstrumentPage();//装修案例
+		fragments[3] = new FG_InstrumentPage();//日记
+		fragments[4] = new FG_InstrumentPage();//小区
 
 	}
 }

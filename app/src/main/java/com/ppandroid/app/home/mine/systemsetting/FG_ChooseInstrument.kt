@@ -9,7 +9,7 @@ import android.widget.CheckBox
 import android.widget.TextView
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ErrorBody
-import com.ppandroid.app.bean.mine.BN_ChooseInstrument
+import com.ppandroid.app.bean.mine.systemsetting.BN_ChooseInstrument
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.im.base.FG_Base

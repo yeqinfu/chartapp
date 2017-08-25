@@ -78,9 +78,9 @@ class FG_TeamDetail : FG_Base() {
                                     it[i].id?.toString(),
                                     it[i].departmentId?.toString(),
                                     it[i].roleId?.toString(),
-                                    it[i].realName,
-                                    it[i].mobile,
-                                    it[i].job
+                                    it[i].realName?:"",
+                                    it[i].mobile?:"",
+                                    it[i].job?:""
                                     )
                             startAC(FG_AddEmployee::class.java.name,b)
 

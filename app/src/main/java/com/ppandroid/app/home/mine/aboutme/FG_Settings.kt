@@ -26,7 +26,7 @@ class FG_Settings:FG_Base(){
         tv_cache_value.text=Utils_Common.getTotalCacheSize(activity)
         ll_clear_cache.setOnClickListener{
             Utils_Common.clearAllCache(activity)
-            toast("清除成功")
+            toast("清除缓存成功")
             tv_cache_value.text=Utils_Common.getTotalCacheSize(activity)
         }
         tv_logout.setOnClickListener {

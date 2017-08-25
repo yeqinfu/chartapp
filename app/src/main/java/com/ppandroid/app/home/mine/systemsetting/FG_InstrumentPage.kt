@@ -9,7 +9,7 @@ import android.widget.TextView
 import com.ppandroid.app.R
 import com.ppandroid.app.base.NetWorkErrorView
 import com.ppandroid.app.bean.ErrorBody
-import com.ppandroid.app.bean.mine.BN_SystemSettingPage01
+import com.ppandroid.app.bean.mine.systemsetting.BN_SystemSettingPage01
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.im.base.FG_Base
@@ -20,8 +20,9 @@ import org.jetbrains.anko.find
 
 /**
  * Created by yeqinfu on 2017/8/22.
+ * 仪表数据列表页面
  */
-class FG_SystemSettingPage : FG_Base() {
+class FG_InstrumentPage : FG_Base() {
     override fun fgRes(): Int = R.layout.fg_system_setting_page
 
     override fun afterViews() {

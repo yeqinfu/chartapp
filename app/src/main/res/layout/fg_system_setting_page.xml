@@ -5,6 +5,7 @@
               android:layout_height="match_parent">
     <!--网络异常-->
     <include layout="@layout/layout_network_error"/>
+    <!--仪表数据，分项数据，区域数据等共用xml 注意！！！！！！！！！-->
     <ListView
         android:id="@+id/lv_list"
         android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package com.ppandroid.app.bean.mine;
+package com.ppandroid.app.bean.mine.systemsetting;
 
 import com.ppandroid.im.bean.BaseBody;
 

@@ -2,7 +2,6 @@ package com.ppandroid.app.home.mine.systemsetting
 
 import android.graphics.Typeface
 import android.support.v4.view.ViewPager
-import android.view.View
 import com.ppandroid.app.R
 import com.ppandroid.app.home.mine.adapter.AD_SystemSetting
 import com.ppandroid.im.base.FG_Base
@@ -13,18 +12,17 @@ import kotlinx.android.synthetic.main.layout_head_view.*
  * Created by yeqinfu on 2017/8/22.
  * 系统设置
  */
-class FG_SystemSetting:FG_Base(){
+class FG_SystemSetting : FG_Base() {
 
-    override fun fgRes(): Int= R.layout.fg_system_setting
+    override fun fgRes(): Int = R.layout.fg_system_setting
 
     override fun afterViews() {
         head_view.setCenterTitle("系统设置")
         head_view.init(activity)
-        head_view.setIvRight(R.drawable.ic_add_model, View.OnClickListener {
+        head_view.setIvRight(R.drawable.ic_add_model, {
             addModelByPosition()
-
         })
-        var adapter=AD_SystemSetting(activity,childFragmentManager)
+        var adapter = AD_SystemSetting(activity, childFragmentManager)
         view_pager.setAdapter(adapter)
         adapter.notifyDataSetChanged()
         title_indicator.setViewPager(view_pager)
@@ -32,8 +30,8 @@ class FG_SystemSetting:FG_Base(){
         title_indicator.setTabSelectedTextColorResource(R.color.color_01)
         title_indicator.setIndicatorColorResource(R.color.color_01)
         title_indicator.setTypeface(null, Typeface.NORMAL)
-        title_indicator.setTextSize((14 * density).toInt())
-        title_indicator.setOnPageChangeListener(object :ViewPager.OnPageChangeListener{
+        title_indicator.textSize = (14 * density).toInt()
+        title_indicator.setOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
             }
 
@@ -41,20 +39,20 @@ class FG_SystemSetting:FG_Base(){
             }
 
             override fun onPageSelected(position: Int) {
-                Position=position
+                Position = position
             }
 
         })
     }
 
     private fun addModelByPosition() {
-        when(Position){
-            0->{//仪表添加
+        when (Position) {
+            0 -> {//仪表添加
                 startAC(FG_AddInstrument::class.java.name)
             }
         }
     }
 
-    private var Position:Int=0
+    private var Position: Int = 0
 
 }

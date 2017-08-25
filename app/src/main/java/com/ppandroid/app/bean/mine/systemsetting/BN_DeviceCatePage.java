@@ -1,14 +1,14 @@
-package com.ppandroid.app.bean.mine;
+package com.ppandroid.app.bean.mine.systemsetting;
 
 import com.ppandroid.im.bean.BaseBody;
 
 import java.util.List;
 
 /**
- * Created by yeqinfu on 2017/8/22.
+ * Created by yeqinfu on 2017/8/25.
  */
 
-public class BN_SystemSettingPage01 extends BaseBody {
+public class BN_DeviceCatePage extends BaseBody {
 
     private List<MessageBean> message;
 
@@ -34,15 +34,10 @@ public class BN_SystemSettingPage01 extends BaseBody {
          * companyId : 1
          * level : 1
          * parentId : -1
-         * code : 87T04
-         * energyClassificationId : 1
-         * name : CH01-1约克离心式制冷机
-         * position : 一楼空调室
-         * charge : null
-         * rate : 1
-         * codeAddress : 987654321
-         * deviceId : 1
-         * status : 0
+         * name : 空调系统
+         * employeeId : 1
+         * employeeName : 张三
+         * isLeaf : false
          */
 
         private int id;
@@ -57,15 +52,10 @@ public class BN_SystemSettingPage01 extends BaseBody {
         private int companyId;
         private int level;
         private int parentId;
-        private String code;
-        private int energyClassificationId;
         private String name;
-        private String position;
-        private Object charge;
-        private String rate;
-        private String codeAddress;
-        private int deviceId;
-        private int status;
+        private int employeeId;
+        private String employeeName;
+        private boolean isLeaf;
 
         public int getId() {
             return id;
@@ -163,22 +153,6 @@ public class BN_SystemSettingPage01 extends BaseBody {
             this.parentId = parentId;
         }
 
-        public String getCode() {
-            return code;
-        }
-
-        public void setCode(String code) {
-            this.code = code;
-        }
-
-        public int getEnergyClassificationId() {
-            return energyClassificationId;
-        }
-
-        public void setEnergyClassificationId(int energyClassificationId) {
-            this.energyClassificationId = energyClassificationId;
-        }
-
         public String getName() {
             return name;
         }
@@ -187,52 +161,28 @@ public class BN_SystemSettingPage01 extends BaseBody {
             this.name = name;
         }
 
-        public String getPosition() {
-            return position;
+        public int getEmployeeId() {
+            return employeeId;
         }
 
-        public void setPosition(String position) {
-            this.position = position;
+        public void setEmployeeId(int employeeId) {
+            this.employeeId = employeeId;
         }
 
-        public Object getCharge() {
-            return charge;
+        public String getEmployeeName() {
+            return employeeName;
         }
 
-        public void setCharge(Object charge) {
-            this.charge = charge;
+        public void setEmployeeName(String employeeName) {
+            this.employeeName = employeeName;
         }
 
-        public String getRate() {
-            return rate;
+        public boolean isIsLeaf() {
+            return isLeaf;
         }
 
-        public void setRate(String rate) {
-            this.rate = rate;
-        }
-
-        public String getCodeAddress() {
-            return codeAddress;
-        }
-
-        public void setCodeAddress(String codeAddress) {
-            this.codeAddress = codeAddress;
-        }
-
-        public int getDeviceId() {
-            return deviceId;
-        }
-
-        public void setDeviceId(int deviceId) {
-            this.deviceId = deviceId;
-        }
-
-        public int getStatus() {
-            return status;
-        }
-
-        public void setStatus(int status) {
-            this.status = status;
+        public void setIsLeaf(boolean isLeaf) {
+            this.isLeaf = isLeaf;
         }
     }
 }
