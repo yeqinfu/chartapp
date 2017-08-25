@@ -37,6 +37,7 @@ public class HeadViewLayout extends RelativeLayout {
     private TextView tv_center;
     private TextView tv_right;
     private ImageView iv_right;
+    private ImageView iv_right2;
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
@@ -44,6 +45,7 @@ public class HeadViewLayout extends RelativeLayout {
         tv_center = (TextView) findViewById(R.id.tv_center);
         tv_right = (TextView) findViewById(R.id.tv_right);
         iv_right = (ImageView) findViewById(R.id.iv_right);
+        iv_right2 = (ImageView) findViewById(R.id.iv_right2);
         initTheme();
     }
 
@@ -86,6 +88,13 @@ public class HeadViewLayout extends RelativeLayout {
             iv_right.setVisibility(VISIBLE);
             iv_right.setImageResource(rsid);
             iv_right.setOnClickListener(listener);
+        }
+    }
+    public void setIvRight2(int rsid,OnClickListener listener){
+        if (iv_right2!=null){
+            iv_right2.setVisibility(VISIBLE);
+            iv_right2.setImageResource(rsid);
+            iv_right2.setOnClickListener(listener);
         }
     }
     public void setCenterTitle(String msg){
