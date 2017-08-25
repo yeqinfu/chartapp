@@ -1,4 +1,4 @@
-package com.ppandroid.app.home.mine
+package com.ppandroid.app.home.mine.systemsetting
 
 import android.app.Activity
 import android.support.v7.app.AlertDialog

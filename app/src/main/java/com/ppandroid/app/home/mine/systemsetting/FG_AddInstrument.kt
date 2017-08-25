@@ -1,4 +1,4 @@
-package com.ppandroid.app.home.mine
+package com.ppandroid.app.home.mine.systemsetting
 
 import android.text.TextUtils
 import com.ppandroid.app.R
@@ -32,7 +32,7 @@ class FG_AddInstrument:FG_Base(){
             postInfo()
         }
         tv_choose_instruemnt.setOnClickListener {
-                var b=FG_ChooseInstrument.createBundle(deviceId)
+                var b= FG_ChooseInstrument.createBundle(deviceId)
                 startAC(FG_ChooseInstrument::class.java.name,b)
         }
         tv_choose_class.setOnClickListener {

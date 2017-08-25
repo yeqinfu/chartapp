@@ -4,7 +4,7 @@ import com.ppandroid.app.R
 import com.ppandroid.app.bean.ET_Refresh
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.mine.BN_UserInfo
-import com.ppandroid.app.home.mine.FG_SystemSetting
+import com.ppandroid.app.home.mine.systemsetting.FG_SystemSetting
 import com.ppandroid.app.home.mine.aboutme.FG_Settings
 import com.ppandroid.app.home.mine.instrument.FG_InstrumentList
 import com.ppandroid.app.home.mine.teammanagement.FG_TeamManagement

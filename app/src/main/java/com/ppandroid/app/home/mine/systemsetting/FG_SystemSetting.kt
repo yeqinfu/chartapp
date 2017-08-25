@@ -1,4 +1,4 @@
-package com.ppandroid.app.home.mine
+package com.ppandroid.app.home.mine.systemsetting
 
 import android.graphics.Typeface
 import android.support.v4.view.ViewPager

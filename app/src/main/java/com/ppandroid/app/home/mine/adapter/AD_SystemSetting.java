@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.ppandroid.app.R;
-import com.ppandroid.app.home.mine.FG_SystemSettingPage;
+import com.ppandroid.app.home.mine.systemsetting.FG_SystemSettingPage;
 
 /**
  * Created by yeqinfu on 2015/12/31.
