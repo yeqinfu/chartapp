@@ -69,7 +69,7 @@ class FG_EnergyChargingPage : FG_Base() {
     }
 
     private fun loadContent() {
-        var url = "user/sysSet/device/search.json"
+        var url = "user/sysSet/energyCharging/search.json"
         Http.get(activity, url, BN_EnergyChargingPage::class.java, object : MyCallBack<BN_EnergyChargingPage> {
             override fun onResponse(response: BN_EnergyChargingPage?) {
                 response?.let {
@@ -127,7 +127,7 @@ class FG_EnergyChargingPage : FG_Base() {
             }
             holder?.tv_name?.text = "名称"
             holder?.tv_level?.text =  "这是分项名称"
-           // holder?.tv_number?.text =  message?.get(pos)?.model
+            holder?.tv_number?.text =  message?.get(pos)?.code.toString()
 
             return layout
         }
