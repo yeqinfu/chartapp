@@ -34,7 +34,7 @@ class FG_DeviceCatePage : FG_Base() {
     /**default:0代表viewpager 1 代表点击item进去的详情*/
     private var pageType=0
     /**当是子页面的时候这个id有用到*/
-    private var parentId:String=""
+    private var parentId:String="-1"
     private var parentName:String=""
     companion object {
         fun createBundle(parentId:String,parentName:String): Bundle {
@@ -53,7 +53,7 @@ class FG_DeviceCatePage : FG_Base() {
         isNeedEventBus=true
         arguments?.let {
             pageType=it.getInt("pageType",0)
-            parentId=it.getString("parentId","")
+            parentId=it.getString("parentId","-1")
             parentName=it.getString("parentName","")
         }
         if (pageType==1){

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/color_03"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include layout="@layout/layout_head_view"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:text="区域详情"
+        android:textColor="@color/color_04"
+        android:textSize="@dimen/sub_title"/>
+
+       <!--所属上级-->
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="所属上级"
+            android:textColor="@color/color_07"
+            android:textSize="@dimen/bar_title"/>
+
+        <TextView
+            android:id="@+id/tv_parent_name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="right|center_vertical"
+            android:text="已经是最高级"
+            android:textColor="@color/color_04"
+            android:textColorHint="@color/color_06"
+            android:textSize="@dimen/bar_title"/>
+
+    </LinearLayout>
+
+    <!--分项名称-->
+    <LinearLayout
+        android:layout_marginTop="0.5dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="区域名称"
+            android:textColor="@color/color_07"
+            android:textSize="@dimen/bar_title"/>
+
+        <EditText
+            android:id="@+id/et_name"
+            android:singleLine="true"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="right|center_vertical"
+            android:hint="@string/input_msg"
+            android:textColor="@color/color_04"
+            android:textColorHint="@color/color_06"
+            android:textSize="@dimen/bar_title"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
