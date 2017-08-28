@@ -126,7 +126,7 @@ class FG_ImportantDevicePage : FG_Base() {
                 layout.tag = holder
             }
             holder?.tv_name?.text = message?.get(pos)?.name ?: ""
-            holder?.tv_level?.text =  "这是分项名称"
+            holder?.tv_level?.text =  message?.get(pos)?.deviceCateName
             holder?.tv_number?.text =  message?.get(pos)?.model
 
             return layout

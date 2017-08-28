@@ -10,6 +10,7 @@ import java.util.List;
 
 public class BN_ImportantDevice extends BaseBody {
 
+
     private List<MessageBean> message;
 
     public List<MessageBean> getMessage() {
@@ -23,15 +24,7 @@ public class BN_ImportantDevice extends BaseBody {
     public static class MessageBean {
         /**
          * id : 1
-         * deleteStatus : false
-         * version : 0
-         * createTime : null
-         * createBy : null
-         * createById : null
-         * lastModifyTime : null
-         * lastModifyBy : null
-         * lastModifyById : null
-         * companyId : 1
+         * companyId : 0
          * name : CH01-1离心式制冷机
          * model : CH01-1
          * photo : /device/photo/aa.jpg
@@ -41,18 +34,11 @@ public class BN_ImportantDevice extends BaseBody {
          * propertiesJson : {"安装位置":"动力一楼","装机容量":"1275kw","规格型号":"YKR2R2K 45DGG/EE22","设备位号":"CH01-1离心式制冷机","设备名称":"约克离心式制冷机","馈线名称":"621馈线"}
          * templateName : null
          * status : 3
+         * deviceCateName : 制冷机
          * template : false
          */
 
         private int id;
-        private boolean deleteStatus;
-        private int version;
-        private Object createTime;
-        private Object createBy;
-        private Object createById;
-        private Object lastModifyTime;
-        private Object lastModifyBy;
-        private Object lastModifyById;
         private int companyId;
         private String name;
         private String model;
@@ -63,6 +49,7 @@ public class BN_ImportantDevice extends BaseBody {
         private String propertiesJson;
         private Object templateName;
         private int status;
+        private String deviceCateName;
         private boolean template;
 
         public int getId() {
@@ -71,70 +58,6 @@ public class BN_ImportantDevice extends BaseBody {
 
         public void setId(int id) {
             this.id = id;
-        }
-
-        public boolean isDeleteStatus() {
-            return deleteStatus;
-        }
-
-        public void setDeleteStatus(boolean deleteStatus) {
-            this.deleteStatus = deleteStatus;
-        }
-
-        public int getVersion() {
-            return version;
-        }
-
-        public void setVersion(int version) {
-            this.version = version;
-        }
-
-        public Object getCreateTime() {
-            return createTime;
-        }
-
-        public void setCreateTime(Object createTime) {
-            this.createTime = createTime;
-        }
-
-        public Object getCreateBy() {
-            return createBy;
-        }
-
-        public void setCreateBy(Object createBy) {
-            this.createBy = createBy;
-        }
-
-        public Object getCreateById() {
-            return createById;
-        }
-
-        public void setCreateById(Object createById) {
-            this.createById = createById;
-        }
-
-        public Object getLastModifyTime() {
-            return lastModifyTime;
-        }
-
-        public void setLastModifyTime(Object lastModifyTime) {
-            this.lastModifyTime = lastModifyTime;
-        }
-
-        public Object getLastModifyBy() {
-            return lastModifyBy;
-        }
-
-        public void setLastModifyBy(Object lastModifyBy) {
-            this.lastModifyBy = lastModifyBy;
-        }
-
-        public Object getLastModifyById() {
-            return lastModifyById;
-        }
-
-        public void setLastModifyById(Object lastModifyById) {
-            this.lastModifyById = lastModifyById;
         }
 
         public int getCompanyId() {
@@ -215,6 +138,14 @@ public class BN_ImportantDevice extends BaseBody {
 
         public void setStatus(int status) {
             this.status = status;
+        }
+
+        public String getDeviceCateName() {
+            return deviceCateName;
+        }
+
+        public void setDeviceCateName(String deviceCateName) {
+            this.deviceCateName = deviceCateName;
         }
 
         public boolean isTemplate() {
