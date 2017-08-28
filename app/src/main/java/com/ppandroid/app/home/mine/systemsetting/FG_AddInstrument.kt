@@ -30,8 +30,6 @@ class FG_AddInstrument : FG_Base() {
     private var pageType = "0"
     /** 如果是修改，这个id不为空 */
     private var objectId = ""
-    /** 层级，1是最高级  */
-    private var level = "1"
     /** 父级id  */
     private var parentId: String = "-1"
     /** 父级名称 */
@@ -78,7 +76,7 @@ class FG_AddInstrument : FG_Base() {
         arguments?.let {
             pageType = it.getString("pageType", "0")
             objectId = it.getString("objectId", "")
-            parentId = it.getString("parentId", "")
+            parentId = it.getString("parentId", "-1")
             parentName = it.getString("parentName", "")
 
         }
@@ -90,7 +88,7 @@ class FG_AddInstrument : FG_Base() {
 
         } else {
             head_view.setCenterTitle("新建仪表")
-            if (!TextUtils.isEmpty(parentId)){
+            if (parentId!="-1"){
                 tv_parent_name.text=parentName
             }
         }
@@ -228,7 +226,6 @@ class FG_AddInstrument : FG_Base() {
             if (pageType=="1"){//修改
                 put("id",objectId)
             }
-            put("level", level.toString())
             put("parentId", parentId.toString())
             put("code", code.toString())
             put("name", name.toString())

@@ -165,7 +165,7 @@ class FG_InstrumentPage : FG_Base() {
     private val dialogListener = View.OnClickListener { v ->
         when (v.id) {
             R.id.rl_detail -> {
-                var b=FG_AddInstrument.createBundle(operatorId,operatorName)
+                var b=FG_AddInstrument.createBundle(operatorId,parentName)
                 startAC(FG_AddInstrument::class.java.name,b)
                 dialog?.dismiss()
 

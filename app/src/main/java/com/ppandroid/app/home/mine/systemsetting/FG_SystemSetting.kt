@@ -50,6 +50,10 @@ class FG_SystemSetting : FG_Base() {
             0 -> {//仪表添加
                 startAC(FG_AddInstrument::class.java.name)
             }
+            1->{//分项添加
+                startAC(FG_AddDeviceCate::class.java.name)
+
+            }
         }
     }
 
