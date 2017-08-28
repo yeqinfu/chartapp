@@ -1,7 +1,10 @@
 package com.ppandroid.app.home.mine.systemsetting
 
 import android.app.Activity
+import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -10,37 +13,77 @@ import com.ppandroid.app.R
 import com.ppandroid.app.base.NetWorkErrorView
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.mine.systemsetting.BN_SystemSettingPage01
+import com.ppandroid.app.bean.mine.systemsetting.ET_SyStemSetting
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
+import com.ppandroid.app.widget.CustomDialog
 import com.ppandroid.im.base.FG_Base
 import com.ppandroid.im.bean.BaseBody
 import kotlinx.android.synthetic.main.fg_system_setting_page.*
+import kotlinx.android.synthetic.main.layout_head_view.*
 import kotlinx.android.synthetic.main.layout_network_error.*
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import org.jetbrains.anko.find
 
 /**
  * Created by yeqinfu on 2017/8/22.
  * 仪表数据列表页面
+ * 副级别页面和viewpage页面共用
  */
 class FG_InstrumentPage : FG_Base() {
+    /**default:0代表viewpager 1 代表点击item进去的详情*/
+    private var pageType=0
+    /**当是子页面的时候这个id有用到*/
+    private var parentId:String=""
+    private var parentName:String=""
+    companion object {
+        fun createBundle(parentId:String,parentName:String): Bundle {
+            var b=Bundle()
+            b.putString("parentName",parentName)
+            b.putString("parentId",parentId)
+            b.putInt("pageType",1)
+            return b
+        }
+
+    }
     override fun fgRes(): Int = R.layout.fg_system_setting_page
 
     override fun afterViews() {
+        arguments?.let {
+            pageType=it.getInt("pageType",0)
+            parentId=it.getString("parentId","")
+            parentName=it.getString("parentName","")
+        }
+        if (pageType==1){
+            head_view.visibility=View.VISIBLE
+            head_view.setCenterTitle(parentName)
+            head_view.init(activity)
+            head_view.setIvRight(R.drawable.ic_add_model, {
+                var b=FG_AddInstrument.createBundle(parentId,parentName,"")
+                startAC(FG_AddInstrument::class.java.name,b)
+            })
+        }
+        isNeedEventBus=true
         loadContent()
         network_error.setListener { loadContent() }
 
         lv_list.setOnItemLongClickListener { adapterView, view, i, l ->
             message?.let {
-                showConfirmDialog(it[i].id)
+                operatorId=it[i].id.toString()
+                operatorName=it[i].name.toString()
+                showChooseDialog()
             }
-            false
+            true
         }
     }
 
-    private fun showConfirmDialog(id: Int) {
+    private var operatorId=""
+    private var operatorName=""
+    private fun showConfirmDialog() {
         val builder = AlertDialog.Builder(activity).setMessage("确定删除吗？").setCancelable(false)
         builder.setPositiveButton("确定") { _, _ ->
-            deleteInstrument(id)
+            deleteInstrument(operatorId)
         }
         builder.setNegativeButton("取消") { _, _ ->
             builder.create().dismiss()
@@ -49,7 +92,7 @@ class FG_InstrumentPage : FG_Base() {
 
     }
 
-    private fun deleteInstrument(id: Int) {
+    private fun deleteInstrument(id: String) {
         var url = "user/sysSet/instrument/delete.json?id=" + id
         Http.get(activity, url, BaseBody::class.java, object : MyCallBack<BaseBody> {
             override fun onResponse(response: BaseBody?) {
@@ -70,6 +113,9 @@ class FG_InstrumentPage : FG_Base() {
 
     private fun loadContent() {
         var url = "user/sysSet/instrument/search.json"
+        if (pageType==1){
+            url+="?parentId=$parentId"
+        }
         Http.get(activity, url, BN_SystemSettingPage01::class.java, object : MyCallBack<BN_SystemSettingPage01> {
             override fun onResponse(response: BN_SystemSettingPage01?) {
                 response?.let {
@@ -80,6 +126,11 @@ class FG_InstrumentPage : FG_Base() {
                         message = it.message
                         var adapter = AD_List(activity, it.message)
                         lv_list.adapter = adapter
+                        lv_list.setOnItemClickListener { adapterView, view, i, l ->
+
+                            var b= createBundle(it.message[i].id.toString(),it.message[i].name)
+                            startAC(FG_InstrumentPage::class.java.name,b)
+                        }
                     }
 
                 }
@@ -92,6 +143,42 @@ class FG_InstrumentPage : FG_Base() {
 
         })
     }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: ET_SyStemSetting) {
+        if (event.taskId == ET_SyStemSetting.TASKID_REFRESH_INSTRUMENT_PAGE) {
+            loadContent()
+        }
+    }
+
+
+    private var dialog: CustomDialog? = null
+    private fun showChooseDialog() {
+        val mView = LayoutInflater.from(activity).inflate(R.layout.dialog_choose_modified_or_del, null)
+        dialog = CustomDialog(activity, R.style.family_dialog_theme, mView, Gravity.CENTER, 4)
+        mView.findViewById(R.id.rl_detail).setOnClickListener(dialogListener)
+        mView.findViewById(R.id.rl_del).setOnClickListener(dialogListener)
+        dialog?.show()
+    }
+
+    private val dialogListener = View.OnClickListener { v ->
+        when (v.id) {
+            R.id.rl_detail -> {
+                var b=FG_AddInstrument.createBundle(operatorId,operatorName)
+                startAC(FG_AddInstrument::class.java.name,b)
+                dialog?.dismiss()
+
+            }
+            R.id.rl_del -> {
+                showConfirmDialog()
+                dialog?.dismiss()
+            }
+
+        }
+    }
+
+
 
     class Holder {
         var tv_name: TextView? = null
@@ -145,5 +232,7 @@ class FG_InstrumentPage : FG_Base() {
         }
 
     }
+
+
 
 }
