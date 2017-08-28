@@ -10,6 +10,7 @@ import java.util.List;
 
 public class BN_EnergyChargingPage extends BaseBody {
 
+
     private List<MessageBean> message;
 
     public List<MessageBean> getMessage() {
@@ -22,147 +23,183 @@ public class BN_EnergyChargingPage extends BaseBody {
 
     public static class MessageBean {
         /**
-         * id : 1
-         * deleteStatus : false
-         * version : 0
-         * createTime : null
-         * createBy : null
-         * createById : null
-         * lastModifyTime : null
-         * lastModifyBy : null
-         * lastModifyById : null
-         * companyId : 1
-         * code : 001
-         * classificationId : 1
-         * chargingType : 1
-         * chargingJson : 0.68
+         * energyChargingEntity : {"id":1,"deleteStatus":false,"version":0,"createTime":null,"createBy":null,"createById":null,"lastModifyTime":null,"lastModifyBy":null,"lastModifyById":null,"companyId":1,"code":"001","classificationId":1,"chargingType":1,"chargingJson":"0.68"}
+         * energyChargingName : 单一计费
+         * classificationName : 电
          */
 
-        private int id;
-        private boolean deleteStatus;
-        private int version;
-        private Object createTime;
-        private Object createBy;
-        private Object createById;
-        private Object lastModifyTime;
-        private Object lastModifyBy;
-        private Object lastModifyById;
-        private int companyId;
-        private String code;
-        private int classificationId;
-        private int chargingType;
-        private String chargingJson;
+        private EnergyChargingEntityBean energyChargingEntity;
+        private String energyChargingName;
+        private String classificationName;
 
-        public int getId() {
-            return id;
+        public EnergyChargingEntityBean getEnergyChargingEntity() {
+            return energyChargingEntity;
         }
 
-        public void setId(int id) {
-            this.id = id;
+        public void setEnergyChargingEntity(EnergyChargingEntityBean energyChargingEntity) {
+            this.energyChargingEntity = energyChargingEntity;
         }
 
-        public boolean isDeleteStatus() {
-            return deleteStatus;
+        public String getEnergyChargingName() {
+            return energyChargingName;
         }
 
-        public void setDeleteStatus(boolean deleteStatus) {
-            this.deleteStatus = deleteStatus;
+        public void setEnergyChargingName(String energyChargingName) {
+            this.energyChargingName = energyChargingName;
         }
 
-        public int getVersion() {
-            return version;
+        public String getClassificationName() {
+            return classificationName;
         }
 
-        public void setVersion(int version) {
-            this.version = version;
+        public void setClassificationName(String classificationName) {
+            this.classificationName = classificationName;
         }
 
-        public Object getCreateTime() {
-            return createTime;
-        }
+        public static class EnergyChargingEntityBean {
+            /**
+             * id : 1
+             * deleteStatus : false
+             * version : 0
+             * createTime : null
+             * createBy : null
+             * createById : null
+             * lastModifyTime : null
+             * lastModifyBy : null
+             * lastModifyById : null
+             * companyId : 1
+             * code : 001
+             * classificationId : 1
+             * chargingType : 1
+             * chargingJson : 0.68
+             */
 
-        public void setCreateTime(Object createTime) {
-            this.createTime = createTime;
-        }
+            private int id;
+            private boolean deleteStatus;
+            private int version;
+            private Object createTime;
+            private Object createBy;
+            private Object createById;
+            private Object lastModifyTime;
+            private Object lastModifyBy;
+            private Object lastModifyById;
+            private int companyId;
+            private String code;
+            private int classificationId;
+            private int chargingType;
+            private String chargingJson;
 
-        public Object getCreateBy() {
-            return createBy;
-        }
+            public int getId() {
+                return id;
+            }
 
-        public void setCreateBy(Object createBy) {
-            this.createBy = createBy;
-        }
+            public void setId(int id) {
+                this.id = id;
+            }
 
-        public Object getCreateById() {
-            return createById;
-        }
+            public boolean isDeleteStatus() {
+                return deleteStatus;
+            }
 
-        public void setCreateById(Object createById) {
-            this.createById = createById;
-        }
+            public void setDeleteStatus(boolean deleteStatus) {
+                this.deleteStatus = deleteStatus;
+            }
 
-        public Object getLastModifyTime() {
-            return lastModifyTime;
-        }
+            public int getVersion() {
+                return version;
+            }
 
-        public void setLastModifyTime(Object lastModifyTime) {
-            this.lastModifyTime = lastModifyTime;
-        }
+            public void setVersion(int version) {
+                this.version = version;
+            }
 
-        public Object getLastModifyBy() {
-            return lastModifyBy;
-        }
+            public Object getCreateTime() {
+                return createTime;
+            }
 
-        public void setLastModifyBy(Object lastModifyBy) {
-            this.lastModifyBy = lastModifyBy;
-        }
+            public void setCreateTime(Object createTime) {
+                this.createTime = createTime;
+            }
 
-        public Object getLastModifyById() {
-            return lastModifyById;
-        }
+            public Object getCreateBy() {
+                return createBy;
+            }
 
-        public void setLastModifyById(Object lastModifyById) {
-            this.lastModifyById = lastModifyById;
-        }
+            public void setCreateBy(Object createBy) {
+                this.createBy = createBy;
+            }
 
-        public int getCompanyId() {
-            return companyId;
-        }
+            public Object getCreateById() {
+                return createById;
+            }
 
-        public void setCompanyId(int companyId) {
-            this.companyId = companyId;
-        }
+            public void setCreateById(Object createById) {
+                this.createById = createById;
+            }
 
-        public String getCode() {
-            return code;
-        }
+            public Object getLastModifyTime() {
+                return lastModifyTime;
+            }
 
-        public void setCode(String code) {
-            this.code = code;
-        }
+            public void setLastModifyTime(Object lastModifyTime) {
+                this.lastModifyTime = lastModifyTime;
+            }
 
-        public int getClassificationId() {
-            return classificationId;
-        }
+            public Object getLastModifyBy() {
+                return lastModifyBy;
+            }
 
-        public void setClassificationId(int classificationId) {
-            this.classificationId = classificationId;
-        }
+            public void setLastModifyBy(Object lastModifyBy) {
+                this.lastModifyBy = lastModifyBy;
+            }
 
-        public int getChargingType() {
-            return chargingType;
-        }
+            public Object getLastModifyById() {
+                return lastModifyById;
+            }
 
-        public void setChargingType(int chargingType) {
-            this.chargingType = chargingType;
-        }
+            public void setLastModifyById(Object lastModifyById) {
+                this.lastModifyById = lastModifyById;
+            }
 
-        public String getChargingJson() {
-            return chargingJson;
-        }
+            public int getCompanyId() {
+                return companyId;
+            }
 
-        public void setChargingJson(String chargingJson) {
-            this.chargingJson = chargingJson;
+            public void setCompanyId(int companyId) {
+                this.companyId = companyId;
+            }
+
+            public String getCode() {
+                return code;
+            }
+
+            public void setCode(String code) {
+                this.code = code;
+            }
+
+            public int getClassificationId() {
+                return classificationId;
+            }
+
+            public void setClassificationId(int classificationId) {
+                this.classificationId = classificationId;
+            }
+
+            public int getChargingType() {
+                return chargingType;
+            }
+
+            public void setChargingType(int chargingType) {
+                this.chargingType = chargingType;
+            }
+
+            public String getChargingJson() {
+                return chargingJson;
+            }
+
+            public void setChargingJson(String chargingJson) {
+                this.chargingJson = chargingJson;
+            }
         }
     }
 }

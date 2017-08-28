@@ -31,7 +31,7 @@ class FG_EnergyChargingPage : FG_Base() {
 
         lv_list.setOnItemLongClickListener { adapterView, view, i, l ->
             message?.let {
-                showConfirmDialog(it[i].id)
+                showConfirmDialog(it[i].energyChargingEntity.id)
             }
             false
         }
@@ -81,7 +81,6 @@ class FG_EnergyChargingPage : FG_Base() {
                         var adapter = AD_List(activity, it.message)
                         lv_list.adapter = adapter
                     }
-
                 }
             }
 
@@ -125,9 +124,9 @@ class FG_EnergyChargingPage : FG_Base() {
                 holder.tv_name = layout.find(R.id.tv_name)
                 layout.tag = holder
             }
-            holder?.tv_name?.text = "名称"
-            holder?.tv_level?.text =  "这是分项名称"
-            holder?.tv_number?.text =  message?.get(pos)?.code.toString()
+            holder?.tv_name?.text =  message?.get(pos)?.energyChargingName
+            holder?.tv_level?.text =  message?.get(pos)?.classificationName
+            holder?.tv_number?.text =  message?.get(pos)?.energyChargingEntity?.code
 
             return layout
         }
