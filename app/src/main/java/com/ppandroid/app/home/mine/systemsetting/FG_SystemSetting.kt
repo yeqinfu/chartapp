@@ -56,6 +56,9 @@ class FG_SystemSetting : FG_Base() {
             2->{//区域添加
                 startAC(FG_AddDeviceArea::class.java.name)
             }
+            3->{//设备添加
+                startAC(FG_AddDevices::class.java.name)
+            }
         }
     }
 
