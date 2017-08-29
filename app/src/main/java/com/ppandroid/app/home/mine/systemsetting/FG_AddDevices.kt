@@ -83,6 +83,7 @@ class FG_AddDevices : FG_Base() {
         }
         deleteImg.setOnClickListener {
             bitmap = null
+            isModified=false
             myLayout.visibility = View.GONE
             relAddPhoto.visibility = View.VISIBLE
         }
@@ -182,7 +183,9 @@ class FG_AddDevices : FG_Base() {
         }
 
         if (bitmap == null) {
-            bitmap = userImg.drawingCache
+            if (isModified){
+                bitmap = userImg.drawingCache
+            }
             if (bitmap == null){
                 toast("请至少添加一张图片")
             }
@@ -272,6 +275,7 @@ class FG_AddDevices : FG_Base() {
      */
     private var bitmap: Bitmap? = null
     private var tempFile: File? = null
+    private var isModified=true
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
