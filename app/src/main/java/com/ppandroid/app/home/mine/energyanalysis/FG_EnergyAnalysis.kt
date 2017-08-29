@@ -1,0 +1,41 @@
+package com.ppandroid.app.home.mine.energyanalysis
+
+import com.ppandroid.app.R
+import com.ppandroid.app.bean.ErrorBody
+import com.ppandroid.app.bean.mine.energyanalysis.BN_EnergyAnalysis
+import com.ppandroid.app.http.Http
+import com.ppandroid.app.http.MyCallBack
+import com.ppandroid.im.base.FG_Base
+import kotlinx.android.synthetic.main.layout_head_view.*
+import kotlinx.android.synthetic.main.yellowchartview.*
+
+/**
+ * Created by yeqinfu on 2017/8/29.
+ * 能耗分析
+ */
+class FG_EnergyAnalysis :FG_Base(){
+    override fun fgRes(): Int= R.layout.fg_energy_analysis
+
+    override fun afterViews() {
+        head_view.init(activity)
+        head_view.setCenterTitle("能耗分析")
+        v_yellow_chart.startAnim()
+        loadContent()
+    }
+    private fun loadContent(){
+        var url="user/energy/analysis/getWeekAnalysis.json"
+        Http.get(activity,url, BN_EnergyAnalysis::class.java,object :MyCallBack<BN_EnergyAnalysis>{
+            override fun onResponse(response: BN_EnergyAnalysis?) {
+                response?.let {
+
+                }
+            }
+
+            override fun onError(error: ErrorBody?) {
+                toast(error)
+            }
+
+        })
+    }
+
+}

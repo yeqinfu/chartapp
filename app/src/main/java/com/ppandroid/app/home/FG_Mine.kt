@@ -4,9 +4,10 @@ import com.ppandroid.app.R
 import com.ppandroid.app.bean.ET_Refresh
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.mine.BN_UserInfo
-import com.ppandroid.app.home.mine.systemsetting.FG_SystemSetting
 import com.ppandroid.app.home.mine.aboutme.FG_Settings
+import com.ppandroid.app.home.mine.energyanalysis.FG_EnergyAnalysis
 import com.ppandroid.app.home.mine.instrument.FG_InstrumentList
+import com.ppandroid.app.home.mine.systemsetting.FG_SystemSetting
 import com.ppandroid.app.home.mine.teammanagement.FG_TeamManagement
 import com.ppandroid.app.home.mine.userinfo.FG_UserInfo
 import com.ppandroid.app.http.Http
@@ -40,6 +41,9 @@ class FG_Mine: FG_Base() {
         }
         tv_team_manager.setOnClickListener {
             startAC(FG_TeamManagement::class.java.name)
+        }
+        tv_energy_analysis.setOnClickListener {
+            startAC(FG_EnergyAnalysis::class.java.name)
         }
         loadContent()
 
