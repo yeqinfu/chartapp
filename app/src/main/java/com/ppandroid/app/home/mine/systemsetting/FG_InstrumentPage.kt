@@ -30,6 +30,8 @@ import org.jetbrains.anko.find
  * Created by yeqinfu on 2017/8/22.
  * 仪表数据列表页面
  * 副级别页面和viewpage页面共用
+ *
+ * 暂时砍掉副级页面
  */
 class FG_InstrumentPage : FG_Base() {
     /**default:0代表viewpager 1 代表点击item进去的详情*/
@@ -126,11 +128,11 @@ class FG_InstrumentPage : FG_Base() {
                         message = it.message
                         var adapter = AD_List(activity, it.message)
                         lv_list.adapter = adapter
-                        lv_list.setOnItemClickListener { adapterView, view, i, l ->
+                       /* lv_list.setOnItemClickListener { adapterView, view, i, l ->
 
                             var b= createBundle(it.message[i].id.toString(),it.message[i].name)
                             startAC(FG_InstrumentPage::class.java.name,b)
-                        }
+                        }*/
                     }
 
                 }

@@ -9,16 +9,23 @@ import android.text.TextUtils
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.BaseAdapter
+import android.widget.EditText
 import android.widget.ImageView
+import com.google.gson.Gson
 import com.ppandroid.app.R
+import com.ppandroid.app.bean.ET_Base
+import com.ppandroid.app.home.mine.adapter.AD_Pic
 import com.ppandroid.app.utils.BitmapUtils
+import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.widget.CustomDialog
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_add_devices.*
 import kotlinx.android.synthetic.main.layout_head_view.*
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+import org.jetbrains.anko.find
+import org.jetbrains.anko.forEachChild
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.IOException
@@ -30,8 +37,9 @@ import java.util.*
  */
 class FG_AddDevices : FG_Base() {
     override fun fgRes(): Int = R.layout.fg_add_devices
-    private var listAdapter: MyListAdapter? = null
+    private var listAdapter: AD_Pic? = null
     override fun afterViews() {
+        isNeedEventBus = true
         head_view.init(activity)
         head_view.setRightText("保存") {
             postInfo()
@@ -44,8 +52,32 @@ class FG_AddDevices : FG_Base() {
             }
 
         }
-        listAdapter = MyListAdapter()
+        listAdapter = AD_Pic(Bitmaps, activity)
         horizontalListView1.adapter = listAdapter
+        ll_add_properties.setOnClickListener {
+            lv_content.addView(addPropertiesViews())
+        }
+        ll_about_cate.setOnClickListener {
+            //添加关联分项
+            startAC(FG_AboutCate::class.java.name)
+        }
+        ll_about_instrument.setOnClickListener {
+            //添加关联仪表
+            startAC(FG_AboutInstrument::class.java.name)
+        }
+    }
+
+    private fun addPropertiesViews(): View? {
+        var view = activity.layoutInflater.inflate(R.layout.item_add_properties_view, null)
+        view.find<ImageView>(R.id.iv_del).setOnClickListener {
+            lv_content.removeView(view)
+        }
+        return view
+    }
+
+    class Model {
+        var key: String? = null
+        var value: String? = null
     }
 
     private fun postInfo() {
@@ -57,6 +89,31 @@ class FG_AddDevices : FG_Base() {
             toast("请输入型号")
             return
         }
+
+        var list = ArrayList<Model>()
+        lv_content.forEachChild { childView ->
+
+            var et_key = childView.find<EditText>(R.id.et_key)
+            var et_value = childView.find<EditText>(R.id.et_value)
+            if (et_key.text.isEmpty() || et_value.text.isEmpty()) {
+                toast("属性未完善")
+                return
+            }
+            var model = Model()
+            model.key = et_key.text.toString()
+            model.value = et_value.text.toString()
+            list.add(model)
+        }
+        var gson = Gson()
+        DebugLog.d("yeqinfu======>" + gson.toJson(list))
+
+
+        if (Bitmaps.size == 0) {
+            toast("请至少添加一张图片")
+            return
+        }
+
+
     }
 
 
@@ -171,34 +228,28 @@ class FG_AddDevices : FG_Base() {
     private val PHOTO_REQUEST_GALLERY = 2                // 从相册中选择
     private val PHOTO_FILE_NAME = "temp_photo2.jpg"
 
-    internal inner class MyListAdapter : BaseAdapter() {
 
-        override fun getCount(): Int {
-            return Bitmaps.size
-        }
-
-        override fun getItem(position: Int): Any? {
-            return Bitmaps[position]
-        }
-
-        override fun getItemId(position: Int): Long {
-            return position.toLong()
-        }
-
-        override fun getView(position: Int, convertView: View, parent: ViewGroup): View {
-            val layout = activity.layoutInflater.inflate(R.layout.want_to_sell_imgview, null)
-            val userImg = layout.findViewById(R.id.userImg) as ImageView
-            val deleteImg = layout.findViewById(R.id.deleteImg) as ImageView
-            userImg.setImageBitmap(Bitmaps[position])
-            deleteImg.setOnClickListener {
-                Bitmaps.removeAt(position)
-                listAdapter?.notifyDataSetChanged()
-                toast("删除成功")
-            }
-
-            return layout
+    class ET_AddDevices(taskId: Int,chooseId:String,chooseName:String) : ET_Base(taskId) {
+        var chooseId=chooseId
+        var chooseName=chooseName
+        companion object {
+            /**添加仪器，选择关联分项 */
+            val TASKID_ADD_DEVICES_ABOUT_CATE = UUID.randomUUID().hashCode()
+            /**添加仪器，选择关联分项 */
+            val TASKID_ADD_DEVICES_ABOUT_INSTRUMENT = UUID.randomUUID().hashCode()
         }
 
     }
-
+    var chooseCateId:String=""
+    var chooseInstrumentId:String=""
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: ET_AddDevices) {
+        if (event.taskId == ET_AddDevices.TASKID_ADD_DEVICES_ABOUT_CATE) {
+            tv_cate.text=event.chooseName
+            chooseCateId=event.chooseId
+        }else if (event.taskId==ET_AddDevices.TASKID_ADD_DEVICES_ABOUT_INSTRUMENT){
+            chooseInstrumentId=event.chooseId
+            tv_instrument.text=event.chooseName
+        }
+    }
 }

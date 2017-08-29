@@ -17,6 +17,10 @@ public class ET_SyStemSetting extends ET_Base {
     public static final int TASKID_REFRESH_DEVICE_CATE_PAGE = UUID.randomUUID().hashCode();
     /**刷新FG_DeviceAreaPage*/
     public static final int TASKID_REFRESH_DEVICE_AREA_PAGE = UUID.randomUUID().hashCode();
+    /**FG_AboutCate 关闭*/
+    public static final int TASKID_CLOSE_FG_ABOUT_CATE = UUID.randomUUID().hashCode();
+    /**FG_AboutInstrument 关闭*/
+    public static final int TASKID_CLOSE_FG_ABOUT_INSTRUMENT = UUID.randomUUID().hashCode();
 
     public ET_SyStemSetting(int taskId) {
         super(taskId);
