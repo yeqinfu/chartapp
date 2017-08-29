@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/color_03"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include layout="@layout/layout_head_view"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:text="能源价格"
+        android:textColor="@color/color_04"
+        android:textSize="@dimen/sub_title"/>
+
+       <!--编号-->
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="编号"
+            android:textColor="@color/color_07"
+            android:textSize="@dimen/bar_title"/>
+
+        <EditText
+            android:id="@+id/et_name"
+            android:singleLine="true"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="right|center_vertical"
+            android:hint="@string/input_msg"
+            android:textColor="@color/color_04"
+            android:textColorHint="@color/color_06"
+            android:textSize="@dimen/bar_title"/>
+
+    </LinearLayout>
+
+    <!--能源类型-->
+    <LinearLayout
+        android:id="@+id/ll_energy_type"
+        android:layout_marginTop="0.5dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="能源类型"
+            android:textColor="@color/color_07"
+            android:textSize="@dimen/bar_title"/>
+
+        <TextView
+            android:id="@+id/tv_choose_class"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawablePadding="5dp"
+            android:drawableRight="@drawable/forward_right"
+            android:gravity="right|center_vertical"
+            android:hint="请选择"
+            android:textColor="@color/color_04"
+            android:textColorHint="@color/color_06"
+            android:textSize="@dimen/bar_title"/>
+
+
+    </LinearLayout>
+    <!--计费类型-->
+    <LinearLayout
+        android:layout_marginTop="0.5dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="计费类型"
+            android:textColor="@color/color_07"
+            android:textSize="@dimen/bar_title"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:drawablePadding="5dp"
+            android:gravity="right|center_vertical"
+            android:text="单一计费"
+            android:textColor="@color/color_04"
+            android:textColorHint="@color/color_06"
+            android:textSize="@dimen/bar_title"/>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -52,6 +52,15 @@ public class BN_DeviceArea extends BaseBody {
         private String name;
         private int employeeId;
         private String employeeName;
+        private boolean isLeaf=false;
+
+        public boolean isLeaf() {
+            return isLeaf;
+        }
+
+        public void setLeaf(boolean leaf) {
+            isLeaf = leaf;
+        }
 
         public int getId() {
             return id;

@@ -59,6 +59,9 @@ class FG_SystemSetting : FG_Base() {
             3->{//设备添加
                 startAC(FG_AddDevices::class.java.name)
             }
+            4->{//能源添加
+                startAC(FG_AddEnergyCharging::class.java.name)
+            }
         }
     }
 

@@ -14,18 +14,27 @@ import android.widget.ImageView
 import com.google.gson.Gson
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ET_Base
+import com.ppandroid.app.bean.ErrorBody
+import com.ppandroid.app.bean.mine.systemsetting.ET_SyStemSetting
 import com.ppandroid.app.home.mine.adapter.AD_Pic
+import com.ppandroid.app.http.Http
+import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.BitmapUtils
-import com.ppandroid.app.utils.DebugLog
+import com.ppandroid.app.utils.Utils_Bitmap
 import com.ppandroid.app.utils.Utils_Common
+import com.ppandroid.app.utils.Utils_Dialog
 import com.ppandroid.app.widget.CustomDialog
 import com.ppandroid.im.base.FG_Base
+import com.ppandroid.im.bean.BaseBody
 import kotlinx.android.synthetic.main.fg_add_devices.*
 import kotlinx.android.synthetic.main.layout_head_view.*
+import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import org.jetbrains.anko.async
 import org.jetbrains.anko.find
 import org.jetbrains.anko.forEachChild
+import org.jetbrains.anko.uiThread
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.IOException
@@ -65,6 +74,11 @@ class FG_AddDevices : FG_Base() {
             //添加关联仪表
             startAC(FG_AboutInstrument::class.java.name)
         }
+        ll_about_area.setOnClickListener {
+            //添加关联区域
+            startAC(FG_AboutArea::class.java.name)
+
+        }
     }
 
     private fun addPropertiesViews(): View? {
@@ -90,6 +104,11 @@ class FG_AddDevices : FG_Base() {
             return
         }
 
+        if (Bitmaps.size == 0) {
+            toast("请至少添加一张图片")
+            return
+        }
+
         var list = ArrayList<Model>()
         lv_content.forEachChild { childView ->
 
@@ -104,13 +123,63 @@ class FG_AddDevices : FG_Base() {
             model.value = et_value.text.toString()
             list.add(model)
         }
-        var gson = Gson()
-        DebugLog.d("yeqinfu======>" + gson.toJson(list))
 
-
-        if (Bitmaps.size == 0) {
-            toast("请至少添加一张图片")
+        if (TextUtils.isEmpty(chooseCateId)) {
+            toast("请选择关联分项")
             return
+        }
+        if (TextUtils.isEmpty(chooseInstrumentId)) {
+            toast("请选择关联仪表")
+            return
+        }
+        if (TextUtils.isEmpty(chooseAreaId)) {
+            toast("请选择关联区域")
+            return
+        }
+
+
+        var gson = Gson()
+        Utils_Dialog.showLoading(activity)
+        var url = "user/sysSet/device/add.json"
+        async {
+            var map = TreeMap<String, String>()
+            map.apply {
+                put("name", et_name.text.toString())
+                put("model", et_model.text.toString())
+                put("deviceAreaId", chooseAreaId)
+                put("deviceCateId", chooseCateId)
+                put("instrumentId", chooseInstrumentId)
+                put("propertiesJson", gson.toJson(list))
+                var photo2: String? = null
+                for (i in Bitmaps.indices) {
+                    val photo = Utils_Bitmap.bitmapToBase64(Bitmaps[i])
+                    if (i != 0) {
+                        photo2 = photo2 + "," + photo
+                    } else {
+                        photo2 = photo
+                    }
+                }
+                photo2?.let { put("photoFile", it) }
+            }
+
+            uiThread {
+                Http.post(activity,url,map,BaseBody::class.java,object :MyCallBack<BaseBody>{
+                    override fun onResponse(response: BaseBody?) {
+                        Utils_Dialog.disMissLoading()
+                        response?.let {
+                            toast("添加成功")
+                            EventBus.getDefault().post(ET_SyStemSetting(ET_SyStemSetting.TASKID_REFRESH_IMPORTANT_DEVICE))
+                            finish()
+                        }
+                    }
+
+                    override fun onError(error: ErrorBody?) {
+                        Utils_Dialog.disMissLoading()
+                        toast(error)
+                    }
+
+                })
+            }
         }
 
 
@@ -229,27 +298,35 @@ class FG_AddDevices : FG_Base() {
     private val PHOTO_FILE_NAME = "temp_photo2.jpg"
 
 
-    class ET_AddDevices(taskId: Int,chooseId:String,chooseName:String) : ET_Base(taskId) {
-        var chooseId=chooseId
-        var chooseName=chooseName
+    class ET_AddDevices(taskId: Int, chooseId: String, chooseName: String) : ET_Base(taskId) {
+        var chooseId = chooseId
+        var chooseName = chooseName
+
         companion object {
             /**添加仪器，选择关联分项 */
             val TASKID_ADD_DEVICES_ABOUT_CATE = UUID.randomUUID().hashCode()
+            /**添加仪器，选择关联区域 */
+            val TASKID_ADD_DEVICES_ABOUT_AREA = UUID.randomUUID().hashCode()
             /**添加仪器，选择关联分项 */
             val TASKID_ADD_DEVICES_ABOUT_INSTRUMENT = UUID.randomUUID().hashCode()
         }
 
     }
-    var chooseCateId:String=""
-    var chooseInstrumentId:String=""
+
+    var chooseCateId: String = ""
+    var chooseInstrumentId: String = ""
+    var chooseAreaId: String = ""
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(event: ET_AddDevices) {
         if (event.taskId == ET_AddDevices.TASKID_ADD_DEVICES_ABOUT_CATE) {
-            tv_cate.text=event.chooseName
-            chooseCateId=event.chooseId
-        }else if (event.taskId==ET_AddDevices.TASKID_ADD_DEVICES_ABOUT_INSTRUMENT){
-            chooseInstrumentId=event.chooseId
-            tv_instrument.text=event.chooseName
+            tv_cate.text = event.chooseName
+            chooseCateId = event.chooseId
+        } else if (event.taskId == ET_AddDevices.TASKID_ADD_DEVICES_ABOUT_INSTRUMENT) {
+            chooseInstrumentId = event.chooseId
+            tv_instrument.text = event.chooseName
+        } else if (event.taskId == ET_AddDevices.TASKID_ADD_DEVICES_ABOUT_AREA) {
+            chooseAreaId = event.chooseId
+            tv_area.text = event.chooseName
         }
     }
 }

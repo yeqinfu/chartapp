@@ -10,12 +10,15 @@ import com.ppandroid.app.R
 import com.ppandroid.app.base.NetWorkErrorView
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.mine.systemsetting.BN_ImportantDevice
+import com.ppandroid.app.bean.mine.systemsetting.ET_SyStemSetting
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.im.base.FG_Base
 import com.ppandroid.im.bean.BaseBody
 import kotlinx.android.synthetic.main.fg_system_setting_page.*
 import kotlinx.android.synthetic.main.layout_network_error.*
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import org.jetbrains.anko.find
 
 /**
@@ -26,6 +29,7 @@ class FG_ImportantDevicePage : FG_Base() {
     override fun fgRes(): Int = R.layout.fg_system_setting_page
 
     override fun afterViews() {
+        isNeedEventBus=true
         loadContent()
         network_error.setListener { loadContent() }
 
@@ -34,6 +38,13 @@ class FG_ImportantDevicePage : FG_Base() {
                 showConfirmDialog(it[i].id)
             }
             false
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: ET_SyStemSetting) {
+        if (event.taskId == ET_SyStemSetting.TASKID_REFRESH_DEVICE_CATE_PAGE) {
+            loadContent()
         }
     }
 
