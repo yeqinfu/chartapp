@@ -3,6 +3,7 @@ package com.ppandroid.app.home.mine.systemsetting
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.text.TextUtils
@@ -15,14 +16,16 @@ import com.google.gson.Gson
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ET_Base
 import com.ppandroid.app.bean.ErrorBody
+import com.ppandroid.app.bean.mine.systemsetting.BN_AddDeviceDetail
 import com.ppandroid.app.bean.mine.systemsetting.ET_SyStemSetting
-import com.ppandroid.app.home.mine.adapter.AD_Pic
 import com.ppandroid.app.http.Http
+import com.ppandroid.app.http.Http.get
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.BitmapUtils
 import com.ppandroid.app.utils.Utils_Bitmap
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.utils.Utils_Dialog
+import com.ppandroid.app.utils.glide.GlideUtils
 import com.ppandroid.app.widget.CustomDialog
 import com.ppandroid.im.base.FG_Base
 import com.ppandroid.im.bean.BaseBody
@@ -39,30 +42,51 @@ import java.io.File
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Created by yeqinfu on 2017/8/28.
  * 新增设备
  */
 class FG_AddDevices : FG_Base() {
+    var operatorId: String = ""
+    /**page type default:0 添加设备 1 修改设备*/
+    private var pageType = "0"
+
+    companion object {
+        fun createBundle(operatorId: String): Bundle {
+            var b = Bundle()
+            b.putString("operatorId", operatorId)
+            b.putString("pageType", "1")
+            return b
+        }
+    }
+
+
     override fun fgRes(): Int = R.layout.fg_add_devices
-    private var listAdapter: AD_Pic? = null
     override fun afterViews() {
+        arguments?.let {
+            operatorId = it.getString("operatorId", "")
+            pageType = it.getString("pageType", "0")
+        }
+        if (pageType == "1") {
+            loadDeviceDetail()
+        }
+
         isNeedEventBus = true
         head_view.init(activity)
         head_view.setRightText("保存") {
             postInfo()
         }
         relAddPhoto.setOnClickListener {
-            if (Bitmaps.size >= 9) {
-                toast("最多添加9张图片")
-            } else {
-                showChooseDialog()
-            }
-
+            showChooseDialog()
         }
-        listAdapter = AD_Pic(Bitmaps, activity)
-        horizontalListView1.adapter = listAdapter
+        deleteImg.setOnClickListener {
+            bitmap = null
+            myLayout.visibility = View.GONE
+            relAddPhoto.visibility = View.VISIBLE
+        }
+
         ll_add_properties.setOnClickListener {
             lv_content.addView(addPropertiesViews())
         }
@@ -81,6 +105,55 @@ class FG_AddDevices : FG_Base() {
         }
     }
 
+    private fun loadDeviceDetail() {
+        var url = "user/sysSet/device/details.json?id=$operatorId"
+        get(activity, url, BN_AddDeviceDetail::class.java, object : MyCallBack<BN_AddDeviceDetail> {
+            override fun onResponse(response: BN_AddDeviceDetail?) {
+                response?.let {
+                    et_name.setText(it.message.name)
+                    et_model.setText(it.message.model)
+                    it.message.photo?.let {
+                        GlideUtils.displayImage(activity, it, userImg)
+                        userImg.isDrawingCacheEnabled = true
+                        myLayout.visibility = View.VISIBLE
+                        relAddPhoto.visibility = View.GONE
+                    }
+
+                    tv_cate.text = it.message.deviceCateName
+                    tv_instrument.text = it.message.instrumentName
+                    tv_area.text = it.message.deviceAreaName
+                    chooseCateId = it.message.deviceCateId.toString()
+                    chooseAreaId = it.message.deviceAreaId.toString()
+                    chooseInstrumentId = it.message.instrumentId.toString()
+
+
+
+
+                    var modelBody=Utils_Common.parseJson(it.message.propertiesJson,ModelBody::class.java)
+                    modelBody?.list?.forEach { item->
+                        lv_content.addView(addViewByItem(item))
+                    }
+                }
+            }
+
+            override fun onError(error: ErrorBody?) {
+                toast(error)
+            }
+
+        })
+
+
+    }
+
+    private fun addViewByItem(item: Model): View? {
+        var view = addPropertiesViews()
+        var et_key=view?.find<EditText>(R.id.et_key)
+        et_key?.setText(item.key)
+        var et_value=view?.find<EditText>(R.id.et_value)
+        et_value?.setText(item.value)
+        return view
+    }
+
     private fun addPropertiesViews(): View? {
         var view = activity.layoutInflater.inflate(R.layout.item_add_properties_view, null)
         view.find<ImageView>(R.id.iv_del).setOnClickListener {
@@ -94,6 +167,10 @@ class FG_AddDevices : FG_Base() {
         var value: String? = null
     }
 
+    class ModelBody{
+        var list:ArrayList<Model>?=null
+    }
+
     private fun postInfo() {
         if (TextUtils.isEmpty(et_name.text)) {
             toast("请输入名称")
@@ -104,8 +181,11 @@ class FG_AddDevices : FG_Base() {
             return
         }
 
-        if (Bitmaps.size == 0) {
-            toast("请至少添加一张图片")
+        if (bitmap == null) {
+            bitmap = userImg.drawingCache
+            if (bitmap == null){
+                toast("请至少添加一张图片")
+            }
             return
         }
 
@@ -139,35 +219,36 @@ class FG_AddDevices : FG_Base() {
 
 
         var gson = Gson()
+        var modelBody=ModelBody()
+        modelBody.list=list
         Utils_Dialog.showLoading(activity)
         var url = "user/sysSet/device/add.json"
         async {
             var map = TreeMap<String, String>()
             map.apply {
+                if (pageType == "1") {
+                    put("id", operatorId)
+                }
                 put("name", et_name.text.toString())
                 put("model", et_model.text.toString())
                 put("deviceAreaId", chooseAreaId)
                 put("deviceCateId", chooseCateId)
                 put("instrumentId", chooseInstrumentId)
-                put("propertiesJson", gson.toJson(list))
-                var photo2: String? = null
-                for (i in Bitmaps.indices) {
-                    val photo = Utils_Bitmap.bitmapToBase64(Bitmaps[i])
-                    if (i != 0) {
-                        photo2 = photo2 + "," + photo
-                    } else {
-                        photo2 = photo
-                    }
-                }
-                photo2?.let { put("photoFile", it) }
+                put("propertiesJson", gson.toJson(modelBody))
+                val photo = Utils_Bitmap.bitmapToBase64(bitmap)
+                photo?.let { put("photoFile", it) }
             }
 
             uiThread {
-                Http.post(activity,url,map,BaseBody::class.java,object :MyCallBack<BaseBody>{
+                Http.post(activity, url, map, BaseBody::class.java, object : MyCallBack<BaseBody> {
                     override fun onResponse(response: BaseBody?) {
                         Utils_Dialog.disMissLoading()
                         response?.let {
-                            toast("添加成功")
+                            if (pageType=="1"){
+                                toast("修改成功")
+                            }else{
+                                toast("添加成功")
+                            }
                             EventBus.getDefault().post(ET_SyStemSetting(ET_SyStemSetting.TASKID_REFRESH_IMPORTANT_DEVICE))
                             finish()
                         }
@@ -190,10 +271,6 @@ class FG_AddDevices : FG_Base() {
      * 最近一张照片Bitmap
      */
     private var bitmap: Bitmap? = null
-    /**
-     * 每次从本地传一张照片就添加一张
-     */
-    var Bitmaps: ArrayList<Bitmap> = ArrayList()
     private var tempFile: File? = null
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -207,11 +284,9 @@ class FG_AddDevices : FG_Base() {
                     // 获取到图片文件
                     bitmap = MediaStore.Images.Media.getBitmap(resolver, uri)
                     bitmap = BitmapUtils.compressImage(bitmap)
-                    bitmap?.let {
-                        Bitmaps.add(it)
-                        listAdapter?.notifyDataSetChanged()
-                    }
-
+                    userImg.setImageBitmap(bitmap)
+                    myLayout.visibility = View.VISIBLE
+                    relAddPhoto.visibility = View.GONE
 
                 } catch (e: FileNotFoundException) {
                     e.printStackTrace()
@@ -231,10 +306,9 @@ class FG_AddDevices : FG_Base() {
                     // 获取到图片文件
                     bitmap = MediaStore.Images.Media.getBitmap(resolver, uri)
                     bitmap = BitmapUtils.compressImage(bitmap)
-                    bitmap?.let {
-                        Bitmaps.add(it)
-                        listAdapter?.notifyDataSetChanged()
-                    }
+                    userImg.setImageBitmap(bitmap)
+                    myLayout.visibility = View.VISIBLE
+                    relAddPhoto.visibility = View.GONE
                 } catch (e: FileNotFoundException) {
                     e.printStackTrace()
                 } catch (e: IOException) {
@@ -273,9 +347,7 @@ class FG_AddDevices : FG_Base() {
     }
 
     private fun takeGalley() {
-        if (dialog != null) {
-            dialog!!.dismiss()
-        }
+        dialog?.dismiss()
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
         startActivityForResult(intent, PHOTO_REQUEST_GALLERY)

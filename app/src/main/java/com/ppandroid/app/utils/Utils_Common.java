@@ -4,6 +4,8 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.google.gson.Gson;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -16,6 +18,16 @@ import android.os.Environment;
  */
 
 public class Utils_Common {
+
+    public  static <T> T parseJson(String json,Class<T> tt){
+        Gson gson=new Gson();
+        try{
+            return gson.fromJson(json,tt);
+        }catch (Exception e){
+           e.printStackTrace();
+        }
+        return null;
+    }
 
     private static boolean deleteDir(File dir) {
         if (dir != null && dir.isDirectory()) {

@@ -57,7 +57,7 @@ class FG_AddEnergyCharging : FG_Base() {
         if (pageType == "1") {//修改计费
             head_view.setCenterTitle("修改计费")
             et_name.setText(code)
-            tv_choose_class.text=mapIdName[energyClassificationId]
+
         } else {
             head_view.setCenterTitle("新建计费")
         }
@@ -106,6 +106,7 @@ class FG_AddEnergyCharging : FG_Base() {
                         listMap.put(item.name, item.id)
                         mapIdName.put(item.id.toString(), item.name)
                     }
+                    tv_choose_class.text=mapIdName[energyClassificationId]
                 }
             }
 

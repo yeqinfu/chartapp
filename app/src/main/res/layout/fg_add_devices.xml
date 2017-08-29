@@ -103,26 +103,44 @@
 
             <!--添加图片-->
             <LinearLayout
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:background="@color/white"
                 android:orientation="horizontal"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp">
-                <!--选中图片-->
-                <com.ppandroid.app.widget.HorizontalListView
-                    android:id="@+id/horizontalListView1"
-                    android:layout_width="0dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1">
-                </com.ppandroid.app.widget.HorizontalListView>
+
+                <FrameLayout
+                    android:visibility="gone"
+                    android:id="@+id/myLayout"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp" >
+
+                    <ImageView
+                        android:id="@+id/userImg"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:scaleType="fitXY"
+                        />
+
+                    <ImageView
+                        android:id="@+id/deleteImg"
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:layout_gravity="top|right"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/delete_img3x" />
+                </FrameLayout>
+
                 <!--添加图片按钮-->
                 <ImageView
                     android:id="@+id/relAddPhoto"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:layout_marginLeft="15dp"
                     android:src="@drawable/add_pic"/>
+
+
             </LinearLayout>
             <View
                 android:background="@color/color_03"
