@@ -33,9 +33,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent">
             <TextView
+                android:id="@+id/tv_weekAverage"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:text="405684kwh"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"/>
             <TextView
@@ -51,9 +51,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent">
             <TextView
+                android:id="@+id/tv_weekSum"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:text="1217054kwh"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"/>
             <TextView
@@ -73,7 +73,7 @@
         android:layout_height="140dp">
         <com.ppandroid.app.widget.VerticalView
             android:id="@+id/vv_01"
-            app:topText="123"
+            app:topText="0"
             app:bottomText="一"
             app:realHeight="70"
             app:totalHeight="100"
@@ -82,7 +82,7 @@
             android:layout_height="match_parent"/>
         <com.ppandroid.app.widget.VerticalView
             android:id="@+id/vv_02"
-            app:topText="123"
+            app:topText="0"
             app:bottomText="二"
             app:realHeight="10"
             app:totalHeight="100"
@@ -91,7 +91,7 @@
             android:layout_height="match_parent"/>
         <com.ppandroid.app.widget.VerticalView
             android:id="@+id/vv_03"
-            app:topText="123"
+            app:topText="0"
             app:bottomText="三"
             app:realHeight="20"
             app:totalHeight="100"
@@ -100,7 +100,7 @@
             android:layout_height="match_parent"/>
         <com.ppandroid.app.widget.VerticalView
             android:id="@+id/vv_04"
-            app:topText="123"
+            app:topText="0"
             app:bottomText="四"
             app:realHeight="50"
             app:totalHeight="100"
@@ -109,7 +109,7 @@
             android:layout_height="match_parent"/>
         <com.ppandroid.app.widget.VerticalView
             android:id="@+id/vv_05"
-            app:topText="123"
+            app:topText="0"
             app:bottomText="五"
             app:realHeight="90"
             app:totalHeight="100"
@@ -118,7 +118,7 @@
             android:layout_height="match_parent"/>
         <com.ppandroid.app.widget.VerticalView
             android:id="@+id/vv_06"
-            app:topText="123"
+            app:topText="0"
             app:bottomText="六"
             app:realHeight="100"
             app:totalHeight="100"
@@ -127,7 +127,7 @@
             android:layout_height="match_parent"/>
         <com.ppandroid.app.widget.VerticalView
             android:id="@+id/vv_07"
-            app:topText="123"
+            app:topText="0"
             app:bottomText="日"
             app:realHeight="65"
             app:totalHeight="100"

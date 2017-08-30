@@ -44,6 +44,23 @@ public class VerticalView extends View implements Runnable{
     private float progress=0.0f;
     private int lineColor=Color.WHITE;
 
+    public float getTotalHeight() {
+        return totalHeight;
+    }
+
+    public void setTotalHeight(float totalHeight) {
+        this.totalHeight = totalHeight;
+    }
+
+    public float getRealHeight() {
+        return realHeight;
+    }
+
+    public void setRealHeight(float realHeight) {
+        this.realHeight = realHeight;
+        this.topStr=realHeight+"";
+    }
+
     public float getProgress() {
         return progress;
     }
@@ -59,16 +76,16 @@ public class VerticalView extends View implements Runnable{
     private void readAttributes(AttributeSet attrs) {
         if (attrs != null) {
             TypedArray attributes = getContext()
-                    .getTheme().obtainStyledAttributes(attrs, R.styleable.verticalview, 0, 0);
+                    .getTheme().obtainStyledAttributes(attrs, R.styleable.verticalview01, 0, 0);
             totalHeight = attributes
-                    .getFloat(R.styleable.verticalview_totalHeight, 0f);
+                    .getFloat(R.styleable.verticalview01_totalHeight, 0f);
             realHeight = attributes
-                    .getFloat(R.styleable.verticalview_realHeight, 0f);
+                    .getFloat(R.styleable.verticalview01_realHeight, 0f);
             topStr = attributes
-                    .getString(R.styleable.verticalview_topText);
+                    .getString(R.styleable.verticalview01_topText);
             bottomStr = attributes
-                    .getString(R.styleable.verticalview_bottomText);
-            lineColor=attributes.getColor(R.styleable.verticalview_lineColor,Color.WHITE);
+                    .getString(R.styleable.verticalview01_bottomText);
+            lineColor=attributes.getColor(R.styleable.verticalview01_lineColor2,Color.WHITE);
             attributes.recycle();
         }
     }

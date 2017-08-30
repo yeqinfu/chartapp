@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/color_05"
+              android:background="@color/color_03"
               android:orientation="vertical">
 
     <RelativeLayout
@@ -31,19 +31,18 @@
 
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="7dp"
-        android:background="@color/color_03"/>
+
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
+        android:paddingTop="7dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         >
 
         <ExpandableListView
+            android:background="@color/white"
             android:id="@+id/lv_ex"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

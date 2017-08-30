@@ -19,7 +19,9 @@ class FG_EnergyAnalysis :FG_Base(){
     override fun afterViews() {
         head_view.init(activity)
         head_view.setCenterTitle("能耗分析")
-        v_yellow_chart.startAnim()
+        head_view.setRightText("历史"){
+            startAC(FG_History::class.java.name)
+        }
         loadContent()
     }
     private fun loadContent(){
@@ -27,6 +29,8 @@ class FG_EnergyAnalysis :FG_Base(){
         Http.get(activity,url, BN_EnergyAnalysis::class.java,object :MyCallBack<BN_EnergyAnalysis>{
             override fun onResponse(response: BN_EnergyAnalysis?) {
                 response?.let {
+                    v_yellow_chart.setSumAndAverage(it.message.weekSum,it.message.weekAverage)
+                    v_yellow_chart.startAnim(it.message.deviceSumString)
 
                 }
             }

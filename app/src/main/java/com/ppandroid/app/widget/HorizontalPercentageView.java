@@ -38,8 +38,8 @@ public class HorizontalPercentageView extends GraphicalView implements Runnable 
     private void readAttributes(AttributeSet attrs) {
         if (attrs != null) {
             TypedArray attributes = getContext()
-                    .getTheme().obtainStyledAttributes(attrs, R.styleable.verticalview, 0, 0);
-            colorId=attributes.getColor(R.styleable.verticalview_lineColor,getResources().getColor(R.color.color_01));
+                    .getTheme().obtainStyledAttributes(attrs, R.styleable.verticalview01, 0, 0);
+            colorId=attributes.getColor(R.styleable.verticalview01_lineColor2,getResources().getColor(R.color.color_01));
             attributes.recycle();
         }
     }

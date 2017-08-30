@@ -7,16 +7,111 @@
 
     <include layout="@layout/layout_head_view"/>
 
-    <LinearLayout
-        android:layout_marginTop="0.5dp"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="20dp">
-        <include layout="@layout/yellowchartview"/>
-    </LinearLayout>
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_marginBottom="10dp"
+                android:paddingBottom="20dp"
+                android:layout_marginTop="0.5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="20dp">
+                <include layout="@layout/yellowchartview"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="90dp">
+                <TextView
+                    android:paddingLeft="25dp"
+                    android:drawableLeft="@drawable/ic_fxnh"
+                    android:textSize="@dimen/bar_title"
+                    android:textColor="@color/color_07"
+                    android:gravity="center"
+                    android:text="分项能耗结构"
+                    android:background="@color/white"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+                <TextView
+                    android:layout_marginLeft="0.5dp"
+                    android:paddingLeft="25dp"
+                    android:drawableLeft="@drawable/ic_qynh"
+                    android:textSize="@dimen/bar_title"
+                    android:textColor="@color/color_07"
+                    android:gravity="center"
+                    android:text="区域能耗结构"
+                    android:background="@color/white"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="0.5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="90dp">
+                <TextView
+                    android:paddingLeft="25dp"
+                    android:drawableLeft="@drawable/ic_fxnh"
+                    android:textSize="@dimen/bar_title"
+                    android:textColor="@color/color_07"
+                    android:gravity="center"
+                    android:text="分项能耗结构"
+                    android:background="@color/white"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+                <TextView
+                    android:layout_marginLeft="0.5dp"
+                    android:paddingLeft="25dp"
+                    android:drawableLeft="@drawable/ic_qynh"
+                    android:textSize="@dimen/bar_title"
+                    android:textColor="@color/color_07"
+                    android:gravity="center"
+                    android:text="区域能耗结构"
+                    android:background="@color/white"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:weightSum="2"
+                android:layout_marginTop="0.5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="90dp">
+                <TextView
+                    android:paddingLeft="25dp"
+                    android:drawableLeft="@drawable/ic_fxnh"
+                    android:textSize="@dimen/bar_title"
+                    android:textColor="@color/color_07"
+                    android:gravity="center"
+                    android:text="分项能耗结构"
+                    android:background="@color/white"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
 
 
 </LinearLayout>
