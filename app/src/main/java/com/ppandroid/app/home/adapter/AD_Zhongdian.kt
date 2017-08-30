@@ -1,6 +1,7 @@
 package com.ppandroid.app.home.adapter
 
 import android.app.Activity
+import android.graphics.Color
 import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
@@ -9,12 +10,15 @@ import android.widget.ListView
 import android.widget.TextView
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.overview.BN_OverView
+import com.ppandroid.app.utils.Utils_Common
+import com.ppandroid.app.widget.HorizontalPercentageView
 import org.jetbrains.anko.find
+import java.util.regex.Pattern
 
 /**
  * Created by yeqinfu on 2017/8/11.
  */
-class AD_Zhongdian(ac: Activity, list: List<BN_OverView.MessageBean.DeviceInformationListBean>): PagerAdapter(){
+class AD_Zhongdian(ac: Activity, list: List<BN_OverView.MessageBean.DeviceInformationListBean>) : PagerAdapter() {
     /**横条图viewpager*/
     var arrays_title = arrayOf(
             "今日",
@@ -23,14 +27,15 @@ class AD_Zhongdian(ac: Activity, list: List<BN_OverView.MessageBean.DeviceInform
 
     )
     var views = ArrayList<View>()// 将要分页显示的View装入数组中
-    var list: List<BN_OverView.MessageBean.DeviceInformationListBean>?=null
-    var ac: Activity?=null
+    var list: List<BN_OverView.MessageBean.DeviceInformationListBean>? = null
+    var ac: Activity? = null
+
     init {
-        this.ac=ac
-        this.list=list
+        this.ac = ac
+        this.list = list
         /**viewpager*/
         val lf = ac.layoutInflater
-        for (item in list){
+        for (item in list) {
             var view1 = lf.inflate(R.layout.item_zhongdian, null)
             views.add(view1)
         }
@@ -63,41 +68,73 @@ class AD_Zhongdian(ac: Activity, list: List<BN_OverView.MessageBean.DeviceInform
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         container.addView(views[position])
 
-        var lv_list=views[position].find<ListView>(R.id.lv_list)
+        var lv_list = views[position].find<ListView>(R.id.lv_list)
         ac?.let {
-            var adapter=AD_List(it, list?.get(position)?.deviceKwhMapList)
-            lv_list.adapter=adapter
+            var adapter = AD_List(it, list?.get(position)?.deviceKwhMapList)
+            lv_list.adapter = adapter
         }
         return views[position]
     }
-    class Holder{
-        var tv_key: TextView?=null
-        var tv_value: TextView?=null
 
+    class Holder {
+        var tv_key: TextView? = null
+        var tv_value: TextView? = null
+        var v_hp: HorizontalPercentageView? = null
     }
+
     class AD_List(ac: Activity, instrumentMapList: List<BN_OverView.MessageBean.DeviceInformationListBean.DeviceKwhMapListBean>?) : BaseAdapter() {
+
+
+        var colors = arrayOf(
+                "#FA6D6F",
+                "#FE8D25",
+                "#FFB338",
+                "#6CC37E",
+                "#2ED9A4"
+                )
         private var ac: Activity
-        internal var instrumentMapList: List<BN_OverView.MessageBean.DeviceInformationListBean.DeviceKwhMapListBean>?=null
+        internal var instrumentMapList: List<BN_OverView.MessageBean.DeviceInformationListBean.DeviceKwhMapListBean>? = null
+
+
+        private var max: Double = 0.0
+
         init {
-            this.ac=ac
-            this.instrumentMapList=instrumentMapList
+            this.ac = ac
+            this.instrumentMapList = instrumentMapList
         }
+
         override fun getView(p0: Int, v: View?, p2: ViewGroup?): View? {
-            var layout: View?=null
-            var holder:Holder?=null
-            if (v!=null){
-                layout=v
-                holder= v.tag as Holder?
-            }else{
-                layout=ac.layoutInflater.inflate(R.layout.item_zhongdian_listview_item,null)
-                holder= Holder()
-                holder.tv_key=layout.find(R.id.tv_key)
-                holder.tv_value=layout.find(R.id.tv_value)
-                layout.tag=holder
+            var layout: View? = null
+            var holder: Holder? = null
+            if (v != null) {
+                layout = v
+                holder = v.tag as Holder?
+            } else {
+                layout = ac.layoutInflater.inflate(R.layout.item_zhongdian_listview_item, null)
+                holder = Holder()
+                holder.tv_key = layout.find(R.id.tv_key)
+                holder.tv_value = layout.find(R.id.tv_value)
+                holder.v_hp = layout.find(R.id.v_hp)
+                layout.tag = holder
             }
             holder?.let {
-                it.tv_key?.text= instrumentMapList?.get(p0)?.key?:""
-                it.tv_value?.text= instrumentMapList?.get(p0)?.value?:""
+                it.tv_key?.text = instrumentMapList?.get(p0)?.key ?: ""
+                it.tv_value?.text = instrumentMapList?.get(p0)?.value ?: ""
+
+
+                val regEx = "kwh$|万kwh$"
+                val p = Pattern.compile(regEx)
+                val m = p.matcher(instrumentMapList?.get(p0)?.value ?: "")
+                var value = m.replaceAll("")
+                if (p0 == 0) {
+                    max = Utils_Common.paraseDouble(value) * 1.2
+                }
+
+
+                holder?.v_hp?.percentage = (Utils_Common.paraseDouble(value) / max).toFloat()
+                holder?.v_hp?.colorId = Color.parseColor(colors[p0%colors.size])
+                holder?.v_hp?.startAnim()
+
 
             }
             return layout
@@ -112,7 +149,7 @@ class AD_Zhongdian(ac: Activity, list: List<BN_OverView.MessageBean.DeviceInform
         }
 
         override fun getCount(): Int {
-            return instrumentMapList?.size?:0
+            return instrumentMapList?.size ?: 0
         }
 
     }

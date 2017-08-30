@@ -60,7 +60,7 @@ public class HorizontalPercentageView extends GraphicalView implements Runnable 
     }
 
     private float strokeSize;
-    private float percentage=0.5f;
+    private float percentage=0.1f;
     private float currentPercentage=percentage;
 
     public float getCurrentPercentage() {
@@ -77,6 +77,7 @@ public class HorizontalPercentageView extends GraphicalView implements Runnable 
 
     public void setPercentage(float percentage) {
         this.percentage = percentage;
+
     }
 
     private Paint getPaint() {
@@ -105,6 +106,7 @@ public class HorizontalPercentageView extends GraphicalView implements Runnable 
         canvas.drawLine(strokeSize,strokeSize,getWidth()-strokeSize,strokeSize,p);
         p.setAlpha(255);
         //value
+
         canvas.drawLine(strokeSize,strokeSize,(getWidth()-strokeSize)*currentPercentage,strokeSize,p);
         //split
         Paint split=new Paint();
@@ -135,7 +137,7 @@ public class HorizontalPercentageView extends GraphicalView implements Runnable 
     }
 
     private void chartAnimation(){
-        for (int i=1;i<=100;i++){
+        for (int i=1;i<=percentage*100;i++){
             try {
                 Thread.sleep(5);
                 setCurrentPercentage((float) i/100);

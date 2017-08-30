@@ -18,6 +18,16 @@ import android.os.Environment;
  */
 
 public class Utils_Common {
+    public static double paraseDouble(String s){
+        double result=0.0;
+        try {
+            result=Double.parseDouble(s);
+            return result;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     public  static <T> T parseJson(String json,Class<T> tt){
         Gson gson=new Gson();
