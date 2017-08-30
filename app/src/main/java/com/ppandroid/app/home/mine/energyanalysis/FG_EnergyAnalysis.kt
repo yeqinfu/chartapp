@@ -6,6 +6,7 @@ import com.ppandroid.app.bean.mine.energyanalysis.BN_EnergyAnalysis
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.im.base.FG_Base
+import kotlinx.android.synthetic.main.fg_energy_analysis.*
 import kotlinx.android.synthetic.main.layout_head_view.*
 import kotlinx.android.synthetic.main.yellowchartview.*
 
@@ -21,6 +22,9 @@ class FG_EnergyAnalysis :FG_Base(){
         head_view.setCenterTitle("能耗分析")
         head_view.setRightText("历史"){
             startAC(FG_History::class.java.name)
+        }
+        tv_cate.setOnClickListener {
+            startAC(FG_DeviceCateAnalysis::class.java.name)
         }
         loadContent()
     }

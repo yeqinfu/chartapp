@@ -32,6 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="90dp">
                 <TextView
+                    android:id="@+id/tv_cate"
                     android:paddingLeft="25dp"
                     android:drawableLeft="@drawable/ic_fxnh"
                     android:textSize="@dimen/bar_title"
@@ -64,11 +65,11 @@
                 android:layout_height="90dp">
                 <TextView
                     android:paddingLeft="25dp"
-                    android:drawableLeft="@drawable/ic_fxnh"
+                    android:drawableLeft="@drawable/ic_zdsb"
                     android:textSize="@dimen/bar_title"
                     android:textColor="@color/color_07"
                     android:gravity="center"
-                    android:text="分项能耗结构"
+                    android:text="重点设备能耗结构"
                     android:background="@color/white"
                     android:layout_weight="1"
                     android:layout_width="0dp"
@@ -76,11 +77,11 @@
                 <TextView
                     android:layout_marginLeft="0.5dp"
                     android:paddingLeft="25dp"
-                    android:drawableLeft="@drawable/ic_qynh"
+                    android:drawableLeft="@drawable/ic_nh"
                     android:textSize="@dimen/bar_title"
                     android:textColor="@color/color_07"
                     android:gravity="center"
-                    android:text="区域能耗结构"
+                    android:text="能耗对比"
                     android:background="@color/white"
                     android:layout_weight="1"
                     android:layout_width="0dp"
@@ -95,11 +96,11 @@
                 android:layout_height="90dp">
                 <TextView
                     android:paddingLeft="25dp"
-                    android:drawableLeft="@drawable/ic_fxnh"
+                    android:drawableLeft="@drawable/ic_ybnh"
                     android:textSize="@dimen/bar_title"
                     android:textColor="@color/color_07"
                     android:gravity="center"
-                    android:text="分项能耗结构"
+                    android:text="仪表能耗结构"
                     android:background="@color/white"
                     android:layout_weight="1"
                     android:layout_width="0dp"
