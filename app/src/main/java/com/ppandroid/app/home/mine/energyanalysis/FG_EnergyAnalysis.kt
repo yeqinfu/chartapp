@@ -26,6 +26,9 @@ class FG_EnergyAnalysis :FG_Base(){
         tv_cate.setOnClickListener {
             startAC(FG_CateAnalysis::class.java.name)
         }
+        tv_area.setOnClickListener {
+            startAC(FG_AreaAnalysis::class.java.name)
+        }
         loadContent()
     }
     private fun loadContent(){

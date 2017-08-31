@@ -10,7 +10,7 @@
         android:orientation="vertical"
         android:layout_weight="1"
         android:layout_width="0dp"
-        android:layout_height="match_parent">
+        android:layout_height="50dp">
 
         <LinearLayout
             android:paddingLeft="12dp"
@@ -56,11 +56,15 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
-    <Button
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="12dp"
+        android:padding="5dp"
         android:id="@+id/btn_next"
+        android:textColor="@color/color_06"
         android:text="分级"
-        android:background="@null"
-        android:layout_width="50dp"
+        android:background="@drawable/shape_stroke_color06_corner_4dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
 

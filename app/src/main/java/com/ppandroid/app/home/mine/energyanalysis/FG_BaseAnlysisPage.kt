@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.Button
 import android.widget.TextView
 import com.bruce.pickerview.popwindow.DatePickerPopWin
 import com.ppandroid.app.R
@@ -25,22 +24,33 @@ abstract class FG_BaseAnlysisPage : FG_Base() {
             b.putInt("index", index)
             return b
         }
+        fun createBundle(index: Int,parentId:String): Bundle {
+            var b = createBundle(index)
+            b.putString("parentId",parentId)
+            return b
+        }
     }
 
     override fun fgRes(): Int = R.layout.fg_base_analysis_page
     //0 日 1 月 2 年 3 总
     protected var index: Int = 0
+    protected var parentId="-1"
 
     override fun afterViews() {
         arguments?.let {
             index = it.getInt("index", 0)
+            parentId=it.getString("parentId","-1")
         }
         val c = Calendar.getInstance()
-        val initDate = c.get(Calendar.YEAR).toString() + "-" + (format(c.get(Calendar.MONTH) + 1)) + "-" + format(c.get(Calendar.DAY_OF_MONTH))
         if (index == 3) {//总
             tv_time.text = c.get(Calendar.YEAR).toString() + "-" + c.get(Calendar.YEAR).toString() + "年"
             select = c.get(Calendar.YEAR).toString()
         } else {
+            var initDate = when (index) {
+                0 -> c.get(Calendar.YEAR).toString() + "-" + (format(c.get(Calendar.MONTH) + 1)) + "-" + format(c.get(Calendar.DAY_OF_MONTH))
+                1 -> c.get(Calendar.YEAR).toString() + "-" + (format(c.get(Calendar.MONTH) + 1))
+                else -> c.get(Calendar.YEAR).toString()
+            }
             tv_time.text = initDate
             select = initDate
             tv_time.setOnClickListener {
@@ -103,8 +113,8 @@ abstract class FG_BaseAnlysisPage : FG_Base() {
     }
 
     private fun format(month: Int): String {
-        if (month<10){
-            return "0"+month
+        if (month < 10) {
+            return "0" + month
         }
         return month.toString()
     }
@@ -112,45 +122,64 @@ abstract class FG_BaseAnlysisPage : FG_Base() {
     abstract fun loadContent()
 
 
-    private  var isHaveChild=true
+    private var isHaveChild = true
 
-    class Model{
-        var name=""
-        var ratio=""
-        var kmh=""
-        var value=0.0f
+    class Model {
+        var name = ""
+        var ratio = ""
+        var kmh = ""
+        var value = 0.0f
+        var isLeaf = false
     }
 
-    protected class AD_List(ac: Activity,list:List<Model>,isHaveChild:Boolean):BaseAdapter(){
-        private var ac=ac
-        private var list=list
-        private  var isHaveChild=isHaveChild
+    protected class AD_List(ac: Activity, list: List<Model>, isHaveChild: Boolean) : BaseAdapter() {
+        private var ac = ac
+        private var list = list
+        private var isHaveChild = isHaveChild
 
         override fun getView(pos: Int, p1: View?, p2: ViewGroup?): View {
-            var layout=ac.layoutInflater.inflate(R.layout.item_base_anlysis_page,null)
-            var btn_next=layout.find<Button>(R.id.btn_next)
-            if (isHaveChild){
-                btn_next.visibility=View.VISIBLE
-            }else{
-                btn_next.visibility=View.GONE
+            var layout = ac.layoutInflater.inflate(R.layout.item_base_anlysis_page, null)
+            var btn_next = layout.find<TextView>(R.id.btn_next)
+            if (isHaveChild) {
+                btn_next.visibility = View.VISIBLE
+            } else {
+                btn_next.visibility = View.GONE
             }
 
-            var tv_name=layout.find<TextView>(R.id.tv_name)
-            tv_name.text=list[pos].name
-            var tv_ratio=layout.find<TextView>(R.id.tv_ratio)
-            tv_ratio.text=list[pos].ratio
-            var tv_kmh=layout.find<TextView>(R.id.tv_kmh)
-            tv_kmh.text=list[pos].kmh
+            var tv_name = layout.find<TextView>(R.id.tv_name)
+            tv_name.text = list[pos].name
+            var tv_ratio = layout.find<TextView>(R.id.tv_ratio)
+            tv_ratio.text = list[pos].ratio
+            var tv_kmh = layout.find<TextView>(R.id.tv_kmh)
+            tv_kmh.text = list[pos].kmh
 
+            if (list[pos].isLeaf) {//子节点
+                btn_next.setBackgroundResource(R.drawable.shape_stroke_color06_corner_4dp)
+                btn_next.setTextColor(ac.resources.getColor(R.color.color_06))
+
+            } else {//支节点
+                btn_next.setBackgroundResource(R.drawable.shape_stroke_color01_corner_4dp)
+                btn_next.setTextColor(ac.resources.getColor(R.color.color_01))
+                btn_next.setOnClickListener {
+                    listener?.choose(pos)
+                }
+            }
             return layout
         }
 
-        override fun getItem(p0: Int): Any=list[p0]
+        var listener: ItemChoosseListener? = null
 
-        override fun getItemId(p0: Int): Long=p0.toLong()
 
-        override fun getCount(): Int=list.size
+        override fun getItem(p0: Int): Any = list[p0]
 
+        override fun getItemId(p0: Int): Long = p0.toLong()
+
+        override fun getCount(): Int = list.size
+
+    }
+
+    interface ItemChoosseListener {
+        fun choose(index: Int)
     }
 
 

@@ -1,6 +1,7 @@
 package com.ppandroid.app.home.mine.energyanalysis
 
 import android.graphics.Typeface
+import android.os.Bundle
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import com.ppandroid.app.R
@@ -12,10 +13,21 @@ import kotlinx.android.synthetic.main.layout_head_view.*
  * Cread by yeqinfu on 2017/8/31.
  */
 open abstract class FG_BaseAnalysis :FG_Base(){
-
+    protected var parentId="-1"
+    companion object {
+        fun createBundle(parentId:String): Bundle {
+            var b =Bundle()
+            b.putString("parentId",parentId)
+            return b
+        }
+    }
     override fun fgRes(): Int= R.layout.fg_base_analysis
 
     override fun afterViews() {
+        arguments?.let {
+            parentId=it.getString("parentId","-1")
+        }
+        init()
         head_view.init(activity)
         head_view.setCenterTitle(getTitle())
         var adapter =getAdapter()
@@ -40,6 +52,8 @@ open abstract class FG_BaseAnalysis :FG_Base(){
 
         })
     }
+
+    abstract fun init()
 
     abstract fun getAdapter(): PagerAdapter
 

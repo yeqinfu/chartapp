@@ -44,6 +44,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"/>
                 <TextView
+                    android:id="@+id/tv_area"
                     android:layout_marginLeft="0.5dp"
                     android:paddingLeft="25dp"
                     android:drawableLeft="@drawable/ic_qynh"
