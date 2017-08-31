@@ -16,11 +16,12 @@ class FG_InstrumentPage : FG_BaseAnlysisPage(){
         if (parentId!="-1"){
             url+="&parentId=$parentId"
         }
+        isHaveChild=false
         Http.get(activity, url, BN_InstrumentPage::class.java, object : MyCallBack<BN_InstrumentPage> {
             override fun onResponse(response: BN_InstrumentPage?) {
                 response?.let {
                     tv_totalKwh.text = it.message.analysisDeviceSum
-                    var adapter = AD_List(activity, getList(it), true)
+                    var adapter = AD_List(activity, getList(it), isHaveChild)
                     v_dount_view.startAnim()
                     lv_list.adapter = adapter
                 }

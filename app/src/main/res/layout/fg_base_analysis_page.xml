@@ -102,10 +102,15 @@
                 android:textColor="@color/color_04"
                 android:textSize="@dimen/sub_title"/>
 
-            <View
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="12dp"
+                android:padding="5dp"
                 android:id="@+id/v_holder"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"/>
+                android:textColor="@color/color_06"
+                android:text="       "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 

@@ -25,9 +25,10 @@ abstract class FG_BaseAnlysisPage : FG_Base() {
             b.putInt("index", index)
             return b
         }
-        fun createBundle(index: Int,parentId:String): Bundle {
+
+        fun createBundle(index: Int, parentId: String): Bundle {
             var b = createBundle(index)
-            b.putString("parentId",parentId)
+            b.putString("parentId", parentId)
             return b
         }
     }
@@ -35,13 +36,13 @@ abstract class FG_BaseAnlysisPage : FG_Base() {
     override fun fgRes(): Int = R.layout.fg_base_analysis_page
     //0 日 1 月 2 年 3 总
     protected var index: Int = 0
-    protected var parentId="-1"
+    protected var parentId = "-1"
 
     override fun afterViews() {
         arguments?.let {
             index = it.getInt("index", 0)
-            parentId=it.getString("parentId","-1")
-            DebugLog.d("yeqinfu","------FG_BaseAnlysisPage--->"+parentId)
+            parentId = it.getString("parentId", "-1")
+            DebugLog.d("yeqinfu", "------FG_BaseAnlysisPage--->" + parentId)
         }
         val c = Calendar.getInstance()
         if (index == 3) {//总
@@ -125,6 +126,15 @@ abstract class FG_BaseAnlysisPage : FG_Base() {
 
 
     protected var isHaveChild = true
+        set(value) {
+            field = value
+            if (value){
+                v_holder.visibility=View.VISIBLE
+            }else{
+                v_holder.visibility=View.GONE
+            }
+
+        }
 
     class Model {
         var name = ""
