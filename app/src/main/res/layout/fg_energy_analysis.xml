@@ -97,6 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="90dp">
                 <TextView
+                    android:id="@+id/tv_instrument"
                     android:paddingLeft="25dp"
                     android:drawableLeft="@drawable/ic_ybnh"
                     android:textSize="@dimen/bar_title"

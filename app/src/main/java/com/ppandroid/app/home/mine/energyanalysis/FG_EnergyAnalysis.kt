@@ -32,6 +32,9 @@ class FG_EnergyAnalysis :FG_Base(){
         tv_devices.setOnClickListener {
             startAC(FG_DeviceAnalysis::class.java.name)
         }
+        tv_instrument.setOnClickListener {
+            startAC(FG_InstrumentAnalysis::class.java.name)
+        }
         loadContent()
     }
     private fun loadContent(){
