@@ -65,6 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="90dp">
                 <TextView
+                    android:id="@+id/tv_devices"
                     android:paddingLeft="25dp"
                     android:drawableLeft="@drawable/ic_zdsb"
                     android:textSize="@dimen/bar_title"

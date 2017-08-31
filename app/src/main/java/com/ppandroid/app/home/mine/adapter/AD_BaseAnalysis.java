@@ -22,7 +22,6 @@ public abstract class AD_BaseAnalysis extends FragmentStatePagerAdapter {
 	public AD_BaseAnalysis(Activity ac, FragmentManager fm) {
 		super(fm);
 		mContext = ac;
-		initFragment();
 	}
 
 	@Override

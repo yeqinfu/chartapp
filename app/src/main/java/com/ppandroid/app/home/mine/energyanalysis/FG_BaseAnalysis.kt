@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import com.ppandroid.app.R
+import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_base_analysis.*
 import kotlinx.android.synthetic.main.layout_head_view.*
@@ -26,6 +27,7 @@ open abstract class FG_BaseAnalysis :FG_Base(){
     override fun afterViews() {
         arguments?.let {
             parentId=it.getString("parentId","-1")
+            DebugLog.d("yeqinfu","---FG_BaseAnalysis afterViews------>"+parentId)
         }
         init()
         head_view.init(activity)

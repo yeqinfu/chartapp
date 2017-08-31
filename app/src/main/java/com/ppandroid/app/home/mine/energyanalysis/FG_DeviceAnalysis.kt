@@ -8,17 +8,19 @@ import com.ppandroid.app.home.mine.adapter.AD_BaseAnalysis
 
 /**
  * Created by yeqinfu on 2017/8/31.
- * 区域用电
+ * 设备用电
  */
-class FG_AreaAnalysis : FG_BaseAnalysis(){
+class FG_DeviceAnalysis : FG_BaseAnalysis(){
 
     override fun init() {
 
     }
 
-    override fun getAdapter(): PagerAdapter =AD_Cate(activity,childFragmentManager,parentId)
+    override fun getAdapter(): PagerAdapter {
+        return AD_Cate(activity,childFragmentManager,parentId)
+    }
 
-    override fun getTitle(): String="区域用电"
+    override fun getTitle(): String="设备用电"
 
     class AD_Cate(ac: Activity, fm: FragmentManager, parentId:String) : AD_BaseAnalysis(ac,fm){
         var parentId:String?=null
@@ -27,11 +29,11 @@ class FG_AreaAnalysis : FG_BaseAnalysis(){
             initFragment()
         }
         override fun getBundle(index:Int): Bundle {
-            return FG_BaseAnlysisPage.createBundle(index, parentId?:"-1")
+            return FG_BaseAnlysisPage.createBundle(index, parentId ?: "-1")
 
         }
         override fun getContentFragment(): FG_BaseAnlysisPage {
-            return FG_AreaPage()
+            return FG_DevicesPage()
         }
     }
 

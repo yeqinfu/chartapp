@@ -16,18 +16,20 @@ class FG_CateAnalysis:FG_BaseAnalysis(){
 
     }
 
-    override fun getAdapter(): PagerAdapter=AD_Cate(activity,childFragmentManager,parentId)
+    override fun getAdapter(): PagerAdapter{
+        return AD_Cate(activity,childFragmentManager,parentId)
+    }
 
     override fun getTitle(): String="分项用电"
 
     class AD_Cate(ac: Activity,  fm: FragmentManager,parentId:String) :AD_BaseAnalysis(ac,fm){
-        var parentId=parentId
+        var parentId:String?=null
+        init {
+            this.parentId=parentId
+            initFragment()
+        }
         override fun getBundle(index:Int): Bundle {
-            if (parentId==null){
-                //TODO 奇怪，不应该null的
-                parentId="-1"
-            }
-            return FG_BaseAnlysisPage.createBundle(index,parentId)
+            return FG_BaseAnlysisPage.createBundle(index,parentId?:"-1")
 
         }
         override fun getContentFragment(): FG_BaseAnlysisPage {

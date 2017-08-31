@@ -9,6 +9,7 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import com.bruce.pickerview.popwindow.DatePickerPopWin
 import com.ppandroid.app.R
+import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_base_analysis_page.*
 import org.jetbrains.anko.find
@@ -40,6 +41,7 @@ abstract class FG_BaseAnlysisPage : FG_Base() {
         arguments?.let {
             index = it.getInt("index", 0)
             parentId=it.getString("parentId","-1")
+            DebugLog.d("yeqinfu","------FG_BaseAnlysisPage--->"+parentId)
         }
         val c = Calendar.getInstance()
         if (index == 3) {//总
@@ -122,7 +124,7 @@ abstract class FG_BaseAnlysisPage : FG_Base() {
     abstract fun loadContent()
 
 
-    private var isHaveChild = true
+    protected var isHaveChild = true
 
     class Model {
         var name = ""
