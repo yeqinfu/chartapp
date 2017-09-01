@@ -11,10 +11,12 @@
         android:id="@+id/tv_back"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginLeft="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="2dp"
         android:drawableLeft="@drawable/back_white"
         android:drawablePadding="3dp"
         android:gravity="center_vertical"
+        android:background="@drawable/selecter_back"
         android:text="返回"
         android:textColor="@color/white"/>
 
