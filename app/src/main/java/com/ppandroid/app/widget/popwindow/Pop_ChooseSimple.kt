@@ -32,6 +32,7 @@ class Pop_ChooseSimple(context: Activity, data:ArrayList<String>): BasePopupWind
         var tv_save=popupWindowView.find<TextView>(R.id.tv_save)
         var tv_cancel=popupWindowView.find<TextView>(R.id.tv_cancel)
         var lv_view=popupWindowView.find<LoopView>(R.id.lv_view)
+        lv_view.setNotLoop()
         lv_view.setArrayList(data)
 
         tv_cancel.setOnClickListener {

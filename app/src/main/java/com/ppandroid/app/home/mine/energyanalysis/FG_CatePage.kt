@@ -20,7 +20,8 @@ class FG_CatePage :FG_BaseAnlysisPage(){
             override fun onResponse(response: BN_CatePage?) {
                 response?.let {
                     tv_totalKwh.text=it.message.analysisCateSum
-                    var adapter=AD_List(activity,getList(it),isHaveChild)
+                    var k=getList(it)
+                    var adapter=AD_List(activity,k,isHaveChild)
                     v_dount_view.startAnim()
                     adapter.listener=object :ItemChoosseListener{
                         override fun choose(index: Int) {
@@ -29,6 +30,8 @@ class FG_CatePage :FG_BaseAnlysisPage(){
                         }
                     }
                     lv_list.adapter=adapter
+
+                    v_dount_view.charRender(getValues(k))
                 }
             }
 

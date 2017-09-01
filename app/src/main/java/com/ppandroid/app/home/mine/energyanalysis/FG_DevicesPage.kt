@@ -21,9 +21,11 @@ class FG_DevicesPage : FG_BaseAnlysisPage(){
             override fun onResponse(response: BN_DevicePage?) {
                 response?.let {
                     tv_totalKwh.text = it.message.analysisDeviceSum
-                    var adapter = AD_List(activity, getList(it), isHaveChild)
+                    var k=getList(it)
+                    var adapter = AD_List(activity, k, isHaveChild)
                     v_dount_view.startAnim()
                     lv_list.adapter = adapter
+                    v_dount_view.charRender(getValues(k))
                 }
             }
 

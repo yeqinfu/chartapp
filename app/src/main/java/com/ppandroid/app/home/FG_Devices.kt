@@ -5,8 +5,8 @@ import com.ppandroid.app.R
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.devices.BN_Devices
 import com.ppandroid.app.home.adapter.AD_ExList
-import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.http.Http
+import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_devices.*
 
@@ -46,6 +46,9 @@ class FG_Devices : FG_Base() {
                         val animator = ObjectAnimator.ofFloat(iv_setting, "rotation", 0f, 180f)
                         animator.duration = (500)
                         animator.start()
+                    }
+                    for (i in 0 until adapter.groupCount) {
+                        lv_ex.expandGroup(i)
                     }
                 }
 

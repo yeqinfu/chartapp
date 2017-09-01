@@ -12,6 +12,8 @@ import com.ppandroid.app.R
 import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.widget.HorizontalPercentageView
+import com.ppandroid.app.widget.graphical.chart.PieData
+import com.ppandroid.app.widget.graphical.render.XEnum
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_base_analysis_page.*
 import org.jetbrains.anko.find
@@ -41,6 +43,7 @@ abstract class FG_BaseAnlysisPage : FG_Base() {
     protected var parentId = "-1"
 
     override fun afterViews() {
+        v_dount_view.setLabelStyle(XEnum.SliceLabelStyle.INSIDE)
         arguments?.let {
             index = it.getInt("index", 0)
             parentId = it.getString("parentId", "-1")
@@ -146,11 +149,37 @@ abstract class FG_BaseAnlysisPage : FG_Base() {
         var isLeaf = false
     }
 
+    var colors = arrayOf(
+            "#FA6D6F",
+            "#FE8D25",
+            "#FFB338",
+            "#6CC37E",
+            "#2ED9A4"
+    )
+
+
+    protected fun getValues(source: List<Model>): List<PieData>? {
+        var list = ArrayList<PieData>()
+        for ((i, item) in source.withIndex()){
+            var value=Utils_Common.paraseDouble(Utils_Common.findNumberFromStr(item.ratio))
+            var p=PieData(item.name,value.toString(),value,Color.parseColor(colors[i%colors.size]))
+            list.add(p)
+        }
+        return list
+    }
+
+
     protected class AD_List(ac: Activity, list: List<Model>, isHaveChild: Boolean) : BaseAdapter() {
         private var ac = ac
         private var list = list
         private var isHaveChild = isHaveChild
-
+        var colors = arrayOf(
+                "#FA6D6F",
+                "#FE8D25",
+                "#FFB338",
+                "#6CC37E",
+                "#2ED9A4"
+        )
         override fun getView(pos: Int, p1: View?, p2: ViewGroup?): View {
             var layout = ac.layoutInflater.inflate(R.layout.item_base_anlysis_page, null)
             var btn_next = layout.find<TextView>(R.id.btn_next)
@@ -184,6 +213,7 @@ abstract class FG_BaseAnlysisPage : FG_Base() {
             var v_hp=layout.find<HorizontalPercentageView>(R.id.v_hp)
             v_hp.percentage= f.toFloat()/100f
             v_hp.startAnim()
+            v_hp.colorId=Color.parseColor(colors[pos%colors.size])
 
 
             return layout

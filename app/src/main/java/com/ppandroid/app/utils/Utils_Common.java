@@ -3,6 +3,8 @@ package com.ppandroid.app.utils;
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.google.gson.Gson;
 
@@ -18,6 +20,12 @@ import android.os.Environment;
  */
 
 public class Utils_Common {
+    public static String findNumberFromStr(String s){
+        String regEx="[^0-9]";
+        Pattern p = Pattern.compile(regEx);
+        Matcher m = p.matcher(s);
+        return m.replaceAll("").trim();
+    }
     public static double paraseDouble(String s){
         double result=0.0;
         try {

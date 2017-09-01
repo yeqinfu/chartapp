@@ -39,6 +39,7 @@ import com.ppandroid.app.widget.graphical.render.info.PlotLegend;
 import com.ppandroid.app.widget.graphical.view.DemoView;
 
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @ClassName DountChart01View
@@ -55,7 +56,6 @@ public class DountChart01View extends DemoView implements Runnable{
 
 	public DountChart01View(Context context) {
 		super(context);
-		// TODO Auto-generated constructor stub
 		initView();
 	}
 
@@ -87,6 +87,11 @@ public class DountChart01View extends DemoView implements Runnable{
 		chart.setChartRange(w, h);
 	}
 
+	public void charRender(List<PieData> list){
+        lPieData.clear();
+        lPieData.addAll(list);
+        chartRender();
+    }
 	private void chartRender() {
 		try {
 			//设置绘图区默认缩进px值
@@ -100,8 +105,8 @@ public class DountChart01View extends DemoView implements Runnable{
 		/*	chart.setCenterText("新品太多!!!");
 			chart.getCenterTextPaint().setColor(Color.rgb(242, 167, 69));*/
 
-			//标签显示(隐藏，显示在中间，显示在扇区外面) 
-			chart.setLabelStyle(XEnum.SliceLabelStyle.HIDE);
+			//标签显示(隐藏，显示在中间，显示在扇区外面)
+			chart.setLabelStyle(getLaybelSyle());
 			chart.getLabelPaint().setColor(Color.WHITE);
 
 			//标题
@@ -145,8 +150,18 @@ public class DountChart01View extends DemoView implements Runnable{
 			Log.e(TAG, e.toString());
 		}
 	}
+    XEnum.SliceLabelStyle labelStyle=XEnum.SliceLabelStyle.HIDE;
 
-	private void addAttrInfo() {
+    public void setLabelStyle(XEnum.SliceLabelStyle labelStyle) {
+        this.labelStyle = labelStyle;
+    }
+
+    private XEnum.SliceLabelStyle getLaybelSyle() {
+
+        return labelStyle;
+    }
+
+    private void addAttrInfo() {
 		/////////////////////////////////////////////////////////////
 		//设置附加信息
 		Paint paintTB = new Paint();
@@ -174,12 +189,7 @@ public class DountChart01View extends DemoView implements Runnable{
 	private void chartDataSet() {
 		//设置图表数据源				
 		//PieData(标签，百分比，在饼图中对应的颜色) #F76D6D #FF8D25 #FFB33B
-		lPieData.add(new PieData("Solaris", "90%", 89.4, Color.rgb(247, 109, 109)));
-		lPieData.add(new PieData("split", "1%", 0.2, Color.WHITE));
-		lPieData.add(new PieData("Aix", "7%", 7, Color.rgb(255, 141, 25)));
-        lPieData.add(new PieData("split", "1%", 0.2, Color.WHITE));
-		lPieData.add(new PieData("HP-UX", "3%", 3, Color.rgb(255, 179, 59)));
-        lPieData.add(new PieData("split", "1%", 0.2, Color.WHITE));
+		lPieData.add(new PieData("", "100%", 100, Color.parseColor("#FF6308")));
 	}
 
 	@Override

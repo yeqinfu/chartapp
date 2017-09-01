@@ -1,32 +1,37 @@
 package com.ppandroid.app.home.adapter
 
 import android.app.Activity
+import android.graphics.Color
 import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.overview.BN_OverView.MessageBean.OverviewConsumptionInformationBean.ClassificationInformationListBean
+import com.ppandroid.app.utils.DebugLog
+import com.ppandroid.app.utils.Utils_Common
+import com.ppandroid.app.widget.graphical.chart.PieData
+import com.ppandroid.app.widget.graphical.demoview.DountChart01View
 import org.jetbrains.anko.find
 
 /**
  * Created by yeqinfu on 2017/8/11.
  */
-class AD_Energy(ac: Activity, list: List<ClassificationInformationListBean>): PagerAdapter(){
+class AD_Energy(ac: Activity, list: List<ClassificationInformationListBean>) : PagerAdapter() {
     var views = ArrayList<View>()// 将要分页显示的View装入数组中
-    var list: List<ClassificationInformationListBean>?=null
-    var ac:Activity?=null
+    var list: List<ClassificationInformationListBean>? = null
+    var ac: Activity? = null
+
     init {
-        this.ac=ac
-        this.list=list
+        this.ac = ac
+        this.list = list
         /**饼图viewpager*/
         val lf = ac.layoutInflater
-        for (item in list){
+        for (item in list) {
             var view1 = lf.inflate(R.layout.item_yongdian, null)
             views.add(view1)
         }
     }
-
 
 
     override fun isViewFromObject(arg0: View, arg1: Any): Boolean {
@@ -54,10 +59,39 @@ class AD_Energy(ac: Activity, list: List<ClassificationInformationListBean>): Pa
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        var tv_totalKwh=views[position].find<TextView>(R.id.tv_totalKwh)
-        tv_totalKwh.text= list?.get(position)?.totalKwh?:""
+        var tv_totalKwh = views[position].find<TextView>(R.id.tv_totalKwh)
+        tv_totalKwh.text = list?.get(position)?.totalKwh ?: ""
+
+        var v_dount_view = views[position].find<DountChart01View>(R.id.v_dount_view)
+        v_dount_view.charRender(getList(list?.get(position)))
+
         container.addView(views[position])
+
         return views[position]
     }
+
+    var colors = arrayOf(
+            "#FA6D6F",
+            "#FE8D25",
+            "#FFB338",
+            "#6CC37E",
+            "#2ED9A4"
+    )
+
+    private fun getList(source: ClassificationInformationListBean?): List<PieData>? {
+        var list = ArrayList<PieData>()
+        source?.let {
+            var total=Utils_Common.paraseDouble(Utils_Common.findNumberFromStr(it.totalKwh))
+            it.classificationKwhMapList
+                    .map { Utils_Common.findNumberFromStr(it.value) }
+                    .mapIndexedTo(list) { i, dd ->
+                        var number= Utils_Common.paraseDouble(dd)/total*100
+                        DebugLog.d("yeqinfu------>"+number)
+                        PieData("", dd,number, Color.parseColor(colors[i % colors.size]))
+                    }
+        }
+        return list
+    }
+
 
 }

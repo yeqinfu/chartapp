@@ -40,15 +40,21 @@ class FG_SecurityCenter:FG_Base(){
                             isDestroy?.let {
                                 if (it){
                                 }else{
-                                    tv_score.text=(progress*100).toInt().toString()
+                                   // tv_score.text=(progress*100).toInt().toString()
+                                    if (progress>0&&progress<=0.25){//第一阶段
+                                        iv_check.setImageResource(R.drawable.icon_check)
+                                        iv_check2.setImageResource(R.drawable.icon_check)
+                                        iv_check3.setImageResource(R.drawable.icon_check)
+                                        iv_check4.setImageResource(R.drawable.icon_check)
+                                        excuteAnimation()
+                                    }
+
+
                                     if (progress>=0.99){
                                         ll_content.setBackgroundResource(R.color.orange)
                                         rotate?.cancel()
-                                        iv_check.setImageResource(R.drawable.icon_ok)
-                                        iv_check2.setImageResource(R.drawable.icon_ok)
-                                        iv_check3.setImageResource(R.drawable.icon_ok)
+                                        iv_check4.setImageResource(R.drawable.icon_ok)
                                         changeView()
-
                                     }
                                 }
                             }
@@ -56,7 +62,8 @@ class FG_SecurityCenter:FG_Base(){
                 }
             }
         }
-        excute()
+        v_check_view.startAnim()
+
     }
 
     private var isDestroy=false
@@ -65,8 +72,8 @@ class FG_SecurityCenter:FG_Base(){
         super.onDestroy()
     }
 
-    private fun excute() {
-        v_check_view.startAnim()
+    private fun excuteAnimation() {
+
         rotate = RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
         rotate?.apply {
             interpolator =  AccelerateDecelerateInterpolator()
@@ -77,6 +84,7 @@ class FG_SecurityCenter:FG_Base(){
             iv_check.startAnimation(this)
             iv_check2.startAnimation(this)
             iv_check3.startAnimation(this)
+            iv_check4.startAnimation(this)
         }
     }
 

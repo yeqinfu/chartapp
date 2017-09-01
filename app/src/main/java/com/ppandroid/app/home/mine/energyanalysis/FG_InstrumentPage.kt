@@ -20,10 +20,12 @@ class FG_InstrumentPage : FG_BaseAnlysisPage(){
         Http.get(activity, url, BN_InstrumentPage::class.java, object : MyCallBack<BN_InstrumentPage> {
             override fun onResponse(response: BN_InstrumentPage?) {
                 response?.let {
+                    var k=getList(it)
                     tv_totalKwh.text = it.message.analysisDeviceSum
-                    var adapter = AD_List(activity, getList(it), isHaveChild)
+                    var adapter = AD_List(activity, k, isHaveChild)
                     v_dount_view.startAnim()
                     lv_list.adapter = adapter
+                    v_dount_view.charRender(getValues(k))
                 }
             }
 

@@ -97,7 +97,7 @@ class FG_AddEnergyCharging : FG_Base() {
      * 查询能源分类
      */
     private fun loadEnergyClasses() {
-        var url = "user/sysSet/energyClassification/search.json"
+        var url = "user/sysSet/energyClassification/energyCharging.json"
         Http.get(activity, url, BN_EnergyClasses::class.java, object : MyCallBack<BN_EnergyClasses> {
             override fun onResponse(response: BN_EnergyClasses?) {
                 response?.let {

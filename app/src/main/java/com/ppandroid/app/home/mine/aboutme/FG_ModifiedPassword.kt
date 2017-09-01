@@ -5,6 +5,7 @@ import com.ppandroid.app.R
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
+import com.ppandroid.app.utils.SecurityUtils
 import com.ppandroid.im.base.FG_Base
 import com.ppandroid.im.bean.BaseBody
 import kotlinx.android.synthetic.main.fg_modified_password.*
@@ -51,8 +52,8 @@ class FG_ModifiedPassword:FG_Base(){
         var url="user/personal/updPassword.json"
         var map=TreeMap<String,String>()
         map.apply {
-            put("oldPassword",old)
-            put("newPassword",newPassword)
+            put("oldPassword",SecurityUtils.decode(old))
+            put("newPassword",SecurityUtils.decode(newPassword))
         }
         Http.post(activity,url,map,BaseBody::class.java,object :MyCallBack<BaseBody>{
             override fun onResponse(response: BaseBody?) {
