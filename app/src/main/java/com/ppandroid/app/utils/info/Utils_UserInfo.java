@@ -14,6 +14,10 @@ import com.ppandroid.app.utils.Utils_SharedPreferences;
 
 public class Utils_UserInfo {
 
+    public static String getCompanyName(Context context){
+        Utils_SharedPreferences sp=new Utils_SharedPreferences(context);
+       return  sp.getString("companyName","");
+    }
     public static String getTempAccount(Context context){
         Utils_SharedPreferences sp=new Utils_SharedPreferences(context);
        return  sp.getString("temp_account","");
@@ -46,6 +50,7 @@ public class Utils_UserInfo {
         sp.put("userID", "");
         sp.put("MD5", "");
         sp.put("Token", "");
+        sp.put("companyName", "");
 
     }
     public static void saveInfo(Context context, LoginBody body){
@@ -53,6 +58,7 @@ public class Utils_UserInfo {
         sp.put("userID", body.getMessage().getId()+"");
         sp.put("MD5", body.getMessage().getMd5());
         sp.put("Token", body.getMessage().getTokenDto().getToken());
+        sp.put("companyName", body.getMessage().getCompanyName());
     }
 
 

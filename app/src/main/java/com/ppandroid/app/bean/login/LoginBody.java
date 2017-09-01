@@ -34,6 +34,15 @@ public class LoginBody extends BaseBody {
         private String md5;
         private TokenDtoBean tokenDto;
         private String role;
+        private String companyName;
+
+        public String getCompanyName() {
+            return companyName;
+        }
+
+        public void setCompanyName(String companyName) {
+            this.companyName = companyName;
+        }
 
         public int getId() {
             return id;
