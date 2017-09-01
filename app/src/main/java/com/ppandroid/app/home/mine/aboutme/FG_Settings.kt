@@ -24,6 +24,9 @@ class FG_Settings:FG_Base(){
         head_view.init(activity)
         head_view.setCenterTitle("设置")
         tv_cache_value.text=Utils_Common.getTotalCacheSize(activity)
+        tv_modified_password.setOnClickListener {
+            startAC(FG_ModifiedPassword::class.java.name)
+        }
         ll_clear_cache.setOnClickListener{
             Utils_Common.clearAllCache(activity)
             toast("清除缓存成功")

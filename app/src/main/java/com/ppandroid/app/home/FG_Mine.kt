@@ -25,6 +25,11 @@ class FG_Mine: FG_Base() {
     override fun fgRes(): Int= R.layout.fg_mine
 
     override fun afterViews() {
+        refreshLayout.setOnRefreshListener {
+           loadContent()
+
+        }
+        refreshLayout.isEnableLoadmore=false
         isNeedEventBus=true
         tv_system_setting.setOnClickListener {
             startAC(FG_SystemSetting::class.java.name)
@@ -53,6 +58,8 @@ class FG_Mine: FG_Base() {
         var url="user/personal/get.json"
         Http.get(activity,url, BN_UserInfo::class.java,object :MyCallBack<BN_UserInfo>{
             override fun onResponse(response: BN_UserInfo?) {
+                refreshLayout.finishRefresh()
+
                 response?.let {
                     tv_name.text=it.message.employeeEntity.realName
                     it.message.employeeEntity.headPhoto?.let {
@@ -63,6 +70,7 @@ class FG_Mine: FG_Base() {
             }
 
             override fun onError(error: ErrorBody?) {
+                refreshLayout.finishRefresh()
                 toast(error)
             }
 
