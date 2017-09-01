@@ -97,7 +97,7 @@ class FG_EnergyList :FG_Base(){
             }
             holder?.let {
                 it.tv_date?.text=list[pos].createTime
-                it.tv_value?.text=list[pos].totalKwh
+                it.tv_value?.text=list[pos].totalKwh+"kwh"
             }
 
             return layout
