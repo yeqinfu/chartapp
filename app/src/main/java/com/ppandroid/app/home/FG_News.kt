@@ -6,10 +6,12 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.ppandroid.app.R
+import com.ppandroid.app.home.news.FG_EnergyList
 import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_news.*
 import org.jetbrains.anko.find
+import java.util.*
 
 /**
  * Created by yeqinfu on 2017/8/3.
@@ -21,15 +23,23 @@ class FG_News :FG_Base(){
 
 
     override fun afterViews() {
+        val c = Calendar.getInstance()
+        val initDate = c.get(Calendar.YEAR).toString() + "-" + (c.get(Calendar.MONTH) + 1).toString() + "-" + c.get(Calendar.DAY_OF_MONTH)
+
         var item=BN_Data()
-        item.date="09.06"
+        item.date=initDate
         item.title="能耗汇总"
-        item.msg="点击查看2017-08-08的能耗汇总"
+        item.msg="点击查看"+initDate+"的能耗汇总"
         dataSet.add(item)
         lv_list.adapter=AD_List(activity,dataSet)
         refreshLayout.setOnRefreshListener { layout->
             DebugLog.d("++++++++++++++++++++++++++refresh yeqinfu")
             layout.finishRefresh(1000)
+        }
+        lv_list.setOnItemClickListener { _, _, i, _ ->
+            if (i==0){
+                startAC(FG_EnergyList::class.java.name)
+            }
         }
     }
     class BN_Data{

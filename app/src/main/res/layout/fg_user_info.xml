@@ -30,6 +30,7 @@
             android:layout_height="44dp"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/iv_arrow"
+            android:src="@drawable/pic_youling"
           />
 
         <ImageView

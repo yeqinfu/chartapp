@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/iv_icon"
         android:layout_centerVertical="true"
-        android:src="@drawable/icon_center"
+        android:src="@drawable/ic_nenghaohz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <TextView

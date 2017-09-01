@@ -21,7 +21,6 @@ import com.ppandroid.app.home.adapter.AD_Zhongdian
 import com.ppandroid.app.home.overview.FG_OverViewConfig
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
-import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.DensityUtil
 import com.ppandroid.app.utils.Utils_Dialog
 import com.ppandroid.app.widget.common.PagerSlidingTab
@@ -145,7 +144,7 @@ class FG_OverView : FG_Base() {
             var view_pager_zhongdian = view.find<ViewPager>(R.id.view_pager_zhongdian)
             //为ViewPager设置高度
             val params = view_pager_zhongdian.getLayoutParams()
-            params.height = DensityUtil.dip2px(activity, 65f) * (it[0].deviceKwhMapList.size-1)
+            params.height = DensityUtil.dip2px(activity, 65f) * (it[0].deviceKwhMapList.size)
             view_pager_zhongdian.setLayoutParams(params)
             view_pager_zhongdian.adapter = adapter
             var title_indicator_zhongdian = view.find<PagerSlidingTab>(R.id.title_indicator_zhongdian)
@@ -175,7 +174,6 @@ class FG_OverView : FG_Base() {
             //为ViewPager设置高度
             val params = view_pager_instruemnt.layoutParams
             params.height = DensityUtil.dip2px(activity, 65f) * (it[0].instrumentMapList.size)
-            DebugLog.d("yeqinfu","============="+params.height+"=="+(it[0].instrumentMapList.size-1))
             view_pager_instruemnt.layoutParams = params
             view_pager_instruemnt.adapter = adapter
             var title_indicator2 = view.find<PagerSlidingTab>(R.id.title_indicator2)
