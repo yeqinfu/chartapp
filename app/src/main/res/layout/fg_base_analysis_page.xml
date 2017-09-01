@@ -6,6 +6,7 @@
     >
 
     <LinearLayout
+        android:gravity="center_horizontal"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:layout_width="match_parent"
@@ -15,10 +16,12 @@
         android:orientation="vertical">
 
         <TextView
+            android:drawablePadding="5dp"
             android:id="@+id/tv_time"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:gravity="center"
+            android:drawableRight="@drawable/icon_dd"
             android:text="2014"
             android:textColor="@color/color_07"
             android:textSize="@dimen/second_title"
