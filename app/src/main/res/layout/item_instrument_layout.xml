@@ -21,7 +21,7 @@
             android:layout_height="39dp"
             android:layout_marginLeft="10dp"
             android:gravity="center"
-            android:text="仪表电统计"
+            android:text="仪表用能统计"
             android:textColor="@color/color_07"
             android:textSize="@dimen/first_title"/>
     </LinearLayout>

@@ -187,13 +187,20 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:paddingRight="18dp"
+                android:paddingLeft="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="82dp"
                 android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:drawablePadding="11dp"
+                    android:gravity="center_vertical"
+                    android:drawableLeft="@drawable/ic_zhineng"
+                    android:textColor="@color/color_07"
+                    android:textSize="@dimen/first_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -205,52 +212,110 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"
-                    android:src="@drawable/icon_check"/>
+                    android:src="@drawable/icon_check_grey"/>
             </LinearLayout>
-
-            <LinearLayout
+            <View
+                android:background="@color/color_03"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="0.5dp"/>
+            <LinearLayout
+                android:paddingRight="18dp"
+                android:paddingLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="82dp"
                 android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:drawablePadding="11dp"
+                    android:gravity="center_vertical"
+                    android:drawableLeft="@drawable/icon_dianli"
+                    android:textColor="@color/color_07"
+                    android:textSize="@dimen/first_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_weight="1"
-                    android:text="智能化监测"/>
+                    android:text="电力质量检测"/>
 
                 <ImageView
                     android:id="@+id/iv_check2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"
-                    android:src="@drawable/icon_check"/>
+                    android:src="@drawable/icon_check_grey"/>
             </LinearLayout>
-
-            <LinearLayout
+            <View
+                android:background="@color/color_03"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="0.5dp"/>
+            <LinearLayout
+                android:paddingRight="18dp"
+                android:paddingLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="82dp"
                 android:background="@color/white"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/textView2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_weight="1"
-                    android:text="智能化监测"/>
+                    android:drawableLeft="@drawable/icon_fxyj"
+                    android:drawablePadding="11dp"
+                    android:gravity="center_vertical"
+                    android:text="风险预警检测"
+                    android:textColor="@color/color_07"
+                    android:textSize="@dimen/first_title"/>
 
                 <ImageView
                     android:id="@+id/iv_check3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"
-                    android:src="@drawable/icon_check"/>
+                    android:src="@drawable/icon_check_grey"/>
             </LinearLayout>
+            <View
+                android:background="@color/color_03"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+            <LinearLayout
+                android:paddingRight="18dp"
+                android:paddingLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="82dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:drawablePadding="11dp"
+                    android:gravity="center_vertical"
+                    android:drawableLeft="@drawable/icon_xitong"
+                    android:textColor="@color/color_07"
+                    android:textSize="@dimen/first_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:text="系统能效检测"/>
+
+                <ImageView
+                    android:id="@+id/iv_check4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/icon_check_grey"/>
+            </LinearLayout>
+            <View
+                android:background="@color/color_03"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+
 
         </LinearLayout>
     </FrameLayout>

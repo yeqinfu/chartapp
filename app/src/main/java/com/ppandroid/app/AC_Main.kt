@@ -22,7 +22,7 @@ class AC_Main : AC_Base() {
 
 
 
-        rg_main_tab.setOnCheckedChangeListener { radioGroup, i ->
+        rg_main_tab.setOnCheckedChangeListener { _, i ->
             when (i) {
                 R.id.tab_01 -> replaceTab(0)
                 R.id.tab_02 -> replaceTab(1)
@@ -30,12 +30,7 @@ class AC_Main : AC_Base() {
                 R.id.tab_04 -> replaceTab(3)
             }
         }
-        tab_01.postDelayed(object :Runnable{
-            override fun run() {
-                tab_01.isChecked=true
-            }
-
-        },500)
+        replaceTab(0)
 
         tv_center.setOnClickListener {
            startAC(FG_Center::class.java.name)

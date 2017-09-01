@@ -25,12 +25,7 @@ class FG_News :FG_Base(){
         item.date="09.06"
         item.title="能耗汇总"
         item.msg="点击查看2017-08-08的能耗汇总"
-        var item1=BN_Data()
-        item1.date="2017-07-25"
-        item1.title="系统消息"
-        item1.msg="请先去系统设置设置数据。如果您有遇到..."
         dataSet.add(item)
-        dataSet.add(item1)
         lv_list.adapter=AD_List(activity,dataSet)
         refreshLayout.setOnRefreshListener { layout->
             DebugLog.d("++++++++++++++++++++++++++refresh yeqinfu")
