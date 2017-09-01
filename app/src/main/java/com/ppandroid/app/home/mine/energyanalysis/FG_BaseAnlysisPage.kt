@@ -10,6 +10,8 @@ import android.widget.TextView
 import com.bruce.pickerview.popwindow.DatePickerPopWin
 import com.ppandroid.app.R
 import com.ppandroid.app.utils.DebugLog
+import com.ppandroid.app.utils.Utils_Common
+import com.ppandroid.app.widget.HorizontalPercentageView
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_base_analysis_page.*
 import org.jetbrains.anko.find
@@ -128,10 +130,10 @@ abstract class FG_BaseAnlysisPage : FG_Base() {
     protected var isHaveChild = true
         set(value) {
             field = value
-            if (value){
-                v_holder.visibility=View.VISIBLE
-            }else{
-                v_holder.visibility=View.GONE
+            if (value) {
+                v_holder.visibility = View.VISIBLE
+            } else {
+                v_holder.visibility = View.GONE
             }
 
         }
@@ -176,6 +178,14 @@ abstract class FG_BaseAnlysisPage : FG_Base() {
                     listener?.choose(pos)
                 }
             }
+
+            var value = list[pos].ratio.replace("%", "")
+            var f = Utils_Common.paraseDouble(value)
+            var v_hp=layout.find<HorizontalPercentageView>(R.id.v_hp)
+            v_hp.percentage= f.toFloat()/100f
+            v_hp.startAnim()
+
+
             return layout
         }
 
