@@ -10,8 +10,9 @@ import java.util.List;
 
 public class BN_EnergyList extends BaseBody {
 
+
     /**
-     * message : {"content":[{"id":2,"deleteStatus":false,"version":0,"createTime":null,"createBy":null,"createById":null,"lastModifyTime":null,"lastModifyBy":null,"lastModifyById":null,"recordDate":1503384300000,"totalKwh":"32677","type":1,"companyId":1},{"id":1,"deleteStatus":false,"version":0,"createTime":null,"createBy":null,"createById":null,"lastModifyTime":null,"lastModifyBy":null,"lastModifyById":null,"recordDate":1503308689000,"totalKwh":"98796","type":1,"companyId":1}],"last":true,"totalPages":1,"firstPage":true,"lastPage":true,"totalElements":2,"size":10,"number":0,"sort":[{"direction":"DESC","property":"id","ignoreCase":false,"nullHandling":"NATIVE","ascending":false}],"first":true,"numberOfElements":2}
+     * message : {"energyConsumptionStatisticsDtoList":[{"id":44,"recordDate":"2017-09-07 12:00:01","totalKwh":"7","type":1,"datePeriod":"2017-09-06"},{"id":43,"recordDate":"2017-09-06 12:00:01","totalKwh":"7","type":1,"datePeriod":"2017-09-05"},{"id":42,"recordDate":"2017-09-05 12:00:01","totalKwh":"7","type":1,"datePeriod":"2017-09-04"},{"id":41,"recordDate":"2017-09-04 12:00:01","totalKwh":"0","type":2,"datePeriod":"2017-08-27~2017-09-03"},{"id":40,"recordDate":"2017-09-04 12:00:01","totalKwh":"7","type":1,"datePeriod":"2017-09-03"},{"id":39,"recordDate":"2017-09-03 12:00:01","totalKwh":"7","type":1,"datePeriod":"2017-09-02"},{"id":38,"recordDate":"2017-09-02 12:00:01","totalKwh":"11","type":1,"datePeriod":"2017-09-01"},{"id":37,"recordDate":"2017-09-01 12:00:01","totalKwh":"46471","type":3,"datePeriod":"2017-08-01~2017-08-31"},{"id":36,"recordDate":"2017-09-01 12:00:01","totalKwh":"17","type":1,"datePeriod":"2017-08-31"},{"id":35,"recordDate":"2017-08-31 12:00:01","totalKwh":"17","type":1,"datePeriod":"2017-08-30"}],"pageNumber":1,"size":10,"totalPages":2}
      */
 
     private MessageBean message;
@@ -26,69 +27,23 @@ public class BN_EnergyList extends BaseBody {
 
     public static class MessageBean {
         /**
-         * content : [{"id":2,"deleteStatus":false,"version":0,"createTime":null,"createBy":null,"createById":null,"lastModifyTime":null,"lastModifyBy":null,"lastModifyById":null,"recordDate":1503384300000,"totalKwh":"32677","type":1,"companyId":1},{"id":1,"deleteStatus":false,"version":0,"createTime":null,"createBy":null,"createById":null,"lastModifyTime":null,"lastModifyBy":null,"lastModifyById":null,"recordDate":1503308689000,"totalKwh":"98796","type":1,"companyId":1}]
-         * last : true
-         * totalPages : 1
-         * firstPage : true
-         * lastPage : true
-         * totalElements : 2
+         * energyConsumptionStatisticsDtoList : [{"id":44,"recordDate":"2017-09-07 12:00:01","totalKwh":"7","type":1,"datePeriod":"2017-09-06"},{"id":43,"recordDate":"2017-09-06 12:00:01","totalKwh":"7","type":1,"datePeriod":"2017-09-05"},{"id":42,"recordDate":"2017-09-05 12:00:01","totalKwh":"7","type":1,"datePeriod":"2017-09-04"},{"id":41,"recordDate":"2017-09-04 12:00:01","totalKwh":"0","type":2,"datePeriod":"2017-08-27~2017-09-03"},{"id":40,"recordDate":"2017-09-04 12:00:01","totalKwh":"7","type":1,"datePeriod":"2017-09-03"},{"id":39,"recordDate":"2017-09-03 12:00:01","totalKwh":"7","type":1,"datePeriod":"2017-09-02"},{"id":38,"recordDate":"2017-09-02 12:00:01","totalKwh":"11","type":1,"datePeriod":"2017-09-01"},{"id":37,"recordDate":"2017-09-01 12:00:01","totalKwh":"46471","type":3,"datePeriod":"2017-08-01~2017-08-31"},{"id":36,"recordDate":"2017-09-01 12:00:01","totalKwh":"17","type":1,"datePeriod":"2017-08-31"},{"id":35,"recordDate":"2017-08-31 12:00:01","totalKwh":"17","type":1,"datePeriod":"2017-08-30"}]
+         * pageNumber : 1
          * size : 10
-         * number : 0
-         * sort : [{"direction":"DESC","property":"id","ignoreCase":false,"nullHandling":"NATIVE","ascending":false}]
-         * first : true
-         * numberOfElements : 2
+         * totalPages : 2
          */
 
-        private boolean last;
-        private int totalPages;
-        private boolean firstPage;
-        private boolean lastPage;
-        private int totalElements;
+        private int pageNumber;
         private int size;
-        private int number;
-        private boolean first;
-        private int numberOfElements;
-        private List<ContentBean> content;
-        private List<SortBean> sort;
+        private int totalPages;
+        private List<EnergyConsumptionStatisticsDtoListBean> energyConsumptionStatisticsDtoList;
 
-        public boolean isLast() {
-            return last;
+        public int getPageNumber() {
+            return pageNumber;
         }
 
-        public void setLast(boolean last) {
-            this.last = last;
-        }
-
-        public int getTotalPages() {
-            return totalPages;
-        }
-
-        public void setTotalPages(int totalPages) {
-            this.totalPages = totalPages;
-        }
-
-        public boolean isFirstPage() {
-            return firstPage;
-        }
-
-        public void setFirstPage(boolean firstPage) {
-            this.firstPage = firstPage;
-        }
-
-        public boolean isLastPage() {
-            return lastPage;
-        }
-
-        public void setLastPage(boolean lastPage) {
-            this.lastPage = lastPage;
-        }
-
-        public int getTotalElements() {
-            return totalElements;
-        }
-
-        public void setTotalElements(int totalElements) {
-            this.totalElements = totalElements;
+        public void setPageNumber(int pageNumber) {
+            this.pageNumber = pageNumber;
         }
 
         public int getSize() {
@@ -99,76 +54,36 @@ public class BN_EnergyList extends BaseBody {
             this.size = size;
         }
 
-        public int getNumber() {
-            return number;
+        public int getTotalPages() {
+            return totalPages;
         }
 
-        public void setNumber(int number) {
-            this.number = number;
+        public void setTotalPages(int totalPages) {
+            this.totalPages = totalPages;
         }
 
-        public boolean isFirst() {
-            return first;
+        public List<EnergyConsumptionStatisticsDtoListBean> getEnergyConsumptionStatisticsDtoList() {
+            return energyConsumptionStatisticsDtoList;
         }
 
-        public void setFirst(boolean first) {
-            this.first = first;
+        public void setEnergyConsumptionStatisticsDtoList(List<EnergyConsumptionStatisticsDtoListBean> energyConsumptionStatisticsDtoList) {
+            this.energyConsumptionStatisticsDtoList = energyConsumptionStatisticsDtoList;
         }
 
-        public int getNumberOfElements() {
-            return numberOfElements;
-        }
-
-        public void setNumberOfElements(int numberOfElements) {
-            this.numberOfElements = numberOfElements;
-        }
-
-        public List<ContentBean> getContent() {
-            return content;
-        }
-
-        public void setContent(List<ContentBean> content) {
-            this.content = content;
-        }
-
-        public List<SortBean> getSort() {
-            return sort;
-        }
-
-        public void setSort(List<SortBean> sort) {
-            this.sort = sort;
-        }
-
-        public static class ContentBean {
+        public static class EnergyConsumptionStatisticsDtoListBean {
             /**
-             * id : 2
-             * deleteStatus : false
-             * version : 0
-             * createTime : null
-             * createBy : null
-             * createById : null
-             * lastModifyTime : null
-             * lastModifyBy : null
-             * lastModifyById : null
-             * recordDate : 1503384300000
-             * totalKwh : 32677
+             * id : 44
+             * recordDate : 2017-09-07 12:00:01
+             * totalKwh : 7
              * type : 1
-             * companyId : 1
+             * datePeriod : 2017-09-06
              */
 
             private int id;
-            private boolean deleteStatus;
-            private int version;
-            private String createTime;
-            private Object createBy;
-            private Object createById;
-            private Object lastModifyTime;
-            private Object lastModifyBy;
-            private Object lastModifyById;
-            private long recordDate;
+            private String recordDate;
             private String totalKwh;
             private int type;
-            private int companyId;
+            private String datePeriod;
 
             public int getId() {
                 return id;
@@ -178,75 +93,11 @@ public class BN_EnergyList extends BaseBody {
                 this.id = id;
             }
 
-            public boolean isDeleteStatus() {
-                return deleteStatus;
-            }
-
-            public void setDeleteStatus(boolean deleteStatus) {
-                this.deleteStatus = deleteStatus;
-            }
-
-            public int getVersion() {
-                return version;
-            }
-
-            public void setVersion(int version) {
-                this.version = version;
-            }
-
-            public String getCreateTime() {
-                return createTime;
-            }
-
-            public void setCreateTime(String createTime) {
-                this.createTime = createTime;
-            }
-
-            public Object getCreateBy() {
-                return createBy;
-            }
-
-            public void setCreateBy(Object createBy) {
-                this.createBy = createBy;
-            }
-
-            public Object getCreateById() {
-                return createById;
-            }
-
-            public void setCreateById(Object createById) {
-                this.createById = createById;
-            }
-
-            public Object getLastModifyTime() {
-                return lastModifyTime;
-            }
-
-            public void setLastModifyTime(Object lastModifyTime) {
-                this.lastModifyTime = lastModifyTime;
-            }
-
-            public Object getLastModifyBy() {
-                return lastModifyBy;
-            }
-
-            public void setLastModifyBy(Object lastModifyBy) {
-                this.lastModifyBy = lastModifyBy;
-            }
-
-            public Object getLastModifyById() {
-                return lastModifyById;
-            }
-
-            public void setLastModifyById(Object lastModifyById) {
-                this.lastModifyById = lastModifyById;
-            }
-
-            public long getRecordDate() {
+            public String getRecordDate() {
                 return recordDate;
             }
 
-            public void setRecordDate(long recordDate) {
+            public void setRecordDate(String recordDate) {
                 this.recordDate = recordDate;
             }
 
@@ -266,68 +117,12 @@ public class BN_EnergyList extends BaseBody {
                 this.type = type;
             }
 
-            public int getCompanyId() {
-                return companyId;
+            public String getDatePeriod() {
+                return datePeriod;
             }
 
-            public void setCompanyId(int companyId) {
-                this.companyId = companyId;
-            }
-        }
-
-        public static class SortBean {
-            /**
-             * direction : DESC
-             * property : id
-             * ignoreCase : false
-             * nullHandling : NATIVE
-             * ascending : false
-             */
-
-            private String direction;
-            private String property;
-            private boolean ignoreCase;
-            private String nullHandling;
-            private boolean ascending;
-
-            public String getDirection() {
-                return direction;
-            }
-
-            public void setDirection(String direction) {
-                this.direction = direction;
-            }
-
-            public String getProperty() {
-                return property;
-            }
-
-            public void setProperty(String property) {
-                this.property = property;
-            }
-
-            public boolean isIgnoreCase() {
-                return ignoreCase;
-            }
-
-            public void setIgnoreCase(boolean ignoreCase) {
-                this.ignoreCase = ignoreCase;
-            }
-
-            public String getNullHandling() {
-                return nullHandling;
-            }
-
-            public void setNullHandling(String nullHandling) {
-                this.nullHandling = nullHandling;
-            }
-
-            public boolean isAscending() {
-                return ascending;
-            }
-
-            public void setAscending(boolean ascending) {
-                this.ascending = ascending;
+            public void setDatePeriod(String datePeriod) {
+                this.datePeriod = datePeriod;
             }
         }
     }

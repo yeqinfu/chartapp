@@ -103,6 +103,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <CheckBox
+            android:visibility="gone"
             android:id="@+id/checkbox"
             android:textSize="@dimen/time_text"
             android:text="记住账号"

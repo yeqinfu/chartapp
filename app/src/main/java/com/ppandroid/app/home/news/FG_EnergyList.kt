@@ -1,9 +1,11 @@
 package com.ppandroid.app.home.news
 
 import android.app.Activity
+import android.graphics.Color
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.TextView
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ErrorBody
@@ -38,7 +40,7 @@ class FG_EnergyList :FG_Base(){
     var adapter:AD_List?=null
     var pageNumber=1
     var totalPage=1
-    private var content=ArrayList<BN_EnergyList.MessageBean.ContentBean>()
+    private var content=ArrayList<BN_EnergyList.MessageBean.EnergyConsumptionStatisticsDtoListBean>()
     private fun loadContent(isRefresh: Boolean){
         if (isRefresh){
             pageNumber=1
@@ -56,8 +58,8 @@ class FG_EnergyList :FG_Base(){
                 refresh_layout.finishRefresh()
                 refresh_layout.finishLoadmore()
                 response?.let {
-                    if (!it.message.content.isEmpty()){
-                        content.addAll(it.message.content)
+                    if (!it.message.energyConsumptionStatisticsDtoList.isEmpty()){
+                        content.addAll(it.message.energyConsumptionStatisticsDtoList)
                         adapter?.notifyDataSetChanged()
                         pageNumber++
                         totalPage=it.message.totalPages
@@ -75,13 +77,23 @@ class FG_EnergyList :FG_Base(){
     }
 
     class Holder{
+        var tv_msg_date:TextView?=null
+        var tv_title:TextView?=null
         var tv_date:TextView?=null
+        var tv_key:TextView?=null
         var tv_value:TextView?=null
+        var iv_type:ImageView?=null
     }
 
-    class AD_List(ac:Activity,list:List<BN_EnergyList.MessageBean.ContentBean>) : BaseAdapter() {
+    class AD_List(ac:Activity,list:List<BN_EnergyList.MessageBean.EnergyConsumptionStatisticsDtoListBean>) : BaseAdapter() {
         private var ac=ac
         private var list=list
+        var colors = arrayOf(
+                "#5EC1FF",
+                "#45E069",
+                "#FFCF3B",
+                "#FF6969"
+        )
         override fun getView(pos: Int, convertView: View?, p2: ViewGroup?): View? {
             var layout:View?=null
             var holder:Holder?=null
@@ -92,12 +104,42 @@ class FG_EnergyList :FG_Base(){
             }else{
                 layout=ac.layoutInflater.inflate(R.layout.item_energy_list,null)
                 holder= Holder()
+                holder.tv_title=layout.find(R.id.tv_title)
+                holder.tv_msg_date=layout.find(R.id.tv_msg_date)
                 holder.tv_date=layout.find(R.id.tv_date)
+                holder.tv_key=layout.find(R.id.tv_key)
                 holder.tv_value=layout.find(R.id.tv_value)
+                holder.iv_type=layout.find(R.id.iv_type)
             }
             holder?.let {
-                it.tv_date?.text=list[pos].createTime
+                it.tv_msg_date?.text=list[pos].recordDate
+                it.tv_date?.text=list[pos].datePeriod+"用电情况，请知晓"
                 it.tv_value?.text=list[pos].totalKwh+"kwh"
+                when(list[pos].type){
+                    1->{
+                        it.iv_type?.setImageResource(R.drawable.ic_day)
+                        it.tv_title?.setTextColor(Color.parseColor(colors[0]))
+                        it.tv_key?.text="今日用电："
+                    }
+                    2->{
+                        it.iv_type?.setImageResource(R.drawable.ic_week)
+                        it.tv_title?.setTextColor(Color.parseColor(colors[1]))
+                        it.tv_key?.text="本周用电："
+                    }
+                    3->{
+                        it.iv_type?.setImageResource(R.drawable.ic_month)
+                        it.tv_title?.setTextColor(Color.parseColor(colors[2]))
+                        it.tv_key?.text="本月用电："
+                    }
+                    4->{
+                        it.iv_type?.setImageResource(R.drawable.ic_year)
+                        it.tv_title?.setTextColor(Color.parseColor(colors[3]))
+                        it.tv_key?.text="本年用电："
+                    }
+
+                }
+
+
             }
 
             return layout

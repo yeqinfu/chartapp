@@ -72,7 +72,7 @@ class FG_AboutInstrument : FG_Base(){
     var adapter:AD_List?=null
     private var message: List<BN_SystemSettingPage01.MessageBean>? = null
     private fun loadContent() {
-        var url = "user/sysSet/instrument/search.json"
+        var url = "user/sysSet/instrument/relation.json"
         if (parentId!="-1"){
             url+="?parentId=$parentId"
         }
