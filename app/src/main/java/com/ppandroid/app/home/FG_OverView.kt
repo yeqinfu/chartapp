@@ -18,6 +18,7 @@ import com.ppandroid.app.home.adapter.AD_AreaEnergy
 import com.ppandroid.app.home.adapter.AD_Energy
 import com.ppandroid.app.home.adapter.AD_Instrument
 import com.ppandroid.app.home.adapter.AD_Zhongdian
+import com.ppandroid.app.home.mine.energyanalysis.*
 import com.ppandroid.app.home.overview.FG_OverViewConfig
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
@@ -105,15 +106,19 @@ class FG_OverView : FG_Base() {
         choosed?.let {
             for (item in it) {
                 //能耗信息
-                if (item.id == 2) {
-                    var v = addEnergyInfo()
-                    ll_content.addView(v)
-                } else if (item.id == 3) {//仪表用能统计图
-                    var v = addInstrumentInfomationList()
-                    ll_content.addView(v)
-                } else if (item.id == 4) {//重点设备用能统计图
-                    var v = addDeviceInformationList()
-                    ll_content.addView(v)
+                when {
+                    item.id == 2 -> {
+                        var v = addEnergyInfo()
+                        ll_content.addView(v)
+                    }
+                    item.id == 3 -> {//仪表用能统计图
+                        var v = addInstrumentInfomationList()
+                        ll_content.addView(v)
+                    }
+                    item.id == 4 -> {//重点设备用能统计图
+                        var v = addDeviceInformationList()
+                        ll_content.addView(v)
+                    }
                 }
             }
             var view = addModule()
@@ -139,6 +144,9 @@ class FG_OverView : FG_Base() {
      */
     private fun addDeviceInformationList(): View {
         var view = activity.layoutInflater.inflate(R.layout.item_zhongdian_layout, null)
+        view.find<TextView>(R.id.tv_more5).setOnClickListener {
+            startAC(FG_DeviceAnalysis::class.java.name)
+        }
         var zhongdianBody = body?.message?.deviceInformationList
         zhongdianBody?.let {
             /**添加仪表用能统计图*/
@@ -167,7 +175,9 @@ class FG_OverView : FG_Base() {
      */
     private fun addInstrumentInfomationList(): View {
         var view = activity.layoutInflater.inflate(R.layout.item_instrument_layout, null)
-
+        view.find<TextView>(R.id.tv_more4).setOnClickListener {
+            startAC(FG_InstrumentAnalysis::class.java.name)
+        }
         var instrumentBody = body?.message?.instrumentInfomationList
         instrumentBody?.let {
             /**添加仪表用能统计图*/
@@ -194,6 +204,15 @@ class FG_OverView : FG_Base() {
      */
     private fun addEnergyInfo(): View {
         var view = activity.layoutInflater.inflate(R.layout.item_energy_layout, null)
+        view.find<TextView>(R.id.tv_more).setOnClickListener {
+            startAC(FG_EnergyAnalysis::class.java.name)
+        }
+        view.find<TextView>(R.id.tv_more2).setOnClickListener {
+            startAC(FG_CateAnalysis::class.java.name)
+        }
+        view.find<TextView>(R.id.tv_more3).setOnClickListener {
+            startAC(FG_AreaAnalysis::class.java.name)
+        }
         var energyBody = body?.message?.overviewConsumptionInformation
         energyBody?.let {
             var tv_totalKwh = view.find<TextView>(R.id.tv_totalKwh)

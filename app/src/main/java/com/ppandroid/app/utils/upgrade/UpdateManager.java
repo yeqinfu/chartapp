@@ -24,7 +24,6 @@ import com.ppandroid.app.R;
 import com.ppandroid.app.bean.ErrorBody;
 import com.ppandroid.app.http.Http;
 import com.ppandroid.app.http.MyCallBack;
-import com.ppandroid.app.utils.DebugLog;
 import com.ppandroid.app.utils.Utils_DateFormat;
 import com.ppandroid.app.utils.toast.ToastUtil;
 import com.ppandroid.app.widget.CustomDialog;
@@ -97,9 +96,9 @@ public class UpdateManager {
             ApplicationInfo appInfo = APP.Companion.getContext().getPackageManager()
                     .getApplicationInfo(context.getPackageName(),
                             PackageManager.GET_META_DATA);
-            String channel=appInfo.metaData.getString("UMENG_CHANNEL");
-            DebugLog.d(" UMENG_CHANNEL == " + channel );
-            String url=  "app/update/android.json?nowVersion="+info.versionCode+"&channel="+channel;
+         /*   String channel=appInfo.metaData.getString("UMENG_CHANNEL");
+            DebugLog.d(" UMENG_CHANNEL == " + channel );*/
+            String url=  "app/update/android.json?nowVersion="+info.versionCode+"&channel=bzw";
             Http.get(context, url, BN_VersionInfoBody.class, new MyCallBack<BN_VersionInfoBody>() {
                 @Override
                 public void onResponse(BN_VersionInfoBody response) {

@@ -292,6 +292,7 @@
         android:background="@color/color_03"/>
 
     <TextView
+        android:id="@+id/tv_more"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center"
@@ -574,6 +575,7 @@
 
     <!--查看更多-->
     <TextView
+        android:id="@+id/tv_more2"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center"
@@ -625,6 +627,7 @@
         />
     <!--查看更多-->
     <TextView
+        android:id="@+id/tv_more3"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:gravity="center"
