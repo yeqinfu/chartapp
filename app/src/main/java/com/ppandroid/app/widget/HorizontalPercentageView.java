@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 
 import com.ppandroid.app.R;
+import com.ppandroid.app.utils.DebugLog;
 import com.ppandroid.app.widget.graphical.view.GraphicalView;
 
 /**
@@ -77,6 +78,7 @@ public class HorizontalPercentageView extends GraphicalView implements Runnable 
 
     public void setPercentage(float percentage) {
         this.percentage = percentage;
+        DebugLog.d("yeqinfu setPercentage"+percentage);
 
     }
 

@@ -122,6 +122,9 @@ class AD_Instrument(ac: Activity, list: List<BN_OverView.MessageBean.InstrumentI
                 if (p0 == 0) {
                     max = Utils_Common.paraseDouble(value) * 1.2
                 }
+                if (max == 0.0){
+                    max=1.0
+                }
 
 
                 holder?.v_hp?.percentage = (Utils_Common.paraseDouble(value) / max).toFloat()

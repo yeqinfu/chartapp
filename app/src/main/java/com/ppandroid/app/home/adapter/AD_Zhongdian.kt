@@ -130,7 +130,9 @@ class AD_Zhongdian(ac: Activity, list: List<BN_OverView.MessageBean.DeviceInform
                     max = Utils_Common.paraseDouble(value) * 1.2
                 }
 
-
+                if (max == 0.0){
+                    max=1.0
+                }
                 holder?.v_hp?.percentage = (Utils_Common.paraseDouble(value) / max).toFloat()
                 holder?.v_hp?.colorId = Color.parseColor(colors[p0%colors.size])
                 holder?.v_hp?.startAnim()
