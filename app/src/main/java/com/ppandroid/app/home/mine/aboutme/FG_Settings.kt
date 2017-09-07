@@ -8,6 +8,7 @@ import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.utils.activitymanager.ActivityManager
 import com.ppandroid.app.utils.info.Utils_UserInfo
+import com.ppandroid.app.utils.upgrade.UpdateManager
 import com.ppandroid.im.base.FG_Base
 import com.ppandroid.im.bean.BaseBody
 import kotlinx.android.synthetic.main.fg_settings.*
@@ -41,7 +42,7 @@ class FG_Settings:FG_Base(){
             }
         }
         tv_check_update.setOnClickListener {
-            toast("已经是最新版本啦！")
+            UpdateManager.getUpdateManager(activity).checkAppUpdate(true)
         }
         tv_about_app.setOnClickListener {
             startAC(FG_AboutMe::class.java.name)

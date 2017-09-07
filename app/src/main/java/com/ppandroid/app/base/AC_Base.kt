@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.SnackbarUtils
 import com.ppandroid.app.utils.activitymanager.ActivityManager
-
+import com.ppandroid.app.utils.upgrade.UpdateManager
 
 
 /**
@@ -46,6 +46,10 @@ open class AC_Base : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         ActivityManager.getActivityManager().popActivity(this)
+        /**如果还没有检查过版本，这边进行检查版本*/
+        if (!UpdateManager.getUpdateManager(this@AC_Base).checkFlag) {
+            UpdateManager.getUpdateManager(this@AC_Base).checkAppUpdate(true)
+        }
 
 
     }
