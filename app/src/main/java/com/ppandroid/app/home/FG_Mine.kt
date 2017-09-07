@@ -62,6 +62,7 @@ class FG_Mine: FG_Base() {
 
                 response?.let {
                     tv_name.text=it.message.employeeEntity.realName
+                    tv_server_provide.text=it.message.companyEntity.serviceProvider
                     it.message.employeeEntity.headPhoto?.let {
                         GlideUtils.displayImage(activity,it,iv_head)
                     }

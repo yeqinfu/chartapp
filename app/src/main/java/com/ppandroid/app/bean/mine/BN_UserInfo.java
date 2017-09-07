@@ -348,6 +348,15 @@ public class BN_UserInfo extends BaseBody {
             private int cityId;
             private int areaId;
             private String areaName;
+            private String serviceProvider;
+
+            public String getServiceProvider() {
+                return serviceProvider;
+            }
+
+            public void setServiceProvider(String serviceProvider) {
+                this.serviceProvider = serviceProvider;
+            }
 
             public int getId() {
                 return id;

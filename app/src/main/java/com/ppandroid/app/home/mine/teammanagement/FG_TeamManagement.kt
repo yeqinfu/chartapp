@@ -31,6 +31,7 @@ class FG_TeamManagement : FG_Base() {
         head_view.setIvRight(R.drawable.ic_add_model) {
             showChooseDialog()
         }
+
         loadContent()
 
     }
