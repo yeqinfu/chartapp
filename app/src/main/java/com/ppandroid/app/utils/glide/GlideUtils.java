@@ -25,6 +25,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.ppandroid.app.R;
 import com.ppandroid.app.utils.DebugLog;
+import com.ppandroid.app.widget.CircleImageView;
 import com.ppandroid.im.utils.Contants;
 
 import java.io.File;
@@ -308,9 +309,9 @@ public abstract class GlideUtils {
             }
 
             //单张CircleImageView不允许动画，不然会不显示,
-         /*   if (imageView instanceof CircleImageView) {
+            if (imageView instanceof CircleImageView) {
                 type.dontAnimate();
-            }*/
+            }
             return type
                     .listener(new GlideListener<String, GlideDrawable, String>(imageLoadListener, url, imageView))
                     .into(imageView);

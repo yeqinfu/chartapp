@@ -142,6 +142,8 @@
             android:textSize="@dimen/bar_title"/>
 
         <LinearLayout
+            android:layout_marginBottom="7dp"
+            android:weightSum="4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -169,16 +171,19 @@
                 android:text="部门管理"/>
 
             <TextView
-                android:background="@drawable/selecter_back"
+                android:visibility="gone"
+                android:id="@+id/textView3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/selecter_back"
                 android:drawablePadding="23dp"
                 android:drawableTop="@drawable/ic_chaobiao"
                 android:gravity="center"
                 android:text="抄表管理"/>
 
             <TextView
+                android:visibility="gone"
                 android:background="@drawable/selecter_back"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -187,16 +192,6 @@
                 android:drawableTop="@drawable/ic_hujiao"
                 android:gravity="center"
                 android:text="我的呼叫"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="7dp"
-            android:paddingTop="15dp"
-            android:weightSum="4">
 
             <TextView
                 android:background="@drawable/selecter_back"
@@ -219,6 +214,19 @@
                 android:drawableTop="@drawable/ic_nenghao"
                 android:gravity="center"
                 android:text="能耗分析"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="7dp"
+            android:paddingTop="15dp"
+            android:weightSum="4">
+
+
 
 
         </LinearLayout>

@@ -11,8 +11,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
-
-
+import com.squareup.leakcanary.LeakCanary
 
 
 /**
@@ -23,19 +22,28 @@ class APP : Application() {
 
 
     companion object {
-        var context:Application?= null
+        var context: Application? = null
         fun getContext(): Context? {
             return context
         }
-        fun toLogin(){
-            var it= Intent()
-            it.setClass(context,AC_Login::class.java)
+
+        fun toLogin() {
+            var it = Intent()
+            it.setClass(context, AC_Login::class.java)
             context?.startActivity(it)
         }
     }
 
     override fun onCreate() {
         super.onCreate()
+
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return
+        }
+        LeakCanary.install(this)
+
 
         //设置全局的Header构建器
         SmartRefreshLayout.setDefaultRefreshHeaderCreater { context, layout ->
@@ -49,18 +57,17 @@ class APP : Application() {
         }
 
         context = this
-        DebugLog.d("+++++++++++++++++++++++++++++++++++++++++++context is"+ context)
+        DebugLog.d("+++++++++++++++++++++++++++++++++++++++++++context is" + context)
         /*****************************************************************
          * 闪退处理
          *****************************************************************/
         val mReportAppError = AppExceptionHandler.getInstance()
         mReportAppError.init(this)
-       /* if (!EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().register(this)
-        }*/
+        /* if (!EventBus.getDefault().isRegistered(this)) {
+             EventBus.getDefault().register(this)
+         }*/
 
     }
-
 
 
 }

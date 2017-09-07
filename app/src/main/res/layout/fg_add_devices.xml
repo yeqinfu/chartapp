@@ -246,7 +246,7 @@
                     android:drawablePadding="5dp"
                     android:drawableRight="@drawable/forward_right"
                     android:gravity="right|center_vertical"
-                    android:hint="请选择"
+                    android:hint="请选择(可选)"
                     android:textColor="@color/color_04"
                     android:textColorHint="@color/color_06"
                     android:textSize="@dimen/bar_title"/>

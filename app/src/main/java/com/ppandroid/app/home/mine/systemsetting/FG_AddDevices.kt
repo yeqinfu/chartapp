@@ -211,10 +211,10 @@ class FG_AddDevices : FG_Base() {
             toast("请选择关联分项")
             return
         }
-        if (TextUtils.isEmpty(chooseInstrumentId)) {
+      /*  if (TextUtils.isEmpty(chooseInstrumentId)) {
             toast("请选择关联仪表")
             return
-        }
+        }*/
         if (TextUtils.isEmpty(chooseAreaId)) {
             toast("请选择关联区域")
             return
@@ -236,7 +236,9 @@ class FG_AddDevices : FG_Base() {
                 put("model", et_model.text.toString())
                 put("deviceAreaId", chooseAreaId)
                 put("deviceCateId", chooseCateId)
-                put("instrumentId", chooseInstrumentId)
+                if (!TextUtils.isEmpty(chooseInstrumentId)) {
+                    put("instrumentId", chooseInstrumentId)
+                }
                 put("propertiesJson", gson.toJson(modelBody))
                 val photo = Utils_Bitmap.bitmapToBase64(bitmap)
                 photo?.let { put("photoFile", it) }

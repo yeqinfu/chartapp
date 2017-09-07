@@ -12,6 +12,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.ppandroid.app.R;
 import com.ppandroid.app.bean.devices.BN_Devices;
 import com.ppandroid.app.utils.glide.GlideUtils;
@@ -122,7 +123,9 @@ public class AD_ExList extends BaseExpandableListAdapter {
 		TextView tv_num = (TextView) view.findViewById(R.id.tv_num);
 		TextView btn_action = (TextView) view.findViewById(R.id.btn_action);
 		BN_Devices.MessageBean.DeviceCateListBean.DeviceListBean item = deviceCateList.get(parentPos).getDeviceList().get(childPos);
-		GlideUtils.displayImage(mContext, item.getPhoto(), iv_icon);
+        String url=GlideUtils.addImageBaseUrl(item.getPhoto());
+        Glide.with(mContext).load(url).asBitmap().centerCrop().placeholder(R.drawable.pic_youling).into(iv_icon);
+
         tv_name.setText(item.getName());
         tv_num.setText(item.getModel());
         if (item.getStatus()==2){
