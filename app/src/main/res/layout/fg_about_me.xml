@@ -1,13 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:gravity="center_horizontal"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
     <include layout="@layout/layout_head_view"/>
+   <ImageView
+       android:layout_marginTop="40dp"
+       android:src="@drawable/ic_launcher"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"/>
+
     <TextView
+        android:id="@+id/tv_version"
+        android:textColor="@color/color_07"
+        android:textSize="@dimen/sub_title"
+        android:layout_marginTop="10dp"
+        android:text="当前版本"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tv_company_name"
+        android:textColor="@color/color_07"
+        android:textSize="@dimen/first_title"
         android:layout_marginTop="50dp"
-        android:text="这是一个神奇的app"
-        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:drawablePadding="10dp"
+        android:drawableLeft="@drawable/ic_address"
+        android:id="@+id/tv_address"
+        android:textColor="@color/color_07"
+        android:textSize="@dimen/sub_title"
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:drawablePadding="10dp"
+        android:drawableLeft="@drawable/ic_phone"
+        android:id="@+id/tv_phone"
+        android:textColor="@color/color_07"
+        android:textSize="@dimen/sub_title"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:drawablePadding="10dp"
+        android:drawableLeft="@drawable/ic_website"
+        android:id="@+id/tv_website"
+        android:textColor="@color/color_07"
+        android:textSize="@dimen/sub_title"
+        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

@@ -168,7 +168,9 @@ public class UpdateManager {
 
             }
         }else{//不是第一次安装 出现不同更新包
-            if (!isCurrVersionBigger(currVersionName,Common.myVersionInfo.getVersionString())) {
+            if (saveVersionName.equals(Common.myVersionInfo.getVersionString())){//
+
+            }else  if (!isCurrVersionBigger(currVersionName,Common.myVersionInfo.getVersionString())) {
                 NoticeDialog();
             }
         }
