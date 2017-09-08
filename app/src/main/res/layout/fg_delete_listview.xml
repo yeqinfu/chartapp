@@ -5,6 +5,7 @@
               android:layout_height="match_parent">
     <com.ppandroid.app.widget.deletelistview.SlideListView
         android:id="@+id/lv_list2"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

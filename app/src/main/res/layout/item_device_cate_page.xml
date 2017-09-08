@@ -4,12 +4,13 @@
               android:layout_height="wrap_content"
               android:orientation="horizontal">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent"
-                    android:layout_height="72dp"
-                    android:orientation="vertical"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="12dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
 
         <TextView
             android:id="@+id/tv_name"
@@ -88,24 +89,24 @@
         android:id="@+id/tv_detail"
         android:layout_width="80dp"
         android:layout_height="match_parent"
+        android:layout_marginBottom="1dp"
         android:background="#dddddd"
         android:gravity="center"
         android:paddingLeft="20dp"
-        android:layout_marginBottom="1dp"
-        android:textColor="@android:color/white"
         android:paddingRight="20dp"
-        android:text="编辑" />
+        android:text="编辑"
+        android:textColor="@android:color/white"/>
 
     <!--delete-->
     <TextView
         android:id="@+id/tv_delete"
         android:layout_width="80dp"
         android:layout_height="match_parent"
+        android:layout_marginBottom="1dp"
         android:background="#FFFF0000"
         android:gravity="center"
         android:paddingLeft="20dp"
-        android:layout_marginBottom="1dp"
-        android:textColor="@android:color/white"
         android:paddingRight="20dp"
-        android:text="删除" />
+        android:text="删除"
+        android:textColor="@android:color/white"/>
 </LinearLayout>

@@ -3,7 +3,6 @@ package com.ppandroid.app.home.mine.aboutme
 import android.support.v7.app.AlertDialog
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ErrorBody
-import com.ppandroid.app.demo.FG_DeleteListView
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.Utils_Common
@@ -46,8 +45,8 @@ class FG_Settings:FG_Base(){
             UpdateManager.getUpdateManager(activity).checkAppUpdate(true)
         }
         tv_about_app.setOnClickListener {
-            startAC(FG_DeleteListView::class.java.name)
-           // startAC(FG_AboutMe::class.java.name)
+           // startAC(FG_DeleteListView::class.java.name)
+            startAC(FG_AboutMe::class.java.name)
         }
 
     }

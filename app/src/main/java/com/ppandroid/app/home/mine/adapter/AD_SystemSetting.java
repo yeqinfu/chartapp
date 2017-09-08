@@ -57,6 +57,5 @@ public class AD_SystemSetting extends FragmentStatePagerAdapter {
 		fragments[2] = new FG_DeviceAreaPage();//区域数据
 		fragments[3] = new FG_ImportantDevicePage();//重点设备
 		fragments[4] = new FG_EnergyChargingPage();//能源计费
-
 	}
 }

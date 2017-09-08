@@ -11,6 +11,9 @@ import kotlinx.android.synthetic.main.fg_delete_listview.*
 class FG_DeleteListView :FG_Base(){
     private val list = ArrayList<String>()
     override fun afterViews() {
+
+
+
         (0..19).mapTo(list) { "第" + it.toString() + "个item" }
         var adapter = ListViewSlideAdapter(activity, list)
         lv_list2.adapter = adapter
@@ -25,10 +28,17 @@ class FG_DeleteListView :FG_Base(){
             }
 
         })
-        lv_list2.setOnItemLongClickListener { adapterView, view, i, l ->
-            toast("fdsafs")
-            true
-        }
+
+      /*  adapter.setOnClickListenerEditOrDelete(object :OnClickListenerDetailOrDelete{
+            override fun OnClickListenerDetail(position: Int) {
+                toast("OnClickListenerDetail")
+            }
+
+            override fun OnClickListenerDelete(position: Int) {
+                toast("OnClickListenerDelete")
+            }
+
+        })*/
         lv_list2.setOnItemClickListener { adapterView, view, i, l ->
             toast("setOnItemClickListener")
             true
