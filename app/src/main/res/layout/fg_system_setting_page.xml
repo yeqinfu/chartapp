@@ -15,11 +15,11 @@
         android:layout_height="match_parent">
 
         <!--仪表数据，分项数据，区域数据等共用xml 注意！！！！！！！！！-->
-        <ListView
+        <com.ppandroid.app.widget.deletelistview.SlideListView
             android:id="@+id/lv_list"
+            android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"/>
+            android:layout_height="wrap_content"/>
         <!--网络异常-->
         <include layout="@layout/layout_network_error"/>
 

@@ -17,7 +17,7 @@ class FG_AboutMe :FG_Base(){
 
     override fun afterViews() {
         head_view.init(activity)
-        head_view.setCenterTitle("关于节能通")
+        head_view.setCenterTitle("关于"+getString(R.string.app_name))
         val info = context.packageManager.getPackageInfo(context.packageName, 0)
         var currVersionName = info.versionName
         tv_version.text="当前版本："+currVersionName

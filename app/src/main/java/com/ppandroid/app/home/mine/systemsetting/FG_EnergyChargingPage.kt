@@ -6,13 +6,14 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.TextView
 import com.ppandroid.app.R
 import com.ppandroid.app.base.NetWorkErrorView
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.mine.systemsetting.BN_EnergyChargingPage
 import com.ppandroid.app.bean.mine.systemsetting.ET_SyStemSetting
+import com.ppandroid.app.home.mine.adapter.AD_SlideDeleteBase
+import com.ppandroid.app.home.mine.adapter.OnClickListenerDetailOrDelete
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.widget.CustomDialog
@@ -131,6 +132,29 @@ class FG_EnergyChargingPage : FG_Base() {
                         message = it.message
                         var adapter = AD_List(activity, it.message)
                         lv_list.adapter = adapter
+                        adapter.setOnClickListenerEditOrDelete(object : OnClickListenerDetailOrDelete {
+                            override fun OnClickListenerDetail(position: Int) {
+                                message?.let {
+                                    operatorId=it[position].energyChargingEntity.id.toString()
+                                    code=it[position].energyChargingEntity.code.toString()
+                                    energyClassificationId=it[position].energyChargingEntity.classificationId.toString()
+                                    var b=FG_AddEnergyCharging.createBundle(operatorId,energyClassificationId,code)
+                                    startAC(FG_AddEnergyCharging::class.java.name,b)
+                                }
+                            }
+
+                            override fun OnClickListenerDelete(position: Int) {
+                                message?.let {
+                                    operatorId=it[position].energyChargingEntity.id.toString()
+                                    code=it[position].energyChargingEntity.code.toString()
+                                    energyClassificationId=it[position].energyChargingEntity.classificationId.toString()
+                                    showConfirmDialog()
+                                }
+                            }
+
+                        })
+
+
                     }
                 }
             }
@@ -147,12 +171,13 @@ class FG_EnergyChargingPage : FG_Base() {
         var tv_name: TextView? = null
         var tv_level: TextView? = null
         var tv_number: TextView? = null
-
+        var tv_detail: TextView? = null
+        var tv_delete: TextView? = null
     }
 
     private var message: List<BN_EnergyChargingPage.MessageBean>? = null
 
-    class AD_List(ac: Activity, message: List<BN_EnergyChargingPage.MessageBean>) : BaseAdapter() {
+    class AD_List(ac: Activity, message: List<BN_EnergyChargingPage.MessageBean>) : AD_SlideDeleteBase() {
         private var ac: Activity
         private var message: List<BN_EnergyChargingPage.MessageBean>? = null
 
@@ -173,12 +198,19 @@ class FG_EnergyChargingPage : FG_Base() {
                 holder.tv_number = layout.find(R.id.tv_number)
                 holder.tv_level = layout.find(R.id.tv_level)
                 holder.tv_name = layout.find(R.id.tv_name)
+                holder.tv_detail = layout.find(R.id.tv_detail)
+                holder.tv_delete = layout.find(R.id.tv_delete)
                 layout.tag = holder
             }
             holder?.tv_name?.text =  message?.get(pos)?.energyChargingName
             holder?.tv_level?.text =  message?.get(pos)?.classificationName
             holder?.tv_number?.text =  message?.get(pos)?.energyChargingEntity?.code
-
+            holder?.tv_delete?.setOnClickListener {
+                onClickListenerDetailOrDelete?.OnClickListenerDelete(pos)
+            }
+            holder?.tv_detail?.setOnClickListener {
+                onClickListenerDetailOrDelete?.OnClickListenerDetail(pos)
+            }
             return layout
         }
 

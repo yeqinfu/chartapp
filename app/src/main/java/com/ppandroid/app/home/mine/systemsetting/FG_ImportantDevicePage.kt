@@ -6,13 +6,14 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.TextView
 import com.ppandroid.app.R
 import com.ppandroid.app.base.NetWorkErrorView
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.mine.systemsetting.BN_ImportantDevice
 import com.ppandroid.app.bean.mine.systemsetting.ET_SyStemSetting
+import com.ppandroid.app.home.mine.adapter.AD_SlideDeleteBase
+import com.ppandroid.app.home.mine.adapter.OnClickListenerDetailOrDelete
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.widget.CustomDialog
@@ -134,6 +135,25 @@ class FG_ImportantDevicePage : FG_Base() {
                         network_error?.setViewType(NetWorkErrorView.NORMAL_VIEW)
                         message = it.message
                         var adapter = AD_List(activity, it.message)
+                        adapter.setOnClickListenerEditOrDelete(object : OnClickListenerDetailOrDelete {
+                            override fun OnClickListenerDetail(position: Int) {
+                                message?.let {
+                                    operatorId=it[position].id.toString()
+                                    operatorName=it[position].name.toString()
+                                    var b=FG_AddDevices.createBundle(operatorId)
+                                    startAC(FG_AddDevices::class.java.name,b)
+                                }
+                            }
+
+                            override fun OnClickListenerDelete(position: Int) {
+                                message?.let {
+                                    operatorId=it[position].id.toString()
+                                    operatorName=it[position].name.toString()
+                                    showConfirmDialog()
+                                }
+                            }
+
+                        })
                         lv_list.adapter = adapter
                     }
 
@@ -152,17 +172,17 @@ class FG_ImportantDevicePage : FG_Base() {
         var tv_name: TextView? = null
         var tv_level: TextView? = null
         var tv_number: TextView? = null
-
+        var tv_detail: TextView? = null
+        var tv_delete: TextView? = null
     }
 
     private var message: List<BN_ImportantDevice.MessageBean>? = null
 
-    class AD_List(ac: Activity, message: List<BN_ImportantDevice.MessageBean>) : BaseAdapter() {
-        private var ac: Activity
+    class AD_List(ac: Activity, message: List<BN_ImportantDevice.MessageBean>) : AD_SlideDeleteBase() {
+        private var ac: Activity = ac
         private var message: List<BN_ImportantDevice.MessageBean>? = null
 
         init {
-            this.ac = ac
             this.message = message
         }
 
@@ -178,12 +198,19 @@ class FG_ImportantDevicePage : FG_Base() {
                 holder.tv_number = layout.find(R.id.tv_number)
                 holder.tv_level = layout.find(R.id.tv_level)
                 holder.tv_name = layout.find(R.id.tv_name)
+                holder.tv_detail = layout.find(R.id.tv_detail)
+                holder.tv_delete = layout.find(R.id.tv_delete)
                 layout.tag = holder
             }
             holder?.tv_name?.text = message?.get(pos)?.name ?: ""
             holder?.tv_level?.text =  message?.get(pos)?.deviceCateName
             holder?.tv_number?.text =  message?.get(pos)?.model
-
+            holder?.tv_delete?.setOnClickListener {
+                onClickListenerDetailOrDelete?.OnClickListenerDelete(pos)
+            }
+            holder?.tv_detail?.setOnClickListener {
+                onClickListenerDetailOrDelete?.OnClickListenerDetail(pos)
+            }
             return layout
         }
 

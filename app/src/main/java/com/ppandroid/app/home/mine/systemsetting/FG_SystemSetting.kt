@@ -23,7 +23,7 @@ class FG_SystemSetting : FG_Base() {
             addModelByPosition()
         })
         var adapter = AD_SystemSetting(activity, childFragmentManager)
-        view_pager.setAdapter(adapter)
+        view_pager.adapter = adapter
         adapter.notifyDataSetChanged()
         title_indicator.setViewPager(view_pager)
         val density = resources.displayMetrics.density

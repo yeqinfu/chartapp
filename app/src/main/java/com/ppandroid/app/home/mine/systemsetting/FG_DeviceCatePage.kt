@@ -7,13 +7,14 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.TextView
 import com.ppandroid.app.R
 import com.ppandroid.app.base.NetWorkErrorView
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.mine.systemsetting.BN_DeviceCatePage
 import com.ppandroid.app.bean.mine.systemsetting.ET_SyStemSetting
+import com.ppandroid.app.home.mine.adapter.AD_SlideDeleteBase
+import com.ppandroid.app.home.mine.adapter.OnClickListenerDetailOrDelete
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.widget.CustomDialog
@@ -68,14 +69,7 @@ class FG_DeviceCatePage : FG_Base() {
         loadContent()
         network_error.setListener { loadContent() }
 
-        lv_list.setOnItemLongClickListener { adapterView, view, i, l ->
-            message?.let {
-                operatorId=it[i].id.toString()
-                operatorName=it[i].name.toString()
-                showChooseDialog()
-            }
-            true
-        }
+
     }
 
     private var operatorId=""
@@ -159,6 +153,25 @@ class FG_DeviceCatePage : FG_Base() {
                         network_error?.setViewType(NetWorkErrorView.NORMAL_VIEW)
                         message = it.message
                         var adapter = AD_List(activity, it.message)
+                        adapter.setOnClickListenerEditOrDelete(object : OnClickListenerDetailOrDelete {
+                            override fun OnClickListenerDetail(position: Int) {
+                                message?.let {
+                                    operatorId=it[position].id.toString()
+                                    operatorName=it[position].name.toString()
+                                    var b=FG_AddDeviceCate.createBundle(operatorId,operatorName,parentId,parentName)
+                                    startAC(FG_AddDeviceCate::class.java.name,b)
+                                }
+                            }
+
+                            override fun OnClickListenerDelete(position: Int) {
+                                message?.let {
+                                    operatorId=it[position].id.toString()
+                                    operatorName=it[position].name.toString()
+                                    showConfirmDialog()
+                                }
+                            }
+
+                        })
                         lv_list.adapter = adapter
                         lv_list.setOnItemClickListener { adapterView, view, i, l ->
 
@@ -182,12 +195,13 @@ class FG_DeviceCatePage : FG_Base() {
         var tv_name: TextView? = null
         var tv_level: TextView? = null
         var tv_number: TextView? = null
-
+        var tv_detail: TextView? = null
+        var tv_delete: TextView? = null
     }
 
     private var message: List<BN_DeviceCatePage.MessageBean>? = null
 
-    class AD_List(ac: Activity, message: List<BN_DeviceCatePage.MessageBean>) : BaseAdapter() {
+    class AD_List(ac: Activity, message: List<BN_DeviceCatePage.MessageBean>) : AD_SlideDeleteBase() {
         private var ac: Activity
         private var message: List<BN_DeviceCatePage.MessageBean>? = null
 
@@ -208,6 +222,8 @@ class FG_DeviceCatePage : FG_Base() {
                 holder.tv_number = layout.find(R.id.tv_number)
                 holder.tv_level = layout.find(R.id.tv_level)
                 holder.tv_name = layout.find(R.id.tv_name)
+                holder.tv_detail = layout.find(R.id.tv_detail)
+                holder.tv_delete = layout.find(R.id.tv_delete)
                 layout.tag = holder
             }
             holder?.tv_name?.text = message?.get(pos)?.name ?: ""
@@ -216,6 +232,12 @@ class FG_DeviceCatePage : FG_Base() {
                 holder?.tv_number?.text = "已经是最高级"
             }else{
                 holder?.tv_number?.text = message?.get(pos)?.parentId.toString()
+            }
+            holder?.tv_delete?.setOnClickListener {
+                onClickListenerDetailOrDelete?.OnClickListenerDelete(pos)
+            }
+            holder?.tv_detail?.setOnClickListener {
+                onClickListenerDetailOrDelete?.OnClickListenerDetail(pos)
             }
 
             return layout
