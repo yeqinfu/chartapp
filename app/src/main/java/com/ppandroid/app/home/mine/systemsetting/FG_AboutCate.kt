@@ -17,7 +17,7 @@ import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.im.base.FG_Base
-import kotlinx.android.synthetic.main.fg_system_setting_page.*
+import kotlinx.android.synthetic.main.fg_about_cate.*
 import kotlinx.android.synthetic.main.layout_head_view.*
 import kotlinx.android.synthetic.main.layout_network_error.*
 import org.greenrobot.eventbus.EventBus
@@ -133,9 +133,12 @@ class FG_AboutCate:FG_Base(){
             }
             message?.get(pos)?.let {
                 holder?.tv_name?.text = it.name ?: ""
+
                 if (it.isIsLeaf) {
+                    holder?.cb_check?.visibility=View.VISIBLE
                     holder?.tv_leaf?.visibility = View.GONE
                 } else {
+                    holder?.cb_check?.visibility=View.INVISIBLE
                     holder?.tv_leaf?.visibility = View.VISIBLE
                     holder?.tv_leaf?.setOnClickListener { _ ->
                         var b = FG_AboutCate.createBundle(""+it.id)

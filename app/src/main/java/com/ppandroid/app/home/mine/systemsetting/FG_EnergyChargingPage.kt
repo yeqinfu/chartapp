@@ -40,7 +40,7 @@ class FG_EnergyChargingPage : FG_Base() {
         loadContent()
         network_error.setListener { loadContent() }
 
-        lv_list.setOnItemLongClickListener { adapterView, view, i, l ->
+      /*  lv_list.setOnItemLongClickListener { adapterView, view, i, l ->
             message?.let {
                 operatorId=it[i].energyChargingEntity.id.toString()
                 code=it[i].energyChargingEntity.code.toString()
@@ -48,7 +48,7 @@ class FG_EnergyChargingPage : FG_Base() {
                 showChooseDialog()
             }
             false
-        }
+        }*/
     }
 
 

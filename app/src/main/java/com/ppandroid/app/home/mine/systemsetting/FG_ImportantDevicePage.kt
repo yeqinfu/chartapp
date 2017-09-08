@@ -37,14 +37,14 @@ class FG_ImportantDevicePage : FG_Base() {
         loadContent()
         network_error.setListener { loadContent() }
 
-        lv_list.setOnItemLongClickListener { adapterView, view, i, l ->
+       /* lv_list.setOnItemLongClickListener { adapterView, view, i, l ->
             message?.let {
                 operatorId=it[i].id.toString()
                 operatorName=it[i].name.toString()
                 showChooseDialog()
             }
             false
-        }
+        }*/
     }
 
     private var operatorId=""
