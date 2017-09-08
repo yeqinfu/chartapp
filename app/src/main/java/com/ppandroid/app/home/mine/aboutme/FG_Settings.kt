@@ -42,7 +42,7 @@ class FG_Settings:FG_Base(){
             }
         }
         tv_check_update.setOnClickListener {
-            UpdateManager.getUpdateManager(activity).checkAppUpdate(true)
+            UpdateManager.getUpdateManager(activity).checkAppUpdate(false)
         }
         tv_about_app.setOnClickListener {
            // startAC(FG_DeleteListView::class.java.name)

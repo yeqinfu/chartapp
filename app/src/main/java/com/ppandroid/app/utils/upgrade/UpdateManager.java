@@ -146,8 +146,8 @@ public class UpdateManager {
         Calendar currCalendar = Calendar.getInstance();
         String currDate = Utils_DateFormat.timeFormat(currCalendar.getTime(),
                 true);
-        Log.i("", "当前日期：" + currDate + "保存日期：" + saveDate);
-        Log.i("", "当前获取的版本：" + Common.myVersionInfo.getVersionString() + "保存的版本："
+        Log.i("yeqinfu", "当前日期：" + currDate + "保存日期：" + saveDate);
+        Log.i("yeqinfu", "当前获取的版本：" + Common.myVersionInfo.getVersionString() + "保存的版本："
                 + saveVersionName);
 
 
