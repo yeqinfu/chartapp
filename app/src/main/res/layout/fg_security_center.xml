@@ -75,9 +75,9 @@
             android:visibility="gone"
             >
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="76dp"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/shape_slid_white_corner_20dp"
                 android:gravity="center_vertical"
@@ -85,24 +85,43 @@
                 android:paddingLeft="15dp">
 
                 <ImageView
+                    android:id="@+id/iv_01"
+                    android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"
-                    android:src="@drawable/icon_ok"/>
+                    android:src="@drawable/ic_zhineng"/>
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_01"
+                    android:layout_toRightOf="@+id/iv_01"
+                    android:textColor="@color/color_07"
+                    android:textSize="@dimen/first_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:gravity="center_vertical"
                     android:layout_marginLeft="15dp"
                     android:layout_weight="1"
-                    android:text="评分结果"/>
+                    android:text="智能化监测"/>
+
+                <TextView
+                    android:layout_below="@+id/tv_01"
+                    android:layout_toRightOf="@+id/iv_01"
+                    android:textColor="@color/color_04"
+                    android:textSize="@dimen/second_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:text="系统检测设备运行完好无风险"/>
 
 
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="76dp"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/shape_slid_white_corner_20dp"
                 android:gravity="center_vertical"
@@ -110,24 +129,42 @@
                 android:paddingLeft="15dp">
 
                 <ImageView
+                    android:id="@+id/iv_02"
+                    android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"
-                    android:src="@drawable/icon_ok"/>
+                    android:src="@drawable/icon_dianli"/>
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_02"
+                    android:layout_toRightOf="@+id/iv_02"
+                    android:textColor="@color/color_07"
+                    android:textSize="@dimen/first_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:gravity="center_vertical"
                     android:layout_marginLeft="15dp"
                     android:layout_weight="1"
-                    android:text="评分结果"/>
+                    android:text="电力质量检测"/>
+
+                <TextView
+                    android:layout_below="@+id/tv_02"
+                    android:layout_toRightOf="@+id/iv_02"
+                    android:textColor="@color/color_04"
+                    android:textSize="@dimen/second_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:text="系统检测设备运行完好无风险"/>
 
 
-            </LinearLayout>
-
-            <LinearLayout
+            </RelativeLayout>
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="76dp"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/shape_slid_white_corner_20dp"
                 android:gravity="center_vertical"
@@ -135,24 +172,42 @@
                 android:paddingLeft="15dp">
 
                 <ImageView
+                    android:id="@+id/iv_03"
+                    android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"
-                    android:src="@drawable/icon_ok"/>
+                    android:src="@drawable/icon_fxyj"/>
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_03"
+                    android:layout_toRightOf="@+id/iv_03"
+                    android:textColor="@color/color_07"
+                    android:textSize="@dimen/first_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:gravity="center_vertical"
                     android:layout_marginLeft="15dp"
                     android:layout_weight="1"
-                    android:text="评分结果"/>
+                    android:text="风险预警检测"/>
+
+                <TextView
+                    android:layout_below="@+id/tv_03"
+                    android:layout_toRightOf="@+id/iv_03"
+                    android:textColor="@color/color_04"
+                    android:textSize="@dimen/second_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:text="系统检测设备运行完好无风险"/>
 
 
-            </LinearLayout>
-
-            <LinearLayout
+            </RelativeLayout>
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="148dp"
+                android:layout_height="76dp"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/shape_slid_white_corner_20dp"
                 android:gravity="center_vertical"
@@ -160,21 +215,39 @@
                 android:paddingLeft="15dp">
 
                 <ImageView
+                    android:id="@+id/iv_04"
+                    android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"
-                    android:src="@drawable/icon_ok"/>
+                    android:src="@drawable/icon_xitong"/>
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_04"
+                    android:layout_toRightOf="@+id/iv_04"
+                    android:textColor="@color/color_07"
+                    android:textSize="@dimen/first_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:gravity="center_vertical"
                     android:layout_marginLeft="15dp"
                     android:layout_weight="1"
-                    android:text="评分结果"/>
+                    android:text="系统能效监测"/>
+
+                <TextView
+                    android:layout_below="@+id/tv_04"
+                    android:layout_toRightOf="@+id/iv_04"
+                    android:textColor="@color/color_04"
+                    android:textSize="@dimen/second_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:text="系统检测设备运行完好无风险"/>
 
 
-            </LinearLayout>
-
+            </RelativeLayout>
 
         </LinearLayout>
 
