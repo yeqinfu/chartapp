@@ -9,6 +9,8 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.ppandroid.app.utils.DebugLog;
+
 /**
  * Created by yeqinfu on 2017/9/8.
  */
@@ -48,6 +50,10 @@ public class SlideListView extends ListView {
                 return performActionMove(ev);
             case MotionEvent.ACTION_UP:
                 performActionUp();
+                if (isMoving){
+                    isMoving=false;
+                    return true;
+                }
                 break;
         }
 
@@ -90,11 +96,18 @@ public class SlideListView extends ListView {
                 mLayoutParams.leftMargin = scroll*2;
                 mPointChild.getChildAt(0).setLayoutParams(mLayoutParams);
             }
+            DebugLog.e("yeqinfu============true");
+            isMoving=true;
             return true;
+        }else{
+            DebugLog.e("nowX->"+nowX+"--mDownX->"+mDownX+"===nowY->"+nowY+"--mDownY->"+mDownY);
         }
+        DebugLog.e("yeqinfu============super");
+
         return super.onTouchEvent(ev);
     }
 
+    private boolean isMoving=false;
     // 处理action_up事件
     private void performActionUp() {
         // 偏移量大于button的一半，则显示button

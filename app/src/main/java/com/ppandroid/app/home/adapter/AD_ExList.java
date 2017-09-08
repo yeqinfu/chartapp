@@ -124,7 +124,7 @@ public class AD_ExList extends BaseExpandableListAdapter {
 		TextView btn_action = (TextView) view.findViewById(R.id.btn_action);
 		BN_Devices.MessageBean.DeviceCateListBean.DeviceListBean item = deviceCateList.get(parentPos).getDeviceList().get(childPos);
         String url=GlideUtils.addImageBaseUrl(item.getPhoto());
-        Glide.with(mContext).load(url).asBitmap().centerCrop().placeholder(R.drawable.pic_youling).into(iv_icon);
+        Glide.with(mContext).load(url).asBitmap().centerCrop().placeholder(R.drawable.pic_device_default).into(iv_icon);
 
         tv_name.setText(item.getName());
         tv_num.setText(item.getModel());
