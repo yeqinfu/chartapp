@@ -40,7 +40,7 @@ class FG_SecurityCenter:FG_Base(){
                             isDestroy?.let {
                                 if (it){
                                 }else{
-                                   // tv_score.text=(progress*100).toInt().toString()
+                                    tv_score.text=(progress*100).toInt().toString()
                                     if (progress>0&&progress<=0.25){//第一阶段
                                         iv_check.setImageResource(R.drawable.icon_check)
                                         iv_check2.setImageResource(R.drawable.icon_check)
