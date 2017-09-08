@@ -11,7 +11,7 @@ import com.ppandroid.app.bean.mine.instrument.BN_InstrumentList
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.im.base.FG_Base
-import kotlinx.android.synthetic.main.fg_system_setting_page.*
+import kotlinx.android.synthetic.main.fg_instrument_list.*
 import kotlinx.android.synthetic.main.layout_head_view.*
 import org.jetbrains.anko.find
 

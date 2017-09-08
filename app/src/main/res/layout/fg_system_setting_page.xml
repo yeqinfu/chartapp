@@ -17,6 +17,8 @@
         <!--仪表数据，分项数据，区域数据等共用xml 注意！！！！！！！！！-->
         <com.ppandroid.app.widget.deletelistview.SlideListView
             android:id="@+id/lv_list"
+            android:divider="@color/color_03"
+            android:dividerHeight="0.5dp"
             android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
