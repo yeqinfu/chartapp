@@ -107,6 +107,7 @@
             android:id="@+id/checkbox"
             android:textSize="@dimen/time_text"
             android:text="记住账号"
+            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView

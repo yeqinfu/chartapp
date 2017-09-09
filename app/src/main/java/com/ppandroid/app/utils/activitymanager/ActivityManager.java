@@ -16,7 +16,6 @@ public class ActivityManager {
     private static final String TAG = "ActivityManager";
     private static Stack<Activity> activityStack;
     private static ActivityManager instance;
-    private Activity currActivity;
     private ActivityManager() {
     }
 
@@ -36,7 +35,6 @@ public class ActivityManager {
         if(activityStack.contains(activity)) {
             activityStack.remove(activity);
         }
-        currActivity = activity;
         //activity.finish();
 
         //activity = null;
@@ -89,10 +87,6 @@ public class ActivityManager {
         popAllActivityExceptOne(null);
     }
 
-    public Activity getCurrentActivity()
-    {
-        return currActivity;
-    }
 
     public int getActivityStackSize()
     {
