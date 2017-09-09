@@ -5,6 +5,7 @@ buildscript {
     ext.glide_version = '3.7.0'
     ext.kotlin_version = '1.1.0'
     ext.anko_version = '0.8.2'
+    ext.okhttp_version='3.3.1'
 
     repositories {
         jcenter()
