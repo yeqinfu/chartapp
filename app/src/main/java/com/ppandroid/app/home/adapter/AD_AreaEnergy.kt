@@ -4,6 +4,7 @@ import android.app.Activity
 import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.overview.BN_OverView
@@ -67,8 +68,15 @@ class AD_AreaEnergy(ac: Activity, list: List<BN_OverView.MessageBean.OverviewCon
         var tv_value2=view.find<TextView>(R.id.tv_value2)
         tv_key.text= list?.get(position)?.areaKwhMapList?.get(0)?.key
         tv_value.text= list?.get(position)?.areaKwhMapList?.get(0)?.value
-        tv_key2.text= list?.get(position)?.areaKwhMapList?.get(1)?.key
-        tv_value2.text= list?.get(position)?.areaKwhMapList?.get(1)?.value
+        var  ll_second=view.find<LinearLayout>(R.id.ll_second)
+        if (list?.get(position)?.areaKwhMapList?.size?:0>=2){
+            tv_key2.text= list?.get(position)?.areaKwhMapList?.get(1)?.key
+            tv_value2.text= list?.get(position)?.areaKwhMapList?.get(1)?.value
+            ll_second.visibility=View.VISIBLE
+        }else{
+            ll_second.visibility=View.GONE
+
+        }
         container.addView(views[position])
         return views[position]
     }
