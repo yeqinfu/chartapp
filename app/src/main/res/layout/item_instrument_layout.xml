@@ -52,4 +52,9 @@
         android:textColor="@color/color_04"
         android:textSize="@dimen/time_text"/>
 
+    <View
+        android:background="@color/color_03"
+        android:layout_width="match_parent"
+        android:layout_height="7dp"/>
+
 </LinearLayout>

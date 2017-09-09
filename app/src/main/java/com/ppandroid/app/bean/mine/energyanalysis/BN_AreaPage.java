@@ -61,7 +61,16 @@ public class BN_AreaPage extends BaseBody {
             private String areaName;
             private String areaRatio;
             private String areaKwh;
+            private String id;
             private boolean leaf;
+
+            public String getId() {
+                return id;
+            }
+
+            public void setId(String id) {
+                this.id = id;
+            }
 
             public String getAreaName() {
                 return areaName;

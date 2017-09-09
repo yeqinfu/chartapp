@@ -25,6 +25,8 @@ class FG_AreaPage : FG_BaseAnlysisPage(){
                     v_dount_view.startAnim()
                     adapter.listener = object : ItemChoosseListener {
                         override fun choose(index: Int) {
+                            var b=FG_BaseAnalysis.createBundle(it.message.analysisAreaParamDtoList[index].id.toString())
+                            startAC(FG_AreaAnalysis::class.java.name,b)
 
                         }
                     }

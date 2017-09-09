@@ -34,7 +34,10 @@ public class ActivityManager {
         }
         if(activityStack.contains(activity)) {
             activityStack.remove(activity);
+            DebugLog.i("ActivityManager======remove++++++=======>");
+
         }
+        DebugLog.i("ActivityManager======popActivity=======>"+activityStack.size());
         //activity.finish();
 
         //activity = null;
@@ -65,7 +68,11 @@ public class ActivityManager {
         if (activityStack == null) {
             activityStack = new Stack<Activity>();
         }
-        activityStack.add(activity);
+        if (!activityStack.contains(activity)){
+            activityStack.add(activity);
+            DebugLog.i("ActivityManager======pushActivity=======>"+activityStack.size());
+        }
+
     }
 
     //退出栈中除指定的Activity外的所有
