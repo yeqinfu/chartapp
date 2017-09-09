@@ -4,6 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
     <LinearLayout
+        android:visibility="gone"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="65dp">
@@ -82,6 +83,7 @@
 
     </LinearLayout>
     <View
+        android:visibility="gone"
         android:background="@color/color_03"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"/>
@@ -97,17 +99,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/tv_key"
                 android:textSize="@dimen/bar_title"
                 android:textColor="@color/color_07"
-                android:text="高压动力站"
                 android:layout_weight="1"
                 android:gravity="left"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"/>
             <TextView
+                android:id="@+id/tv_value"
                 android:textSize="@dimen/bar_title"
                 android:textColor="@color/color_07"
-                android:text="15.91万kwh"
                 android:layout_weight="1"
                 android:gravity="right"
                 android:layout_width="0dp"
@@ -117,6 +119,42 @@
             android:layout_marginBottom="5dp"
             android:layout_marginTop="10dp"
             android:id="@+id/v_hp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="65dp">
+        <LinearLayout
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_key2"
+                android:textSize="@dimen/bar_title"
+                android:textColor="@color/color_07"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:id="@+id/tv_value2"
+                android:textSize="@dimen/bar_title"
+                android:textColor="@color/color_07"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+        <com.ppandroid.app.widget.HorizontalPercentageView
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/v_hp2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

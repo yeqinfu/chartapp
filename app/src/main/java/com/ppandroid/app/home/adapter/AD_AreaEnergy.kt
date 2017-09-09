@@ -4,15 +4,17 @@ import android.app.Activity
 import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.overview.BN_OverView
+import org.jetbrains.anko.find
 
 /**
  * Created by yeqinfu on 2017/8/11.
  */
 class AD_AreaEnergy(ac: Activity, list: List<BN_OverView.MessageBean.OverviewConsumptionInformationBean.AreaInformationListBean>): PagerAdapter(){
     /**横条图viewpager*/
-    var arrays_title = arrayOf(
+    private var arrays_title = arrayOf(
             "今日",
             "本月",
             "本年"
@@ -43,7 +45,7 @@ class AD_AreaEnergy(ac: Activity, list: List<BN_OverView.MessageBean.OverviewCon
 
     override fun destroyItem(container: ViewGroup, position: Int,
                              `object`: Any) {
-        container.removeView(views.get(position))
+        container.removeView(views[position])
 
     }
 
@@ -57,6 +59,16 @@ class AD_AreaEnergy(ac: Activity, list: List<BN_OverView.MessageBean.OverviewCon
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
+
+        var view=views[position]
+        var tv_key=view.find<TextView>(R.id.tv_key)
+        var tv_value=view.find<TextView>(R.id.tv_value)
+        var tv_key2=view.find<TextView>(R.id.tv_key2)
+        var tv_value2=view.find<TextView>(R.id.tv_value2)
+        tv_key.text= list?.get(position)?.areaKwhMapList?.get(0)?.key
+        tv_value.text= list?.get(position)?.areaKwhMapList?.get(0)?.value
+        tv_key2.text= list?.get(position)?.areaKwhMapList?.get(1)?.key
+        tv_value2.text= list?.get(position)?.areaKwhMapList?.get(1)?.value
         container.addView(views[position])
         return views[position]
     }
