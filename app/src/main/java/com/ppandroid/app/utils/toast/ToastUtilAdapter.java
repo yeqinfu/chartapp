@@ -13,17 +13,19 @@ public class ToastUtilAdapter {
 	private Toast toast;
 	private WeakReference<Context> context;
 	private Handler handler;
-	
-	private ToastUtilAdapter (Context context){
-		this.context = new WeakReference<Context>(context);
+	public ToastUtilAdapter setContext(Context context){
+        this.context=new WeakReference(context);
+        return instance;
+    }
+	private ToastUtilAdapter (){
 		handler = new Handler();
 	}
 	
-	public static ToastUtilAdapter getInstance(Context context){
+	public static ToastUtilAdapter getInstance(){
 		if(instance == null){
 			synchronized (ToastUtilAdapter.class) {
 				if(instance == null){
-					instance = new ToastUtilAdapter(context);
+					instance = new ToastUtilAdapter();
 				}
 			}
 		}

@@ -7,12 +7,12 @@ public class ToastUtil {
 
 	public static void toast(Context context,String toastMsg){
         if (!TextUtils.isEmpty(toastMsg)){
-            ToastUtilAdapter.getInstance(context).toast(toastMsg);
+            ToastUtilAdapter.getInstance().setContext(context).toast(toastMsg);
         }
 	}
 	
 	public static void toast(Context context,int resId){
-		ToastUtilAdapter.getInstance(context).toast(resId);
+		ToastUtilAdapter.getInstance().setContext(context).toast(resId);
 	}
 
 
