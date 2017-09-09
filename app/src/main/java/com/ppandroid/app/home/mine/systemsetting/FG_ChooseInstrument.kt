@@ -8,6 +8,7 @@ import android.widget.BaseAdapter
 import android.widget.CheckBox
 import android.widget.TextView
 import com.ppandroid.app.R
+import com.ppandroid.app.base.NetWorkErrorView
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.mine.systemsetting.BN_ChooseInstrument
 import com.ppandroid.app.http.Http
@@ -15,6 +16,7 @@ import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_choose_instruemnt.*
 import kotlinx.android.synthetic.main.layout_head_view.*
+import kotlinx.android.synthetic.main.layout_network_error.*
 import org.greenrobot.eventbus.EventBus
 import org.jetbrains.anko.find
 
@@ -41,6 +43,9 @@ class FG_ChooseInstrument : FG_Base() {
         head_view.setRightText("保存") {
             saveInfo()
         }
+        network_error.setListener {
+            loadContent()
+        }
 
     }
 
@@ -62,12 +67,20 @@ class FG_ChooseInstrument : FG_Base() {
                         }
                     }
                     lv_list.adapter = adapter
+
+                    if (it.message.isEmpty()){
+                        network_error?.setViewType(NetWorkErrorView.NOT_DATA)
+                    }else{
+                        network_error?.setViewType(NetWorkErrorView.NORMAL_VIEW)
+                    }
+
                 }
 
             }
 
             override fun onError(error: ErrorBody?) {
                 toast(error)
+                network_error?.setViewType(NetWorkErrorView.NETWORK_ERROR)
             }
 
         })
