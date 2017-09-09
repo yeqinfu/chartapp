@@ -12,6 +12,7 @@ import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.news.BN_EnergyList
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
+import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_energy_list.*
 import kotlinx.android.synthetic.main.layout_head_view.*
@@ -85,7 +86,7 @@ class FG_EnergyList :FG_Base(){
         var iv_type:ImageView?=null
     }
 
-    class AD_List(ac:Activity,list:List<BN_EnergyList.MessageBean.EnergyConsumptionStatisticsDtoListBean>) : BaseAdapter() {
+    class AD_List(ac:Activity,list:ArrayList<BN_EnergyList.MessageBean.EnergyConsumptionStatisticsDtoListBean>) : BaseAdapter() {
         private var ac=ac
         private var list=list
         var colors = arrayOf(
@@ -95,6 +96,7 @@ class FG_EnergyList :FG_Base(){
                 "#FF6969"
         )
         override fun getView(pos: Int, convertView: View?, p2: ViewGroup?): View? {
+            DebugLog.d("======="+pos)
             var layout:View?=null
             var holder:Holder?=null
             if (convertView!=null){
@@ -110,6 +112,7 @@ class FG_EnergyList :FG_Base(){
                 holder.tv_key=layout.find(R.id.tv_key)
                 holder.tv_value=layout.find(R.id.tv_value)
                 holder.iv_type=layout.find(R.id.iv_type)
+                layout.tag = holder
             }
             holder?.let {
                 it.tv_msg_date?.text=list[pos].recordDate
