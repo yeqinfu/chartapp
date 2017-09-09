@@ -59,8 +59,22 @@ class AD_Energy(ac: Activity, list: List<ClassificationInformationListBean>) : P
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
+
         var tv_totalKwh = views[position].find<TextView>(R.id.tv_totalKwh)
-        tv_totalKwh.text = list?.get(position)?.totalKwh ?: ""
+        var tv_title = views[position].find<TextView>(R.id.tv_title)
+        var tv_kwh = views[position].find<TextView>(R.id.tv_kwh)
+        when (position) {
+            0 -> tv_title.text="今日用电"
+            1 -> tv_title.text="本月用电"
+            else -> tv_title.text="本年用电"
+        }
+        tv_totalKwh.text = Utils_Common.findNumberFromStr(list?.get(position)?.totalKwh ?: "")
+        var d=list?.get(position)?.totalKwh?:""
+        if (d.contains("万")){
+            tv_kwh.text="万kwh"
+        }else{
+            tv_kwh.text="kwh"
+        }
 
         var v_dount_view = views[position].find<DountChart01View>(R.id.v_dount_view)
         v_dount_view.charRender(getList(list?.get(position)))

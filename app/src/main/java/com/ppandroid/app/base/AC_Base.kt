@@ -45,7 +45,7 @@ open class AC_Base : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        ActivityManager.getActivityManager().popActivity(this)
+        ActivityManager.getActivityManager().pushActivity(this)
         /**如果还没有检查过版本，这边进行检查版本*/
         if (!UpdateManager.getUpdateManager(this@AC_Base).checkFlag) {
             UpdateManager.getUpdateManager(this@AC_Base).checkAppUpdate(true)
@@ -56,11 +56,12 @@ open class AC_Base : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        ActivityManager.getActivityManager().pushActivity(this)
+
     }
 
 
     override fun onDestroy() {
+        ActivityManager.getActivityManager().popActivity(this)
         super.onDestroy()
         System.gc()
     }

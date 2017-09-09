@@ -1,5 +1,7 @@
 package com.ppandroid.app.http;
 
+import com.ppandroid.im.FG_Mine;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,6 +17,9 @@ public class HttpTest {
     @Test
     public void get() throws Exception {
 
+        String url="user/personal/get.json";
+        FG_Mine fg=new FG_Mine();
+        fg.loadContent();
 
     }
 
@@ -45,7 +50,6 @@ public class HttpTest {
 
     @Test
     public void addBaseParams() throws Exception {
-
     }
 
 }
