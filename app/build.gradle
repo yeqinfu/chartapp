@@ -70,7 +70,8 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.1'
     compile "com.github.bumptech.glide:glide:$glide_version"
     testCompile 'junit:junit:4.12'
-
+    /*全局右滑返回*/
+    compile 'com.github.liuguangqiang.swipeback:library:1.0.2@aar'
     //leaks
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'

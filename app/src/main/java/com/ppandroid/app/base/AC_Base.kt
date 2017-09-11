@@ -1,15 +1,11 @@
 package com.ppandroid.im.base
 
 
-import android.app.Activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.text.TextUtils
-import android.view.View
-import android.view.ViewGroup
 import com.ppandroid.app.utils.DebugLog
-import com.ppandroid.app.utils.SnackbarUtils
 import com.ppandroid.app.utils.activitymanager.ActivityManager
+import com.ppandroid.app.utils.toast.ToastUtil
 import com.ppandroid.app.utils.upgrade.UpdateManager
 
 
@@ -24,7 +20,7 @@ open class AC_Base : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         try {
-            DebugLog.d("intent", this.javaClass.getName())
+            DebugLog.d("intent", this.javaClass.name)
         } catch (e: Exception) {
             DebugLog.d("intent", "=print class name exception===========")
         }
@@ -67,18 +63,12 @@ open class AC_Base : AppCompatActivity() {
     }
 
     protected fun toast(msg: String) {
-        if (!TextUtils.isEmpty(msg)) {
-            SnackbarUtils.with(getContentView(this)).setMessage(msg).show()
-        }
+        ToastUtil.toast(this,msg)
     }
 
     protected fun toast(resId: Int) {
-        SnackbarUtils.with(getContentView(this)).setMessage(getString(resId)).show()
+        ToastUtil.toast(this,resId)
     }
 
-    companion object {
-        fun getContentView(context: Activity): View {
-            return (context.findViewById(android.R.id.content) as ViewGroup).getChildAt(0)
-        }
-    }
+
 }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
+import com.liuguangqiang.swipeback.SwipeBackLayout;
 import com.ppandroid.app.R;
 import com.ppandroid.app.utils.DebugLog;
 import com.ppandroid.im.base.AC_Base;
@@ -18,6 +19,8 @@ import com.ppandroid.im.base.AC_Base;
 public class AC_ContentFG extends AC_Base {
     Fragment fragment;
     String						fragmentName;
+
+
 
     public static Intent createIntent(Context context, String fragmentName, String title, Bundle b) {
         DebugLog.v("intent",fragmentName);
@@ -47,6 +50,9 @@ public class AC_ContentFG extends AC_Base {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ac_content_fg);
         replaceFragment(getIntent());
+        SwipeBackLayout swipeBackLayout= (SwipeBackLayout) findViewById(R.id.swipeBackLayout);
+        swipeBackLayout.setDragEdge(SwipeBackLayout.DragEdge.LEFT);
+
     }
 
     private void replaceFragment(Intent intent) {
