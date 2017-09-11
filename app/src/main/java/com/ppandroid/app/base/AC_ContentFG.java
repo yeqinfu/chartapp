@@ -44,16 +44,20 @@ public class AC_ContentFG extends AC_Base {
 
 
 
-
+    SwipeBackLayout swipeBackLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ac_content_fg);
         replaceFragment(getIntent());
-        SwipeBackLayout swipeBackLayout= (SwipeBackLayout) findViewById(R.id.swipeBackLayout);
+        swipeBackLayout= (SwipeBackLayout) findViewById(R.id.swipeBackLayout);
         swipeBackLayout.setDragEdge(SwipeBackLayout.DragEdge.LEFT);
 
     }
+    public void setEnablePullToBack(boolean b) {
+        swipeBackLayout.setEnablePullToBack(b);
+    }
+
 
     private void replaceFragment(Intent intent) {
         try {
