@@ -15,6 +15,7 @@
             android:layout_height="240dp"
             android:src="@drawable/pic_youling"/>
         <LinearLayout
+            android:visibility="gone"
             android:paddingRight="10dp"
             android:paddingLeft="10dp"
             android:layout_marginRight="20dp"
