@@ -30,6 +30,7 @@ class APP : Application() {
         fun toLogin() {
             var it = Intent()
             it.setClass(context, AC_Login::class.java)
+            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             context?.startActivity(it)
         }
     }

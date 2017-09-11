@@ -62,6 +62,7 @@ class FG_EnergyChargingPage : FG_Base() {
 
     private var operatorId=""
     private var energyClassificationId=""
+    private var energyClassificationName=""
     private var code=""
     private var dialog: CustomDialog? = null
     private fun showChooseDialog() {
@@ -75,7 +76,7 @@ class FG_EnergyChargingPage : FG_Base() {
     private val dialogListener = View.OnClickListener { v ->
         when (v.id) {
             R.id.rl_detail -> {
-                var b=FG_AddEnergyCharging.createBundle(operatorId,energyClassificationId,code)
+                var b=FG_AddEnergyCharging.createBundle(operatorId,energyClassificationId,energyClassificationName,code)
                 startAC(FG_AddEnergyCharging::class.java.name,b)
                 dialog?.dismiss()
 
@@ -138,7 +139,8 @@ class FG_EnergyChargingPage : FG_Base() {
                                     operatorId=it[position].energyChargingEntity.id.toString()
                                     code=it[position].energyChargingEntity.code.toString()
                                     energyClassificationId=it[position].energyChargingEntity.classificationId.toString()
-                                    var b=FG_AddEnergyCharging.createBundle(operatorId,energyClassificationId,code)
+                                    energyClassificationName=it[position].classificationName.toString()
+                                    var b=FG_AddEnergyCharging.createBundle(operatorId,energyClassificationId,energyClassificationName,code)
                                     startAC(FG_AddEnergyCharging::class.java.name,b)
                                 }
                             }
@@ -147,6 +149,7 @@ class FG_EnergyChargingPage : FG_Base() {
                                 message?.let {
                                     operatorId=it[position].energyChargingEntity.id.toString()
                                     code=it[position].energyChargingEntity.code.toString()
+                                    energyClassificationName=it[position].classificationName.toString()
                                     energyClassificationId=it[position].energyChargingEntity.classificationId.toString()
                                     showConfirmDialog()
                                 }

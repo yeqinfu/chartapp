@@ -29,14 +29,16 @@ class FG_AddEnergyCharging : FG_Base() {
     private var objectName = ""
     /** 能源分类：水、电、煤气、蒸汽  */
     private var energyClassificationId: String? = null
+    private var energyClassificationName: String? = null
     /** 编号  */
     private var code: String? = null
 
     companion object {
-        fun createBundle(objectId: String, energyClassificationId: String, code: String): Bundle {
+        fun createBundle(objectId: String, energyClassificationId: String,energyClassificationName:String, code: String): Bundle {
             var b = Bundle()
             b.putString("objectId", objectId)
             b.putString("energyClassificationId", energyClassificationId)
+            b.putString("energyClassificationName", energyClassificationName)
             b.putString("code", code)
             b.putString("pageType", "1")
             return b
@@ -52,11 +54,13 @@ class FG_AddEnergyCharging : FG_Base() {
             pageType = it.getString("pageType", "0")
             objectId = it.getString("objectId", "")
             energyClassificationId = it.getString("energyClassificationId", "")
+            energyClassificationName = it.getString("energyClassificationName", "")
             code = it.getString("code", "")
         }
         if (pageType == "1") {//修改计费
             head_view.setCenterTitle("修改计费")
             et_name.setText(code)
+            tv_choose_class.text=energyClassificationName
 
         } else {
             head_view.setCenterTitle("新建计费")
@@ -106,7 +110,6 @@ class FG_AddEnergyCharging : FG_Base() {
                         listMap.put(item.name, item.id)
                         mapIdName.put(item.id.toString(), item.name)
                     }
-                    tv_choose_class.text=mapIdName[energyClassificationId]
                 }
             }
 
