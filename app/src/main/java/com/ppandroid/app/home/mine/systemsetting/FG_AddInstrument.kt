@@ -116,6 +116,9 @@ class FG_AddInstrument : FG_Base() {
         Http.get(activity,url, BN_AddInstrumentDetail::class.java,object :MyCallBack<BN_AddInstrumentDetail>{
             override fun onResponse(response: BN_AddInstrumentDetail?) {
                 response?.let {
+                    if (it.message.parentId==-1){
+                        tv_parent_name.text="已经是最高级"
+                    }
                     et_code.setText(it.message.code)
                     tv_choose_class.text=it.message.energyClassificationName
                     energyClassificationId=it.message.energyClassificationId?.toString()
