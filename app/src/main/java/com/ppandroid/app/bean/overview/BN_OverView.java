@@ -208,6 +208,15 @@ public class BN_OverView extends BaseBody {
 
                     private String key;
                     private String value;
+                    private String ratio;
+
+                    public String getRatio() {
+                        return ratio;
+                    }
+
+                    public void setRatio(String ratio) {
+                        this.ratio = ratio;
+                    }
 
                     public String getKey() {
                         return key;
@@ -246,6 +255,15 @@ public class BN_OverView extends BaseBody {
 
                     private String key;
                     private String value;
+                    private String ratio;
+
+                    public String getRatio() {
+                        return ratio;
+                    }
+
+                    public void setRatio(String ratio) {
+                        this.ratio = ratio;
+                    }
 
                     public String getKey() {
                         return key;
