@@ -53,5 +53,7 @@ public class AD_DevicesInfo extends FragmentStatePagerAdapter {
 		fragments[0] = new FG_DevicesMonitor();//数据监测
         fragments[0].setArguments(FG_DevicesMonitor.Companion.createBundle(id));
 		fragments[1] = new FG_DevicesDetail();//账台信息
-	}
+        fragments[1].setArguments(FG_DevicesDetail.Companion.createBundle(id));
+
+    }
 }
