@@ -22,7 +22,6 @@ import com.ppandroid.app.home.mine.energyanalysis.*
 import com.ppandroid.app.home.overview.FG_OverViewConfig
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
-import com.ppandroid.app.utils.DensityUtil
 import com.ppandroid.app.utils.Utils_Dialog
 import com.ppandroid.app.utils.info.Utils_UserInfo
 import com.ppandroid.app.widget.common.PagerSlidingTab
@@ -152,10 +151,14 @@ class FG_OverView : FG_Base() {
             /**添加仪表用能统计图*/
             var adapter = AD_Zhongdian(activity, it)
             var view_pager_zhongdian = view.find<ViewPager>(R.id.view_pager_zhongdian)
-            //为ViewPager设置高度
-            val params = view_pager_zhongdian.getLayoutParams()
-            params.height = DensityUtil.dip2px(activity, 65f) * (it[0].deviceKwhMapList.size)
-            view_pager_zhongdian.setLayoutParams(params)
+            adapter.lisenter=object :IHeightListener{
+                override fun getHeight(h: Int) {
+                    //为ViewPager设置高度
+                    val params = view_pager_zhongdian.layoutParams
+                    params.height = h
+                    view_pager_zhongdian.layoutParams = params
+                }
+            }
             view_pager_zhongdian.adapter = adapter
             var title_indicator_zhongdian = view.find<PagerSlidingTab>(R.id.title_indicator_zhongdian)
             val density = resources.displayMetrics.density
@@ -163,11 +166,14 @@ class FG_OverView : FG_Base() {
             title_indicator_zhongdian.setTabSelectedTextColorResource(R.color.color_01)
             title_indicator_zhongdian.setIndicatorColorResource(R.color.color_01)
             title_indicator_zhongdian.setTypeface(null, Typeface.NORMAL)
-            title_indicator_zhongdian.setTextSize((14 * density).toInt())
+            title_indicator_zhongdian.textSize = (14 * density).toInt()
         }
 
 
         return view
+    }
+    interface IHeightListener{
+        fun getHeight(h:Int)
     }
 
     /**
@@ -183,10 +189,16 @@ class FG_OverView : FG_Base() {
             /**添加仪表用能统计图*/
             var adapter = AD_Instrument(activity, it)
             var view_pager_instruemnt = view.find<ViewPager>(R.id.view_pager_instruemnt)
-            //为ViewPager设置高度
-            val params = view_pager_instruemnt.layoutParams
-            params.height = DensityUtil.dip2px(activity, 65f) * (it[0].instrumentMapList.size)
-            view_pager_instruemnt.layoutParams = params
+            adapter.lisenter=object :IHeightListener{
+                override fun getHeight(h: Int) {
+                    //为ViewPager设置高度
+                    val params = view_pager_instruemnt.layoutParams
+                    params.height = h
+                    view_pager_instruemnt.layoutParams = params
+                }
+
+            }
+
             view_pager_instruemnt.adapter = adapter
             var title_indicator2 = view.find<PagerSlidingTab>(R.id.title_indicator2)
             val density = resources.displayMetrics.density

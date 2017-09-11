@@ -10,6 +10,7 @@ import android.widget.ListView
 import android.widget.TextView
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.overview.BN_OverView
+import com.ppandroid.app.home.FG_OverView
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.widget.HorizontalPercentageView
 import org.jetbrains.anko.find
@@ -27,6 +28,7 @@ class AD_Instrument(ac: Activity, list: List<BN_OverView.MessageBean.InstrumentI
     )
     var views = ArrayList<View>()// 将要分页显示的View装入数组中
     var list: List<BN_OverView.MessageBean.InstrumentInfomationListBean>?=null
+    var lisenter: FG_OverView.IHeightListener?=null
     var ac: Activity?=null
     init {
         this.ac=ac
@@ -35,6 +37,9 @@ class AD_Instrument(ac: Activity, list: List<BN_OverView.MessageBean.InstrumentI
         val lf = ac.layoutInflater
         for (item in list){
             var view1 = lf.inflate(R.layout.item_zhongdian, null)
+            view1.viewTreeObserver.addOnGlobalLayoutListener {
+                lisenter?.getHeight(view1.height)
+            }
             views.add(view1)
         }
     }
