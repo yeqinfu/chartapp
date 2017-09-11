@@ -570,7 +570,12 @@
 
 
 
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/color_03"/>
 
 
     <!--查看更多-->
@@ -625,6 +630,12 @@
         android:layout_width="match_parent"
         android:layout_height="131dp"
         />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/color_03"/>
     <!--查看更多-->
     <TextView
         android:id="@+id/tv_more3"
