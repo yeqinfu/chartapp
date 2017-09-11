@@ -16,6 +16,10 @@
         <item>重点设备</item>
         <item>能源计费</item>
     </string-array>
+    <string-array name="fg_devices_info">
+        <item>数据监测</item>
+        <item>账台信息</item>
+    </string-array>
     <string-array name="fg_base_analysis">
         <item>日</item>
         <item>月</item>

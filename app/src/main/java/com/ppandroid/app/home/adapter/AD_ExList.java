@@ -142,6 +142,6 @@ public class AD_ExList extends BaseExpandableListAdapter {
 	//  子项是否可选中，如果需要设置子项的点击事件，需要返回true
 	@Override
 	public boolean isChildSelectable(int i, int i1) {
-		return false;
+		return true;
 	}
 }

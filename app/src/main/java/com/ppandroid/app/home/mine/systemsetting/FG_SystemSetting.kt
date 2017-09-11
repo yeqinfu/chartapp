@@ -3,6 +3,7 @@ package com.ppandroid.app.home.mine.systemsetting
 import android.graphics.Typeface
 import android.support.v4.view.ViewPager
 import com.ppandroid.app.R
+import com.ppandroid.app.base.AC_ContentFG
 import com.ppandroid.app.home.mine.adapter.AD_SystemSetting
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_system_setting.*
@@ -17,6 +18,7 @@ class FG_SystemSetting : FG_Base() {
     override fun fgRes(): Int = R.layout.fg_system_setting
 
     override fun afterViews() {
+        (activity as AC_ContentFG).setEnablePullToBack(false)
         head_view.setCenterTitle("系统设置")
         head_view.init(activity)
         head_view.setIvRight(R.drawable.ic_add_model, {

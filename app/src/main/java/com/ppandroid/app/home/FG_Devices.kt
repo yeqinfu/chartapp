@@ -5,6 +5,7 @@ import com.ppandroid.app.R
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.devices.BN_Devices
 import com.ppandroid.app.home.adapter.AD_ExList
+import com.ppandroid.app.home.devices.FG_DevicesInfo
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.im.base.FG_Base
@@ -49,6 +50,12 @@ class FG_Devices : FG_Base() {
                     }
                     for (i in 0 until adapter.groupCount) {
                         lv_ex.expandGroup(i)
+                    }
+                    lv_ex.setOnChildClickListener { expandableListView, view, i, j, l ->
+                        var item=it.message.deviceCateList[i].deviceList[j]
+                        var b=FG_DevicesInfo.Companion.createIntent(item.name,item.id.toString())
+                        startAC(FG_DevicesInfo::class.java.name,b)
+                        false
                     }
                 }
 
