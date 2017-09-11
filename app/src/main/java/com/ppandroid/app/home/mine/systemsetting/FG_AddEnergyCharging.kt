@@ -120,6 +120,7 @@ class FG_AddEnergyCharging : FG_Base() {
     private fun postInfo() {
         if (TextUtils.isEmpty(et_name.text)) {
             toast("请输入编号")
+            et_name.error="请输入编号"
             return
         }
         if (TextUtils.isEmpty(energyClassificationId)) {

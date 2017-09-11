@@ -21,7 +21,7 @@ import android.os.Environment;
 
 public class Utils_Common {
     public static String findNumberFromStr(String s){
-        String regEx="[^0-9]";
+        String regEx="[^0-9||/.]";
         Pattern p = Pattern.compile(regEx);
         Matcher m = p.matcher(s);
         return m.replaceAll("").trim();

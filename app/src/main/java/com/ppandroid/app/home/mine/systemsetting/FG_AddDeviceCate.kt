@@ -82,6 +82,7 @@ class FG_AddDeviceCate :FG_Base(){
     private fun postInfo() {
         if (TextUtils.isEmpty(et_name.text)) {
             toast("请输入别名")
+            et_name.error = "请输入别名"
             return
         }
         var url="user/sysSet/deviceCate/add.json"

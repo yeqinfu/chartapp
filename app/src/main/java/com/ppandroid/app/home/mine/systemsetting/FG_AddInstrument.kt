@@ -187,6 +187,7 @@ class FG_AddInstrument : FG_Base() {
     private fun postInfo() {
         if (TextUtils.isEmpty(et_code.text)) {
             toast("请输入能源编号")
+            et_code.error = "请输入能源编号"
             return
         }
         if (energyClassificationId == null) {
@@ -195,22 +196,30 @@ class FG_AddInstrument : FG_Base() {
         }
         if (TextUtils.isEmpty(et_name.text)) {
             toast("请输入别名")
+            et_name.error = "请输入别名"
             return
         }
         if (TextUtils.isEmpty(et_position.text)) {
             toast("请输入位置")
+            et_position.error = "请输入位置"
+
             return
         }
         if (TextUtils.isEmpty(et_charge.text)) {
             toast("请输入负载")
+            et_charge.error = "请输入负载"
+
             return
         }
         if (TextUtils.isEmpty(et_rate.text)) {
             toast("请输入赔率")
+            et_rate.error = "请输入赔率"
+
             return
         }
         if (TextUtils.isEmpty(et_codeAddress.text)) {
             toast("请输入编码地址")
+            et_codeAddress.error = "请输入编码地址"
             return
         }
 

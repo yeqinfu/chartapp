@@ -174,10 +174,12 @@ class FG_AddDevices : FG_Base() {
 
     private fun postInfo() {
         if (TextUtils.isEmpty(et_name.text)) {
+            et_name.error = "请输入名称"
             toast("请输入名称")
             return
         }
         if (TextUtils.isEmpty(et_model.text)) {
+            et_model.error = "请输入型号"
             toast("请输入型号")
             return
         }
