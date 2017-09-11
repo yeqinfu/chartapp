@@ -35,7 +35,7 @@ class FG_DevicesInfo :FG_Base(){
         head_view.setCenterTitle(name)
         head_view.init(activity)
 
-        var adapter = AD_DevicesInfo(activity, childFragmentManager)
+        var adapter = AD_DevicesInfo(activity, childFragmentManager,deviceId)
         view_pager.adapter = adapter
         adapter.notifyDataSetChanged()
         title_indicator.setViewPager(view_pager)

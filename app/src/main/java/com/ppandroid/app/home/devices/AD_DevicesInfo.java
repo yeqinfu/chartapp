@@ -18,8 +18,11 @@ public class AD_DevicesInfo extends FragmentStatePagerAdapter {
 	private Fragment[]	fragments;
 	private Context		mContext;
 
-	public AD_DevicesInfo(Activity ac, FragmentManager fm) {
+
+    private String id="-1";
+	public AD_DevicesInfo(Activity ac, FragmentManager fm,String id) {
 		super(fm);
+        this.id=id;
 		mContext = ac;
 		initFragment();
 	}
@@ -48,6 +51,7 @@ public class AD_DevicesInfo extends FragmentStatePagerAdapter {
 		this.arrays_title = mContext.getResources().getStringArray(R.array.fg_devices_info);
 		fragments = new Fragment[arrays_title.length];
 		fragments[0] = new FG_DevicesMonitor();//数据监测
+        fragments[0].setArguments(FG_DevicesMonitor.Companion.createBundle(id));
 		fragments[1] = new FG_DevicesDetail();//账台信息
 	}
 }
