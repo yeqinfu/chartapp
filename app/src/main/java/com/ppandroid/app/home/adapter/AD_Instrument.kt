@@ -13,7 +13,6 @@ import com.ppandroid.app.bean.overview.BN_OverView
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.widget.HorizontalPercentageView
 import org.jetbrains.anko.find
-import java.util.regex.Pattern
 
 /**
  * Created by yeqinfu on 2017/8/11.
@@ -115,19 +114,9 @@ class AD_Instrument(ac: Activity, list: List<BN_OverView.MessageBean.InstrumentI
                 it.tv_key?.text= instrumentMapList?.get(p0)?.key?:""
                 it.tv_value?.text= instrumentMapList?.get(p0)?.value?:""
 
-                val regEx = "kwh$|万kwh$"
-                val p = Pattern.compile(regEx)
-                val m = p.matcher(instrumentMapList?.get(p0)?.value ?: "")
-                var value = m.replaceAll("")
-                if (p0 == 0) {
-                    max = Utils_Common.paraseDouble(value) * 1.2
-                }
-                if (max == 0.0){
-                    max=1.0
-                }
-
-
-                holder?.v_hp?.percentage = (Utils_Common.paraseDouble(value) / max).toFloat()
+                var d=Utils_Common.findNumberFromStr(instrumentMapList?.get(p0)?.ratio?:"")
+                var dd=Utils_Common.paraseDouble(d)/100f
+                holder?.v_hp?.percentage = dd.toFloat()
                 holder?.v_hp?.colorId = Color.parseColor(colors[p0%colors.size])
                 holder?.v_hp?.startAnim()
 
