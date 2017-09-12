@@ -1,6 +1,7 @@
 package com.ppandroid.app.home.devices
 
 import android.app.Activity
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -44,6 +45,13 @@ class FG_DevicesDetail:FG_Base(){
         Http.get(activity,url,BN_DevicesDetail::class.java,object :MyCallBack<BN_DevicesDetail>{
             override fun onResponse(response: BN_DevicesDetail?) {
                 response?.let {
+                    tv_device_name.text=it.message.name
+                    when {
+                        it.message.status == 2 -> tv_status001.setTextColor(Color.parseColor("#5ec1ff"))
+                        it.message.status == 3 ->  tv_status001.setTextColor(Color.parseColor("#45e069"))
+                        else ->tv_status001.setTextColor(Color.parseColor("#d5d5d5"))
+                    }
+                    tv_status001.text = it.message.statusString
                     val url = GlideUtils.addImageBaseUrl(it.message.photo)
                     Glide.with(activity).load(url).asBitmap().centerCrop().placeholder(R.drawable.pic_device_default).into(iv_img)
                     var modelBody= Utils_Common.parseJson(it.message.propertiesJson, FG_AddDevices.ModelBody::class.java)

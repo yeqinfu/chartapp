@@ -15,7 +15,8 @@
             android:layout_height="240dp"
             android:src="@drawable/pic_youling"/>
         <LinearLayout
-            android:visibility="gone"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_slid_gray_alpha"
             android:paddingRight="10dp"
             android:paddingLeft="10dp"
             android:layout_marginRight="20dp"
@@ -27,20 +28,21 @@
             android:layout_height="40dp">
             <TextView
                 android:textColor="@color/color_07"
-                android:text="fjdkalfja"
                 android:id="@+id/tv_device_name"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"/>
             <View
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="10dp"
                 android:background="@color/color_03"
                 android:layout_width="0.5dp"
                 android:layout_height="match_parent"/>
 
             <TextView
-                android:text="fdsadf"
                 android:textColor="@color/color_01"
-                android:id="@+id/tv_status"
+                android:id="@+id/tv_status001"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>

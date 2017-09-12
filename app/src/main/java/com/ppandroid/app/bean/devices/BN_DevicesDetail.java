@@ -65,7 +65,16 @@ public class BN_DevicesDetail extends BaseBody {
         private String propertiesJson;
         private Object templateName;
         private int status;
+        private String statusString;
         private boolean template;
+
+        public String getStatusString() {
+            return statusString;
+        }
+
+        public void setStatusString(String statusString) {
+            this.statusString = statusString;
+        }
 
         public int getId() {
             return id;
