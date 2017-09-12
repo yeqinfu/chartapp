@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- 1号 APP基础色 -->
-    <color name="color_01">#FF6308</color>
+    <color name="color_01">#00bd0b</color>
     <!-- 2号  文字-->
     <color name="color_02">#4b4b4b</color>
     <!-- 3号  分割线-->

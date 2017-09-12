@@ -20,14 +20,7 @@
         android:orientation="horizontal"
         >
 
-        <RadioButton
 
-            android:id="@+id/tab_01"
-            style="@style/ac_main_tab_style"
-            android:checked="true"
-            android:drawableTop="@drawable/selecter_main_drawable"
-            android:text="消息"
-            android:textColor="@drawable/selecter_main_text"/>
 
         <RadioButton
             android:id="@+id/tab_02"
@@ -36,6 +29,12 @@
             android:text="总览"
             android:textColor="@drawable/selecter_main_text"/>
 
+        <RadioButton
+            android:id="@+id/tab_03"
+            style="@style/ac_main_tab_style"
+            android:drawableTop="@drawable/selecter_main_devices"
+            android:text="设备"
+            android:textColor="@drawable/selecter_main_text"/>
         <LinearLayout
             android:id="@+id/tv_center"
             style="@style/ac_main_tab_style"
@@ -54,10 +53,12 @@
 
 
         <RadioButton
-            android:id="@+id/tab_03"
+
+            android:id="@+id/tab_01"
             style="@style/ac_main_tab_style"
-            android:drawableTop="@drawable/selecter_main_devices"
-            android:text="设备"
+            android:checked="true"
+            android:drawableTop="@drawable/selecter_main_drawable"
+            android:text="消息"
             android:textColor="@drawable/selecter_main_text"/>
 
         <RadioButton
