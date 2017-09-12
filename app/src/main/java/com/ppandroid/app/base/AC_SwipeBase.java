@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.liuguangqiang.swipeback.SwipeBackLayout;
-import com.ppandroid.app.R;
 
 /**
  * Created by yeqinfu on 2017/9/12.
@@ -29,10 +28,10 @@ public class AC_SwipeBase extends AppCompatActivity implements SwipeBackLayout.S
         swipeBackLayout = new SwipeBackLayout(this);
         swipeBackLayout.setOnSwipeBackListener(this);
         setDragEdge(SwipeBackLayout.DragEdge.LEFT);
-        ivShadow = new ImageView(this);
+    /*    ivShadow = new ImageView(this);
         ivShadow.setBackgroundColor(getResources().getColor(R.color.black_p50));
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-        container.addView(ivShadow, params);
+        container.addView(ivShadow, params);*/
         container.addView(swipeBackLayout);
         return container;
     }
@@ -50,6 +49,6 @@ public class AC_SwipeBase extends AppCompatActivity implements SwipeBackLayout.S
 
     @Override
     public void onViewPositionChanged(float fractionAnchor, float fractionScreen) {
-        ivShadow.setAlpha(1 - fractionScreen);
+     //   ivShadow.setAlpha(1 - fractionScreen);
     }
 }

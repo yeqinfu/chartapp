@@ -31,7 +31,7 @@ class AC_Main : AC_Base() {
                 R.id.tab_04 -> replaceTab(3)
             }
         }
-        replaceTab(0)
+        replaceTab(1)
 
         tv_center.setOnClickListener {
            startAC(FG_Center::class.java.name)

@@ -122,21 +122,25 @@ class FG_EnergyList :FG_Base(){
                     1->{
                         it.iv_type?.setImageResource(R.drawable.ic_day)
                         it.tv_title?.setTextColor(Color.parseColor(colors[0]))
+                        it.tv_title?.text="企业日用能情况汇总"
                         it.tv_key?.text="今日用电："
                     }
                     2->{
                         it.iv_type?.setImageResource(R.drawable.ic_week)
                         it.tv_title?.setTextColor(Color.parseColor(colors[1]))
+                        it.tv_title?.text="企业周用能情况汇总"
                         it.tv_key?.text="本周用电："
                     }
                     3->{
                         it.iv_type?.setImageResource(R.drawable.ic_month)
                         it.tv_title?.setTextColor(Color.parseColor(colors[2]))
+                        it.tv_title?.text="企业月用能情况汇总"
                         it.tv_key?.text="本月用电："
                     }
                     4->{
                         it.iv_type?.setImageResource(R.drawable.ic_year)
                         it.tv_title?.setTextColor(Color.parseColor(colors[3]))
+                        it.tv_title?.text="企业年用能情况汇总"
                         it.tv_key?.text="本年用电："
                     }
 
