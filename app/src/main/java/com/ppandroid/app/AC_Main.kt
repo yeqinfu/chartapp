@@ -19,6 +19,7 @@ class AC_Main : AC_Base() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setEnablePullToBack(false)
 
 
 

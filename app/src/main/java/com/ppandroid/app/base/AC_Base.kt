@@ -2,7 +2,7 @@ package com.ppandroid.im.base
 
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import com.ppandroid.app.base.AC_SwipeBase
 import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.activitymanager.ActivityManager
 import com.ppandroid.app.utils.toast.ToastUtil
@@ -13,7 +13,7 @@ import com.ppandroid.app.utils.upgrade.UpdateManager
  * Created by Administrator on 2017/3/13. 所有通用页面的基类
  */
 
-open class AC_Base : AppCompatActivity() {
+open class AC_Base : AC_SwipeBase() {
     protected var token: String? = null
     var isNeedLogin = false
 
