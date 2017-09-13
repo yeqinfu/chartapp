@@ -2,6 +2,7 @@ package com.ppandroid.app.home.mine.energyanalysis
 
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.mine.energyanalysis.BN_DevicePage
+import com.ppandroid.app.home.mine.energyanalysis.devicesanalysis.FG_DeviceDetailAnalysis
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import kotlinx.android.synthetic.main.fg_base_analysis_page.*
@@ -25,6 +26,12 @@ class FG_DevicesPage : FG_BaseAnlysisPage(){
                     var adapter = AD_List(activity, k, isHaveChild)
                     v_dount_view.startAnim()
                     lv_list.adapter = adapter
+                    lv_list.setOnItemClickListener { adapterView, view, i, l ->
+                        var item=it.message.analysisDeviceParamDtoList[i]
+                        var bundle=FG_DeviceDetailAnalysis.createBundle(item.deviceId,item.deviceName)
+                        startAC(FG_DeviceDetailAnalysis::class.java.name,bundle)
+
+                    }
                     v_dount_view.charRender(getValues(k))
                 }
             }

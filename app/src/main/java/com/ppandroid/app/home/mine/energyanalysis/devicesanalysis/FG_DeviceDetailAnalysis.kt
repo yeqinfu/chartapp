@@ -13,12 +13,27 @@ import com.ppandroid.app.home.mine.energyanalysis.FG_BaseAnlysisPage
  * 单一设备柱状图分析
  */
 class FG_DeviceDetailAnalysis :FG_BaseAnalysis(){
+
+    companion object {
+        fun createBundle(parentId:String,title:String): Bundle {
+            var b =Bundle()
+            b.putString("parentId",parentId)
+            b.putString("title",title)
+            return b
+        }
+    }
     override fun init() {
     }
 
     override fun getAdapter(): PagerAdapter=AD_DeviceAnalysis(activity,childFragmentManager,parentId)
 
-    override fun getTitle(): String="设备分析"
+    override fun getTitle(): String{
+        var title=""
+        arguments?.let {
+            title=it.getString("title","")
+        }
+        return title
+    }
     class AD_DeviceAnalysis(ac: Activity, fm: FragmentManager, parentId:String) : AD_BaseDevicesAnalysis(ac,fm){
         var parentId:String?=null
         init {

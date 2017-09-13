@@ -33,7 +33,6 @@ class FG_AreaPage : FG_BaseAnlysisPage(){
                     }
                     lv_list.adapter = adapter
                     lv_list.setOnItemClickListener { adapterView, view, i, l ->
-                        startAC(FG_DeviceDetailAnalysis::class.java.name)
                     }
                     v_dount_view.charRender(getValues(k))
                 }

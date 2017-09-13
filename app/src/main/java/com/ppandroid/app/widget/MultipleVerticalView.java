@@ -9,7 +9,6 @@ import android.view.View;
 
 import com.ppandroid.app.R;
 import com.ppandroid.app.bean.BN_Vertical;
-import com.ppandroid.app.utils.DebugLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,6 +79,9 @@ public class MultipleVerticalView extends View implements Runnable{
 
     public void setDataSet(List<BN_Vertical> dataSet) {
         this.dataSet = dataSet;
+        if (!dataSet.isEmpty()){
+            strokeSize=getWidth()/(dataSet.size()*2);
+        }
 
     }
 
@@ -88,9 +90,11 @@ public class MultipleVerticalView extends View implements Runnable{
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+
         if (!isInEditMode()){
-            strokeSize=getWidth()/(dataSet.size()*2);
-            DebugLog.d("++++++++++strokeSize"+strokeSize);
+            if (!dataSet.isEmpty()){
+                strokeSize=getWidth()/(dataSet.size()*2);
+            }
         }
 
     }
