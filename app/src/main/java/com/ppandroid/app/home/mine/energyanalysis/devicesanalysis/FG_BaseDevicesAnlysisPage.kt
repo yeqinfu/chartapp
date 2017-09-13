@@ -12,7 +12,6 @@ import com.ppandroid.app.R
 import com.ppandroid.app.base.AC_ContentFG
 import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.Utils_Common
-import com.ppandroid.app.widget.HorizontalPercentageView
 import com.ppandroid.app.widget.graphical.chart.PieData
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_base_devices_analysis_page.*
@@ -130,23 +129,10 @@ abstract class FG_BaseDevicesAnlysisPage : FG_Base() {
     abstract fun loadContent()
 
 
-    protected var isHaveChild = true
-        set(value) {
-            field = value
-            if (value) {
-                v_holder.visibility = View.VISIBLE
-            } else {
-                v_holder.visibility = View.GONE
-            }
-
-        }
 
     class Model {
-        var name = ""
-        var ratio = ""
-        var kmh = ""
-        var value = 0.0f
-        var isLeaf = false
+        var key = ""
+        var values = ""
     }
 
     var colors = arrayOf(
@@ -161,18 +147,17 @@ abstract class FG_BaseDevicesAnlysisPage : FG_Base() {
     protected fun getValues(source: List<Model>): List<PieData>? {
         var list = ArrayList<PieData>()
         for ((i, item) in source.withIndex()){
-            var value= Utils_Common.paraseDouble(Utils_Common.findNumberFromStr(item.ratio))
-            var p= PieData(item.name, value.toString(), value, Color.parseColor(colors[i % colors.size]))
+            var value= Utils_Common.paraseDouble(Utils_Common.findNumberFromStr(item.values))
+            var p= PieData(item.key, value.toString(), value, Color.parseColor(colors[i % colors.size]))
             list.add(p)
         }
         return list
     }
 
 
-    protected class AD_List(ac: Activity, list: List<Model>, isHaveChild: Boolean) : BaseAdapter() {
+    protected class AD_List(ac: Activity, list: List<Model>) : BaseAdapter() {
         private var ac = ac
         private var list = list
-        private var isHaveChild = isHaveChild
         var colors = arrayOf(
                 "#FA6D6F",
                 "#FE8D25",
@@ -181,41 +166,11 @@ abstract class FG_BaseDevicesAnlysisPage : FG_Base() {
                 "#2ED9A4"
         )
         override fun getView(pos: Int, p1: View?, p2: ViewGroup?): View {
-            var layout = ac.layoutInflater.inflate(R.layout.item_base_anlysis_page, null)
-            var btn_next = layout.find<TextView>(R.id.btn_next)
-            if (isHaveChild) {
-                btn_next.visibility = View.VISIBLE
-            } else {
-                btn_next.visibility = View.GONE
-            }
-
-            var tv_name = layout.find<TextView>(R.id.tv_name)
-            tv_name.text = list[pos].name
-            var tv_ratio = layout.find<TextView>(R.id.tv_ratio)
-            tv_ratio.text = list[pos].ratio
-            var tv_kmh = layout.find<TextView>(R.id.tv_kmh)
-            tv_kmh.text = list[pos].kmh
-
-            if (list[pos].isLeaf) {//子节点
-                btn_next.setBackgroundResource(R.drawable.shape_stroke_color06_corner_4dp)
-                btn_next.setTextColor(ac.resources.getColor(R.color.color_06))
-
-            } else {//支节点
-                btn_next.setBackgroundResource(R.drawable.shape_stroke_color01_corner_4dp)
-                btn_next.setTextColor(ac.resources.getColor(R.color.color_01))
-                btn_next.setOnClickListener {
-                    listener?.choose(pos)
-                }
-            }
-
-            var value = list[pos].ratio.replace("%", "")
-            var f = Utils_Common.paraseDouble(value)
-            var v_hp=layout.find<HorizontalPercentageView>(R.id.v_hp)
-            v_hp.percentage= f.toFloat()/100f
-            v_hp.startAnim()
-            v_hp.colorId= Color.parseColor(colors[pos % colors.size])
-
-
+            var layout = ac.layoutInflater.inflate(R.layout.item_base_devices_anlysis_page, null)
+            var tv_key = layout.find<TextView>(R.id.tv_key)
+            tv_key.text = list[pos].key
+            var tv_value = layout.find<TextView>(R.id.tv_value)
+            tv_value.text = list[pos].values
             return layout
         }
 
