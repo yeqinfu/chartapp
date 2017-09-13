@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/sv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="7dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:drawablePadding="5dp"
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:drawableRight="@drawable/icon_dd"
+            android:text="2014"
+            android:textColor="@color/color_07"
+            android:textSize="@dimen/second_title"
+            android:textStyle="bold"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp">
+
+            <com.ppandroid.app.widget.MultipleVerticalView
+                android:id="@+id/v_multiple_view"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@color/white"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="7dp"
+            android:background="@color/color_03"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:paddingLeft="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="名称"
+                android:textColor="@color/color_04"
+                android:textSize="@dimen/sub_title"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="40dp"
+                android:gravity="center_vertical"
+                android:text="占比%"
+                android:textColor="@color/color_04"
+                android:textSize="@dimen/sub_title"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="20dp"
+                android:gravity="center_vertical"
+                android:text="能耗kwh"
+                android:textColor="@color/color_04"
+                android:textSize="@dimen/sub_title"/>
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="12dp"
+                android:padding="5dp"
+                android:id="@+id/v_holder"
+                android:textColor="@color/color_06"
+                android:text="       "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/color_03"/>
+
+        <com.ppandroid.app.widget.MyListView
+            android:id="@+id/lv_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+</ScrollView>

@@ -2,12 +2,12 @@ package com.ppandroid.app.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.ppandroid.app.R;
 import com.ppandroid.app.bean.BN_Vertical;
 import com.ppandroid.app.utils.DebugLog;
 
@@ -58,13 +58,13 @@ public class MultipleVerticalView extends View implements Runnable{
     private Paint getTextPaint() {
         Paint paint = getPaint();
         paint.setTextSize(30f);
-        paint.setColor(Color.WHITE);
+        paint.setColor(getResources().getColor(R.color.color_01));
         paint.setTextAlign(Paint.Align.CENTER);
         return paint;
     }
     private Paint getPicPaint(){
         Paint paint = getPaint();
-        paint.setColor(Color.WHITE);
+        paint.setColor(getResources().getColor(R.color.color_01));
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         paint.setStrokeWidth(strokeSize);
 
