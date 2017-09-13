@@ -58,13 +58,13 @@ public class MultipleVerticalView extends View implements Runnable{
     private Paint getTextPaint() {
         Paint paint = getPaint();
         paint.setTextSize(30f);
-        paint.setColor(getResources().getColor(R.color.color_01));
+        paint.setColor(getResources().getColor(R.color.color_07));
         paint.setTextAlign(Paint.Align.CENTER);
         return paint;
     }
     private Paint getPicPaint(){
         Paint paint = getPaint();
-        paint.setColor(getResources().getColor(R.color.color_01));
+        paint.setColor(getResources().getColor(R.color.color_10));
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         paint.setStrokeWidth(strokeSize);
 
