@@ -9,6 +9,9 @@ import java.util.List;
  */
 
 public class BN_EnergyList extends BaseBody {
+    public void test(){
+        double[] a=new double[10];
+    }
 
 
     /**

@@ -13,6 +13,7 @@ import com.ppandroid.app.bean.ErrorBody;
 import com.ppandroid.app.bean.login.MD5Body;
 import com.ppandroid.app.http.callback.StringCallback;
 import com.ppandroid.app.utils.DebugLog;
+import com.ppandroid.app.utils.Log2FileUtil;
 import com.ppandroid.app.utils.Utils_SharedPreferences;
 import com.ppandroid.app.utils.activitymanager.ActivityManager;
 import com.ppandroid.app.utils.info.Utils_UserInfo;
@@ -176,6 +177,7 @@ public class Http {
         Utils_SharedPreferences sp = new Utils_SharedPreferences(context);
         String url =  Contants.Companion.getBaseUrl()+"user/login/auto/check.json" + "?id=" + sp.getString("userID", null) + "&md5=" + sp.getString("MD5", null);
         DebugLog.d("http->md5登录" + url);
+        Log2FileUtil.saveLog2Sdcard("++++++++++++++++++++++http->md5登录+++++++++++++++++++++++++++++++\n" + url);
         OkHttpUtils.get().url(url).build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
@@ -188,6 +190,7 @@ public class Http {
             public void onResponse(String response, int id) {
                 isAutoCheck=false;
                 DebugLog.d("http->md5登录" + response);
+                Log2FileUtil.saveLog2Sdcard("++++++++++++++++++++++http->md5登录+++++++++++++++++++++++++++++++\n" + response);
 
                 ErrorBody errorBody = parseErrorBody(response);
                 if (errorBody == null) {
