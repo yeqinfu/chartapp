@@ -22,6 +22,7 @@ import com.ppandroid.app.home.mine.energyanalysis.*
 import com.ppandroid.app.home.overview.FG_OverViewConfig
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
+import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.Utils_Dialog
 import com.ppandroid.app.utils.info.Utils_UserInfo
 import com.ppandroid.app.widget.common.PagerSlidingTab
@@ -43,8 +44,12 @@ import java.util.regex.Pattern
 class FG_OverView : FG_Base() {
     override fun fgRes(): Int = R.layout.fg_over_view
 
-
+    override fun refresh(){
+        DebugLog.d("http===yeqinfu=============消息重发=========================")
+        loadContent()
+    }
     override fun afterViews() {
+        isNeedEventBus=true
         tv_company_name.text=Utils_UserInfo.getCompanyName(activity)
         Utils_Dialog.showLoading(activity)
         loadOverViewConfig()

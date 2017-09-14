@@ -28,10 +28,7 @@ class FG_Devices : FG_Base() {
 
     }
 
-    override fun refresh(){
-        DebugLog.d("http===yeqinfu=============消息重发=========================")
-        loadContent()
-    }
+
 
     private fun loadContent() {
         var url = "user/device/index.json"

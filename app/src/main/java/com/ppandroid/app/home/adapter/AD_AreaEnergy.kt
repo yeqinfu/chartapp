@@ -1,6 +1,7 @@
 package com.ppandroid.app.home.adapter
 
 import android.app.Activity
+import android.graphics.Color
 import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
@@ -78,6 +79,7 @@ class AD_AreaEnergy(ac: Activity, list: List<BN_OverView.MessageBean.OverviewCon
                 tv_value.text = it[0]?.value
                 var d = Utils_Common.findNumberFromStr(it[0]?.ratio)
                 v_hp.percentage = Utils_Common.paraseDouble(d).toFloat()/100f
+                v_hp2.colorId= Color.parseColor("#FA6D6F")
                 v_hp.startAnim()
                 var ll_second = view.find<LinearLayout>(R.id.ll_second)
                 if (it.size>= 2) {
@@ -85,6 +87,7 @@ class AD_AreaEnergy(ac: Activity, list: List<BN_OverView.MessageBean.OverviewCon
                     tv_value2.text = it[1]?.value
                     var d = Utils_Common.findNumberFromStr(it[1]?.ratio)
                     v_hp2.percentage = Utils_Common.paraseDouble(d).toFloat()/100f
+                    v_hp2.colorId= Color.parseColor("#FE8D25")
                     v_hp2.startAnim()
                     ll_second.visibility = View.VISIBLE
                 } else {
