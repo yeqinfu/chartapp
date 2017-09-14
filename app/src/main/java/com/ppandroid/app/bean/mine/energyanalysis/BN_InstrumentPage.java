@@ -59,6 +59,15 @@ public class BN_InstrumentPage extends BaseBody {
             private String instrumentName;
             private String instrumentRatio;
             private String instrumentKwh;
+            private String instrumentId;
+
+            public String getInstrumentId() {
+                return instrumentId;
+            }
+
+            public void setInstrumentId(String instrumentId) {
+                this.instrumentId = instrumentId;
+            }
 
             public String getInstrumentName() {
                 return instrumentName;

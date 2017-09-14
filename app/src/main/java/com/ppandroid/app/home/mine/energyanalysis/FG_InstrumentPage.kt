@@ -2,6 +2,7 @@ package com.ppandroid.app.home.mine.energyanalysis
 
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.mine.energyanalysis.BN_InstrumentPage
+import com.ppandroid.app.home.mine.energyanalysis.devicesanalysis.FG_InstrumentDetailAnalysis
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import kotlinx.android.synthetic.main.fg_base_analysis_page.*
@@ -25,6 +26,11 @@ class FG_InstrumentPage : FG_BaseAnlysisPage(){
                     var adapter = AD_List(activity, k, isHaveChild)
                     v_dount_view.startAnim()
                     lv_list.adapter = adapter
+                    lv_list.setOnItemClickListener { adapterView, view, i, l ->
+                        var item=it.message.analysisInstrumentParamDtoList[i]
+                        var bundle= FG_InstrumentDetailAnalysis.createBundle(item.instrumentId,item.instrumentName)
+                        startAC(FG_InstrumentDetailAnalysis::class.java.name,bundle)
+                    }
                     v_dount_view.charRender(getValues(k))
                 }
             }
