@@ -62,6 +62,15 @@ public class BN_CatePage  extends BaseBody{
             private String cateKwh;
             private boolean leaf;
             private long id;
+            private String cateId;
+
+            public String getCateId() {
+                return cateId;
+            }
+
+            public void setCateId(String cateId) {
+                this.cateId = cateId;
+            }
 
             public long getId() {
                 return id;
