@@ -2,7 +2,7 @@ package com.ppandroid.app.home.mine.energyanalysis
 
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.mine.energyanalysis.BN_AreaPage
-import com.ppandroid.app.home.mine.energyanalysis.devicesanalysis.FG_DeviceDetailAnalysis
+import com.ppandroid.app.home.mine.energyanalysis.devicesanalysis.FG_AreaDetailAnalysis
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import kotlinx.android.synthetic.main.fg_base_analysis_page.*
@@ -26,13 +26,16 @@ class FG_AreaPage : FG_BaseAnlysisPage(){
                     v_dount_view.startAnim()
                     adapter.listener = object : ItemChoosseListener {
                         override fun choose(index: Int) {
-                            var b=FG_BaseAnalysis.createBundle(it.message.analysisAreaParamDtoList[index].id.toString())
+                            var b=FG_BaseAnalysis.createBundle(it.message.analysisAreaParamDtoList[index].areaId.toString())
                             startAC(FG_AreaAnalysis::class.java.name,b)
 
                         }
                     }
                     lv_list.adapter = adapter
                     lv_list.setOnItemClickListener { adapterView, view, i, l ->
+                        var item=it.message.analysisAreaParamDtoList[i]
+                        var bundle= FG_AreaDetailAnalysis.createBundle(item.areaId,item.areaName)
+                        startAC(FG_AreaDetailAnalysis::class.java.name,bundle)
                     }
                     v_dount_view.charRender(getValues(k))
                 }
