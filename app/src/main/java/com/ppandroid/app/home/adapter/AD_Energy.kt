@@ -95,11 +95,10 @@ class AD_Energy(ac: Activity, list: List<ClassificationInformationListBean>) : P
     private fun getList(source: ClassificationInformationListBean?): List<PieData>? {
         var list = ArrayList<PieData>()
         source?.let {
-            var total=Utils_Common.paraseDouble(Utils_Common.findNumberFromStr(it.totalKwh))
             it.classificationKwhMapList
-                    .map { Utils_Common.findNumberFromStr(it.value) }
+                    .map { Utils_Common.findNumberFromStr(it.ratio) }
                     .mapIndexedTo(list) { i, dd ->
-                        var number= Utils_Common.paraseDouble(dd)/total*100
+                        var number= Utils_Common.paraseDouble(dd)
                         DebugLog.d("yeqinfu------>"+number)
                         PieData("", dd,number, Color.parseColor(colors[i % colors.size]))
                     }

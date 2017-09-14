@@ -27,7 +27,7 @@ class FG_CatePage :FG_BaseAnlysisPage(){
                     v_dount_view.startAnim()
                     adapter.listener=object :ItemChoosseListener{
                         override fun choose(index: Int) {
-                            var b=FG_BaseAnalysis.createBundle(it.message.analysisCateParamDtoList[index].id.toString())
+                            var b=FG_BaseAnalysis.createBundle(it.message.analysisCateParamDtoList[index].cateId.toString())
                             startAC(FG_CateAnalysis::class.java.name,b)
                         }
                     }

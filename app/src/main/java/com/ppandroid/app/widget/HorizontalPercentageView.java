@@ -111,7 +111,10 @@ public class HorizontalPercentageView extends GraphicalView implements Runnable 
         if (percentage<=0.0f){
 
         }else{
-            canvas.drawLine(strokeSize,strokeSize,(getWidth()-strokeSize)*currentPercentage,strokeSize,p);
+            float a=(getWidth()-strokeSize)*currentPercentage;
+            if (a-strokeSize>0){
+                canvas.drawLine(strokeSize,strokeSize,a,strokeSize,p);
+            }
         }
         //split
         Paint split=new Paint();

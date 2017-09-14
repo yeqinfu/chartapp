@@ -61,7 +61,6 @@ public class BN_CatePage  extends BaseBody{
             private String cateRatio;
             private String cateKwh;
             private boolean leaf;
-            private long id;
             private String cateId;
 
             public String getCateId() {
@@ -72,13 +71,7 @@ public class BN_CatePage  extends BaseBody{
                 this.cateId = cateId;
             }
 
-            public long getId() {
-                return id;
-            }
 
-            public void setId(long id) {
-                this.id = id;
-            }
 
             public String getCateName() {
                 return cateName;
