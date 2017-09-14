@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import com.ppandroid.app.R;
+import com.ppandroid.app.bean.ET_ReSend;
 import com.ppandroid.app.bean.ErrorBody;
 import com.ppandroid.app.bean.login.MD5Body;
 import com.ppandroid.app.http.callback.StringCallback;
@@ -21,6 +22,7 @@ import com.ppandroid.im.APP;
 import com.ppandroid.im.bean.BaseBody;
 import com.ppandroid.im.utils.Contants;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -199,6 +201,8 @@ public class Http {
                     if (body != null) {
                         DebugLog.i("http", "====================== token 失效 尝试MD5 登录成功新Token===" + body.getMessage().getTokenDto().getToken());
                         Utils_UserInfo.saveReloginInfo(context, body);
+                        /**发送消息给需要请求重发的页面*/
+                        EventBus.getDefault().post(new ET_ReSend(ET_ReSend.TASKID_RESEND));
                     }
                 }
                 else {

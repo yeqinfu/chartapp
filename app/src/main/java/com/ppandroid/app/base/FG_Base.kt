@@ -11,10 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.ppandroid.app.AC_Login
 import com.ppandroid.app.base.AC_ContentFG
+import com.ppandroid.app.bean.ET_ReSend
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.utils.Utils_SharedPreferences
 import com.ppandroid.app.utils.toast.ToastUtil
 import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import java.io.UnsupportedEncodingException
 import java.net.URLEncoder
 
@@ -120,5 +123,18 @@ abstract class FG_Base : Fragment() {
         System.gc()
         super.onDestroy()
 
+    }
+    /**页面请求重发 当md5刷新token成功时候会发一个消息给这个方法，refresh方法在子类重写，调用loadContent方法，进行消息重发
+     * 目前FG_DEVICES页面作为首页在用
+     * */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    open fun onMessageEvent(event: ET_ReSend) {
+        if (event.taskId === ET_ReSend.TASKID_RESEND) {
+            refresh()
+        }
+
+    }
+
+    protected open fun refresh() {
     }
 }
