@@ -77,7 +77,7 @@ class FG_CateDetailAnalysisPage : FG_BaseDevicesAnlysisPage() {
                         bn.realHeight = item.toFloat()
                         list.add(bn)
                     }
-
+                    tv_averageKwh.text=it.message.averageKwh
                     v_multiple_view.dataSet = list
                     v_multiple_view.startAnim()
                     lv_list.adapter = AD_List(activity, list2)

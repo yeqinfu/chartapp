@@ -6,22 +6,22 @@
     >
 
     <LinearLayout
-        android:gravity="center_horizontal"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="7dp"
         android:background="@color/white"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <TextView
-            android:drawablePadding="5dp"
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:gravity="center"
+            android:drawablePadding="5dp"
             android:drawableRight="@drawable/icon_dd"
+            android:gravity="center"
             android:text="2014"
             android:textColor="@color/color_07"
             android:textSize="@dimen/second_title"
@@ -31,13 +31,17 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_margin="20dp"
-        >
+            >
 
             <com.ppandroid.app.widget.MultipleVerticalView
                 android:id="@+id/v_multiple_view"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="@color/white"/>
+            <TextView
+                android:id="@+id/tv_averageKwh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
         </RelativeLayout>
 
@@ -62,7 +66,6 @@
                 android:textSize="@dimen/sub_title"/>
 
 
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -71,7 +74,6 @@
                 android:text="能耗kwh"
                 android:textColor="@color/color_04"
                 android:textSize="@dimen/sub_title"/>
-
 
 
         </LinearLayout>

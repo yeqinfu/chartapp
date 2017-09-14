@@ -78,6 +78,7 @@ class FG_AreaDetailAnalysisPage : FG_BaseDevicesAnlysisPage() {
                         list.add(bn)
                     }
 
+                    tv_averageKwh.text=it.message.averageKwh
                     v_multiple_view.dataSet = list
                     v_multiple_view.startAnim()
                     lv_list.adapter = AD_List(activity, list2)
