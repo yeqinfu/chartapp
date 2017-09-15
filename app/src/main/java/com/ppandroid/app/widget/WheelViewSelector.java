@@ -19,13 +19,20 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.ppandroid.app.utils.DebugLog;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Author: wangjie
- * Email: tiantian.china.2@gmail.com
- * Date: 7/1/14.
+ * You may think you know what the following code does.
+ * But you don't. Trust me
+ * Fiddle with it, and you'll spend many a sleepless
+ * night cursing the moment you thought you'd be clever
+ * enough to "optimize" the code below.
+ * Now close this file and go play with something else.
+ * God bless you!!!
+ * The God's name is YeQinFu
  */
 public class WheelViewSelector extends ScrollView {
     public static final String TAG = WheelViewSelector.class.getSimpleName();
@@ -196,7 +203,8 @@ public class WheelViewSelector extends ScrollView {
             Log.d(TAG, "itemHeight: " + itemHeight);
             views.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, itemHeight * displayItemCount));
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) this.getLayoutParams();
-            this.setLayoutParams(new LinearLayout.LayoutParams(lp.width, itemHeight * displayItemCount));
+            lp.gravity=Gravity.CENTER;
+            this.setLayoutParams(new LinearLayout.LayoutParams(lp.width, ViewGroup.LayoutParams.MATCH_PARENT));
         }
         return tv;
     }
@@ -351,6 +359,16 @@ public class WheelViewSelector extends ScrollView {
 
         super.setBackgroundDrawable(background);
 
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        DebugLog.d(TAG,"-------->"+heightSize);
     }
 
     @Override

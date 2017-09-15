@@ -77,10 +77,11 @@ class FG_DevicesDetailAnalysisPage : FG_BaseDevicesAnlysisPage() {
                         bn.realHeight = item.toFloat()
                         list.add(bn)
                     }
-                    tv_averageKwh.text=it.message.averageKwh
-                    v_multiple_view.dataSet = list
-                    v_multiple_view.startAnim()
-                    lv_list.adapter = AD_List(activity, list2)
+                    /**知道我为啥加空安全吗？因为进入这个页面瞬间退出的时候就报空指针了*/
+                    tv_averageKwh?.text=it.message.averageKwh
+                    v_multiple_view?.dataSet = list
+                    v_multiple_view?.startAnim()
+                    lv_list?.adapter = AD_List(activity, list2)
                 }
             }
 

@@ -22,6 +22,7 @@ class FG_News :FG_Base(){
     var dataSet=ArrayList<BN_Data>()
 
 
+
     override fun afterViews() {
         val c = Calendar.getInstance()
         val initDate = c.get(Calendar.YEAR).toString() + "-" + (c.get(Calendar.MONTH) + 1).toString() + "-" + c.get(Calendar.DAY_OF_MONTH)

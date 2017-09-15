@@ -25,6 +25,7 @@ class FG_Mine: FG_Base() {
     override fun fgRes(): Int= R.layout.fg_mine
 
     override fun afterViews() {
+        isNeedEventBus=true
         refreshLayout.setOnRefreshListener {
            loadContent()
 
@@ -86,6 +87,11 @@ class FG_Mine: FG_Base() {
             loadContent()
         }
 
+    }
+
+    override fun refresh() {
+        super.refresh()
+        loadContent()
     }
 
 

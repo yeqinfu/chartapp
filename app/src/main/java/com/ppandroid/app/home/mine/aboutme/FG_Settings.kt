@@ -1,10 +1,8 @@
 package com.ppandroid.app.home.mine.aboutme
 
-import android.content.Intent
 import android.support.v7.app.AlertDialog
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ErrorBody
-import com.ppandroid.app.demo.AC_HorChart
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.Utils_Common
@@ -47,11 +45,10 @@ class FG_Settings:FG_Base(){
             UpdateManager.getUpdateManager(activity).checkAppUpdate(false)
         }
         tv_about_app.setOnClickListener {
-           // startAC(FG_DeleteListView::class.java.name)
-            //startAC(FG_AboutMe::class.java.name)
-            var it= Intent()
+            startAC(FG_AboutMe::class.java.name)
+            /*var it= Intent()
             it.setClass(activity,AC_HorChart::class.java)
-            startActivity(it)
+            startActivity(it)*/
         }
 
     }
