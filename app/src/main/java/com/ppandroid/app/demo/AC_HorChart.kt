@@ -12,12 +12,11 @@ class AC_HorChart : AC_Base() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ac__hor_chart)
-        wv_choose.offset = 1
+        wv_choose.offset = 3
         var list=ArrayList<String>()
-        list.add("Mercury")
-        list.add("Venus")
-        list.add("Earth")
-        list.add("Jupiter")
+        list.add("柱状图")
+        list.add("环比图")
+        list.add("同比图")
         wv_choose.setItems(list)
         wv_choose.onWheelViewListener = object : WheelViewSelector.OnWheelViewListener() {
             override fun onSelected(selectedIndex: Int, item: String) {

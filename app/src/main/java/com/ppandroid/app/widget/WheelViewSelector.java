@@ -179,22 +179,21 @@ public class WheelViewSelector extends ScrollView {
 
     private void initData() {
         displayItemCount = offset * 2 + 1;
-
         for (String item : items) {
             views.addView(createView(item));
         }
-
         refreshItemView(0);
     }
 
+
+
     int itemHeight = 0;
 
-    private TextView createView(String item) {
+    private TextView createView() {
         TextView tv = new TextView(context);
         tv.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         tv.setSingleLine(true);
         tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-        tv.setText(item);
         tv.setGravity(Gravity.CENTER);
         int padding = dip2px(15);
         tv.setPadding(padding, padding, padding, padding);
@@ -206,6 +205,12 @@ public class WheelViewSelector extends ScrollView {
             lp.gravity=Gravity.CENTER;
             this.setLayoutParams(new LinearLayout.LayoutParams(lp.width, ViewGroup.LayoutParams.MATCH_PARENT));
         }
+        return tv;
+    }
+
+    private TextView createView(String item) {
+        TextView tv = createView();
+        tv.setText(item);
         return tv;
     }
 
@@ -377,6 +382,7 @@ public class WheelViewSelector extends ScrollView {
         Log.d(TAG, "w: " + w + ", h: " + h + ", oldw: " + oldw + ", oldh: " + oldh);
         viewWidth = w;
         setBackgroundDrawable(null);
+
     }
 
     /**
@@ -384,7 +390,9 @@ public class WheelViewSelector extends ScrollView {
      */
     private void onSeletedCallBack() {
         if (null != onWheelViewListener) {
-            onWheelViewListener.onSelected(selectedIndex, items.get(selectedIndex));
+            if (selectedIndex-offset>=0&&items.size()-offset>selectedIndex){
+                onWheelViewListener.onSelected(selectedIndex-offset, items.get(selectedIndex));
+            }
         }
 
     }
@@ -418,7 +426,6 @@ public class WheelViewSelector extends ScrollView {
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_UP) {
-
             startScrollerTask();
         }
         return super.onTouchEvent(ev);

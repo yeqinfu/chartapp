@@ -46,9 +46,6 @@ class FG_Settings:FG_Base(){
         }
         tv_about_app.setOnClickListener {
             startAC(FG_AboutMe::class.java.name)
-            /*var it= Intent()
-            it.setClass(activity,AC_HorChart::class.java)
-            startActivity(it)*/
         }
 
     }
