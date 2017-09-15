@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="horizontal"
-    tools:context="com.ppandroid.app.demo.AC_HorChart">
+    tools:context="com.ppandroid.app.home.mine.energyanalysis.horizontalanalysis.AC_HorChart">
 
     <LinearLayout
         android:id="@+id/ll_fragment"
@@ -14,11 +14,11 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical"/>
-
     <com.ppandroid.app.widget.WheelViewSelector
         android:id="@+id/wv_choose"
         android:layout_width="100dp"
         android:layout_height="match_parent"/>
+
 
 
 </LinearLayout>

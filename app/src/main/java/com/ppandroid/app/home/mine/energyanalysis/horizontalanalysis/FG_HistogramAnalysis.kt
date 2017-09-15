@@ -1,0 +1,38 @@
+package com.ppandroid.app.home.mine.energyanalysis.horizontalanalysis
+
+import android.app.Activity
+import android.os.Bundle
+import android.support.v4.app.FragmentManager
+import android.support.v4.view.PagerAdapter
+import com.ppandroid.app.home.mine.adapter.AD_BaseHorizontalAnalysis
+import com.ppandroid.app.home.mine.energyanalysis.FG_BaseAnlysisPage
+
+
+/**
+ * Created by yeqinfu on 2017/9/15.
+ * 横向柱状图分析
+ */
+class FG_HistogramAnalysis :FG_BaseHorizontalanalysis(){
+    override fun init() {
+    }
+
+    override fun getAdapter(): PagerAdapter {
+        return AD_HistogramAnalysis(activity,fragmentManager,"")
+    }
+
+    class AD_HistogramAnalysis(ac: Activity, fm: FragmentManager, parentId:String) : AD_BaseHorizontalAnalysis(ac,fm){
+        var parentId:String?=null
+        init {
+            this.parentId=parentId
+            initFragment()
+        }
+        override fun getBundle(index:Int): Bundle {
+            return FG_BaseAnlysisPage.createBundle(index, parentId?:"-1")
+
+        }
+        override fun getContentFragment(): FG_BaseHistoramAnalysisPage {
+            return FG_BaseHistoramAnalysisPage()
+        }
+    }
+
+}

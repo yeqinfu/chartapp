@@ -1,8 +1,10 @@
 package com.ppandroid.app.home.mine.energyanalysis
 
+import android.content.Intent
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.mine.energyanalysis.BN_EnergyAnalysis
+import com.ppandroid.app.home.mine.energyanalysis.horizontalanalysis.AC_HorChart
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.im.base.FG_Base
@@ -16,12 +18,16 @@ import kotlinx.android.synthetic.main.yellowchartview.*
  */
 class FG_EnergyAnalysis :FG_Base(){
     override fun fgRes(): Int= R.layout.fg_energy_analysis
-
     override fun afterViews() {
         head_view.init(activity)
         head_view.setCenterTitle("能耗分析")
         head_view.setRightText("历史"){
             startAC(FG_History::class.java.name)
+        }
+        v_yellow_chart.setOnClickListener {
+            var it= Intent()
+            it.setClass(activity, AC_HorChart::class.java)
+            startActivity(it)
         }
         tv_cate.setOnClickListener {
             startAC(FG_CateAnalysis::class.java.name)
