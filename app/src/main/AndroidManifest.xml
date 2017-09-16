@@ -46,6 +46,10 @@
             android:screenOrientation="landscape"
             android:name=".home.mine.energyanalysis.horizontalanalysis.AC_DevicesHorChart">
         </activity>
+        <activity
+            android:screenOrientation="landscape"
+            android:name=".home.mine.energyanalysis.horizontalanalysis.AC_AreaHorChart">
+        </activity>
     </application>
 
 </manifest>
