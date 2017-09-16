@@ -31,8 +31,27 @@ public class BN_DevicesDetailAnalysisPage extends BaseBody {
          * stageKwh : [{"key":"2017年","value":"25.04万"}]
          */
 
+        private String totalKwh;
+        private String accurateAverageKwh;
         private String averageKwh;
         private List<StageKwhBean> stageKwh;
+
+
+        public String getTotalKwh() {
+            return totalKwh;
+        }
+
+        public void setTotalKwh(String totalKwh) {
+            this.totalKwh = totalKwh;
+        }
+
+        public String getAccurateAverageKwh() {
+            return accurateAverageKwh;
+        }
+
+        public void setAccurateAverageKwh(String accurateAverageKwh) {
+            this.accurateAverageKwh = accurateAverageKwh;
+        }
 
         public String getAverageKwh() {
             return averageKwh;

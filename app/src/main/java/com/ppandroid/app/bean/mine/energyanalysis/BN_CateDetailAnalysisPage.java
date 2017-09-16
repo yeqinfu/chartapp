@@ -31,6 +31,25 @@ public class BN_CateDetailAnalysisPage extends BaseBody {
          */
 
         private String averageKwh;
+        private String accurateAverageKwh;
+        private String totalKwh;
+
+        public String getAccurateAverageKwh() {
+            return accurateAverageKwh;
+        }
+
+        public void setAccurateAverageKwh(String accurateAverageKwh) {
+            this.accurateAverageKwh = accurateAverageKwh;
+        }
+
+        public String getTotalKwh() {
+            return totalKwh;
+        }
+
+        public void setTotalKwh(String totalKwh) {
+            this.totalKwh = totalKwh;
+        }
+
         private List<StageKwhBean> stageKwh;
 
         public String getAverageKwh() {

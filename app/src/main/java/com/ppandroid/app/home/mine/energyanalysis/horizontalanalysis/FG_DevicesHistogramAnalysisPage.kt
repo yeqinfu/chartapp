@@ -2,11 +2,10 @@ package com.ppandroid.app.home.mine.energyanalysis.horizontalanalysis
 
 import com.ppandroid.app.bean.BN_Vertical
 import com.ppandroid.app.bean.ErrorBody
-import com.ppandroid.app.bean.mine.energyanalysis.BN_CateDetailAnalysisPage
+import com.ppandroid.app.bean.mine.energyanalysis.BN_DevicesDetailAnalysisPage
 import com.ppandroid.app.home.mine.energyanalysis.devicesanalysis.FG_BaseDevicesAnlysisPage
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
-import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.Utils_Common
 import kotlinx.android.synthetic.main.fg_base_histroam_analysis_page.*
 import java.util.*
@@ -14,31 +13,16 @@ import java.util.*
 /**
  * Created by yeqinfu on 2017/9/16.
  */
-class FG_CateHistogramAnalysisPage :FG_BaseHistoramAnalysisPage(){
+class FG_DevicesHistogramAnalysisPage : FG_BaseHistoramAnalysisPage(){
 
-    override fun onDestroy() {
-        DebugLog.d("=FG_BaseHistoramAnalysisPage==============onDestroy===========")
-
-        super.onDestroy()
-    }
-    override fun onResume() {
-        super.onResume()
-        DebugLog.d("=FG_BaseHistoramAnalysisPage==============onResume===========")
-    }
-
-
-    override fun getUserVisibleHint(): Boolean {
-        DebugLog.d("==FG_BaseHistoramAnalysisPage=============getUserVisibleHint===========")
-        return super.getUserVisibleHint()
-    }
 
     override fun loadContent() {
-        var url = "user/energy/analysis/getDeviceCateDetail.json?cateId=$parentId"
+        var url = "user/energy/analysis/getDeviceDetail.json?deviceId=$parentId"
         if (index != 3) {//总计
             url += "&dateString=$select"
         }
-        Http.get(activity, url, BN_CateDetailAnalysisPage::class.java, object : MyCallBack<BN_CateDetailAnalysisPage> {
-            override fun onResponse(response: BN_CateDetailAnalysisPage?) {
+        Http.get(activity, url, BN_DevicesDetailAnalysisPage::class.java, object : MyCallBack<BN_DevicesDetailAnalysisPage> {
+            override fun onResponse(response: BN_DevicesDetailAnalysisPage?) {
                 response?.let {
                     /**柱状图*/
                     var list = ArrayList<BN_Vertical>()
@@ -93,8 +77,8 @@ class FG_CateHistogramAnalysisPage :FG_BaseHistoramAnalysisPage(){
                     tv_averageKwh?.text=it.message.averageKwh
                     v_multiple_view?.dataSet = list
                     v_multiple_view?.startAnim()
-                    tv_avg?.text=it.message.accurateAverageKwh
-                    tv_total?.text=it.message.totalKwh
+                    tv_avg?.text = it.message.accurateAverageKwh
+                    tv_total?.text = it.message.totalKwh
                 }
             }
 
@@ -105,5 +89,6 @@ class FG_CateHistogramAnalysisPage :FG_BaseHistoramAnalysisPage(){
         })
 
     }
+
 
 }

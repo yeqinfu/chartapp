@@ -1,12 +1,16 @@
 package com.ppandroid.app.home.mine.energyanalysis.devicesanalysis
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v4.view.PagerAdapter
+import com.ppandroid.app.R
 import com.ppandroid.app.home.mine.adapter.AD_BaseDevicesAnalysis
 import com.ppandroid.app.home.mine.energyanalysis.FG_BaseAnalysis
 import com.ppandroid.app.home.mine.energyanalysis.FG_BaseAnlysisPage
+import com.ppandroid.app.home.mine.energyanalysis.horizontalanalysis.AC_DevicesHorChart
+import kotlinx.android.synthetic.main.layout_head_view.*
 
 /**
  * Created by yeqinfu on 2017/9/13.
@@ -23,6 +27,12 @@ class FG_DeviceDetailAnalysis :FG_BaseAnalysis(){
         }
     }
     override fun init() {
+        //横向分析图
+        head_view.setIvRight(R.drawable.ic_fanzhuan){
+            var it= Intent()
+            it.setClass(activity, AC_DevicesHorChart::class.java)
+            startActivity(it)
+        }
     }
 
     override fun getAdapter(): PagerAdapter=AD_DeviceAnalysis(activity,childFragmentManager,parentId)

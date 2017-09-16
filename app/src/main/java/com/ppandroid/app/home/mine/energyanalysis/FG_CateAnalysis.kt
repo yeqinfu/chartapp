@@ -17,12 +17,7 @@ import kotlinx.android.synthetic.main.layout_head_view.*
 class FG_CateAnalysis:FG_BaseAnalysis(){
 
     override fun init() {
-        //横向分析图
-        head_view.setIvRight(R.drawable.ic_fanzhuan){
-            var it= Intent()
-            it.setClass(activity, AC_CateHorChart::class.java)
-            startActivity(it)
-        }
+
     }
 
     override fun getAdapter(): PagerAdapter{
