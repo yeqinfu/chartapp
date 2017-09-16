@@ -7,6 +7,7 @@ import android.view.View
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ET_Refresh
 import com.ppandroid.app.bean.ErrorBody
+import com.ppandroid.app.bean.mine.teammanagemet.BN_Role
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.widget.popwindow.Pop_ChooseSimple
@@ -30,7 +31,7 @@ class FG_AddEmployee : FG_Base() {
             return b
         }
 
-        fun createBundle(id: String, parentId: String, roleId:String, realName: String, mobile: String, job: String): Bundle {
+        fun createBundle(id: String, parentId: String, roleId: String, realName: String, mobile: String, job: String): Bundle {
             var b = Bundle()
             b.putString("id", id)
             b.putString("parentId", parentId)
@@ -53,23 +54,28 @@ class FG_AddEmployee : FG_Base() {
     private var job: String = "-1"
     override fun fgRes(): Int = R.layout.fg_add_employee
 
+    fun loadRoleList() {
+        var url = "user/personal/getRole.json"
+        Http.get(activity,url,BN_Role::class.java,object :MyCallBack<BN_Role>{
+            override fun onResponse(response: BN_Role?) {
+                response?.let {
+                    for(item in it.message){
+                        list.add(item.name)
+                        map.put(item.name,item.id.toString())
+                        map2.put(item.id.toString(),item.name)
+                    }
+                }
+            }
+
+            override fun onError(error: ErrorBody?) {
+                toast(error)
+            }
+
+        })
+    }
+
     override fun afterViews() {
-        list.add("管理员")
-        list.add("领导")
-        list.add("主管")
-        list.add("正式用户")
-        map.apply {
-            put(list[0], "1")
-            put(list[1], "2")
-            put(list[2], "3")
-            put(list[3], "4")
-        }
-        map2.apply {
-            put("1", list[0])
-            put("2", list[1])
-            put("3", list[2])
-            put("4", list[3])
-        }
+        loadRoleList()
 
         arguments?.let {
             parentId = it.getString("parentId", "-1")
@@ -80,12 +86,12 @@ class FG_AddEmployee : FG_Base() {
             job = it.getString("job", "-1")
             pageType = it.getInt("pageType", 0)
         }
-        if (pageType==1){//编辑员工
+        if (pageType == 1) {//编辑员工
             et_name.setText(realName)
             et_phone.setText(mobile)
             et_job.setText(job)
-            tv_jurisdiction.text= map2[roleId]
-            btn_del_e.visibility= View.VISIBLE
+            tv_jurisdiction.text = map2[roleId]
+            btn_del_e.visibility = View.VISIBLE
         }
         btn_del_e.setOnClickListener {
             showConfirmDialog()
@@ -96,7 +102,7 @@ class FG_AddEmployee : FG_Base() {
             postInfo()
         }
         rl_power.setOnClickListener {
-          showChoosePositionDialog()
+            showChoosePositionDialog()
         }
     }
 
@@ -114,8 +120,8 @@ class FG_AddEmployee : FG_Base() {
     }
 
     private fun deleteEmployee() {
-        var url="user/team/department/employee/delete.json?id=$id"
-        Http.get(activity,url,BaseBody::class.java,object :MyCallBack<BaseBody>{
+        var url = "user/team/department/employee/delete.json?id=$id"
+        Http.get(activity, url, BaseBody::class.java, object : MyCallBack<BaseBody> {
             override fun onResponse(response: BaseBody?) {
                 response?.let {
                     EventBus.getDefault().post(ET_Refresh(ET_Refresh.TASKID_REFRESH_TEAM_MANAGEMENT))
@@ -136,8 +142,9 @@ class FG_AddEmployee : FG_Base() {
     var map2 = HashMap<String, String>()
     var list = ArrayList<String>()
     private fun showChoosePositionDialog() {
-
-
+        if (list.isEmpty()){
+            return
+        }
         var pop = Pop_ChooseSimple(activity, list)
         pop.showPopupWindow()
         pop.setAutoShowInputMethod(false)
@@ -175,8 +182,8 @@ class FG_AddEmployee : FG_Base() {
 
         var url = "user/team/department/employee/add.json?departmentId=$parentId&roleId=$roleId&realName=$name&mobile=$phone&job=$job"
 
-        if (pageType==1){
-            url+="&id=$id"
+        if (pageType == 1) {
+            url += "&id=$id"
         }
         Http.get(activity, url, BaseBody::class.java, object : MyCallBack<BaseBody> {
             override fun onResponse(response: BaseBody?) {
