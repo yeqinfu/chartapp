@@ -21,24 +21,24 @@ class FG_CatePage :FG_BaseAnlysisPage(){
         Http.get(activity,url, BN_CatePage::class.java,object : MyCallBack<BN_CatePage> {
             override fun onResponse(response: BN_CatePage?) {
                 response?.let {
-                    tv_totalKwh.text=it.message.analysisCateSum
+                    tv_totalKwh?.text=it.message.analysisCateSum
                     var k=getList(it)
                     var adapter=AD_List(activity,k,isHaveChild)
-                    v_dount_view.startAnim()
+                    v_dount_view?.startAnim()
                     adapter.listener=object :ItemChoosseListener{
                         override fun choose(index: Int) {
                             var b=FG_BaseAnalysis.createBundle(it.message.analysisCateParamDtoList[index].cateId.toString())
                             startAC(FG_CateAnalysis::class.java.name,b)
                         }
                     }
-                    lv_list.adapter=adapter
-                    lv_list.setOnItemClickListener { adapterView, view, i, l ->
+                    lv_list?.adapter=adapter
+                    lv_list?.setOnItemClickListener { adapterView, view, i, l ->
                         var item=it.message.analysisCateParamDtoList[i]
                         var bundle= FG_DeviceDetailAnalysis.createBundle(item.cateId,item.cateName)
                         startAC(FG_CateDetailAnalysis::class.java.name,bundle)
                     }
 
-                    v_dount_view.charRender(getValues(k))
+                    v_dount_view?.charRender(getValues(k))
                 }
             }
 

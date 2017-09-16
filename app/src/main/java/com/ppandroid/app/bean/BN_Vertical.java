@@ -15,6 +15,7 @@ public class BN_Vertical {
 
 
 	public String getTopText() {
+
 		return topText;
 	}
 

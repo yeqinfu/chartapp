@@ -3,6 +3,7 @@ package com.ppandroid.im.base
 
 import android.os.Bundle
 import com.ppandroid.app.base.AC_SwipeBase
+import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.activitymanager.ActivityManager
 import com.ppandroid.app.utils.toast.ToastUtil
@@ -69,6 +70,8 @@ open class AC_Base : AC_SwipeBase() {
     protected fun toast(resId: Int) {
         ToastUtil.toast(this,resId)
     }
-
+    protected fun toast(error: ErrorBody?) {
+        toast(error?.message ?: "")
+    }
 
 }

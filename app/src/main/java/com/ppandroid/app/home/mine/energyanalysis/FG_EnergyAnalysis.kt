@@ -25,9 +25,7 @@ class FG_EnergyAnalysis :FG_Base(){
             startAC(FG_History::class.java.name)
         }
         v_yellow_chart.setOnClickListener {
-            var it= Intent()
-            it.setClass(activity, AC_HorChart::class.java)
-            startActivity(it)
+
         }
         tv_cate.setOnClickListener {
             startAC(FG_CateAnalysis::class.java.name)

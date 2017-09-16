@@ -3,6 +3,7 @@ package com.ppandroid.app.home.mine.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -60,4 +61,19 @@ public abstract class AD_BaseHorizontalAnalysis extends FragmentStatePagerAdapte
     protected abstract Bundle getBundle(int index);
 
     protected abstract FG_BaseHistoramAnalysisPage getContentFragment();
+
+    @Override
+    public void restoreState(Parcelable arg0, ClassLoader arg1) {
+        //do nothing here! no call to super.restoreState(arg0, arg1);
+        //super方法中会抛出异常，这边重写解决，至于为啥，没明白
+       /*
+       这样也行
+       try{
+            super.restoreState(state, loader);
+        }catch (NullPointerException e){
+            // null caught
+        }
+
+        */
+    }
 }

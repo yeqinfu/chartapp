@@ -8,41 +8,42 @@ import com.ppandroid.im.base.AC_Base
 import kotlinx.android.synthetic.main.activity_ac__hor_chart.*
 
 
-class AC_HorChart : AC_Base() {
+open abstract class AC_HorChart : AC_Base() {
     private var fragments: ArrayList<Fragment>? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_ac__hor_chart)
-
-
+    protected fun setContent(){
         fragments =ArrayList()
-        fragments?.let {
-            it.add(FG_HistogramAnalysis())
-            it.add(FG_HuanAnalysis())
-            it.add(FG_TongAnalysis())
-        }
-
-
-
-
-
         wv_choose.offset = 3
         var list=ArrayList<String>()
-        list.add("柱状图")
-        list.add("环比图")
-        list.add("同比图")
+        /**分别代表右边栏的列表总数*/
+        var total=getCountPage()-1
+        for (i in 0..total){
+            list.add(getTitlePage(i))
+            fragments?.add(getFragmentPage(i))
+        }
+        replaceFragment(0)
         wv_choose.setItems(list)
         wv_choose.onWheelViewListener = object : WheelViewSelector.OnWheelViewListener() {
             override fun onSelected(selectedIndex: Int, item: String) {
                 replaceFragment(selectedIndex)
             }
         }
-        replaceFragment(0)
-        setEnablePullToBack(false)
-
-
     }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_ac__hor_chart)
+        init()
+        setEnablePullToBack(false)
+    }
+
+    abstract fun init()
+
+    abstract fun getTitlePage(i: Int): String
+
+    abstract fun getFragmentPage(i: Int): Fragment
+
+    abstract fun getCountPage(): Int
+
     fun replaceFragment(selectedIndex: Int){
         fragments?.let {
             val t = supportFragmentManager.beginTransaction()

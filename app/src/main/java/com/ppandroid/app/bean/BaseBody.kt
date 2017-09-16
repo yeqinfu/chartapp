@@ -7,9 +7,7 @@ package com.ppandroid.im.bean
 
  open class BaseBody {
 
-    companion object {
 
-    }
 
     var title:String=""
     var isSuccess:Boolean=false
