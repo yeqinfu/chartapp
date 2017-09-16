@@ -33,6 +33,24 @@ public class BN_InstrumentDetailAnalysisPage extends BaseBody {
 
         private String averageKwh;
         private List<StageKwhBean> stageKwh;
+        private String totalKwh;
+        private String accurateAverageKwh;
+
+        public String getTotalKwh() {
+            return totalKwh;
+        }
+
+        public void setTotalKwh(String totalKwh) {
+            this.totalKwh = totalKwh;
+        }
+
+        public String getAccurateAverageKwh() {
+            return accurateAverageKwh;
+        }
+
+        public void setAccurateAverageKwh(String accurateAverageKwh) {
+            this.accurateAverageKwh = accurateAverageKwh;
+        }
 
         public String getAverageKwh() {
             return averageKwh;
