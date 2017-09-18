@@ -20,9 +20,9 @@ open class FG_BaseLineChart:FG_Base(){
         xValue.clear()
         yValue.clear()
         value.clear()
-        for (i in 0..11) {
+        for (i in 0..22) {
             xValue.add((i + 1).toString())
-            value.put((i + 1).toString(), (Math.random() * 181 + 60).toInt())//60--240
+            value.put((i + 1).toString(), (Math.random() * 20 + 60).toInt())//60--80
         }
 
         for (i in 0..5) {

@@ -52,6 +52,8 @@ public class ChartView extends View {
 	private Paint					xyTextPaint;
 	//画折线对应的画笔
 	private Paint					linePaint;
+	//画折线对应的画笔
+	private Paint					blackPaint;
 	private int						width;
 	private int						height;
 	//x轴的原点坐标
@@ -71,7 +73,7 @@ public class ChartView extends View {
 	//折线对应的数据
 	private Map<String, Integer>	value		= new HashMap<>();
 	//点击的点对应的X轴的第几个点，默认1
-	private int						selectIndex	= 1;
+	private int						selectIndex	= -1;
 	//X轴刻度文本对应的最大矩形，为了选中时，在x轴文本画的框框大小一致
 	private Rect					xValueRect;
 	//速度检测器
@@ -114,6 +116,16 @@ public class ChartView extends View {
 		linePaint.setStrokeCap(Paint.Cap.ROUND);
 		linePaint.setColor(linecolor);
 		linePaint.setStyle(Paint.Style.STROKE);
+
+
+        blackPaint = new Paint();
+        blackPaint.setAntiAlias(true);
+        blackPaint.setStrokeWidth(xylinewidth);
+        blackPaint.setStrokeCap(Paint.Cap.ROUND);
+        blackPaint.setColor(Color.BLACK);
+        blackPaint.setStyle(Paint.Style.STROKE);
+
+
 	}
 
 	/**
@@ -240,6 +252,12 @@ public class ChartView extends View {
 		for (int i = 0; i < xValue.size(); i++) {
 			float x = xInit + interval * i;
 			float y = yOri - yOri * (1 - 0.1f) * value.get(xValue.get(i)) / yValue.get(yValue.size() - 1);
+            //当前点如果是选中点，绘制一个十字定位
+            if (i == selectIndex - 1) {
+                drawFloatTextBox(canvas, x, y - dp7, value.get(xValue.get(i)));
+                canvas.drawLine(0,y,width,y,blackPaint);
+                canvas.drawLine(x,0,x,yOri,blackPaint);
+            }
 			/*//绘制选中的点
 			if (i == selectIndex - 1) {
 				linePaint.setStyle(Paint.Style.FILL);
@@ -271,7 +289,7 @@ public class ChartView extends View {
 	private void drawFloatTextBox(Canvas canvas, float x, float y, int text) {
 		int dp6 = dpToPx(6);
 		int dp18 = dpToPx(18);
-		//p1
+		/*//p1
 		Path path = new Path();
 		path.moveTo(x, y);
 		//p2
@@ -288,11 +306,11 @@ public class ChartView extends View {
 		path.lineTo(x + dp6, y - dp6);
 		//p1
 		path.lineTo(x, y);
-		canvas.drawPath(path, linePaint);
-		linePaint.setColor(Color.WHITE);
-		linePaint.setTextSize(spToPx(14));
-		Rect rect = getTextBounds(text + "", linePaint);
-		canvas.drawText(text + "", x - rect.width() / 2, y - dp6 - (dp18 - rect.height()) / 2, linePaint);
+		canvas.drawPath(path, linePaint);*/
+		//linePaint.setColor(Color.WHITE);
+        blackPaint.setTextSize(spToPx(12));
+		Rect rect = getTextBounds(text + "", blackPaint);
+		canvas.drawText(text + "", x - rect.width() / 2, y - dp6 - (dp18 - rect.height()) / 2, blackPaint);
 	}
 
 	/**
