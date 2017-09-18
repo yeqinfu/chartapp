@@ -26,7 +26,6 @@ open abstract class AC_HorChart : AC_Base() {
         wv_choose.onWheelViewListener = object : WheelViewSelector.OnWheelViewListener() {
             override fun onSelected(selectedIndex: Int, item: String) {
                 replaceFragment(selectedIndex)
-                toast(item)
             }
         }
     }
