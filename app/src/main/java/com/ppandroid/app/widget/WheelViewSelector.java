@@ -10,16 +10,17 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.ppandroid.app.R;
 import com.ppandroid.app.utils.DebugLog;
-import com.ppandroid.app.utils.Utils_Common;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -173,12 +174,30 @@ public class WheelViewSelector extends ScrollView {
 	private void initData() {
 		displayItemCount = offset * 2 + 1;
 		for (String item : items) {
-			views.addView(createView(item));
+			views.addView(createItemView(item));
 		}
 		refreshItemView(0);
+        scrollTo(0,offset*itemHeight*2);
 	}
 
 	int itemHeight = 0;
+    private View createItemView(String item){
+        View v= LayoutInflater.from(context).inflate(R.layout.item_wheel_view_selector,null);
+        TextView tv_text= (TextView) v.findViewById(R.id.tv_text);
+        tv_text.setText(item);
+        if (TextUtils.isEmpty(item)) {
+            tv_text.setCompoundDrawables(null, null, null, null);
+        }
+        if (0 == itemHeight) {
+            itemHeight = getViewMeasuredHeight(v);
+            Log.d(TAG, "itemHeight: " + itemHeight);
+            views.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, itemHeight * displayItemCount));
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) this.getLayoutParams();
+            lp.gravity = Gravity.CENTER;
+            this.setLayoutParams(new LinearLayout.LayoutParams(lp.width, ViewGroup.LayoutParams.MATCH_PARENT));
+        }
+        return v;
+    }
 
 	private TextView createView(String item) {
 		TextView tv = new TextView(context);
@@ -206,12 +225,27 @@ public class WheelViewSelector extends ScrollView {
 			lp.gravity = Gravity.CENTER;
 			this.setLayoutParams(new LinearLayout.LayoutParams(lp.width, ViewGroup.LayoutParams.MATCH_PARENT));
 		}
-        tv.setHeight(itemHeight);
-		tv.setBackgroundColor(Utils_Common.getRandomColor());
 		return tv;
 	}
 
-	@Override
+
+
+    private Paint getPaint() {
+        if (!isInEditMode()) {
+            return new Paint(Paint.ANTI_ALIAS_FLAG);
+        } else {
+            return new Paint();
+        }
+    }
+    private Paint getTextPaint() {
+        Paint paint = getPaint();
+        paint.setTextSize(30f);
+        paint.setColor(getResources().getColor(R.color.color_01));
+        paint.setTextAlign(Paint.Align.CENTER);
+        return paint;
+    }
+
+    @Override
 	protected void onScrollChanged(int l, int t, int oldl, int oldt) {
 		super.onScrollChanged(l, t, oldl, oldt);
 
@@ -286,14 +320,18 @@ public class WheelViewSelector extends ScrollView {
 
 		int childSize = views.getChildCount();
 		for (int i = 0; i < childSize; i++) {
-			TextView itemView = (TextView) views.getChildAt(i);
+			View v =  views.getChildAt(i);
+            TextView itemView= (TextView) v.findViewById(R.id.tv_text);
+            ImageView iv_img= (ImageView) v.findViewById(R.id.iv_img);
 			if (null == itemView) {
 				return;
 			}
 			if (position == i) {
+                iv_img.setVisibility(View.VISIBLE);
 				itemView.setTextColor(Color.parseColor("#0288ce"));
 			}
 			else {
+                iv_img.setVisibility(View.GONE);
 				itemView.setTextColor(Color.parseColor("#bbbbbb"));
 			}
 		}
@@ -312,6 +350,7 @@ public class WheelViewSelector extends ScrollView {
 		}
 		return selectedAreaBorder;
 	}
+
 
 	private int					scrollDirection			= -1;
 	private static final int	SCROLL_DIRECTION_UP		= 0;
@@ -347,8 +386,7 @@ public class WheelViewSelector extends ScrollView {
 			paint.setColor(Color.parseColor("#83cde6"));
 			paint.setStrokeWidth(dip2px(1f));
 		}
-
-	}
+    }
 
 	/**
 	 * 选中回调

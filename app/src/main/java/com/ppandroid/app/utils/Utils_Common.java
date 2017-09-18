@@ -3,6 +3,7 @@ package com.ppandroid.app.utils;
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Environment;
 
@@ -20,6 +22,16 @@ import android.os.Environment;
  */
 
 public class Utils_Common {
+   static String[] colors={
+            "#FA6D6F",
+            "#FE8D25",
+            "#FFB338",
+            "#6CC37E",
+            "#2ED9A4"
+    };
+    public static int getRandomColor(){
+       return  Color.parseColor(colors[(int) (Math.random()*100%colors.length)]);
+    }
     public static double parseNumberString(String s){
         String d=findNumberFromStr(s);
         double result=paraseDouble(d);
