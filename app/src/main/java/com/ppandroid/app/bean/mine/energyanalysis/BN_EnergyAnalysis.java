@@ -34,6 +34,24 @@ public class BN_EnergyAnalysis extends BaseBody {
         private String weekAverage;
         private String weekSum;
         private List<String> deviceSumString;
+        private String accurateAverageKwh;
+        private String averageKwh;
+
+        public String getAccurateAverageKwh() {
+            return accurateAverageKwh;
+        }
+
+        public void setAccurateAverageKwh(String accurateAverageKwh) {
+            this.accurateAverageKwh = accurateAverageKwh;
+        }
+
+        public String getAverageKwh() {
+            return averageKwh;
+        }
+
+        public void setAverageKwh(String averageKwh) {
+            this.averageKwh = averageKwh;
+        }
 
         public String getWeekAverage() {
             return weekAverage;

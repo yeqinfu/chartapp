@@ -16,9 +16,9 @@ import com.ppandroid.app.home.mine.energyanalysis.horizontalanalysis.FG_BaseHist
  */
 public abstract class AD_BaseHorizontalAnalysis extends FragmentStatePagerAdapter {
 
-	private String[]				arrays_title;
-	private FG_BaseHistoramAnalysisPage[]	fragments;
-	private Context					mContext;
+	protected String[]				arrays_title;
+    protected FG_BaseHistoramAnalysisPage[]	fragments;
+    protected Context					mContext;
 
 	public AD_BaseHorizontalAnalysis(Activity ac, FragmentManager fm) {
 		super(fm);

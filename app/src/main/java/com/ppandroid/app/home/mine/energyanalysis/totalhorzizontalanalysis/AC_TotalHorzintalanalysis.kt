@@ -20,7 +20,7 @@ class AC_TotalHorzintalanalysis:AC_HorChart(){
 
     override fun getFragmentPage(i: Int): Fragment {
         if (i==0){
-            return FG_TotalHisogram()
+            return FG_Histogram()
         }else if(i==1){
             return FG_Huan()
         }else{
