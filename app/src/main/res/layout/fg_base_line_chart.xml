@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView5"
+    <com.ppandroid.app.widget.linechart.ChartView
+        android:id="@+id/chartview"
+        app:bgcolor="#ffffff"
+        app:isScroll="false"
+        app:linecolor="#02bbb7"
+        app:xylinecolor="#e2e2e2"
+        app:xylinewidth="1dp"
+        app:xytextcolor="#7e7e7e"
+        app:xytextsize="12sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="基本折线图"/>
+        android:layout_height="match_parent"/>
 </LinearLayout>
