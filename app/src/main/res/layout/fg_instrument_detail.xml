@@ -378,7 +378,7 @@
                 android:layout_height="27dp"
                 android:gravity="center_vertical|right"
                 android:paddingLeft="22dp"
-                android:text="kW"
+                android:text="kVar"
                 android:textColor="@color/color_04"
                 android:textSize="@dimen/bar_title"/>
         </LinearLayout>
