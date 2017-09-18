@@ -13,17 +13,18 @@ class AC_TotalHorzintalanalysis:AC_HorChart(){
         list.add("用电柱状图")
         list.add("用电环比图")
         list.add("用电同比图")
+        setContent()
     }
 
     override fun getTitlePage(i: Int): String=list[i]
 
     override fun getFragmentPage(i: Int): Fragment {
         if (i==0){
-            return FG_TotalHisogramPage()
+            return FG_TotalHisogram()
         }else if(i==1){
-            return FG_HuanPage()
+            return FG_Huan()
         }else{
-            return FG_TongPage()
+            return FG_Tong()
         }
     }
 
