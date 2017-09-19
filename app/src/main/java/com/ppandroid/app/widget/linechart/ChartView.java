@@ -54,6 +54,8 @@ public class ChartView extends View {
 	private Paint					linePaint;
 	//画折线对应的画笔
 	private Paint					blackPaint;
+	//画折线对应的画笔
+	private Paint					valuePaint;
 	private int						width;
 	private int						height;
 	//x轴的原点坐标
@@ -72,8 +74,12 @@ public class ChartView extends View {
 	private List<Integer>			yValue		= new ArrayList<>();
 	//折线对应的数据
 	private Map<String, Integer>	value		= new HashMap<>();
+	//折线对应的数据2
+	private Map<String, Integer>	value2		= new HashMap<>();
 	//点击的点对应的X轴的第几个点，默认1
 	private int						selectIndex	= -1;
+	private int						selectIndex2	= -1;
+    private int selectType=0;//0，表示selectIndex 有效，1表示selectIndex2有效
 	//X轴刻度文本对应的最大矩形，为了选中时，在x轴文本画的框框大小一致
 	private Rect					xValueRect;
 	//速度检测器
@@ -124,6 +130,14 @@ public class ChartView extends View {
         blackPaint.setStrokeCap(Paint.Cap.ROUND);
         blackPaint.setColor(Color.BLACK);
         blackPaint.setStyle(Paint.Style.STROKE);
+
+
+        valuePaint = new Paint();
+        valuePaint.setAntiAlias(true);
+        valuePaint.setStrokeWidth(xylinewidth);
+        valuePaint.setStrokeCap(Paint.Cap.ROUND);
+        valuePaint.setColor(Color.parseColor("#883ACDFF"));
+        valuePaint.setStyle(Paint.Style.FILL_AND_STROKE);
 
 
 	}
@@ -213,6 +227,7 @@ public class ChartView extends View {
 		canvas.drawColor(bgcolor);
 		drawXY(canvas);
 		drawBrokenLineAndPoint(canvas);
+		drawBrokenLineAndPoint2(canvas);
 	}
 
 	/**
@@ -238,6 +253,29 @@ public class ChartView extends View {
 		//保存图层
 		canvas.restoreToCount(layerId);
 	}
+    /**
+     * 绘制折线和折线交点处对应的点2
+     *
+     * @param canvas
+     */
+    private void drawBrokenLineAndPoint2(Canvas canvas) {
+        if (xValue.size() <= 0)
+            return;
+        //重新开一个图层
+        int layerId = canvas.saveLayer(0, 0, width, height, null, Canvas.ALL_SAVE_FLAG);
+        drawBrokenLine2(canvas);
+        drawBrokenPoint2(canvas);
+
+        // 将折线超出x轴坐标的部分截取掉
+        linePaint.setStyle(Paint.Style.FILL);
+        linePaint.setColor(bgcolor);
+        linePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        RectF rectF = new RectF(0, 0, xOri, height);
+        canvas.drawRect(rectF, linePaint);
+        linePaint.setXfermode(null);
+        //保存图层
+        canvas.restoreToCount(layerId);
+    }
 
 	/**
 	 * 绘制折线对应的点
@@ -253,7 +291,7 @@ public class ChartView extends View {
 			float x = xInit + interval * i;
 			float y = yOri - yOri * (1 - 0.1f) * value.get(xValue.get(i)) / yValue.get(yValue.size() - 1);
             //当前点如果是选中点，绘制一个十字定位
-            if (i == selectIndex - 1) {
+            if (i == selectIndex - 1&&selectType==0) {
                 drawFloatTextBox(canvas, x, y - dp7, value.get(xValue.get(i)));
                 canvas.drawLine(0,y,width,y,blackPaint);
                 canvas.drawLine(x,0,x,yOri,blackPaint);
@@ -277,6 +315,42 @@ public class ChartView extends View {
 
 		}
 	}
+
+    /**
+     * 绘制折线对应的点
+     *
+     * @param canvas
+     */
+    private void drawBrokenPoint2(Canvas canvas) {
+        float dp2 = dpToPx(2);
+        float dp4 = dpToPx(4);
+        float dp7 = dpToPx(7);
+        //绘制节点对应的原点
+        for (int i = 0; i < xValue.size(); i++) {
+            float x = xInit + interval * i;
+            float y = yOri - yOri * (1 - 0.1f) * value2.get(xValue.get(i)) / yValue.get(yValue.size() - 1);
+            //当前点如果是选中点，绘制一个十字定位
+            if (i == selectIndex2 - 1&&selectType==1) {
+                drawFloatTextBox(canvas, x, y - dp7, value2.get(xValue.get(i)));
+                canvas.drawLine(0,y,width,y,blackPaint);
+                canvas.drawLine(x,0,x,yOri,blackPaint);
+            }
+			/*//绘制选中的点
+			if (i == selectIndex - 1) {
+				linePaint.setStyle(Paint.Style.FILL);
+				linePaint.setColor(0xffd0f3f2);
+				canvas.drawCircle(x, y, dp7, linePaint);
+				linePaint.setColor(0xff81dddb);
+				canvas.drawCircle(x, y, dp4, linePaint);
+				drawFloatTextBox(canvas, x, y - dp7, value.get(xValue.get(i)));
+			}*/
+            //绘制普通的节点
+		/*	linePaint.setStyle(Paint.Style.FILL);
+			linePaint.setColor(Color.WHITE);
+			canvas.drawCircle(x, y, dp2, linePaint);*/
+
+        }
+    }
 
 	/**
 	 * 绘制显示Y值的浮动框
@@ -333,6 +407,35 @@ public class ChartView extends View {
 		}
 		canvas.drawPath(path, linePaint);
 	}
+
+	/**
+     * * 绘制折线
+	 *
+     * @param canvas
+	 */
+    private void drawBrokenLine2(Canvas canvas) {
+        linePaint.setStyle(Paint.Style.STROKE);
+        linePaint.setColor(linecolor);
+        //绘制折线
+        Path path = new Path();
+        float x = xInit + interval * 0;
+        float y = yOri - yOri * (1 - 0.1f) * value2.get(xValue.get(0)) / yValue.get(yValue.size() - 1);
+
+        path.moveTo(x, y);
+        for (int i = 1; i < xValue.size(); i++) {
+            x = xInit + interval * i;
+            y = yOri - yOri * (1 - 0.1f) * value2.get(xValue.get(i)) / yValue.get(yValue.size() - 1);
+            path.lineTo(x, y);
+
+        }
+        canvas.drawPath(path, linePaint);
+        //填充折线 这边x，y的值一定是最后一个折线的坐标
+        path.lineTo(x, yOri);
+        path.lineTo(xInit, yOri);
+        path.close();
+        canvas.drawPath(path,valuePaint);
+
+    }
 
 	/**
 	 * 绘制XY坐标
@@ -529,9 +632,20 @@ public class ChartView extends View {
 			float y = yOri - yOri * (1 - 0.1f) * value.get(xValue.get(i)) / yValue.get(yValue.size() - 1);
 			if (eventX >= x - dp8 && eventX <= x + dp8 && eventY >= y - dp8 && eventY <= y + dp8 && selectIndex != i + 1) {//每个节点周围8dp都是可点击区域
 				selectIndex = i + 1;
+                selectType=0;
 				invalidate();
 				return;
 			}
+
+            //节点2
+            float x2 = xInit + interval * i;
+            float y2 = yOri - yOri * (1 - 0.1f) * value2.get(xValue.get(i)) / yValue.get(yValue.size() - 1);
+            if (eventX >= x2 - dp8 && eventX <= x2 + dp8 && eventY >= y2 - dp8 && eventY <= y2 + dp8 && selectIndex2 != i + 1) {//每个节点周围8dp都是可点击区域
+                selectIndex2 = i + 1;
+                selectType=1;
+                invalidate();
+                return;
+            }
 			//X轴刻度
 			/*String text = xValue.get(i);
 			Rect rect = getTextBounds(text, xyTextPaint);
@@ -592,8 +706,9 @@ public class ChartView extends View {
 		invalidate();
 	}
 
-	public void setValue(Map<String, Integer> value, List<String> xValue, List<Integer> yValue) {
+	public void setValue(Map<String, Integer> value,Map<String, Integer> value2, List<String> xValue, List<Integer> yValue) {
 		this.value = value;
+		this.value2 = value2;
 		this.xValue = xValue;
 		this.yValue = yValue;
 		invalidate();

@@ -16,18 +16,20 @@ open class FG_BaseLineChart:FG_Base(){
     private val yValue = ArrayList<Int>()
     //折线对应的数据
     private val value = HashMap<String, Int>()
+    //数据源2
+    private val value2 = HashMap<String, Int>()
     override fun afterViews() {
         xValue.clear()
         yValue.clear()
         value.clear()
+        value2.clear()
         for (i in 0..22) {
             xValue.add((i + 1).toString())
             value.put((i + 1).toString(), (Math.random() * 20 + 60).toInt())//60--80
+            value2.put((i + 1).toString(), (Math.random() * 20 + 60).toInt())//60--80
         }
 
-        for (i in 0..5) {
-            yValue.add(i * 60)
-        }
-        chartview.setValue(value, xValue, yValue)
+        (0..5).mapTo(yValue) { it * 60 }
+        chartview.setValue(value,value2, xValue, yValue)
     }
 }
