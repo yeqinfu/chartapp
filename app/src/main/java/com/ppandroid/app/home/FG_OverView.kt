@@ -46,7 +46,7 @@ class FG_OverView : FG_Base() {
 
     override fun refresh(){
         DebugLog.d("http===yeqinfu=============消息重发=========================")
-        loadContent()
+        loadOverViewConfig()
     }
     override fun afterViews() {
         isNeedEventBus=true

@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.ppandroid.app.R;
@@ -69,6 +70,14 @@ public class MultipleVerticalView extends View implements Runnable{
 
         return paint;
     }
+    private Paint getSelectPaint(){
+        Paint paint = getPaint();
+        paint.setColor(getResources().getColor(R.color.color_09));
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint.setStrokeWidth(strokeSize);
+
+        return paint;
+    }
 
 
     private List<BN_Vertical> dataSet = new ArrayList<>();
@@ -119,13 +128,45 @@ public class MultipleVerticalView extends View implements Runnable{
             float v1=getHeight()-h-baseLineY;
             float v2=getHeight()-baseLineY;
             if (v1<v2){
-                canvas.drawLine(begin,v1,begin,v2,p2);
+                if (i==select){//选中的用灰色画笔
+                    canvas.drawText(item.getRealHeight()+"",begin,getHeight()-baseLineY*1.5f-h,p);
+                    canvas.drawLine(begin,v1,begin,v2,getSelectPaint());
+                }else{
+                    canvas.drawLine(begin,v1,begin,v2,p2);
+                }
+
             }
 
         }
 
     }
+    //被选中的那条
+    private int select=-1;
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction()==MotionEvent.ACTION_DOWN){
+            int dp8 = dpToPx(8);
+            float eventX = event.getX();
+            float eventY = event.getY();
+            for (int i=0;i<dataSet.size();i++){
+
+
+            }
+        }
+        return super.onTouchEvent(event);
+
+    }
+    /**
+     * dp转化成为px
+     *
+     * @param dp
+     * @return
+     */
+    private int dpToPx(int dp) {
+        float density = getContext().getResources().getDisplayMetrics().density;
+        return (int) (dp * density + 0.5f * (dp >= 0 ? 1 : -1));
+    }
 
     @Override
     public void run() {
