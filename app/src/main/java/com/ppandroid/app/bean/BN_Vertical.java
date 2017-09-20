@@ -13,8 +13,44 @@ public class BN_Vertical {
 	float	realHeight=0.0f;
 	int		lineColor	= Color.WHITE;
 
+    float startX=0f;
+    float startY=0f;
+    float endX=0f;
+    float endY=0f;
 
-	public String getTopText() {
+    public float getStartX() {
+        return startX;
+    }
+
+    public void setStartX(float startX) {
+        this.startX = startX;
+    }
+
+    public float getStartY() {
+        return startY;
+    }
+
+    public void setStartY(float startY) {
+        this.startY = startY;
+    }
+
+    public float getEndX() {
+        return endX;
+    }
+
+    public void setEndX(float endX) {
+        this.endX = endX;
+    }
+
+    public float getEndY() {
+        return endY;
+    }
+
+    public void setEndY(float endY) {
+        this.endY = endY;
+    }
+
+    public String getTopText() {
 
 		return topText;
 	}

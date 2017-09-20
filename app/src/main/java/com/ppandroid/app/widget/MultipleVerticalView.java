@@ -129,11 +129,15 @@ public class MultipleVerticalView extends View implements Runnable{
             float v2=getHeight()-baseLineY;
             if (v1<v2){
                 if (i==select){//选中的用灰色画笔
-                    canvas.drawText(item.getRealHeight()+"",begin,getHeight()-baseLineY*1.5f-h,p);
                     canvas.drawLine(begin,v1,begin,v2,getSelectPaint());
+                    canvas.drawText(item.getRealHeight()+"",begin,getHeight()-baseLineY*1.5f-h,p);
                 }else{
                     canvas.drawLine(begin,v1,begin,v2,p2);
                 }
+                item.setStartY(v1);
+                item.setStartX(begin);
+                item.setEndX(begin);
+                item.setEndY(v2);
 
             }
 
@@ -146,11 +150,15 @@ public class MultipleVerticalView extends View implements Runnable{
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction()==MotionEvent.ACTION_DOWN){
-            int dp8 = dpToPx(8);
             float eventX = event.getX();
             float eventY = event.getY();
             for (int i=0;i<dataSet.size();i++){
-
+                BN_Vertical item=dataSet.get(i);
+                if (Math.abs(item.getEndX()-eventX)<=strokeSize&&item.getStartY()<=eventY&&item.getEndY()>=eventY){
+                    select=i;
+                    invalidate();
+                    break;
+                }
 
             }
         }
