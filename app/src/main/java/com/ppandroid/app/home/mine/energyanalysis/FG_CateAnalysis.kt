@@ -1,14 +1,10 @@
 package com.ppandroid.app.home.mine.energyanalysis
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v4.view.PagerAdapter
-import com.ppandroid.app.R
 import com.ppandroid.app.home.mine.adapter.AD_BaseAnalysis
-import com.ppandroid.app.home.mine.energyanalysis.horizontalanalysis.AC_CateHorChart
-import kotlinx.android.synthetic.main.layout_head_view.*
 
 /**
  * Created by yeqinfu on 2017/8/31.

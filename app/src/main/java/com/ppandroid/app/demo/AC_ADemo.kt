@@ -1,16 +1,26 @@
 package com.ppandroid.app.demo
 
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.support.v4.app.Fragment
 import android.util.Log
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.ppandroid.app.R
-import org.jetbrains.anko.find
+import com.ppandroid.app.home.mine.energyanalysis.horizontalanalysis.AC_HorChart
 
-class AC_ADemo : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
+class AC_ADemo : AC_HorChart() {
+    override fun getTopDrawable(i: Int): Int= R.drawable.zuzt
+
+    override fun init() {
+    }
+
+    override fun getTitlePage(i: Int): String="haha"
+
+    override fun getFragmentPage(i: Int): Fragment=FG_Demo01()
+
+    override fun getCountPage(): Int=3
+
+   /* override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ac__ademo)
 
@@ -26,7 +36,7 @@ class AC_ADemo : AppCompatActivity() {
         web.setWebViewClient(MyWebViewClient())
         web.setWebChromeClient(MyWebChromeClient())
         web.loadUrl(url)
-    }
+    }*/
 
     internal inner class MyWebViewClient : WebViewClient() {
 

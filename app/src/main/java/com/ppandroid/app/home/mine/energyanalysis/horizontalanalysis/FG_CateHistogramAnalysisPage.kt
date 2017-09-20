@@ -6,7 +6,6 @@ import com.ppandroid.app.bean.mine.energyanalysis.BN_CateDetailAnalysisPage
 import com.ppandroid.app.home.mine.energyanalysis.devicesanalysis.FG_BaseDevicesAnlysisPage
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
-import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.Utils_Common
 import kotlinx.android.synthetic.main.fg_base_histroam_analysis_page.*
 import java.util.*
@@ -16,21 +15,6 @@ import java.util.*
  */
 class FG_CateHistogramAnalysisPage :FG_BaseHistoramAnalysisPage(){
 
-    override fun onDestroy() {
-        DebugLog.d("=FG_BaseHistoramAnalysisPage==============onDestroy===========")
-
-        super.onDestroy()
-    }
-    override fun onResume() {
-        super.onResume()
-        DebugLog.d("=FG_BaseHistoramAnalysisPage==============onResume===========")
-    }
-
-
-    override fun getUserVisibleHint(): Boolean {
-        DebugLog.d("==FG_BaseHistoramAnalysisPage=============getUserVisibleHint===========")
-        return super.getUserVisibleHint()
-    }
 
     override fun loadContent() {
         var url = "user/energy/analysis/getDeviceCateDetail.json?cateId=$parentId"

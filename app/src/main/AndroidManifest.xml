@@ -18,10 +18,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AC_Main">
-        </activity>
-        <activity android:name=".base.AC_ContentFG"/>
         <activity
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:name=".AC_Main">
+        </activity>
+        <activity
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:name=".base.AC_ContentFG"/>
+        <activity
+            android:configChanges="screenSize|keyboardHidden|orientation"
             android:screenOrientation="portrait"
             android:name="com.ppandroid.im.base.AC_Base"/>
         <activity android:name=".AC_Login">
