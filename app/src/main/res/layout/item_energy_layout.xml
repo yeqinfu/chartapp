@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="bottom"
-                    android:text="24.54"
+                    android:text="0"
                     android:textColor="@color/color_01"
                     android:textSize="46sp"/>
 
@@ -110,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:text="碳排放：192612.3kg"
+                android:text="碳排放：0kg"
                 android:textColor="@color/color_04"
                 android:textSize="@dimen/bar_title"/>
 
@@ -147,7 +147,7 @@
                 android:drawablePadding="6dp"
                 android:drawableRight="@drawable/icon_down_yellow"
                 android:gravity="center"
-                android:text="9%"
+                android:text="0%"
                 android:textColor="@color/color_07"
                 android:textSize="@dimen/normal_text"/>
 
@@ -169,7 +169,7 @@
                 android:drawablePadding="6dp"
                 android:drawableRight="@drawable/icon_up_blue"
                 android:gravity="center"
-                android:text="6%"
+                android:text="0%"
                 android:textColor="@color/color_07"
                 android:textSize="@dimen/normal_text"/>
 
@@ -199,7 +199,7 @@
                 android:drawablePadding="6dp"
                 android:drawableRight="@drawable/icon_up_blue"
                 android:gravity="center"
-                android:text="35%"
+                android:text="0%"
                 android:textColor="@color/color_07"
                 android:textSize="@dimen/normal_text"/>
 
@@ -249,7 +249,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="37dp"
                 android:gravity="center"
-                android:text="334.83万kwh"
+                android:text="0kwh"
                 android:textColor="@color/color_07"
                 android:textSize="@dimen/normal_text"/>
 
@@ -270,7 +270,7 @@
                 android:layout_height="37dp"
                 android:drawablePadding="6dp"
                 android:gravity="center"
-                android:text="197.55万元"
+                android:text="0万元"
                 android:textColor="@color/color_07"
                 android:textSize="@dimen/normal_text"/>
 

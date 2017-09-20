@@ -89,7 +89,7 @@ class FG_OverView : FG_Base() {
             override fun onResponse(response: BN_OverView?) {
                 response?.let {
                     body = it
-                    setData()
+                    setValue()
                 }
 
             }
@@ -101,56 +101,25 @@ class FG_OverView : FG_Base() {
         })
 
     }
+    private var viewId2:View?=null
+    private var viewId3:View?=null
+    private var viewId4:View?=null
 
-    /**
-     * 页面设定
-     */
-    private fun setData() {
-        ll_content.removeAllViews()
-        choosed?.let {
-            for (item in it) {
-                //能耗信息
-                when {
-                    item.id == 2 -> {
-                        var v = addEnergyInfo()
-                        ll_content.addView(v)
-                    }
-                    item.id == 3 -> {//仪表用能统计图
-                        var v = addInstrumentInfomationList()
-                        ll_content.addView(v)
-                    }
-                    item.id == 4 -> {//重点设备用能统计图
-                        var v = addDeviceInformationList()
-                        ll_content.addView(v)
-                    }
-                }
-            }
-            var view = addModule()
-            ll_content.addView(view)
-            sv.smoothScrollTo(0, 0)
+    private fun setValue(){
+        viewId2?.let {
+            setEnergyValue(it)
+        }
+        viewId3?.let {
+            setInstrumentInfomationValue(it)
+        }
+        viewId4?.let {
+            setDeviceInformationValue(it)
         }
 
 
     }
 
-    private fun addModule(): View {
-        var view = activity.layoutInflater.inflate(R.layout.layout_add_module, null)
-        var iv_add_model = view.find<ImageView>(R.id.iv_add_model)
-        iv_add_model.setOnClickListener {
-            startAC(FG_OverViewConfig::class.java.name)
-        }
-
-        return view
-    }
-
-    /**
-     * 重点设备用能统计图
-     */
-    private fun addDeviceInformationList(): View {
-        var view = activity.layoutInflater.inflate(R.layout.item_zhongdian_layout, null)
-        view.find<TextView>(R.id.tv_more5).setOnClickListener {
-            startAC(FG_DeviceAnalysis::class.java.name)
-        }
+    private fun setDeviceInformationValue(view: View) {
         var zhongdianBody = body?.message?.deviceInformationList
         zhongdianBody?.let {
             /**添加仪表用能统计图*/
@@ -173,22 +142,9 @@ class FG_OverView : FG_Base() {
             title_indicator_zhongdian.setTypeface(null, Typeface.NORMAL)
             title_indicator_zhongdian.textSize = (14 * density).toInt()
         }
-
-
-        return view
-    }
-    interface IHeightListener{
-        fun getHeight(h:Int)
     }
 
-    /**
-     * 添加仪表用能统计图
-     */
-    private fun addInstrumentInfomationList(): View {
-        var view = activity.layoutInflater.inflate(R.layout.item_instrument_layout, null)
-        view.find<TextView>(R.id.tv_more4).setOnClickListener {
-            startAC(FG_InstrumentAnalysis::class.java.name)
-        }
+    private fun setInstrumentInfomationValue(view: View){
         var instrumentBody = body?.message?.instrumentInfomationList
         instrumentBody?.let {
             /**添加仪表用能统计图*/
@@ -213,23 +169,9 @@ class FG_OverView : FG_Base() {
             title_indicator2.setTypeface(null, Typeface.NORMAL)
             title_indicator2.textSize = (14 * density).toInt()
         }
-        return view
     }
 
-    /**
-     * 添加能耗信息
-     */
-    private fun addEnergyInfo(): View {
-        var view = activity.layoutInflater.inflate(R.layout.item_energy_layout, null)
-        view.find<TextView>(R.id.tv_more).setOnClickListener {
-            startAC(FG_EnergyAnalysis::class.java.name)
-        }
-        view.find<TextView>(R.id.tv_more2).setOnClickListener {
-            startAC(FG_CateAnalysis::class.java.name)
-        }
-        view.find<TextView>(R.id.tv_more3).setOnClickListener {
-            startAC(FG_AreaAnalysis::class.java.name)
-        }
+    private fun setEnergyValue(view:View) {
         var energyBody = body?.message?.overviewConsumptionInformation
         energyBody?.let {
             var tv_totalKwh = view.find<TextView>(R.id.tv_totalKwh)
@@ -336,6 +278,91 @@ class FG_OverView : FG_Base() {
             title_indicator.setTypeface(null, Typeface.NORMAL)
             title_indicator.textSize = (14 * density).toInt()
         }
+    }
+
+    /**
+     * 页面设定
+     */
+    private fun setData() {
+        ll_content.removeAllViews()
+        choosed?.let {
+            for (item in it) {
+                //能耗信息
+                when {
+                    item.id == 2 -> {
+                        viewId2 = addEnergyInfo()
+                        ll_content.addView(viewId2)
+                    }
+                    item.id == 3 -> {//仪表用能统计图
+                        viewId3= addInstrumentInfomationList()
+                        ll_content.addView(viewId3)
+                    }
+                    item.id == 4 -> {//重点设备用能统计图
+                        viewId4 = addDeviceInformationList()
+                        ll_content.addView(viewId4)
+                    }
+                }
+            }
+            var view = addModule()
+            ll_content.addView(view)
+            sv.smoothScrollTo(0, 0)
+        }
+
+
+    }
+
+    private fun addModule(): View {
+        var view = activity.layoutInflater.inflate(R.layout.layout_add_module, null)
+        var iv_add_model = view.find<ImageView>(R.id.iv_add_model)
+        iv_add_model.setOnClickListener {
+            startAC(FG_OverViewConfig::class.java.name)
+        }
+
+        return view
+    }
+
+    /**
+     * 重点设备用能统计图
+     */
+    private fun addDeviceInformationList(): View {
+        var view = activity.layoutInflater.inflate(R.layout.item_zhongdian_layout, null)
+        view.find<TextView>(R.id.tv_more5).setOnClickListener {
+            startAC(FG_DeviceAnalysis::class.java.name)
+        }
+
+        return view
+    }
+    interface IHeightListener{
+        fun getHeight(h:Int)
+    }
+
+    /**
+     * 添加仪表用能统计图
+     */
+    private fun addInstrumentInfomationList(): View {
+        var view = activity.layoutInflater.inflate(R.layout.item_instrument_layout, null)
+        view.find<TextView>(R.id.tv_more4).setOnClickListener {
+            startAC(FG_InstrumentAnalysis::class.java.name)
+        }
+
+        return view
+    }
+
+    /**
+     * 添加能耗信息
+     */
+    private fun addEnergyInfo(): View {
+        var view = activity.layoutInflater.inflate(R.layout.item_energy_layout, null)
+        view.find<TextView>(R.id.tv_more).setOnClickListener {
+            startAC(FG_EnergyAnalysis::class.java.name)
+        }
+        view.find<TextView>(R.id.tv_more2).setOnClickListener {
+            startAC(FG_CateAnalysis::class.java.name)
+        }
+        view.find<TextView>(R.id.tv_more3).setOnClickListener {
+            startAC(FG_AreaAnalysis::class.java.name)
+        }
+
         return view
     }
 
@@ -388,6 +415,7 @@ class FG_OverView : FG_Base() {
                 refreshLayout.finishRefresh()
                 response?.let {
                     choosed = it.message.choosed
+                    setData()
                     loadContent()
                 }
             }
