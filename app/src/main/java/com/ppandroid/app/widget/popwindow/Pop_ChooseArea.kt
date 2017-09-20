@@ -47,7 +47,7 @@ class Pop_ChooseArea(context: Activity) : BasePopupWindow(context, ViewGroup.Lay
     var lv_list: ListView? = null
 
     init {
-        isNeedgreybg = true
+        isNeedgreybg = false
         popupGravity = Gravity.BOTTOM
         var tv_back = popupWindowView.find<ImageView>(R.id.tv_back)
         var tv_close = popupWindowView.find<TextView>(R.id.tv_close)
