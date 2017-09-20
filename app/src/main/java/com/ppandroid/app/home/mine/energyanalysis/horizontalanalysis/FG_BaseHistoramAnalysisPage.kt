@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.View
 import com.bruce.pickerview.popwindow.DatePickerPopWin
 import com.ppandroid.app.R
+import com.ppandroid.app.bean.BN_Vertical
+import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_base_histroam_analysis_page.*
 import java.util.*
@@ -31,6 +33,24 @@ abstract class FG_BaseHistoramAnalysisPage:FG_Base(){
     protected var parentId = "-1"
 
     override fun fgRes(): Int= R.layout.fg_base_histroam_analysis_page
+
+    protected fun setAvg(max:Double,avgStr:String){
+        v_multiple_view?.isShowAvg=true
+        var avg= BN_Vertical()
+        var topText=""
+        when(index){
+            0->topText="时平均"
+            1->topText="日平均"
+            2->topText="月平均"
+            3->topText="年平均"
+            4->topText="周平均"
+
+        }
+        avg.topText=topText
+        avg.totalHeight=max.toFloat()
+        avg.realHeight= Utils_Common.parseNumberString(avgStr).toFloat()
+        v_multiple_view?.avgValue=avg
+    }
 
     override fun afterViews() {
         arguments?.let {

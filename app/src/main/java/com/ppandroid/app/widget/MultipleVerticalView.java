@@ -2,6 +2,7 @@ package com.ppandroid.app.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -10,6 +11,8 @@ import android.view.View;
 
 import com.ppandroid.app.R;
 import com.ppandroid.app.bean.BN_Vertical;
+import com.ppandroid.app.utils.DebugLog;
+import com.ppandroid.app.widget.graphical.common.SysinfoHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,8 @@ public class MultipleVerticalView extends View implements Runnable{
         initSetting();
     }
     private void initSetting() {
+        //禁用硬件加速
+        disableHardwareAccelerated();
         strokeSize=40f;
 
     }
@@ -108,6 +113,26 @@ public class MultipleVerticalView extends View implements Runnable{
 
     }
 
+    /**是否显示平均值*/
+    private boolean isShowAvg=false;
+    private BN_Vertical avgValue=null;
+
+    public BN_Vertical getAvgValue() {
+        return avgValue;
+    }
+
+    public void setAvgValue(BN_Vertical avgValue) {
+        this.avgValue = avgValue;
+    }
+
+    public boolean isShowAvg() {
+        return isShowAvg;
+    }
+
+    public void setShowAvg(boolean showAvg) {
+        isShowAvg = showAvg;
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
 
@@ -137,15 +162,36 @@ public class MultipleVerticalView extends View implements Runnable{
                 item.setStartY(v1);
                 item.setStartX(begin);
                 item.setEndX(begin);
-                item.setEndY(v2);
+               // item.setEndY(v2);
+                /*这边设置endy为这个值，是因为当柱状图太短的时候选不中*/
+                item.setEndY(getHeight());
 
             }
+
+        }
+        if (isShowAvg){//显示平均线
+            Paint  mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            mPaint.setColor(getResources().getColor(R.color.color_02));
+            mPaint.setStrokeWidth(3);
+            mPaint.setPathEffect(new DashPathEffect(new float[] {5, 5}, 0));
+
+            if (avgValue!=null){
+                float h=(avgValue.getRealHeight()/avgValue.getTotalHeight())*(getHeight()-baseLineY*2.5f);
+                float v1=getHeight()-h-baseLineY;
+                DebugLog.d("avg h-->"+h);
+                float textWidth=p.measureText(avgValue.getTopText());
+                canvas.drawText(avgValue.getTopText(),getWidth()-textWidth,getHeight()-baseLineY*1.5f-h,p);
+                canvas.drawLine(0, v1, getWidth(), v1, mPaint);
+            }
+
+
 
         }
 
     }
     //被选中的那条
     private int select=-1;
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -202,5 +248,23 @@ public class MultipleVerticalView extends View implements Runnable{
     }
     public void startAnim(){
         new Thread(this).start();
+    }
+
+
+    /**
+     * 禁用硬件加速. 原因:android自3.0引入了硬件加速，即使用GPU进行绘图,但它并不能完善的支持所有的绘图，
+     * 通常表现为内容(如Rect或Path)不可见，异常或渲染错误。所以类了保证图表的正常显示，强制禁用掉.
+     */
+    protected void disableHardwareAccelerated() {
+        //View.isHardwareAccelerated()
+        //Canvas.isHardwareAccelerated()
+
+        if (SysinfoHelper.getInstance().supportHardwareAccelerated()) {
+            //是否开启了硬件加速,如开启将其禁掉
+            if (!isHardwareAccelerated()) {
+                //setLayerType(View.LAYER_TYPE_NONE,null);  //LAYER_TYPE_SOFTWARE
+                setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+            }
+        }
     }
 }

@@ -75,6 +75,7 @@ class FG_DevicesHistogramAnalysisPage : FG_BaseHistoramAnalysisPage(){
                     }
                     /**知道我为啥加空安全吗？因为进入这个页面瞬间退出的时候就报空指针了*/
                     tv_averageKwh?.text=it.message.averageKwh
+                    setAvg(max,it.message.averageKwh)
                     v_multiple_view?.dataSet = list
                     v_multiple_view?.startAnim()
                     tv_avg?.text = it.message.accurateAverageKwh
