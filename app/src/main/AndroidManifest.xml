@@ -21,7 +21,9 @@
         <activity android:name=".AC_Main">
         </activity>
         <activity android:name=".base.AC_ContentFG"/>
-        <activity android:name="com.ppandroid.im.base.AC_Base"/>
+        <activity
+            android:screenOrientation="portrait"
+            android:name="com.ppandroid.im.base.AC_Base"/>
         <activity android:name=".AC_Login">
         </activity>
         <activity android:name=".AC_Welcome">

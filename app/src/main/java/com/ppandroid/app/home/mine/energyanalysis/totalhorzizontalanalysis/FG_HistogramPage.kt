@@ -144,7 +144,7 @@ class FG_HistogramPage : FG_BaseHistoramAnalysisPage(){
                     setAvg(max,it.message.weekAverage)
                     v_multiple_view?.dataSet = list
                     v_multiple_view?.startAnim()
-                    tv_avg?.text = it.message.accurateAverageKwh
+                    tv_avg?.text = it.message.weekAverage
                     tv_total?.text = it.message.weekSum
                 }
             }

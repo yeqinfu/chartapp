@@ -57,6 +57,32 @@ abstract class FG_BaseHistoramAnalysisPage:FG_Base(){
             index = it.getInt("index", 0)
             parentId = it.getString("parentId", "-1")
         }
+
+        when(index){
+            0->{
+                tv_01.text="时平均"
+                tv_02.text="日累计"
+            }
+            1->{
+                tv_01.text="日平均"
+                tv_02.text="月累计"
+            }
+            2->{
+                tv_01.text="月平均"
+                tv_02.text="年累计"
+            }
+            3->{
+                tv_01.text="年平均"
+                tv_02.text="累计"
+            }
+            4->{
+                tv_01.text="日平均"
+                tv_02.text="周累计"
+            }
+
+
+        }
+
         val c = Calendar.getInstance()
         if (index == 3) {//总
             tv_time.text = c.get(Calendar.YEAR).toString() + "-" + c.get(Calendar.YEAR).toString() + "年"

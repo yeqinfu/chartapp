@@ -20,6 +20,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.ppandroid.app.R;
+import com.ppandroid.app.bean.mine.energyanalysis.Model;
 import com.ppandroid.app.utils.DebugLog;
 
 import java.util.ArrayList;
@@ -60,23 +61,26 @@ public class WheelViewSelector extends ScrollView {
 	}
 
 	//    String[] items;
-	List<String> items;
+	List<Model> items;
 
-	private List<String> getItems() {
+	private List<Model> getItems() {
 		return items;
 	}
 
-	public void setItems(List<String> list) {
+
+
+	public void setItems(List<Model> list) {
 		if (null == items) {
-			items = new ArrayList<String>();
+			items = new ArrayList<Model>();
 		}
 		items.clear();
 		items.addAll(list);
 
 		// 前面和后面补全
 		for (int i = 0; i < offset; i++) {
-			items.add(0, "");
-			items.add("");
+            Model model=new Model();
+			items.add(0, model);
+			items.add(model);
 		}
 
 		initData();
@@ -173,7 +177,7 @@ public class WheelViewSelector extends ScrollView {
 
 	private void initData() {
 		displayItemCount = offset * 2 + 1;
-		for (String item : items) {
+		for (Model item : items) {
 			views.addView(createItemView(item));
 		}
 		refreshItemView(0);
@@ -181,12 +185,16 @@ public class WheelViewSelector extends ScrollView {
 	}
 
 	int itemHeight = 0;
-    private View createItemView(String item){
+    private View createItemView(Model item){
         View v= LayoutInflater.from(context).inflate(R.layout.item_wheel_view_selector,null);
         TextView tv_text= (TextView) v.findViewById(R.id.tv_text);
-        tv_text.setText(item);
-        if (TextUtils.isEmpty(item)) {
+        tv_text.setText(item.getTitle());
+        if (TextUtils.isEmpty(item.getTitle())) {
             tv_text.setCompoundDrawables(null, null, null, null);
+        }else{
+            Drawable drawable = getResources().getDrawable(item.getTopDrawable());
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+            tv_text.setCompoundDrawables(null, drawable, null, null);
         }
         if (0 == itemHeight) {
             itemHeight = getViewMeasuredHeight(v);
@@ -394,7 +402,7 @@ public class WheelViewSelector extends ScrollView {
 	private void onSeletedCallBack() {
 		if (null != onWheelViewListener) {
 			if (selectedIndex - offset >= 0 && items.size() - offset > selectedIndex) {
-				onWheelViewListener.onSelected(selectedIndex - offset, items.get(selectedIndex));
+				onWheelViewListener.onSelected(selectedIndex - offset, items.get(selectedIndex).getTitle());
 			}
 		}
 
@@ -413,7 +421,7 @@ public class WheelViewSelector extends ScrollView {
 	}
 
 	public String getSeletedItem() {
-		return items.get(selectedIndex);
+		return items.get(selectedIndex).getTitle();
 	}
 
 	public int getSeletedIndex() {
@@ -456,3 +464,4 @@ public class WheelViewSelector extends ScrollView {
 	}
 
 }
+

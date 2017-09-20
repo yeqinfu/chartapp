@@ -1,6 +1,7 @@
 package com.ppandroid.app.home.mine.energyanalysis.horizontalanalysis
 
 import android.support.v4.app.Fragment
+import com.ppandroid.app.R
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.mine.energyanalysis.BN_CateList
 import com.ppandroid.app.http.Http
@@ -10,6 +11,7 @@ import com.ppandroid.app.http.MyCallBack
  * Created by yeqinfu on 2017/9/16.
  */
 class AC_CateHorChart:AC_HorChart(){
+    override fun getTopDrawable(i: Int): Int= R.drawable.zuzt
     override fun init() {
         loadContent()
     }

@@ -1,6 +1,7 @@
 package com.ppandroid.app.home.mine.energyanalysis.horizontalanalysis
 
 import android.support.v4.app.Fragment
+import com.ppandroid.app.R
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.mine.energyanalysis.BN_DevicesList
 import com.ppandroid.app.http.Http
@@ -11,6 +12,8 @@ import com.ppandroid.app.http.MyCallBack
  * 设备横向分析图
  */
 class AC_DevicesHorChart : AC_HorChart(){
+    override fun getTopDrawable(i: Int): Int= R.drawable.zuzt
+
     override fun init() {
         loadContent()
     }

@@ -1,6 +1,7 @@
 package com.ppandroid.app.home.mine.energyanalysis.totalhorzizontalanalysis
 
 import android.support.v4.app.Fragment
+import com.ppandroid.app.R
 import com.ppandroid.app.home.mine.energyanalysis.horizontalanalysis.AC_HorChart
 
 /**
@@ -8,6 +9,23 @@ import com.ppandroid.app.home.mine.energyanalysis.horizontalanalysis.AC_HorChart
  * 总的横向分析图
  */
 class AC_TotalHorzintalanalysis:AC_HorChart(){
+    override fun getTopDrawable(i: Int): Int{
+        return when(i){
+            0->{
+                R.drawable.zuzt
+            }
+            1->{
+               R.drawable.dianzt
+            }
+            2->{
+                R.drawable.dianzt
+            }
+            else->{
+                R.drawable.zuzt
+            }
+        }
+
+    }
     var list=ArrayList<String>()
     override fun init() {
         list.add("用电柱状图")
@@ -19,12 +37,10 @@ class AC_TotalHorzintalanalysis:AC_HorChart(){
     override fun getTitlePage(i: Int): String=list[i]
 
     override fun getFragmentPage(i: Int): Fragment {
-        if (i==0){
-            return FG_Histogram()
-        }else if(i==1){
-            return FG_Huan()
-        }else{
-            return FG_Tong()
+        return when (i) {
+            0 -> FG_Histogram()
+            1 -> FG_Huan()
+            else -> FG_Tong()
         }
     }
 
