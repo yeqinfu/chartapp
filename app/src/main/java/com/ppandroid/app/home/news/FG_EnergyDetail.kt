@@ -110,8 +110,15 @@ class FG_EnergyDetail : FG_Base() {
                 var a=Utils_Common.parseNumberString(item.thisDevice)
                 var b=Utils_Common.parseNumberString(item.lastDevice)
                 it.tv_this_modified?.text=(a.minus(b)).toString()
-                it.v_hp?.percentage= (a/100f).toFloat()
-                it.v_hp2?.percentage= (b/100f).toFloat()
+
+                it.v_hp?.colorId=context.resources.getColor(R.color.vcolor03)
+                it.v_hp2?.colorId=context.resources.getColor(R.color.vcolor05)
+
+                var c=Utils_Common.parseNumberString(item.thisDeviceRatio)
+                var d=Utils_Common.parseNumberString(item.lastDeviceRatio)
+
+                it.v_hp?.percentage= (c/100f).toFloat()
+                it.v_hp2?.percentage= (d/100f).toFloat()
                 it.v_hp?.startAnim()
                 it.v_hp2?.startAnim()
 

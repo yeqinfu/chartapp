@@ -36,4 +36,12 @@
     <color name="chart_value_4">#B5CC84</color>
     <color name="white">@android:color/white</color>
     <color name="orange">#FC9426</color>
+
+
+
+    <color name="vcolor01">#FA6D6F</color>
+    <color name="vcolor02">#FE8D25</color>
+    <color name="vcolor03">#FFB338</color>
+    <color name="vcolor04">#6CC37E</color>
+    <color name="vcolor05">#2ED9A4</color>
 </resources>

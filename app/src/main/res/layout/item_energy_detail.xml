@@ -43,7 +43,7 @@
     </LinearLayout>
 
     <com.ppandroid.app.widget.HorizontalPercentageView
-        app:lineColor="#2ED9A4"
+        app:lineColor="@color/vcolor03"
         android:id="@+id/v_hp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -73,7 +73,7 @@
 
     </LinearLayout>
     <com.ppandroid.app.widget.HorizontalPercentageView
-        app:lineColor="#FFB338"
+        app:lineColor="@color/vcolor05"
         android:id="@+id/v_hp2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
