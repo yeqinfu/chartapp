@@ -9,7 +9,6 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import com.bruce.pickerview.popwindow.DatePickerPopWin
 import com.ppandroid.app.R
-import com.ppandroid.app.base.AC_ContentFG
 import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.widget.graphical.chart.PieData
@@ -42,7 +41,6 @@ abstract class FG_BaseDevicesAnlysisPage : FG_Base() {
     protected var parentId = "-1"
 
     override fun afterViews() {
-        (activity as AC_ContentFG).setEnablePullToBack(false)
         arguments?.let {
             index = it.getInt("index", 0)
             parentId = it.getString("parentId", "-1")

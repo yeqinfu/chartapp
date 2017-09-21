@@ -6,7 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.liuguangqiang.swipeback.SwipeBackLayout;
+import com.ppandroid.app.widget.SwipeBackLayout;
+
 
 /**
  * Created by yeqinfu on 2017/9/12.

@@ -3,7 +3,6 @@ package com.ppandroid.app.home.devices
 import android.graphics.Typeface
 import android.os.Bundle
 import com.ppandroid.app.R
-import com.ppandroid.app.base.AC_ContentFG
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_devices_info.*
 import kotlinx.android.synthetic.main.layout_head_view.*
@@ -31,7 +30,6 @@ class FG_DevicesInfo :FG_Base(){
             name=it.getString("name","")
             deviceId=it.getString("deviceId","")
         }
-        (activity as AC_ContentFG).setEnablePullToBack(false)
         head_view.setCenterTitle(name)
         head_view.init(activity)
 

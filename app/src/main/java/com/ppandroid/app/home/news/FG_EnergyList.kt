@@ -8,7 +8,6 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.ppandroid.app.R
-import com.ppandroid.app.base.AC_ContentFG
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.news.BN_EnergyList
 import com.ppandroid.app.http.Http
@@ -26,7 +25,6 @@ class FG_EnergyList :FG_Base(){
     override fun fgRes(): Int= R.layout.fg_energy_list
 
     override fun afterViews() {
-        (activity as AC_ContentFG).setEnablePullToBack(false)
         head_view.init(activity)
         head_view.setCenterTitle("能耗汇总")
         refresh_layout.setOnRefreshListener {

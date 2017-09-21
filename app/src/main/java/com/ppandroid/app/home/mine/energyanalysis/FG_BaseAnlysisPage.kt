@@ -9,7 +9,6 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import com.bruce.pickerview.popwindow.DatePickerPopWin
 import com.ppandroid.app.R
-import com.ppandroid.app.base.AC_ContentFG
 import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.widget.HorizontalPercentageView
@@ -44,7 +43,6 @@ abstract class FG_BaseAnlysisPage : FG_Base() {
     protected var parentId = "-1"
 
     override fun afterViews() {
-        (activity as  AC_ContentFG).setEnablePullToBack(false)
         v_dount_view.setLabelStyle(XEnum.SliceLabelStyle.INSIDE)
         arguments?.let {
             index = it.getInt("index", 0)
