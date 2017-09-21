@@ -145,6 +145,10 @@ public class HorizontalPercentageView extends GraphicalView implements Runnable 
     }
 
     private void chartAnimation(){
+        if (percentage==0f){
+            postInvalidate();
+            return;
+        }
         for (int i=1;i<=percentage*100;i++){
             try {
                 Thread.sleep(5);

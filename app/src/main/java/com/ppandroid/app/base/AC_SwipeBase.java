@@ -25,7 +25,9 @@ public class AC_SwipeBase extends AppCompatActivity implements SwipeBackLayout.S
 
     private View getContainer() {
         RelativeLayout container = new RelativeLayout(this);
-        swipeBackLayout = new SwipeBackLayout(this);
+        swipeBackLayout = new SwipeBackLayout(this){
+
+        };
         swipeBackLayout.setOnSwipeBackListener(this);
         setDragEdge(SwipeBackLayout.DragEdge.LEFT);
     /*    ivShadow = new ImageView(this);
@@ -35,6 +37,7 @@ public class AC_SwipeBase extends AppCompatActivity implements SwipeBackLayout.S
         container.addView(swipeBackLayout);
         return container;
     }
+
 
     public void setDragEdge(SwipeBackLayout.DragEdge dragEdge) {
         swipeBackLayout.setDragEdge(dragEdge);

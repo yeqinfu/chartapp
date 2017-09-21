@@ -111,6 +111,23 @@ class FG_EnergyDetail : FG_Base() {
                 var b=Utils_Common.parseNumberString(item.lastDevice)
                 it.tv_this_modified?.text=(a.minus(b)).toString()
 
+                val drawable = if (a.minus(b)>0){
+                    it.tv_this_modified?.setTextColor(context.resources.getColor(R.color.vcolor03))
+
+                    context.resources.getDrawable(R.drawable.up_yellow)
+
+                }else{
+                    it.tv_this_modified?.setTextColor(context.resources.getColor(R.color.color_01))
+
+                    context.resources.getDrawable(R.drawable.down_green)
+
+                }
+                drawable.setBounds(0, 0, drawable.minimumWidth, drawable.minimumHeight)
+                it.tv_this_modified?.setCompoundDrawables(drawable,null, null, null)
+
+
+
+
                 it.v_hp?.colorId=context.resources.getColor(R.color.vcolor03)
                 it.v_hp2?.colorId=context.resources.getColor(R.color.vcolor05)
 
