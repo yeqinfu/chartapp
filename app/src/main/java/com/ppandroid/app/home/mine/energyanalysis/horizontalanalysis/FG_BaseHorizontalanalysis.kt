@@ -30,6 +30,7 @@ open abstract class FG_BaseHorizontalanalysis:FG_Base(){
         init()
         var adapter =getAdapter()
         view_pager.adapter = adapter
+        view_pager.offscreenPageLimit=5
         adapter.notifyDataSetChanged()
         title_indicator.setViewPager(view_pager)
         view_pager.currentItem=0

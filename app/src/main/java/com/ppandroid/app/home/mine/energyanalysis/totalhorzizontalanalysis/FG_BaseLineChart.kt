@@ -114,18 +114,20 @@ open class FG_BaseLineChart:FG_Base(){
 
         //向上取整纵坐标六等分
         max=Math.ceil(max)
+        val df = DecimalFormat("######0.00")
         //
         (0..6).mapTo(yValue) {
-            val df = DecimalFormat("######0.00")
             df.format(it *max/6).toDouble() }
-        chartview.isNeedSplit=true
-        chartview.setValue(value,value2, xValue, yValue)
+        if (index!=3){
+            chartview?.isNeedSplit=true
+        }
+        chartview?.setValue(value,value2, xValue, yValue,df.format(max))
     }
     protected fun setSumRadioAvg(sum:String,radio:String,avg:Double){
-        tv_sum.text=sum
-        tv_radio.text=radio
-        chartview.avgText=avg.toString()
-        chartview.avgValue=avg
+        tv_sum?.text=sum
+        tv_radio?.text=radio
+        chartview?.avgText=avg.toString()
+        chartview?.avgValue=avg
 
     }
     private fun format(month: Int): String {

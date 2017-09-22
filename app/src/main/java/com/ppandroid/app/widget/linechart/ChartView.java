@@ -249,8 +249,7 @@ public class ChartView extends View {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		//x轴刻度自适应
-		interval = getWidth() / (xValue.size() + 2);
-		//        super.onDraw(canvas);
+		interval = (getWidth()-xOri) / (xValue.size() + 1);
 		canvas.drawColor(bgcolor);
 		drawXY(canvas);
 		drawBrokenLineAndPoint(canvas);
@@ -812,11 +811,16 @@ public class ChartView extends View {
 		invalidate();
 	}
 
-	public void setValue(Map<String, Double> value,Map<String, Double> value2, List<String> xValue, List<Double> yValue) {
+	public void setValue(Map<String, Double> value,Map<String, Double> value2, List<String> xValue, List<Double> yValue,String xLength) {
 		this.value = value;
 		this.value2 = value2;
 		this.xValue = xValue;
 		this.yValue = yValue;
+        //Y轴文本最大宽度
+        float textYWdith = getTextBounds(xLength, xyTextPaint).width();
+        int dp2 = dpToPx(2);
+        xOri = (int) (dp2 + textYWdith + dp2 + xylinewidth);//dp2是y轴文本距离左边，以及距离y轴的距离
+        xInit =  xOri+dpToPx(5);
 		invalidate();
 	}
 
