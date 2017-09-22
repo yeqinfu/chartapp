@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
@@ -20,14 +21,19 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
 import com.ppandroid.app.R;
+import com.ppandroid.app.widget.graphical.common.SysinfoHelper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
 /**
- * 自定义折线图
+ * 自定义折线图 代码减减变得恶心，别问我为什么跑得起来，我也不知道
+ * You may think you know what the following code does. But you don't. Trust me
+ * Fiddle with it, and you'll spend many a sleepless night cursing the moment
+ * you thought you'd be clever enough to "optimize" the code below. Now close
+ * this file and go play with something else. God bless you!!! The God's name is
+ * YeQinFu
  */
 public class ChartView extends View {
 	//xy坐标轴颜色
@@ -73,9 +79,9 @@ public class ChartView extends View {
 	//y轴坐标对应的数据
 	private List<Double>			yValue		= new ArrayList<>();
 	//折线对应的数据
-	private Map<String, Double>	value		= new HashMap<>();
+	private Map<String, Double>	value		= new LinkedHashMap<>();
 	//折线对应的数据2
-	private Map<String, Double>	value2		= new HashMap<>();
+	private Map<String, Double>	value2		= new LinkedHashMap<>();
 	//点击的点对应的X轴的第几个点，默认1
 	private int						selectIndex	= -1;
 	private int						selectIndex2	= -1;
@@ -87,17 +93,39 @@ public class ChartView extends View {
 
 	public ChartView(Context context) {
 		this(context, null);
+        //禁用硬件加速
+        disableHardwareAccelerated();
 	}
 
 	public ChartView(Context context, AttributeSet attrs) {
 		this(context, attrs, 0);
+        //禁用硬件加速
+        disableHardwareAccelerated();
 	}
 
 	public ChartView(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
+        //禁用硬件加速
+        disableHardwareAccelerated();
 		init(context, attrs, defStyleAttr);
 		initPaint();
 	}
+    /**
+     * 禁用硬件加速. 原因:android自3.0引入了硬件加速，即使用GPU进行绘图,但它并不能完善的支持所有的绘图，
+     * 通常表现为内容(如Rect或Path)不可见，异常或渲染错误。所以类了保证图表的正常显示，强制禁用掉.
+     */
+    protected void disableHardwareAccelerated() {
+        //View.isHardwareAccelerated()
+        //Canvas.isHardwareAccelerated()
+
+        if (SysinfoHelper.getInstance().supportHardwareAccelerated()) {
+            //是否开启了硬件加速,如开启将其禁掉
+            if (!isHardwareAccelerated()) {
+                //setLayerType(View.LAYER_TYPE_NONE,null);  //LAYER_TYPE_SOFTWARE
+                setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+            }
+        }
+    }
 
 	/**
 	 * 初始化畫筆
@@ -114,7 +142,7 @@ public class ChartView extends View {
 		xyTextPaint.setTextSize(xytextsize);
 		xyTextPaint.setStrokeCap(Paint.Cap.ROUND);
 		xyTextPaint.setColor(xytextcolor);
-		xyTextPaint.setStyle(Paint.Style.STROKE);
+		xyTextPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 
 		linePaint = new Paint();
 		linePaint.setAntiAlias(true);
@@ -126,10 +154,9 @@ public class ChartView extends View {
 
         blackPaint = new Paint();
         blackPaint.setAntiAlias(true);
-        blackPaint.setStrokeWidth(xylinewidth);
-        blackPaint.setStrokeCap(Paint.Cap.ROUND);
+        blackPaint.setStrokeWidth(dpToPx(0.5f));
         blackPaint.setColor(Color.BLACK);
-        blackPaint.setStyle(Paint.Style.STROKE);
+        blackPaint.setStyle(Paint.Style.FILL);
 
 
         valuePaint = new Paint();
@@ -228,9 +255,58 @@ public class ChartView extends View {
 		drawXY(canvas);
 		drawBrokenLineAndPoint(canvas);
 		drawBrokenLineAndPoint2(canvas);
+        drawAvg(canvas);
 	}
 
-	/**
+    private void drawAvg(Canvas canvas) {
+        if (isShowAvg){//显示平均线
+            Paint  mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            mPaint.setColor(getResources().getColor(R.color.color_02));
+            mPaint.setStrokeWidth(3);
+            mPaint.setPathEffect(new DashPathEffect(new float[] {5, 5}, 0));
+
+            if (avgValue!=0){
+                float startx = xInit + interval * 0;
+                float starty = (float) (yOri - yOri * (1 - 0.1f) * avgValue / yValue.get(yValue.size() - 1));
+                float endx=xInit+interval*xValue.size();
+                drawFloatTextBox(canvas,endx-interval,starty,avgText);
+                canvas.drawLine(startx, starty, endx,starty, mPaint);
+            }
+        }
+    }
+
+
+    /**是否显示平均值*/
+    private boolean isShowAvg=true;
+    private double avgValue=0;
+    private String avgText="";
+
+    public String getAvgText() {
+        return avgText;
+    }
+
+    public void setAvgText(String avgText) {
+        this.avgText = avgText;
+    }
+
+    public double getAvgValue() {
+        return avgValue;
+    }
+
+    public void setAvgValue(double avgValue) {
+        this.avgValue = avgValue;
+    }
+
+    public boolean isShowAvg() {
+        return isShowAvg;
+    }
+
+    public void setShowAvg(boolean showAvg) {
+        isShowAvg = showAvg;
+    }
+
+
+    /**
 	 * 绘制折线和折线交点处对应的点
 	 *
 	 * @param canvas
@@ -287,12 +363,12 @@ public class ChartView extends View {
 		float dp4 = dpToPx(4);
 		float dp7 = dpToPx(7);
 		//绘制节点对应的原点
-		for (int i = 0; i < xValue.size(); i++) {
+		for (int i = 0; i < value.size(); i++) {
 			float x = xInit + interval * i;
 			float y = (float) (yOri - yOri * (1 - 0.1f) * value.get(xValue.get(i)) / yValue.get(yValue.size() - 1));
             //当前点如果是选中点，绘制一个十字定位
             if (i == selectIndex - 1&&selectType==0) {
-                drawFloatTextBox(canvas, x, y - dp7, value.get(xValue.get(i)));
+                drawFloatTextBox(canvas, x, y - dp7, value.get(xValue.get(i))+"");
                 canvas.drawLine(0,y,width,y,blackPaint);
                 canvas.drawLine(x,0,x,yOri,blackPaint);
             }
@@ -326,12 +402,12 @@ public class ChartView extends View {
         float dp4 = dpToPx(4);
         float dp7 = dpToPx(7);
         //绘制节点对应的原点
-        for (int i = 0; i < xValue.size(); i++) {
+        for (int i = 0; i < value2.size(); i++) {
             float x = xInit + interval * i;
             float y = (float) (yOri - yOri * (1 - 0.1f) * value2.get(xValue.get(i)) / yValue.get(yValue.size() - 1));
             //当前点如果是选中点，绘制一个十字定位
             if (i == selectIndex2 - 1&&selectType==1) {
-                drawFloatTextBox(canvas, x, y - dp7, value2.get(xValue.get(i)));
+                drawFloatTextBox(canvas, x, y - dp7, value2.get(xValue.get(i))+"");
                 canvas.drawLine(0,y,width,y,blackPaint);
                 canvas.drawLine(x,0,x,yOri,blackPaint);
             }
@@ -360,7 +436,7 @@ public class ChartView extends View {
 	 * @param y
 	 * @param text
 	 */
-	private void drawFloatTextBox(Canvas canvas, float x, float y, double text) {
+	private void drawFloatTextBox(Canvas canvas, float x, float y, String text) {
 		int dp6 = dpToPx(6);
 		int dp18 = dpToPx(18);
 		/*//p1
@@ -384,7 +460,12 @@ public class ChartView extends View {
 		//linePaint.setColor(Color.WHITE);
         blackPaint.setTextSize(spToPx(12));
 		Rect rect = getTextBounds(text + "", blackPaint);
-		canvas.drawText(text + "", x - rect.width() / 2, y - dp6 - (dp18 - rect.height()) / 2, blackPaint);
+        float posY=y - dp6 - (dp18 - rect.height()) / 2;
+        if (posY< rect.height()){//说明显示看不见了，改成显示在坐标底部
+            posY=y + dp18 +rect.height();
+
+        }
+		canvas.drawText(text + "", x - rect.width() / 2,posY , blackPaint);
 	}
 
 	/**
@@ -400,7 +481,7 @@ public class ChartView extends View {
 		float x = xInit + interval * 0;
 		float y = (float) (yOri - yOri * (1 - 0.1f) * value.get(xValue.get(0)) / yValue.get(yValue.size() - 1));
 		path.moveTo(x, y);
-		for (int i = 1; i < xValue.size(); i++) {
+		for (int i = 1; i < value.size(); i++) {
 			x = xInit + interval * i;
 			y = (float) (yOri - yOri * (1 - 0.1f) * value.get(xValue.get(i)) / yValue.get(yValue.size() - 1));
 			path.lineTo(x, y);
@@ -422,7 +503,7 @@ public class ChartView extends View {
         float y = (float) (yOri - yOri * (1 - 0.1f) * value2.get(xValue.get(0)) / yValue.get(yValue.size() - 1));
 
         path.moveTo(x, y);
-        for (int i = 1; i < xValue.size(); i++) {
+        for (int i = 1; i < value2.size(); i++) {
             x = xInit + interval * i;
             y = (float) (yOri - yOri * (1 - 0.1f) * value2.get(xValue.get(i)) / yValue.get(yValue.size() - 1));
             path.lineTo(x, y);
@@ -437,7 +518,18 @@ public class ChartView extends View {
 
     }
 
-	/**
+    private boolean isNeedSplit=false;
+
+
+    public boolean isNeedSplit() {
+        return isNeedSplit;
+    }
+
+    public void setNeedSplit(boolean needSplit) {
+        isNeedSplit = needSplit;
+    }
+
+    /**
 	 * 绘制XY坐标
 	 *
 	 * @param canvas
@@ -459,10 +551,13 @@ public class ChartView extends View {
 			//绘制Y轴刻度
 			//   canvas.drawLine(xOri, yOri - yLength * i + xylinewidth / 2, xOri + length, yOri - yLength * i + xylinewidth / 2, xyPaint);
 			xyTextPaint.setColor(xytextcolor);
-			//绘制Y轴文本
-			String text = yValue.get(i) + "";
-			Rect rect = getTextBounds(text, xyTextPaint);
-			canvas.drawText(text, 0, text.length(), xOri - xylinewidth - dpToPx(2) - rect.width(), yOri - yLength * i + rect.height() / 2, xyTextPaint);
+            //绘制Y轴文本
+            String text = yValue.get(i) + "";
+            Rect rect = getTextBounds(text, xyTextPaint);
+            canvas.drawText(text, 0, text.length(), xOri - xylinewidth - dpToPx(2) - rect.width(), yOri - yLength * i + rect.height() / 2, xyTextPaint);
+
+
+
 		}
 		//绘制X轴坐标
 		canvas.drawLine(xOri, yOri + xylinewidth / 2, width, yOri + xylinewidth / 2, xyPaint);
@@ -483,10 +578,15 @@ public class ChartView extends View {
 			if (x >= xOri) {//只绘制从原点开始的区域
 				xyTextPaint.setColor(xytextcolor);
 				//   canvas.drawLine(x, yOri, x, yOri - length, xyPaint);
-				//绘制X轴文本
-				String text = xValue.get(i);
-				Rect rect = getTextBounds(text, xyTextPaint);
-                canvas.drawText(text, 0, text.length(), x - rect.width() / 2, yOri + xylinewidth + dpToPx(2) + rect.height(), xyTextPaint);
+                if (isNeedSplit&&i%2==1){
+
+                }else{
+                    //绘制X轴文本
+                    String text = xValue.get(i);
+                    Rect rect = getTextBounds(text, xyTextPaint);
+                    canvas.drawText(text, 0, text.length(), x - rect.width() / 2, yOri + xylinewidth + dpToPx(2) + rect.height(), xyTextPaint);
+                }
+
 				/*if (i == selectIndex - 1) {
 					xyTextPaint.setColor(linecolor);
 					canvas.drawText(text, 0, text.length(), x - rect.width() / 2, yOri + xylinewidth + dpToPx(2) + rect.height(), xyTextPaint);
@@ -541,7 +641,7 @@ public class ChartView extends View {
 			recycleVelocityTracker();
 			break;
 		}
-		return false;
+		return true;
 	}
 
 	//是否正在滑动
@@ -627,25 +727,31 @@ public class ChartView extends View {
 		float eventX = event.getX();
 		float eventY = event.getY();
 		for (int i = 0; i < xValue.size(); i++) {
-			//节点
-			float x = xInit + interval * i;
-			float y = (float) (yOri - yOri * (1 - 0.1f) * value.get(xValue.get(i)) / yValue.get(yValue.size() - 1));
-			if (eventX >= x - dp8 && eventX <= x + dp8 && eventY >= y - dp8 && eventY <= y + dp8 && selectIndex != i + 1) {//每个节点周围8dp都是可点击区域
-				selectIndex = i + 1;
-                selectType=0;
-				invalidate();
-				return;
-			}
-
-            //节点2
-            float x2 = xInit + interval * i;
-            float y2 = (float) (yOri - yOri * (1 - 0.1f) * value2.get(xValue.get(i)) / yValue.get(yValue.size() - 1));
-            if (eventX >= x2 - dp8 && eventX <= x2 + dp8 && eventY >= y2 - dp8 && eventY <= y2 + dp8 && selectIndex2 != i + 1) {//每个节点周围8dp都是可点击区域
-                selectIndex2 = i + 1;
-                selectType=1;
-                invalidate();
-                return;
+            if (i<value.size()){
+                //节点
+                float x = xInit + interval * i;
+                float y = (float) (yOri - yOri * (1 - 0.1f) * value.get(xValue.get(i)) / yValue.get(yValue.size() - 1));
+                if (eventX >= x - dp8 && eventX <= x + dp8 && eventY >= y - dp8 && eventY <= y + dp8 && selectIndex != i + 1) {//每个节点周围8dp都是可点击区域
+                    selectIndex = i + 1;
+                    selectType=0;
+                    invalidate();
+                    return;
+                }
             }
+
+
+			if (i<value2.size()){
+                //节点2
+                float x2 = xInit + interval * i;
+                float y2 = (float) (yOri - yOri * (1 - 0.1f) * value2.get(xValue.get(i)) / yValue.get(yValue.size() - 1));
+                if (eventX >= x2 - dp8 && eventX <= x2 + dp8 && eventY >= y2 - dp8 && eventY <= y2 + dp8 && selectIndex2 != i + 1) {//每个节点周围8dp都是可点击区域
+                    selectIndex2 = i + 1;
+                    selectType=1;
+                    invalidate();
+                    return;
+                }
+            }
+
 			//X轴刻度
 			/*String text = xValue.get(i);
 			Rect rect = getTextBounds(text, xyTextPaint);
@@ -745,7 +851,7 @@ public class ChartView extends View {
 	 * @param dp
 	 * @return
 	 */
-	private int dpToPx(int dp) {
+	private int dpToPx(double dp) {
 		float density = getContext().getResources().getDisplayMetrics().density;
 		return (int) (dp * density + 0.5f * (dp >= 0 ? 1 : -1));
 	}

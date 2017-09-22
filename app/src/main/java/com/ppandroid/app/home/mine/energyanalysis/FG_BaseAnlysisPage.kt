@@ -52,7 +52,7 @@ abstract class FG_BaseAnlysisPage : FG_Base() {
         val c = Calendar.getInstance()
         if (index == 3) {//总
             tv_time.text = c.get(Calendar.YEAR).toString() + "-" + c.get(Calendar.YEAR).toString() + "年"
-            select = c.get(Calendar.YEAR).toString()
+            select = ""//总计传空
         } else {
             var initDate = when (index) {
                 0 -> c.get(Calendar.YEAR).toString() + "-" + (format(c.get(Calendar.MONTH) + 1)) + "-" + format(c.get(Calendar.DAY_OF_MONTH))

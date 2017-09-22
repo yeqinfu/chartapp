@@ -183,9 +183,6 @@ public class MultipleVerticalView extends View implements Runnable{
                 canvas.drawText(avgValue.getTopText(),getWidth()-textWidth,getHeight()-baseLineY*1.5f-h,p);
                 canvas.drawLine(0, v1, getWidth(), v1, mPaint);
             }
-
-
-
         }
 
     }

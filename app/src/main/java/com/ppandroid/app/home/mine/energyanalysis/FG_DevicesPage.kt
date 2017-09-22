@@ -33,6 +33,9 @@ class FG_DevicesPage : FG_BaseAnlysisPage(){
 
                     }
                     v_dount_view.charRender(getValues(k))
+                    if (index==3){
+                        tv_time.text = it.message.dateString
+                    }
                 }
             }
 

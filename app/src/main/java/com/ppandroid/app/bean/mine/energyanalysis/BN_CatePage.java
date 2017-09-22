@@ -31,7 +31,17 @@ public class BN_CatePage  extends BaseBody{
          */
 
         private String analysisCateSum;
+        private String dateString;
+
         private List<AnalysisCateParamDtoListBean> analysisCateParamDtoList;
+
+        public String getDateString() {
+            return dateString;
+        }
+
+        public void setDateString(String dateString) {
+            this.dateString = dateString;
+        }
 
         public String getAnalysisCateSum() {
             return analysisCateSum;

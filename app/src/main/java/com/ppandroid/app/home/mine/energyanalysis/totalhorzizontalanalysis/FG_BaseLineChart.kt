@@ -5,7 +5,9 @@ import android.view.View
 import com.ppandroid.app.R
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_base_line_chart.*
+import java.text.DecimalFormat
 import java.util.*
+import kotlin.collections.LinkedHashMap
 
 /**
  * Created by yeqinfu on 2017/9/18.
@@ -26,9 +28,9 @@ open class FG_BaseLineChart:FG_Base(){
     //y轴坐标对应的数据
     protected val yValue = ArrayList<Double>()
     //折线对应的数据
-    protected val value = HashMap<String, Double>()
+    protected val value = LinkedHashMap<String, Double>()
     //数据源2
-    protected val value2 = HashMap<String, Double>()
+    protected val value2 = LinkedHashMap<String, Double>()
 
     //0 日 1 周 2 月 3 年
     protected var index: Int = 0
@@ -39,7 +41,7 @@ open class FG_BaseLineChart:FG_Base(){
             index = it.getInt("index", 0)
         }
         val c = Calendar.getInstance()
-        val initDate = c.get(Calendar.YEAR).toString() + "-" + (c.get(Calendar.MONTH) + 1).toString() + "-" + c.get(Calendar.DAY_OF_MONTH)
+        val initDate = c.get(Calendar.YEAR).toString() + "-" + format(c.get(Calendar.MONTH) + 1) + "-" + format(c.get(Calendar.DAY_OF_MONTH))
 
         var topText=""
         var topText2=""
@@ -111,15 +113,20 @@ open class FG_BaseLineChart:FG_Base(){
         }
 
         //向上取整纵坐标六等分
-        max=Math.floor(max)
+        max=Math.ceil(max)
         //
-        (1..6).mapTo(yValue) { it *max/6 }
-
+        (0..6).mapTo(yValue) {
+            val df = DecimalFormat("######0.00")
+            df.format(it *max/6).toDouble() }
+        chartview.isNeedSplit=true
         chartview.setValue(value,value2, xValue, yValue)
     }
-    protected fun setSumRadio(sum:String,radio:String){
+    protected fun setSumRadioAvg(sum:String,radio:String,avg:Double){
         tv_sum.text=sum
         tv_radio.text=radio
+        chartview.avgText=avg.toString()
+        chartview.avgValue=avg
+
     }
     private fun format(month: Int): String {
         if (month < 10) {

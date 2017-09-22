@@ -32,7 +32,16 @@ public class BN_AreaPage extends BaseBody {
          */
 
         private String analysisAreaSum;
+        private String dateString;
         private List<AnalysisAreaParamDtoListBean> analysisAreaParamDtoList;
+
+        public String getDateString() {
+            return dateString;
+        }
+
+        public void setDateString(String dateString) {
+            this.dateString = dateString;
+        }
 
         public String getAnalysisAreaSum() {
             return analysisAreaSum;

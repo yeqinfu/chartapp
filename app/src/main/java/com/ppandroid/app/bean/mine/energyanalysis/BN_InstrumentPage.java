@@ -30,8 +30,17 @@ public class BN_InstrumentPage extends BaseBody {
          * analysisDeviceSum : 46445
          */
 
+        private String dateString;
         private String analysisDeviceSum;
         private List<AnalysisInstrumentParamDtoListBean> analysisInstrumentParamDtoList;
+
+        public String getDateString() {
+            return dateString;
+        }
+
+        public void setDateString(String dateString) {
+            this.dateString = dateString;
+        }
 
         public String getAnalysisDeviceSum() {
             return analysisDeviceSum;

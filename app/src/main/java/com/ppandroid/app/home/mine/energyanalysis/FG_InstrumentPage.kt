@@ -32,6 +32,9 @@ class FG_InstrumentPage : FG_BaseAnlysisPage(){
                         startAC(FG_InstrumentDetailAnalysis::class.java.name,bundle)
                     }
                     v_dount_view.charRender(getValues(k))
+                    if (index==3){
+                        tv_time.text = it.message.dateString
+                    }
                 }
             }
 

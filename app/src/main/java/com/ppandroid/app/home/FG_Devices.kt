@@ -8,7 +8,6 @@ import com.ppandroid.app.home.adapter.AD_ExList
 import com.ppandroid.app.home.devices.FG_DevicesInfo
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
-import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_devices.*
 
@@ -26,6 +25,11 @@ class FG_Devices : FG_Base() {
         }
         refreshLayout.isEnableLoadmore = false
 
+    }
+
+    override fun refresh() {
+        super.refresh()
+        loadContent()
     }
 
 

@@ -38,6 +38,9 @@ class FG_AreaPage : FG_BaseAnlysisPage(){
                         startAC(FG_AreaDetailAnalysis::class.java.name,bundle)
                     }
                     v_dount_view.charRender(getValues(k))
+                    if (index==3){
+                        tv_time.text = it.message.dateString
+                    }
                 }
             }
 

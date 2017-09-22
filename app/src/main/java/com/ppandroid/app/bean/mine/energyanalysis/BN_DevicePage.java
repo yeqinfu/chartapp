@@ -31,7 +31,16 @@ public class BN_DevicePage extends BaseBody {
          */
 
         private String analysisDeviceSum;
+        private String dateString;
         private List<AnalysisDeviceParamDtoListBean> analysisDeviceParamDtoList;
+
+        public String getDateString() {
+            return dateString;
+        }
+
+        public void setDateString(String dateString) {
+            this.dateString = dateString;
+        }
 
         public String getAnalysisDeviceSum() {
             return analysisDeviceSum;
