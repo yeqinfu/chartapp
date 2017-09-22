@@ -118,7 +118,7 @@ open class FG_BaseLineChart:FG_Base(){
         //
         (0..6).mapTo(yValue) {
             df.format(it *max/6).toDouble() }
-        if (index!=3){
+        if (index!=3&&index!=1){
             chartview?.isNeedSplit=true
         }
         chartview?.setValue(value,value2, xValue, yValue,df.format(max))

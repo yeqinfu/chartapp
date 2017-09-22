@@ -2,6 +2,7 @@ package com.ppandroid.app.home.mine.energyanalysis.totalhorzizontalanalysis
 
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.mine.energyanalysis.BN_HuanPage
+import com.ppandroid.app.bean.mine.energyanalysis.BN_HuanPageWeek
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.Utils_Common
@@ -65,6 +66,47 @@ class FG_HuanPage:FG_BaseLineChart(){
     }
 
     private fun loadWeekContent() {
+        var url="user/energy/analysis/getWeekAnalysisHuanbi.json"
+        Http.get(activity,url, BN_HuanPageWeek::class.java,object :MyCallBack<BN_HuanPageWeek>{
+            override fun onResponse(response: BN_HuanPageWeek?) {
+                response?.let {
+                    var sum=it.message.thisAnalysisWeekParamDto.weekSum?.toString()?:""
+                    var radio=it.message.huanbiRatio
+                    var avg=it.message.thisAnalysisWeekParamDto.weekAverage
+                    setSumRadioAvg(sum,radio,Utils_Common.parseNumberString(avg))
+                    xValue.clear()
+                    xValue.add("周一")
+                    xValue.add("周二")
+                    xValue.add("周三")
+                    xValue.add("周四")
+                    xValue.add("周五")
+                    xValue.add("周六")
+                    xValue.add("周日")
+                    value.putAll(setValues2(it.message.huanbiAnalysisWeekParamDto))
+                    value2.putAll(setValues2(it.message.thisAnalysisWeekParamDto))
+                    setValueAll()
+                }
+            }
 
+            override fun onError(error: ErrorBody?) {
+                toast(error)
+            }
+
+        })
+
+
+    }
+
+    private fun setValues2(list: BN_HuanPageWeek.MessageBean.AnalysisWeekParamDtoBean?): Map<out String, Double> {
+
+        var result= HashMap<String, Double>()
+        var data=list?.deviceSumString
+        data?.let {
+            for ((j,item) in it.withIndex()){
+                result.put(xValue[j],Utils_Common.parseNumberString(item))
+
+            }
+        }
+        return result
     }
 }
