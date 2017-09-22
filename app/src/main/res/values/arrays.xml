@@ -39,4 +39,10 @@
         <item>本年</item>
         <item>全部</item>
     </string-array>
+    <string-array name="fg_base_h_analysis3">
+        <item>今日</item>
+        <item>本周</item>
+        <item>本月</item>
+        <item>本年</item>
+    </string-array>
 </resources>

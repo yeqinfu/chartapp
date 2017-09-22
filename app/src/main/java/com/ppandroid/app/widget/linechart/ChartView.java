@@ -71,11 +71,11 @@ public class ChartView extends View {
 	//x轴坐标对应的数据
 	private List<String>			xValue		= new ArrayList<>();
 	//y轴坐标对应的数据
-	private List<Integer>			yValue		= new ArrayList<>();
+	private List<Double>			yValue		= new ArrayList<>();
 	//折线对应的数据
-	private Map<String, Integer>	value		= new HashMap<>();
+	private Map<String, Double>	value		= new HashMap<>();
 	//折线对应的数据2
-	private Map<String, Integer>	value2		= new HashMap<>();
+	private Map<String, Double>	value2		= new HashMap<>();
 	//点击的点对应的X轴的第几个点，默认1
 	private int						selectIndex	= -1;
 	private int						selectIndex2	= -1;
@@ -289,7 +289,7 @@ public class ChartView extends View {
 		//绘制节点对应的原点
 		for (int i = 0; i < xValue.size(); i++) {
 			float x = xInit + interval * i;
-			float y = yOri - yOri * (1 - 0.1f) * value.get(xValue.get(i)) / yValue.get(yValue.size() - 1);
+			float y = (float) (yOri - yOri * (1 - 0.1f) * value.get(xValue.get(i)) / yValue.get(yValue.size() - 1));
             //当前点如果是选中点，绘制一个十字定位
             if (i == selectIndex - 1&&selectType==0) {
                 drawFloatTextBox(canvas, x, y - dp7, value.get(xValue.get(i)));
@@ -328,7 +328,7 @@ public class ChartView extends View {
         //绘制节点对应的原点
         for (int i = 0; i < xValue.size(); i++) {
             float x = xInit + interval * i;
-            float y = yOri - yOri * (1 - 0.1f) * value2.get(xValue.get(i)) / yValue.get(yValue.size() - 1);
+            float y = (float) (yOri - yOri * (1 - 0.1f) * value2.get(xValue.get(i)) / yValue.get(yValue.size() - 1));
             //当前点如果是选中点，绘制一个十字定位
             if (i == selectIndex2 - 1&&selectType==1) {
                 drawFloatTextBox(canvas, x, y - dp7, value2.get(xValue.get(i)));
@@ -360,7 +360,7 @@ public class ChartView extends View {
 	 * @param y
 	 * @param text
 	 */
-	private void drawFloatTextBox(Canvas canvas, float x, float y, int text) {
+	private void drawFloatTextBox(Canvas canvas, float x, float y, double text) {
 		int dp6 = dpToPx(6);
 		int dp18 = dpToPx(18);
 		/*//p1
@@ -398,11 +398,11 @@ public class ChartView extends View {
 		//绘制折线
 		Path path = new Path();
 		float x = xInit + interval * 0;
-		float y = yOri - yOri * (1 - 0.1f) * value.get(xValue.get(0)) / yValue.get(yValue.size() - 1);
+		float y = (float) (yOri - yOri * (1 - 0.1f) * value.get(xValue.get(0)) / yValue.get(yValue.size() - 1));
 		path.moveTo(x, y);
 		for (int i = 1; i < xValue.size(); i++) {
 			x = xInit + interval * i;
-			y = yOri - yOri * (1 - 0.1f) * value.get(xValue.get(i)) / yValue.get(yValue.size() - 1);
+			y = (float) (yOri - yOri * (1 - 0.1f) * value.get(xValue.get(i)) / yValue.get(yValue.size() - 1));
 			path.lineTo(x, y);
 		}
 		canvas.drawPath(path, linePaint);
@@ -419,12 +419,12 @@ public class ChartView extends View {
         //绘制折线
         Path path = new Path();
         float x = xInit + interval * 0;
-        float y = yOri - yOri * (1 - 0.1f) * value2.get(xValue.get(0)) / yValue.get(yValue.size() - 1);
+        float y = (float) (yOri - yOri * (1 - 0.1f) * value2.get(xValue.get(0)) / yValue.get(yValue.size() - 1));
 
         path.moveTo(x, y);
         for (int i = 1; i < xValue.size(); i++) {
             x = xInit + interval * i;
-            y = yOri - yOri * (1 - 0.1f) * value2.get(xValue.get(i)) / yValue.get(yValue.size() - 1);
+            y = (float) (yOri - yOri * (1 - 0.1f) * value2.get(xValue.get(i)) / yValue.get(yValue.size() - 1));
             path.lineTo(x, y);
 
         }
@@ -541,7 +541,7 @@ public class ChartView extends View {
 			recycleVelocityTracker();
 			break;
 		}
-		return true;
+		return false;
 	}
 
 	//是否正在滑动
@@ -629,7 +629,7 @@ public class ChartView extends View {
 		for (int i = 0; i < xValue.size(); i++) {
 			//节点
 			float x = xInit + interval * i;
-			float y = yOri - yOri * (1 - 0.1f) * value.get(xValue.get(i)) / yValue.get(yValue.size() - 1);
+			float y = (float) (yOri - yOri * (1 - 0.1f) * value.get(xValue.get(i)) / yValue.get(yValue.size() - 1));
 			if (eventX >= x - dp8 && eventX <= x + dp8 && eventY >= y - dp8 && eventY <= y + dp8 && selectIndex != i + 1) {//每个节点周围8dp都是可点击区域
 				selectIndex = i + 1;
                 selectType=0;
@@ -639,7 +639,7 @@ public class ChartView extends View {
 
             //节点2
             float x2 = xInit + interval * i;
-            float y2 = yOri - yOri * (1 - 0.1f) * value2.get(xValue.get(i)) / yValue.get(yValue.size() - 1);
+            float y2 = (float) (yOri - yOri * (1 - 0.1f) * value2.get(xValue.get(i)) / yValue.get(yValue.size() - 1));
             if (eventX >= x2 - dp8 && eventX <= x2 + dp8 && eventY >= y2 - dp8 && eventY <= y2 + dp8 && selectIndex2 != i + 1) {//每个节点周围8dp都是可点击区域
                 selectIndex2 = i + 1;
                 selectType=1;
@@ -696,17 +696,17 @@ public class ChartView extends View {
 		this.xValue = xValue;
 	}
 
-	public void setyValue(List<Integer> yValue) {
+	public void setyValue(List<Double> yValue) {
 		this.yValue = yValue;
 		invalidate();
 	}
 
-	public void setValue(Map<String, Integer> value) {
+	public void setValue(Map<String, Double> value) {
 		this.value = value;
 		invalidate();
 	}
 
-	public void setValue(Map<String, Integer> value,Map<String, Integer> value2, List<String> xValue, List<Integer> yValue) {
+	public void setValue(Map<String, Double> value,Map<String, Double> value2, List<String> xValue, List<Double> yValue) {
 		this.value = value;
 		this.value2 = value2;
 		this.xValue = xValue;
@@ -718,11 +718,11 @@ public class ChartView extends View {
 		return xValue;
 	}
 
-	public List<Integer> getyValue() {
+	public List<Double> getyValue() {
 		return yValue;
 	}
 
-	public Map<String, Integer> getValue() {
+	public Map<String, Double> getValue() {
 		return value;
 	}
 
