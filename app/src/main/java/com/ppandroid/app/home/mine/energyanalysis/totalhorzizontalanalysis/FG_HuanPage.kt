@@ -12,6 +12,8 @@ import java.util.*
  * Created by yeqinfu on 2017/9/21.
  */
 class FG_HuanPage:FG_BaseLineChart(){
+    override fun getKeyStr(): String="环"
+
     override fun afterViews() {
         super.afterViews()
         loadContent()

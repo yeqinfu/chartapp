@@ -12,7 +12,7 @@ import kotlin.collections.LinkedHashMap
 /**
  * Created by yeqinfu on 2017/9/18.
  */
-open class FG_BaseLineChart:FG_Base(){
+open abstract class FG_BaseLineChart:FG_Base(){
     companion object {
         fun createBundle(index: Int): Bundle {
             var b = Bundle()
@@ -48,26 +48,26 @@ open class FG_BaseLineChart:FG_Base(){
         when(index){
             0->{
                 topText="日累计"
-                topText2="环比上日"
+                topText2=getKeyStr()+"比上日"
                 tv_time.text=initDate
                 tv_time.visibility= View.VISIBLE
                 select=initDate
             }
             1->{
                 topText="周累计"
-                topText2="环比上周"
+                topText2=getKeyStr()+"比上周"
                 tv_time.visibility= View.GONE
                 select=""
             }
             2->{
                 topText="月累计"
-                topText2="环比上月"
+                topText2=getKeyStr()+"比上月"
                 tv_time.visibility= View.GONE
                 select= c.get(Calendar.YEAR).toString() + "-" + (format(c.get(Calendar.MONTH) + 1))
             }
             3->{
                 topText="年累计"
-                topText2="环比去年"
+                topText2=getKeyStr()+"比去年"
                 tv_time.visibility= View.GONE
                 select=c.get(Calendar.YEAR).toString()
             }
@@ -98,6 +98,8 @@ open class FG_BaseLineChart:FG_Base(){
         (0..5).mapTo(yValue) { it * 60 }
         chartview.setValue(value,value2, xValue, yValue)*/
     }
+
+    abstract fun getKeyStr(): String
 
     protected fun setValueAll(){
         var max= 0.0

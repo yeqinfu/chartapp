@@ -12,6 +12,8 @@ import java.util.*
  * Created by yeqinfu on 2017/9/23.
  */
 class FG_TongPage:FG_BaseLineChart(){
+    override fun getKeyStr(): String="同"
+
     override fun afterViews() {
         super.afterViews()
         loadContent()
