@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.OvershootInterpolator
 import android.view.animation.TranslateAnimation
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.ppandroid.app.R
 import com.ppandroid.app.utils.DebugLog
@@ -56,21 +57,24 @@ class Pop_DatePicker(context: Activity, type: Int) : BasePopupWindow(context, Vi
         wv_year = popupWindowView.find<WheelView>(R.id.wv_year)
         wv_month = popupWindowView.find<WheelView>(R.id.wv_month)
         wv_day = popupWindowView.find<WheelView>(R.id.wv_day)
+        var ll_day=popupWindowView.find<LinearLayout>(R.id.ll_day)
+        var ll_year=popupWindowView.find<LinearLayout>(R.id.ll_year)
+        var ll_month=popupWindowView.find<LinearLayout>(R.id.ll_month)
         when (type) {
             0 -> {
-                wv_year?.visibility=View.VISIBLE
-                wv_month?.visibility=View.VISIBLE
-                wv_day?.visibility=View.VISIBLE
+                ll_year?.visibility=View.VISIBLE
+                ll_month?.visibility=View.VISIBLE
+                ll_day?.visibility=View.VISIBLE
             }
             1 -> {
-                wv_year?.visibility=View.VISIBLE
-                wv_month?.visibility=View.VISIBLE
-                wv_day?.visibility=View.GONE
+                ll_year?.visibility=View.VISIBLE
+                ll_month?.visibility=View.VISIBLE
+                ll_day?.visibility=View.GONE
             }
             else -> {
-                wv_year?.visibility=View.VISIBLE
-                wv_month?.visibility=View.GONE
-                wv_day?.visibility=View.GONE
+                ll_year?.visibility=View.VISIBLE
+                ll_month?.visibility=View.GONE
+                ll_day?.visibility=View.GONE
             }
         }
 
