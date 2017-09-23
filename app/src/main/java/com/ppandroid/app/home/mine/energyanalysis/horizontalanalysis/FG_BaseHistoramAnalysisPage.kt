@@ -1,12 +1,10 @@
 package com.ppandroid.app.home.mine.energyanalysis.horizontalanalysis
 
-import android.graphics.Color
 import android.os.Bundle
-import android.view.View
-import com.bruce.pickerview.popwindow.DatePickerPopWin
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.BN_Vertical
 import com.ppandroid.app.utils.Utils_Common
+import com.ppandroid.app.widget.popwindow.Pop_DatePicker
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_base_histroam_analysis_page.*
 import java.util.*
@@ -96,7 +94,7 @@ abstract class FG_BaseHistoramAnalysisPage:FG_Base(){
             tv_time.text = initDate
             select = initDate
             btn_search.setOnClickListener {
-                showDatePop()
+                showDatePop2()
             }
         }
         loadContent()
@@ -112,52 +110,33 @@ abstract class FG_BaseHistoramAnalysisPage:FG_Base(){
     }*/
 
     protected var select = ""
-    private fun showDatePop() {
-        val c = Calendar.getInstance()
-        val initDate = c.get(Calendar.YEAR).toString() + "-" + (c.get(Calendar.MONTH) + 1).toString() + "-" + c.get(Calendar.DAY_OF_MONTH)
-        val pickerPopWin = DatePickerPopWin.Builder(activity, DatePickerPopWin.OnDatePickedListener { year, month, day, dateDesc ->
-
-
-            when (index) {
-                0 -> //日
-                    select = year.toString() + "-" + format(month) + "-" + format(day)
-                1 -> //月
-                    select = year.toString() + "-" + format(month)
-                2 -> //日
-                    select = year.toString()
-            }
-            tv_time.text = select
-            loadContent()
-        }).textConfirm("确定") //text of confirm button
-                .textCancel("取消") //text of cancel button
-                .btnTextSize(16) // button text size
-                .viewTextSize(25) // pick view text size
-                .colorCancel(Color.parseColor("#999999")) //color of cancel button
-                .colorConfirm(Color.parseColor("#009900"))//color of confirm button
-                .minYear(1990) //min year in loop
-                .maxYear(c.get(Calendar.YEAR) + 1) // max year in loop
-                .showDayMonthYear(false) // shows like dd mm yyyy (default is false)
-                .dateChose(initDate) // date chose when init popwindow
-                .build()
-
-        when (index) {
-            0 -> //日
-            {
-            }
-            1 -> //月
-            {
-                pickerPopWin.dayLoopView.visibility = View.GONE
-            }
-            2 -> //日
-            {
-                pickerPopWin.monthLoopView.visibility = View.GONE
-                pickerPopWin.dayLoopView.visibility = View.GONE
-            }
+    private fun showDatePop2(){
+        var type=0
+        when(index){
+            0->type=0
+            1->type=1
+            2->type=2
         }
+        var pop= Pop_DatePicker(activity,type)
+        pop.listener=object : Pop_DatePicker.IChooseListener{
+            override fun choose(year: String, month: String, day: String) {
+                when (index) {
+                    0 -> //日
+                        select = "$year-$month-$day"
+                    1 -> //月
+                        select = year+ "-" + (month)
+                    2 -> //日
+                        select = year
+                }
+                tv_time.text = select
+                loadContent()
+                pop?.dismiss()
+            }
 
-
-        pickerPopWin.showPopWin(activity)
+        }
+        pop.showPopupWindow()
     }
+
 
     private fun format(month: Int): String {
         if (month < 10) {

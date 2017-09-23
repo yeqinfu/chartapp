@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import com.bruce.pickerview.popwindow.DatePickerPopWin
 import com.ppandroid.app.R
 import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.Utils_Common
@@ -101,52 +100,7 @@ abstract class FG_BaseAnlysisPage : FG_Base() {
         }
         pop.showPopupWindow()
     }
-    private fun showDatePop() {
-        val c = Calendar.getInstance()
-        val initDate = c.get(Calendar.YEAR).toString() + "-" + (c.get(Calendar.MONTH) + 1).toString() + "-" + c.get(Calendar.DAY_OF_MONTH)
-        val pickerPopWin = DatePickerPopWin.Builder(activity, DatePickerPopWin.OnDatePickedListener { year, month, day, dateDesc ->
 
-
-            when (index) {
-                0 -> //日
-                    select = year.toString() + "-" + format(month) + "-" + format(day)
-                1 -> //月
-                    select = year.toString() + "-" + format(month)
-                2 -> //日
-                    select = year.toString()
-            }
-            tv_time.text = select
-            loadContent()
-        }).textConfirm("确定") //text of confirm button
-                .textCancel("取消") //text of cancel button
-                .btnTextSize(16) // button text size
-                .viewTextSize(25) // pick view text size
-                .colorCancel(Color.parseColor("#999999")) //color of cancel button
-                .colorConfirm(Color.parseColor("#009900"))//color of confirm button
-                .minYear(1990) //min year in loop
-                .maxYear(c.get(Calendar.YEAR) + 1) // max year in loop
-                .showDayMonthYear(false) // shows like dd mm yyyy (default is false)
-                .dateChose(initDate) // date chose when init popwindow
-                .build()
-
-        when (index) {
-            0 -> //日
-            {
-            }
-            1 -> //月
-            {
-                pickerPopWin.dayLoopView.visibility = View.GONE
-            }
-            2 -> //日
-            {
-                pickerPopWin.monthLoopView.visibility = View.GONE
-                pickerPopWin.dayLoopView.visibility = View.GONE
-            }
-        }
-
-
-        pickerPopWin.showPopWin(activity)
-    }
 
     private fun format(month: Int): String {
         if (month < 10) {
