@@ -9,6 +9,7 @@ import android.view.animation.OvershootInterpolator
 import android.view.animation.TranslateAnimation
 import android.widget.TextView
 import com.ppandroid.app.R
+import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.DimensUtils
 import com.ppandroid.app.widget.WheelView
 import com.ppandroid.app.widget.popwindow.basepopup.BasePopupWindow
@@ -33,7 +34,12 @@ class Pop_DatePicker(context: Activity, type: Int) : BasePopupWindow(context, Vi
     var wv_year: WheelView? = null
     var wv_month: WheelView? = null
     var wv_day: WheelView? = null
-
+    private var yearPos = 0
+    private var monthPos = 0
+    private var dayPos = 0
+    private var yearStr = ""
+    private var monthStr = ""
+    private var dayStr = "01"
     interface IChooseListener {
         fun choose(year: String, month: String, day: String)
     }
@@ -41,6 +47,7 @@ class Pop_DatePicker(context: Activity, type: Int) : BasePopupWindow(context, Vi
     var listener: IChooseListener? = null
 
     init {
+
         isNeedgreybg = false
         popupGravity = Gravity.BOTTOM
         tv_title = popupWindowView.find<TextView>(R.id.tv_title)
@@ -70,24 +77,31 @@ class Pop_DatePicker(context: Activity, type: Int) : BasePopupWindow(context, Vi
         val c = Calendar.getInstance()
         var yearCount = c.get(Calendar.YEAR) - DEFAULT_MIN_YEAR
         for (i in 0 until yearCount) {
-            yearList.add(format2LenStr(DEFAULT_MIN_YEAR + i))
+            yearList.add(format2LenStr(DEFAULT_MIN_YEAR + i+1))
         }
         for (j in 0..11) {
             monthList.add(format2LenStr(j + 1))
         }
         wv_year?.setItems(yearList)
+        wv_year?.setSeletion(yearCount-1)
+        yearStr=(DEFAULT_MIN_YEAR+yearCount).toString()
         wv_month?.setItems(monthList)
+        val calendar = Calendar.getInstance()
+        wv_month?.setSeletion(calendar.get(Calendar.MONTH))
+        monthStr=format2LenStr(calendar.get(Calendar.MONTH)+1)
         initDayPickerView()
 
         wv_year?.onWheelViewListener = object : WheelView.OnWheelViewListener() {
             override fun onSelected(selectedIndex: Int, item: String?) {
                 yearPos = DEFAULT_MIN_YEAR + selectedIndex
+                yearStr=item?:""
                 initDayPickerView()
             }
         }
         wv_month?.onWheelViewListener = object : WheelView.OnWheelViewListener() {
             override fun onSelected(selectedIndex: Int, item: String?) {
                 monthPos = selectedIndex
+                monthStr=item?:""
                 initDayPickerView()
             }
         }
@@ -98,7 +112,7 @@ class Pop_DatePicker(context: Activity, type: Int) : BasePopupWindow(context, Vi
         }
         tv_save.setOnClickListener {
             listener?.let {
-                it.choose((DEFAULT_MIN_YEAR + yearPos).toString(), (monthPos + 1).toString(), (dayPos + 1).toString())
+                it.choose(yearStr, monthStr,dayStr)
             }
 
 
@@ -106,9 +120,7 @@ class Pop_DatePicker(context: Activity, type: Int) : BasePopupWindow(context, Vi
 
     }
 
-    private var yearPos = 0
-    private var monthPos = 0
-    private var dayPos = 0
+
     /**
      * Init day item
      */
@@ -117,8 +129,9 @@ class Pop_DatePicker(context: Activity, type: Int) : BasePopupWindow(context, Vi
         val calendar = Calendar.getInstance()
         dayList = ArrayList()
 
+        DebugLog.d("======initDayPickerView=======")
         calendar.set(Calendar.YEAR, DEFAULT_MIN_YEAR + yearPos)
-        calendar.set(Calendar.MONTH, monthPos)
+        calendar.set(Calendar.MONTH, monthPos-1)
 
         //get max day in month
         dayMaxInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
@@ -127,7 +140,14 @@ class Pop_DatePicker(context: Activity, type: Int) : BasePopupWindow(context, Vi
             dayList.add(format2LenStr(i + 1))
         }
         wv_day?.setItems(dayList)
-        wv_day?.invalidate()
+        wv_day?.onWheelViewListener=object : WheelView.OnWheelViewListener(){
+            override fun onSelected(selectedIndex: Int, item: String?) {
+                super.onSelected(selectedIndex, item)
+                dayPos=selectedIndex
+                dayStr=item?:""
+            }
+
+        }
     }
 
     /**
