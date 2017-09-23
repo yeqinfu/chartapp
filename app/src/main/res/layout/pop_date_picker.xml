@@ -49,21 +49,42 @@
         android:layout_height="200dp"
         android:gravity="center">
 
-        <com.ppandroid.app.widget.WheelView
-            android:id="@+id/wv_year"
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-        <com.ppandroid.app.widget.WheelView
-            android:id="@+id/wv_month"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <com.ppandroid.app.widget.WheelView
+                android:id="@+id/wv_year"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-        <com.ppandroid.app.widget.WheelView
-            android:id="@+id/wv_day"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <com.ppandroid.app.widget.WheelView
+                android:id="@+id/wv_month"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <com.ppandroid.app.widget.WheelView
+                android:id="@+id/wv_day"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </LinearLayout>
+
 
     </LinearLayout>
 

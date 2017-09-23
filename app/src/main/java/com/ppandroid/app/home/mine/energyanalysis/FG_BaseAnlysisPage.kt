@@ -14,6 +14,7 @@ import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.widget.HorizontalPercentageView
 import com.ppandroid.app.widget.graphical.chart.PieData
 import com.ppandroid.app.widget.graphical.render.XEnum
+import com.ppandroid.app.widget.popwindow.Pop_DatePicker
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_base_analysis_page.*
 import org.jetbrains.anko.find
@@ -62,7 +63,7 @@ abstract class FG_BaseAnlysisPage : FG_Base() {
             tv_time.text = initDate
             select = initDate
             tv_time.setOnClickListener {
-                showDatePop()
+                showDatePop2()
             }
         }
         loadContent()
@@ -73,6 +74,33 @@ abstract class FG_BaseAnlysisPage : FG_Base() {
 
 
     protected var select = ""
+
+    private fun showDatePop2(){
+        var type=0
+        when(index){
+            0->type=0
+            1->type=1
+            2->type=2
+        }
+        var pop= Pop_DatePicker(activity,type)
+        pop.listener=object : Pop_DatePicker.IChooseListener{
+            override fun choose(year: String, month: String, day: String) {
+                when (index) {
+                    0 -> //日
+                        select = "$year-$month-$day"
+                    1 -> //月
+                        select = year+ "-" + (month)
+                    2 -> //日
+                        select = year
+                }
+                tv_time.text = select
+                loadContent()
+                pop?.dismiss()
+            }
+
+        }
+        pop.showPopupWindow()
+    }
     private fun showDatePop() {
         val c = Calendar.getInstance()
         val initDate = c.get(Calendar.YEAR).toString() + "-" + (c.get(Calendar.MONTH) + 1).toString() + "-" + c.get(Calendar.DAY_OF_MONTH)
