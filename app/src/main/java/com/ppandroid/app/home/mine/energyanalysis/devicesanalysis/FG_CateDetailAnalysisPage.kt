@@ -82,6 +82,7 @@ class FG_CateDetailAnalysisPage : FG_BaseDevicesAnlysisPage() {
                     v_multiple_view?.dataSet = list
                     v_multiple_view?.startAnim()
                     lv_list?.adapter = AD_List(activity, list2)
+                    setTotalNumber(it.message.totalKwh)
                 }
             }
 

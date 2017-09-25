@@ -3,6 +3,7 @@ package com.ppandroid.app.home.mine.energyanalysis.devicesanalysis
 import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -64,6 +65,12 @@ abstract class FG_BaseDevicesAnlysisPage : FG_Base() {
         }
         loadContent()
         init()
+    }
+    protected fun setTotalNumber(total:String){
+        if (!TextUtils.isEmpty(total)){
+            tv_totalKwh?.text="总能耗："+total+"kwh"
+
+        }
     }
 
     abstract fun init()

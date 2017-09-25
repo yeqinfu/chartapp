@@ -40,7 +40,12 @@
                 android:background="@color/white"/>
             <TextView
                 android:id="@+id/tv_averageKwh"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_alignParentRight="true"
+                android:id="@+id/tv_totalKwh"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
         </RelativeLayout>
