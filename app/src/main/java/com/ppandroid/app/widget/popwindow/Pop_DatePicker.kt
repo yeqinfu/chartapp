@@ -1,6 +1,7 @@
 package com.ppandroid.app.widget.popwindow
 
 import android.app.Activity
+import android.text.TextUtils
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -41,6 +42,7 @@ class Pop_DatePicker(context: Activity, type: Int) : BasePopupWindow(context, Vi
     private var yearStr = ""
     private var monthStr = ""
     private var dayStr = "01"
+
     interface IChooseListener {
         fun choose(year: String, month: String, day: String)
     }
@@ -57,55 +59,55 @@ class Pop_DatePicker(context: Activity, type: Int) : BasePopupWindow(context, Vi
         wv_year = popupWindowView.find<WheelView>(R.id.wv_year)
         wv_month = popupWindowView.find<WheelView>(R.id.wv_month)
         wv_day = popupWindowView.find<WheelView>(R.id.wv_day)
-        var ll_day=popupWindowView.find<LinearLayout>(R.id.ll_day)
-        var ll_year=popupWindowView.find<LinearLayout>(R.id.ll_year)
-        var ll_month=popupWindowView.find<LinearLayout>(R.id.ll_month)
+        var ll_day = popupWindowView.find<LinearLayout>(R.id.ll_day)
+        var ll_year = popupWindowView.find<LinearLayout>(R.id.ll_year)
+        var ll_month = popupWindowView.find<LinearLayout>(R.id.ll_month)
         when (type) {
             0 -> {
-                ll_year?.visibility=View.VISIBLE
-                ll_month?.visibility=View.VISIBLE
-                ll_day?.visibility=View.VISIBLE
+                ll_year?.visibility = View.VISIBLE
+                ll_month?.visibility = View.VISIBLE
+                ll_day?.visibility = View.VISIBLE
             }
             1 -> {
-                ll_year?.visibility=View.VISIBLE
-                ll_month?.visibility=View.VISIBLE
-                ll_day?.visibility=View.GONE
+                ll_year?.visibility = View.VISIBLE
+                ll_month?.visibility = View.VISIBLE
+                ll_day?.visibility = View.GONE
             }
             else -> {
-                ll_year?.visibility=View.VISIBLE
-                ll_month?.visibility=View.GONE
-                ll_day?.visibility=View.GONE
+                ll_year?.visibility = View.VISIBLE
+                ll_month?.visibility = View.GONE
+                ll_day?.visibility = View.GONE
             }
         }
 
         val c = Calendar.getInstance()
         var yearCount = c.get(Calendar.YEAR) - DEFAULT_MIN_YEAR
         for (i in 0 until yearCount) {
-            yearList.add(format2LenStr(DEFAULT_MIN_YEAR + i+1))
+            yearList.add(format2LenStr(DEFAULT_MIN_YEAR + i + 1))
         }
         for (j in 0..11) {
             monthList.add(format2LenStr(j + 1))
         }
         wv_year?.setItems(yearList)
-        wv_year?.setSeletion(yearCount-1)
-        yearStr=(DEFAULT_MIN_YEAR+yearCount).toString()
+        wv_year?.setSeletion(yearCount - 1)
+        yearStr = (DEFAULT_MIN_YEAR + yearCount).toString()
         wv_month?.setItems(monthList)
         val calendar = Calendar.getInstance()
         wv_month?.setSeletion(calendar.get(Calendar.MONTH))
-        monthStr=format2LenStr(calendar.get(Calendar.MONTH)+1)
+        monthStr = format2LenStr(calendar.get(Calendar.MONTH) + 1)
         initDayPickerView()
 
         wv_year?.onWheelViewListener = object : WheelView.OnWheelViewListener() {
             override fun onSelected(selectedIndex: Int, item: String?) {
                 yearPos = DEFAULT_MIN_YEAR + selectedIndex
-                yearStr=item?:""
+                yearStr = item ?: ""
                 initDayPickerView()
             }
         }
         wv_month?.onWheelViewListener = object : WheelView.OnWheelViewListener() {
             override fun onSelected(selectedIndex: Int, item: String?) {
                 monthPos = selectedIndex
-                monthStr=item?:""
+                monthStr = item ?: ""
                 initDayPickerView()
             }
         }
@@ -116,10 +118,38 @@ class Pop_DatePicker(context: Activity, type: Int) : BasePopupWindow(context, Vi
         }
         tv_save.setOnClickListener {
             listener?.let {
-                it.choose(yearStr, monthStr,dayStr)
+                it.choose(yearStr, monthStr, dayStr)
             }
 
 
+        }
+
+    }
+
+
+    fun setInitStr(initStr:String){
+        if (!TextUtils.isEmpty(initStr)){
+            var list=initStr.split("-")
+            if (list.size==3){
+                setInitDate(list[0].toInt(),list[1].toInt(),list[2].toInt())
+            }else if (list.size==2){
+                setInitDate(list[0].toInt(),list[1].toInt(),1)
+            }else{
+                setInitDate(list[0].toInt(),1,1)
+            }
+        }
+    }
+    fun setInitDate(year: Int, month: Int, day: Int) {
+
+        var yearPos=year-DEFAULT_MIN_YEAR
+        if (yearList.size>yearPos-1){
+            wv_year?.setSeletion(yearPos)
+        }
+        if (monthList.size>=month){
+            wv_month?.setSeletion(month-1)
+        }
+        if (dayList.size>=day){
+            wv_day?.setSeletion(day-1)
         }
 
     }
@@ -135,7 +165,7 @@ class Pop_DatePicker(context: Activity, type: Int) : BasePopupWindow(context, Vi
 
         DebugLog.d("======initDayPickerView=======")
         calendar.set(Calendar.YEAR, DEFAULT_MIN_YEAR + yearPos)
-        calendar.set(Calendar.MONTH, monthPos-1)
+        calendar.set(Calendar.MONTH, monthPos - 1)
 
         //get max day in month
         dayMaxInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
@@ -144,11 +174,11 @@ class Pop_DatePicker(context: Activity, type: Int) : BasePopupWindow(context, Vi
             dayList.add(format2LenStr(i + 1))
         }
         wv_day?.setItems(dayList)
-        wv_day?.onWheelViewListener=object : WheelView.OnWheelViewListener(){
+        wv_day?.onWheelViewListener = object : WheelView.OnWheelViewListener() {
             override fun onSelected(selectedIndex: Int, item: String?) {
                 super.onSelected(selectedIndex, item)
-                dayPos=selectedIndex
-                dayStr=item?:""
+                dayPos = selectedIndex
+                dayStr = item ?: ""
             }
 
         }

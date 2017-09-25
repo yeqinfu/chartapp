@@ -118,6 +118,7 @@ abstract class FG_BaseHistoramAnalysisPage:FG_Base(){
             2->type=2
         }
         var pop= Pop_DatePicker(activity,type)
+        pop.setInitStr(select)
         pop.listener=object : Pop_DatePicker.IChooseListener{
             override fun choose(year: String, month: String, day: String) {
                 when (index) {
