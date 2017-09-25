@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
 /**
  * 自定义折线图 代码减减变得恶心，别问我为什么跑得起来，我也不知道
  * You may think you know what the following code does. But you don't. Trust me
@@ -35,7 +36,7 @@ import java.util.Map;
  * this file and go play with something else. God bless you!!! The God's name is
  * YeQinFu
  */
-public class ChartView extends View {
+public class ChartView extends View implements Runnable {
 	//xy坐标轴颜色
 	private int						xylinecolor	= 0xffe2e2e2;
 	//xy坐标轴宽度
@@ -897,4 +898,32 @@ public class ChartView extends View {
 		float scaledDensity = getContext().getResources().getDisplayMetrics().scaledDensity;
 		return (int) (scaledDensity * sp + 0.5f * (sp >= 0 ? 1 : -1));
 	}
+
+
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
+        try {
+            chartAnimation();
+        }
+        catch(Exception e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    private void chartAnimation(){
+        for (int i=1;i<=100;i++){
+            try {
+                Thread.sleep(5);
+                postInvalidate();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                Thread.currentThread().interrupt();
+            }
+
+        }
+    }
+    public void startAnim(){
+        new Thread(this).start();
+    }
 }

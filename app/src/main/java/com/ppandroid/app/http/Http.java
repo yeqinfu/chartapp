@@ -39,9 +39,7 @@ import static org.jetbrains.anko.DialogsKt.toast;
 
 public class Http {
 
-    private void test(){
 
-    }
 
 	public static <T extends BaseBody>  void get(final Context context, String url, final Class<T> tt, final MyCallBack<T> callBack) {
         final WeakReference<Context> mWeakContext=new WeakReference<Context>(context);

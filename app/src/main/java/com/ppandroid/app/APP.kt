@@ -3,8 +3,12 @@ package com.ppandroid.im
 import android.app.Application
 import android.content.Context
 import android.content.Intent
+import com.franmontiel.persistentcookiejar.PersistentCookieJar
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.ppandroid.app.AC_Login
 import com.ppandroid.app.R
+import com.ppandroid.app.http.OkHttpUtils
 import com.ppandroid.app.utils.AppExceptionHandler
 import com.ppandroid.app.utils.DebugLog
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
@@ -12,6 +16,9 @@ import com.scwang.smartrefresh.layout.constant.SpinnerStyle
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.squareup.leakcanary.LeakCanary
+import okhttp3.OkHttpClient
+
+
 
 
 /**
@@ -37,6 +44,20 @@ class APP : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        //持久化cookie
+        val cookieJar = PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(this))
+        val okHttpClient = OkHttpClient.Builder()
+                .cookieJar(cookieJar)
+                //其他配置
+                .build()
+        OkHttpUtils.initClient(okHttpClient)
+
+
+
+
+
+
 
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.

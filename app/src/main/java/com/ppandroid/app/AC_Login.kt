@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import com.ppandroid.app.bean.ErrorBody
+import com.ppandroid.app.bean.login.CaptchaBody
 import com.ppandroid.app.bean.login.LoginBody
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
@@ -40,11 +41,52 @@ class AC_Login : AppCompatActivity() {
             if (checkbox.isChecked){
                 Utils_UserInfo.saveTempAccount(this,account)
             }
-            beginLogin(account,password)
+            beginLogin2(account,password)
         }
     }
 
+    /**
+     * 新登录方式
+     */
+    private fun beginLogin2(account: String, password: String) {
+        var url="user/captcha.json"
+        Http.get(this@AC_Login,url, CaptchaBody::class.java,object :MyCallBack<CaptchaBody>{
+            override fun onResponse(response: CaptchaBody?) {
+                response?.let {
+                    var password2=SecurityUtils.decode(password)
+                    password2 += it.message
+                    var sign=SecurityUtils.decode(password2)
+                    beginLogin3(account,it.message,sign)
+                }
+            }
+
+            override fun onError(error: ErrorBody?) {
+                toast(error?.message?:"")
+            }
+
+        })
+    }
+
+    private fun beginLogin3(account: String, captcha: String?, sign: String?) {
+        var url="user/login/check.json?username=$account&captcha=$captcha&sign=$sign"
+        Http.get(this@AC_Login, url, LoginBody::class.java, object : MyCallBack<LoginBody> {
+            override fun onResponse(response: LoginBody) {
+                response?.let {
+                    Utils_UserInfo.saveInfo(this@AC_Login,response)
+                    var it= Intent()
+                    it.setClass(this@AC_Login,AC_Main::class.java)
+                    startActivity(it)
+                    finish()
+                }
+            }
+            override fun onError(error: ErrorBody) {
+                toast(error.message)
+            }
+        })
+    }
+
     private fun beginLogin(account: String, password: String) {
+
         var password2=SecurityUtils.decode(password)
         var url= "user/login/check.json?username=$account&password=$password2"
         Http.get(this@AC_Login, url, LoginBody::class.java, object : MyCallBack<LoginBody> {
