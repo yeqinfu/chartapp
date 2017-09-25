@@ -13,7 +13,6 @@ import com.ppandroid.app.AC_Login
 import com.ppandroid.app.base.AC_ContentFG
 import com.ppandroid.app.bean.ET_ReSend
 import com.ppandroid.app.bean.ErrorBody
-import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.Utils_SharedPreferences
 import com.ppandroid.app.utils.toast.ToastUtil
 import org.greenrobot.eventbus.EventBus
@@ -47,7 +46,6 @@ abstract class FG_Base : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        DebugLog.e("==============onViewCreated")
         afterViews()
     }
 

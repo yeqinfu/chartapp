@@ -245,15 +245,42 @@ public class ChartView extends View {
 		}
 		super.onLayout(changed, left, top, right, bottom);
 	}
+	/**是否显示折线图1*/
+	private boolean isShowValue1=true;
+    /**是否显示折线图2*/
+	private boolean isShowValue2=true;
 
-	@Override
+
+    public boolean isShowValue1() {
+        return isShowValue1;
+    }
+
+    public void setShowValue1(boolean showValue1) {
+        isShowValue1 = showValue1;
+        invalidate();
+    }
+
+    public boolean isShowValue2() {
+        return isShowValue2;
+    }
+
+    public void setShowValue2(boolean showValue2) {
+        isShowValue2 = showValue2;
+        invalidate();
+    }
+
+    @Override
 	protected void onDraw(Canvas canvas) {
 		//x轴刻度自适应
 		interval = (getWidth()-xOri) / (xValue.size() + 1);
 		canvas.drawColor(bgcolor);
 		drawXY(canvas);
-		drawBrokenLineAndPoint(canvas);
-		drawBrokenLineAndPoint2(canvas);
+        if (isShowValue1){
+            drawBrokenLineAndPoint(canvas);
+        }
+        if (isShowValue2){
+            drawBrokenLineAndPoint2(canvas);
+        }
         drawAvg(canvas);
 	}
 

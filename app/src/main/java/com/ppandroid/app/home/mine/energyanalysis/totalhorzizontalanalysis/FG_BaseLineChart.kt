@@ -52,28 +52,44 @@ open abstract class FG_BaseLineChart:FG_Base(){
                 tv_time.text=initDate
                 tv_time.visibility= View.VISIBLE
                 select=initDate
+                tv_before.text= c.get(Calendar.YEAR).toString() + "年" + format(c.get(Calendar.MONTH) + 1) + "月"+format(c.get(Calendar.DAY_OF_MONTH)-1)+"日"
+                tv_this.text= c.get(Calendar.YEAR).toString() + "年" + format(c.get(Calendar.MONTH) + 1) + "月"+format(c.get(Calendar.DAY_OF_MONTH))+"日"
+
             }
             1->{
                 topText="周累计"
                 topText2=getKeyStr()+"比上周"
                 tv_time.visibility= View.GONE
                 select=""
+                tv_this.text="本周用电"
+                tv_before.text=getKeyStr()+"比上周"
             }
             2->{
                 topText="月累计"
                 topText2=getKeyStr()+"比上月"
                 tv_time.visibility= View.GONE
                 select= c.get(Calendar.YEAR).toString() + "-" + (format(c.get(Calendar.MONTH) + 1))
+                tv_before.text= c.get(Calendar.YEAR).toString() + "年" + format(c.get(Calendar.MONTH)) + "月"
+                tv_this.text= c.get(Calendar.YEAR).toString() + "年" + format(c.get(Calendar.MONTH) + 1) + "月"
+
             }
             3->{
                 topText="年累计"
                 topText2=getKeyStr()+"比去年"
                 tv_time.visibility= View.GONE
                 select=c.get(Calendar.YEAR).toString()
+                tv_before.text= (c.get(Calendar.YEAR)-1).toString() + "年"
+                tv_this.text= c.get(Calendar.YEAR).toString() + "年"
             }
         }
         tv_01.text=topText
         tv_02.text=topText2
+        tv_before.setOnClickListener {
+            chartview.isShowValue1=!chartview.isShowValue1
+        }
+        tv_this.setOnClickListener {
+            chartview.isShowValue2=!chartview.isShowValue2
+        }
 
 
 
