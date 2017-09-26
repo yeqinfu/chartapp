@@ -32,6 +32,7 @@ public class Utils_Common {
     public static int getRandomColor(){
        return  Color.parseColor(colors[(int) (Math.random()*100%colors.length)]);
     }
+
     public static double parseNumberString(String s){
         String d=findNumberFromStr(s);
         double result=paraseDouble(d);

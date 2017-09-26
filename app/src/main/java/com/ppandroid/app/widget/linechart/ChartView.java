@@ -838,6 +838,19 @@ public class ChartView extends View implements Runnable {
 		this.value = value;
 		invalidate();
 	}
+	public void setXYvalues( List<String> xValue, List<Double> yValue,String xLength){
+        this.xValue = xValue;
+        this.yValue = yValue;
+        //Y轴文本最大宽度
+        float textYWdith = getTextBounds(xLength, xyTextPaint).width();
+        int dp2 = dpToPx(2);
+        xOri = (int) (dp2 + textYWdith + dp2 + xylinewidth);//dp2是y轴文本距离左边，以及距离y轴的距离
+        xInit =  xOri+dpToPx(5);
+    }
+    public void setValue12(Map<String, Double> value,Map<String, Double> value2){
+        this.value = value;
+        this.value2 = value2;
+    }
 
 	public void setValue(Map<String, Double> value,Map<String, Double> value2, List<String> xValue, List<Double> yValue,String xLength) {
 		this.value = value;
@@ -911,10 +924,25 @@ public class ChartView extends View implements Runnable {
         }
     }
 
+    //折线对应的数据
+    private Map<String, Double>	allValue1		= new LinkedHashMap<>();
+    //折线对应的数据2
+    private Map<String, Double>	allValue2		= new LinkedHashMap<>();
+    public void setAnimValues(Map<String, Double> value,Map<String, Double> value2, List<String> xValue, List<Double> yValue,String xLength) {
+        setXYvalues(xValue,yValue,xLength);
+        this.allValue1=value;
+        this.allValue2=value2;
+        startAnim();
+    }
     private void chartAnimation(){
-        for (int i=1;i<=100;i++){
+        int max=allValue1.size()>allValue2.size()?allValue1.size():allValue2.size();
+        for (int i=0;i<=max;i++){
             try {
                 Thread.sleep(5);
+                int index1=i>allValue1.size()?allValue1.size():i;
+                int index2=i>allValue2.size()?allValue2.size():i;
+                setValue12(sub(allValue1,index1),sub(allValue2,index2));
+
                 postInvalidate();
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -923,6 +951,13 @@ public class ChartView extends View implements Runnable {
 
         }
     }
+
+    private Map<String,Double> sub(Map<String, Double> allValue, int index) {
+        LinkedHashMap<String, Double>	value		= new LinkedHashMap<>();
+
+        return value;
+    }
+
     public void startAnim(){
         new Thread(this).start();
     }

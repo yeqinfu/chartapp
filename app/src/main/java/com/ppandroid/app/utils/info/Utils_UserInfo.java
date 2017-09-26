@@ -13,6 +13,14 @@ import com.ppandroid.app.utils.Utils_SharedPreferences;
  */
 
 public class Utils_UserInfo {
+    public static void saveSign(Context context,String sign){
+        Utils_SharedPreferences sp=new Utils_SharedPreferences(context);
+        sp.put("sign_user",sign);
+    }
+    public static String getSign(Context context){
+        Utils_SharedPreferences sp=new Utils_SharedPreferences(context);
+        return sp.getString("sign_user","");
+    }
 
     public static String getCompanyName(Context context){
         Utils_SharedPreferences sp=new Utils_SharedPreferences(context);

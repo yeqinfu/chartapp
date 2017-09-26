@@ -56,6 +56,7 @@ class AC_Login : AppCompatActivity() {
                     var password2=SecurityUtils.decode(password)
                     password2 += it.message
                     var sign=SecurityUtils.decode(password2)
+                    Utils_UserInfo.saveSign(this@AC_Login,sign)
                     beginLogin3(account,it.message,sign)
                 }
             }
@@ -68,7 +69,7 @@ class AC_Login : AppCompatActivity() {
     }
 
     private fun beginLogin3(account: String, captcha: String?, sign: String?) {
-        var url="user/login/check.json?username=$account&captcha=$captcha&sign=$sign"
+        var url="user/login/check.json?username=$account&captcha=$captcha&sign_=$sign"
         Http.get(this@AC_Login, url, LoginBody::class.java, object : MyCallBack<LoginBody> {
             override fun onResponse(response: LoginBody) {
                 response?.let {
