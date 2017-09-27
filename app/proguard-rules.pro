@@ -26,11 +26,20 @@
 #-------------------------------------------定制化区域----------------------------------------------
 #---------------------------------1.实体类---------------------------------
 -keep class com.ppandroid.app.bean.** { *; }
-
-
+-keep class * extends com.ppandroid.app.bean.ET_Base
+# keep annotated by NotProguard 自定义不混淆注解
+-keep @com.ppandroid.app.utils.NotProguard class * {*;}
+-keep class * {
+@com.ppandroid.app.utils.NotProguard <fields>;
+}
+-keepclassmembers class * {
+@com.ppandroid.app.utils.NotProguard <methods>;
+}
 #-------------------------------------------------------------------------
 
 #---------------------------------2.第三方包-------------------------------
+#anko
+-dontwarn org.jetbrains.anko.**
 ##leakcanary
 -dontwarn com.squareup.haha.guava.**
 -dontwarn com.squareup.haha.perflib.**
@@ -140,7 +149,6 @@
 -keep public class * extends android.content.ContentProvider
 -keep public class * extends android.app.backup.BackupAgentHelper
 -keep public class * extends android.preference.Preference
--keep public class * extends android.view.View
 -keep public class com.android.vending.licensing.ILicensingService
 -keep class android.support.** {*;}
 
@@ -197,7 +205,7 @@
 }
 #----------------------------------------------------------------------------
 #---------------------------------------------------------------------------------------------------
-
+#特此保留链接，有问题找他算账哈哈~~~~~~~~~~
 #作者：wolearn
 #链接：http://www.jianshu.com/p/f3455ecaa56e
 #來源：简书

@@ -333,9 +333,6 @@ public class Http {
      * 将string 数据转换成网络请求格式
      */
     protected static String String2UTF8(String string) {
-
-        DebugLog.e("String2UTF8---------->source:"+string);
-        DebugLog.e("String2UTF8---------->size:"+string.length());
         try {
             string = URLEncoder.encode(string, "utf-8");
         } catch (UnsupportedEncodingException e) {
