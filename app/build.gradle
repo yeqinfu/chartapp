@@ -7,6 +7,13 @@ android {
     productFlavors {
         jxt {}
     }
+    splits {//
+        abi {
+            enable true
+            reset()
+            include 'armeabi-v7a'//只打包armeabi-v7a平台的，就算有其他文件夹也不管
+        }
+    }
     defaultConfig {
         applicationId "com.ppandroid.app"
         minSdkVersion Integer.parseInt(project.ANDROID_BUILD_MIN_SDK_VERSION)
@@ -18,6 +25,11 @@ android {
             cmake {
                 cppFlags ""
             }
+        }
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi-v7a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64', 'armeabi-v7a', 'arm64-v8a'
         }
     }
     signingConfigs {
