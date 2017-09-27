@@ -23,7 +23,12 @@ import java.util.Map;
  */
 
 public class Utils_Sign {
-    private static final String privateKey="MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALOsXH4UwWs/NkBTWdGUTSFaEnKYk5UHFVZgZz4BUjeWsjvwgwQsDdIJRtK4x3N4uc0BnedC+ZJOLkxc0JMZoNc68//XQb20WCnks4KQZJuCPOufOCqoTS+nkF2XivppubS6c3jhIr5LH9BznKHY5YPNj44IvBzSXidGTLNTb6pjAgMBAAECgYEApuAuY7fZUUe7lpETuhDYdmKXAbJuWBrlGX2eRjup5hFj50HiHczg5TRSgEK4lKoLP7oBs5pD/Dv6ylfmLMm/1LhBCZXofFcVUmoih2UTQJZ9p6tg2jpAgeFpvUIGILdsD3LLAUUw1RQBcegdwtxuB6B3CyjgoZt4cJoMNmtMQrkCQQDj2HyJcD/tLnVON96lhiYITHTUeE6mZpy21x1ojguS53mrC64X8tLs52lBK7K1exEEcrtEz27eDvCAwousMt1nAkEAyeAF8GmWTsh2THdV6SrJTE5NWBpFqwpVvzgk1aOt96CE7Ssv3Ke6QhX5pb0zjF7v3vvgg6cwpLtvo8j6fV/xpQJACEuPbSmLCkWQu8JI9tnFdLPj5QBkTKabugRm67GQNk77HQEV24VZrIpYSKkgnn7WhcTvkHfE34zHsMhkcWaArQJAQy9WaquJRZD7pfk1U1NVCRsqLH8Z3pGi9e/Gen9t33LBqnjsBeCgYWwU2K7+H+JcrHZhQw96Zeinf/fcPauXrQJAU5oaCOPTcVzzpMO5qn6Ftz2/DpcFxpHuqYvCg3Ju34y/Xjc+e8sJ8s6fVNTMIw3UfMFZ0Hp7efLaxmtHt3TFmA==";
+
+    // Used to load the 'native-lib' library on application startup.
+    static {
+        System.loadLibrary("native-lib");
+    }
+  //  private static final String privateKey="MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALOsXH4UwWs/NkBTWdGUTSFaEnKYk5UHFVZgZz4BUjeWsjvwgwQsDdIJRtK4x3N4uc0BnedC+ZJOLkxc0JMZoNc68//XQb20WCnks4KQZJuCPOufOCqoTS+nkF2XivppubS6c3jhIr5LH9BznKHY5YPNj44IvBzSXidGTLNTb6pjAgMBAAECgYEApuAuY7fZUUe7lpETuhDYdmKXAbJuWBrlGX2eRjup5hFj50HiHczg5TRSgEK4lKoLP7oBs5pD/Dv6ylfmLMm/1LhBCZXofFcVUmoih2UTQJZ9p6tg2jpAgeFpvUIGILdsD3LLAUUw1RQBcegdwtxuB6B3CyjgoZt4cJoMNmtMQrkCQQDj2HyJcD/tLnVON96lhiYITHTUeE6mZpy21x1ojguS53mrC64X8tLs52lBK7K1exEEcrtEz27eDvCAwousMt1nAkEAyeAF8GmWTsh2THdV6SrJTE5NWBpFqwpVvzgk1aOt96CE7Ssv3Ke6QhX5pb0zjF7v3vvgg6cwpLtvo8j6fV/xpQJACEuPbSmLCkWQu8JI9tnFdLPj5QBkTKabugRm67GQNk77HQEV24VZrIpYSKkgnn7WhcTvkHfE34zHsMhkcWaArQJAQy9WaquJRZD7pfk1U1NVCRsqLH8Z3pGi9e/Gen9t33LBqnjsBeCgYWwU2K7+H+JcrHZhQw96Zeinf/fcPauXrQJAU5oaCOPTcVzzpMO5qn6Ftz2/DpcFxpHuqYvCg3Ju34y/Xjc+e8sJ8s6fVNTMIw3UfMFZ0Hp7efLaxmtHt3TFmA==";
 
     public static final String KEY_ALGORITHM = "RSA";
 
@@ -105,7 +110,7 @@ public class Utils_Sign {
 
 	public static String sign(String data){
         try {
-            return sign(data,privateKey);
+            return sign(data,getPrivateKey());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -131,4 +136,11 @@ public class Utils_Sign {
     public static String signPost(Map<String,String> map){
         return sign(createLinkString(map));
     }
+
+    /**
+     * A native method that is implemented by the 'native-lib' native library,
+     * which is packaged with this application.
+     */
+    public native static String getPrivateKey();
+
 }
