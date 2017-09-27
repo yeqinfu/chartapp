@@ -6,22 +6,20 @@
 package com.ppandroid.app.home.mine.energyanalysis
 
 import android.app.Activity
-import android.graphics.Color
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import com.bruce.pickerview.popwindow.DatePickerPopWin
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.mine.energyanalysis.BN_History
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
+import com.ppandroid.app.widget.popwindow.Pop_DatePicker
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_history.*
 import kotlinx.android.synthetic.main.layout_head_view.*
 import org.jetbrains.anko.find
-import java.util.*
 
 
 /**
@@ -35,7 +33,7 @@ class FG_History:FG_Base(){
         head_view.init(activity)
         head_view.setCenterTitle("历史查询")
         ll_year.setOnClickListener {
-            showDatePop()
+            showDatePop2()
         }
     }
 
@@ -78,27 +76,21 @@ class FG_History:FG_Base(){
 
 
     var select=""
-    private fun showDatePop() {
-        val c = Calendar.getInstance()
-        val initDate = c.get(Calendar.YEAR).toString() + "-" + (c.get(Calendar.MONTH) + 1).toString() + "-" + c.get(Calendar.DAY_OF_MONTH)
-        val pickerPopWin = DatePickerPopWin.Builder(activity, DatePickerPopWin.OnDatePickedListener { year, month, day, dateDesc ->
-            tv_choose.text = year.toString()
-            select=year.toString()
-            loadContent()
-        }).textConfirm("确定") //text of confirm button
-                .textCancel("取消") //text of cancel button
-                .btnTextSize(16) // button text size
-                .viewTextSize(25) // pick view text size
-                .colorCancel(Color.parseColor("#999999")) //color of cancel button
-                .colorConfirm(Color.parseColor("#009900"))//color of confirm button
-                .minYear(1990) //min year in loop
-                .maxYear(c.get(Calendar.YEAR) + 1) // max year in loop
-                .showDayMonthYear(false) // shows like dd mm yyyy (default is false)
-                .dateChose(initDate) // date chose when init popwindow
-                .build()
-        pickerPopWin.monthLoopView.visibility=View.GONE
-        pickerPopWin.dayLoopView.visibility=View.GONE
-        pickerPopWin.showPopWin(activity)
-    }
 
+
+    private fun showDatePop2(){
+        var type=2
+        var pop= Pop_DatePicker(activity,type)
+        pop.setInitStr(select)
+        pop.listener=object : Pop_DatePicker.IChooseListener{
+            override fun choose(year: String, month: String, day: String) {
+                tv_choose.text = year
+                select=year
+                loadContent()
+                pop?.dismiss()
+            }
+
+        }
+        pop.showPopupWindow()
+    }
 }
