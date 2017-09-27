@@ -147,7 +147,7 @@ public class SwipeBackLayout extends ViewGroup {
         super(context, attrs);
 
         viewDragHelper = ViewDragHelper.create(this, 1.0f, new ViewDragHelperCallBack());
-        chkDragable();
+        //chkDragable();
     }
 
     float lastY = 0;
@@ -319,7 +319,7 @@ public class SwipeBackLayout extends ViewGroup {
      * @return
      */
     private boolean isInLawRange(MotionEvent ev) {
-        if (ev.getX()<horizontalDragRange/4){
+        if (ev.getX()<horizontalDragRange/4&&enablePullToBack){
             return true;
         }
         return false;
