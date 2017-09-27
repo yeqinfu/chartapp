@@ -32,6 +32,8 @@ import com.ppandroid.im.bean.BaseBody
 import kotlinx.android.synthetic.main.fg_user_info.*
 import kotlinx.android.synthetic.main.layout_head_view.*
 import org.greenrobot.eventbus.EventBus
+import org.jetbrains.anko.async
+import org.jetbrains.anko.uiThread
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.IOException
@@ -197,10 +199,16 @@ class FG_UserInfo : FG_Base() {
                 val uri = data.data
                 val resolver = activity.contentResolver
                 try {
-                    // 获取到图片文件
-                    bitmap = MediaStore.Images.Media.getBitmap(resolver, uri)
-                    bitmap = BitmapUtils.compressImage(bitmap)
-                    iv_head.setImageBitmap(bitmap)
+                    async {
+                        // 获取到图片文件
+                        bitmap = MediaStore.Images.Media.getBitmap(resolver, uri)
+                        bitmap = BitmapUtils.compressImage(bitmap)
+                        uiThread {
+                            iv_head.setImageBitmap(bitmap)
+                        }
+
+                    }
+
 
                 } catch (e: FileNotFoundException) {
                     e.printStackTrace()
@@ -212,21 +220,27 @@ class FG_UserInfo : FG_Base() {
 
         } else if (requestCode == PHOTO_REQUEST_CAMERA) {
             if (Utils_Common.hasSdcard()) {
-                tempFile = File(Environment.getExternalStorageDirectory(), PHOTO_FILE_NAME)
-                val uri = Uri.fromFile(tempFile)
+                async {
+                    tempFile = File(Environment.getExternalStorageDirectory(), PHOTO_FILE_NAME)
+                    val uri = Uri.fromFile(tempFile)
 
-                val resolver = activity.contentResolver
-                try {
-                    // 获取到图片文件
-                    bitmap = MediaStore.Images.Media.getBitmap(resolver, uri)
-                    bitmap = BitmapUtils.compressImage(bitmap)
-                    iv_head.setImageBitmap(bitmap)
+                    val resolver = activity.contentResolver
+                    try {
+                        // 获取到图片文件
+                        bitmap = MediaStore.Images.Media.getBitmap(resolver, uri)
+                        bitmap = BitmapUtils.compressImage(bitmap)
+                        uiThread {
+                            iv_head.setImageBitmap(bitmap)
+                        }
 
-                } catch (e: FileNotFoundException) {
-                    e.printStackTrace()
-                } catch (e: IOException) {
-                    e.printStackTrace()
+
+                    } catch (e: FileNotFoundException) {
+                        e.printStackTrace()
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                    }
                 }
+
 
             } else {
                 toast("未找到存储卡，无法存储照片！")
