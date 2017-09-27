@@ -1,10 +1,9 @@
+/*
+ * Created by yeqinfu on 17-9-27 上午9:35
+ * Copyright (c) JXT All rights reserved.
+ */
+
 package com.ppandroid.app.widget.wv;
-
-// Decompiled by Jad v1.5.8e. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.geocities.com/kpdus/jad.html
-// Decompiler options: braces fieldsfirst space lnc 
-
-
 
 public interface LoopListener {
     void onItemSelect(int item);

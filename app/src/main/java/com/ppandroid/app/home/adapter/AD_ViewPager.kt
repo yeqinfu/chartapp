@@ -1,3 +1,8 @@
+/*
+ * Created by yeqinfu on 17-9-27 上午9:35
+ * Copyright (c) JXT All rights reserved.
+ */
+
 package com.ppandroid.app.home.adapter
 
 import android.support.v4.view.PagerAdapter

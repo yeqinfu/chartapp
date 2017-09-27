@@ -78,6 +78,11 @@ dependencies {
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
 }
+/*
+ * Created by yeqinfu on 17-9-27 上午9:35
+ * Copyright (c) JXT All rights reserved.
+ */
+
 /**
  * 从Manifest.xml中读取版本号
  **/
