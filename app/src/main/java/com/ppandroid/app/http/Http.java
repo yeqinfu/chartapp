@@ -186,7 +186,9 @@ public class Http {
 		DebugLog.i("http", "====================== token 失效 尝试MD5 登录====================================");
 		Utils_SharedPreferences sp = new Utils_SharedPreferences(context);
 		String url = Contants.Companion.getBaseUrl() + "user/login/auto/check.json" + "?id=" + sp.getString("userID", null) + "&md5=" + sp.getString("MD5", null);
-		DebugLog.d("http->md5登录" + url);
+        url += "&appId=1"+"&timeStamp=" + getTimeStemp() ;
+        url+="&sign=" + String2UTF8(Utils_Sign.signGet(url));
+        DebugLog.d("http->md5登录" + url);
 		Log2FileUtil.saveLog2Sdcard("++++++++++++++++++++++http->md5登录+++++++++++++++++++++++++++++++\n" + url);
 		OkHttpUtils.get().url(url).build().execute(new StringCallback() {
 			@Override
