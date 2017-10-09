@@ -294,7 +294,7 @@ public class Http {
 			params.put("X-Auth-Token", sp.getString("Token", ""));
 		}
 		params.put("timeStamp", getTimeStemp());
-		params.put("appId", Utils_UserInfo.getUserId(context));
+		params.put("appId", "1");
         params.put("sign",  Utils_Sign.signPost(params));
 		return params;
 	}
