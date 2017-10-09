@@ -79,7 +79,7 @@ public class Utils_Sign {
 	 */
 	public static String sign(byte[] data, String privateKey) throws Exception {
 		// 解密由base64编码的私钥
-		byte[] keyBytes = Base64.decode(privateKey, Base64.DEFAULT);
+		byte[] keyBytes = Base64.decode(privateKey, Base64.NO_WRAP);
 		// 构造PKCS8EncodedKeySpec对象
 		PKCS8EncodedKeySpec pkcs8KeySpec = new PKCS8EncodedKeySpec(keyBytes);
 		// KEY_ALGORITHM 指定的加密算法

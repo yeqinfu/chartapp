@@ -25,8 +25,8 @@ class Contants {
         val CHECK_ERROR = "007"
 
   //  var baseUrl = "http://192.168.25.110:9010/"
-     var baseUrl = "http://120.76.40.63:9010/"
-    //var baseUrl = "http://192.168.25.127/"
+    // var baseUrl = "http://120.76.40.63:9010/"
+    var baseUrl = "http://192.168.25.127/"
      // var baseUrl = "http://192.168.25.203:80/"
     }
 }

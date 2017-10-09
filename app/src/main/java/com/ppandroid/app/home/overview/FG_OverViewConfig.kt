@@ -9,8 +9,8 @@ import com.ppandroid.app.R
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.overview.BN_OverViewConfig
 import com.ppandroid.app.home.FG_OverView
-import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.http.Http
+import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.im.base.FG_Base
 import com.ppandroid.im.bean.BaseBody
 import kotlinx.android.synthetic.main.fg_over_view_config.*
@@ -80,10 +80,11 @@ class FG_OverViewConfig:FG_Base(){
     private fun saveInfo() {
         var list=adapter.ts
         var url="user/overview/modular/save.json?"
+        var ids=""
         for (item in list){
-            url+="ids="+item.id.toString()+"&"
+            ids+=item.id.toString()+","
         }
-        url=url.substring(0,url.length-1)
+        url+="ids="+ids.substring(0,ids.length-1)
         Http.get(activity,url,BaseBody::class.java,object :MyCallBack<BaseBody>{
             override fun onResponse(response: BaseBody?) {
                 response?.let {
