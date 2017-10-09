@@ -295,7 +295,7 @@ public class Http {
 		}
 		params.put("timeStamp", getTimeStemp());
 		params.put("appId", Utils_UserInfo.getUserId(context));
-        params.put("sign",  String2UTF8(Utils_Sign.signPost(params)));
+        params.put("sign",  Utils_Sign.signPost(params));
 		return params;
 	}
 

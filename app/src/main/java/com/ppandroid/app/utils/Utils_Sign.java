@@ -37,6 +37,31 @@ public class Utils_Sign {
     private static final String PUBLIC_KEY = "RSAPublicKey";
     /** map中的私钥key */
     private static final String PRIVATE_KEY = "RSAPrivateKey";
+    /**
+     * 除去数组中的空值和签名参数
+     *
+     * @param sArray
+     *            签名参数组
+     * @return 去掉空值与签名参数后的新签名参数组
+     */
+    private static Map<String, String> paraFilter(Map<String, String> sArray) {
+
+        Map<String, String> result = new HashMap<String, String>();
+
+        if (sArray == null || sArray.size() <= 0) {
+            return result;
+        }
+
+        for (String key : sArray.keySet()) {
+            String value = sArray.get(key);
+            if (value == null || value.equals("") || key.equalsIgnoreCase("sign") || key.equalsIgnoreCase("sign_type")) {
+                continue;
+            }
+            result.put(key, value);
+        }
+
+        return result;
+    }
 
     /**
      * 把数组所有元素排序，并按照“参数=参数值”的模式用“&”字符拼接成字符串
@@ -46,7 +71,7 @@ public class Utils_Sign {
      * @return 拼接后字符串
      */
     public static String createLinkString(Map<String, String> params) {
-
+        params=paraFilter(params);
         List<String> keys = new ArrayList<String>(params.keySet());
         Collections.sort(keys);
 
