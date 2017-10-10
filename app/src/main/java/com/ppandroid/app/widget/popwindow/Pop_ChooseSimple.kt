@@ -31,7 +31,7 @@ class Pop_ChooseSimple(context: Activity, data:ArrayList<String>): BasePopupWind
     var listener:IChooseListener?=null
 
     init {
-        isNeedgreybg=true
+        isNeedgreybg=false
         popupGravity= Gravity.BOTTOM
         tv_title=popupWindowView.find<TextView>(R.id.tv_title)
         var tv_save=popupWindowView.find<TextView>(R.id.tv_save)
@@ -70,7 +70,7 @@ class Pop_ChooseSimple(context: Activity, data:ArrayList<String>): BasePopupWind
     }
 
     override fun getClickToDismissView(): View {
-        return getPopupWindowView();
+        return popupWindowView
     }
 
     override fun initExitAnimation(): Animation {
