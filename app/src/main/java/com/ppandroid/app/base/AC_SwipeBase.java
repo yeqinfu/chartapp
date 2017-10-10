@@ -5,13 +5,14 @@
 
 package com.ppandroid.app.base;
 
+import com.ppandroid.app.R;
+import com.ppandroid.app.widget.SwipeBackLayout;
+
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
-import com.ppandroid.app.widget.SwipeBackLayout;
 
 
 /**
@@ -36,10 +37,10 @@ public class AC_SwipeBase extends AppCompatActivity implements SwipeBackLayout.S
         };
         swipeBackLayout.setOnSwipeBackListener(this);
         setDragEdge(SwipeBackLayout.DragEdge.LEFT);
-    /*    ivShadow = new ImageView(this);
+        ivShadow = new ImageView(this);
         ivShadow.setBackgroundColor(getResources().getColor(R.color.black_p50));
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-        container.addView(ivShadow, params);*/
+        container.addView(ivShadow, params);
         container.addView(swipeBackLayout);
         return container;
     }

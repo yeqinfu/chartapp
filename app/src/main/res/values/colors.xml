@@ -42,7 +42,7 @@
     <color name="white">@android:color/white</color>
     <color name="orange">#FC9426</color>
 
-
+    <color name="black_p50">#7f000000</color>
 
     <color name="vcolor01">#FA6D6F</color>
     <color name="vcolor02">#FE8D25</color>
