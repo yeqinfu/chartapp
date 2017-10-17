@@ -8,7 +8,7 @@ package com.ppandroid.app.utils;
 import android.os.Environment;
 
 import com.ppandroid.app.R;
-import com.ppandroid.im.APP;
+import com.ppandroid.app.base.SampleApplicationLike;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -53,7 +53,7 @@ public class Log2FileUtil {
 	public static void saveLog2Sdcard(String log) {
 		if (true) {
 			try {
-				File file = AppFileManager.getInstance(APP.Companion.getContext()).createFile(LogFileDir, LogFileName);
+				File file = AppFileManager.getInstance(SampleApplicationLike.getContext()).createFile(LogFileDir, LogFileName);
 				DebugLog.v("#####-->" + file.getAbsolutePath());
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 				BufferedWriter out = null;
@@ -79,8 +79,8 @@ public class Log2FileUtil {
 
 	public static void copyDBToAssert() {
 		String DB_PATH = String.format("/data/data/%1$s/databases/medicine.sqlite",
-				APP.Companion.getContext().getResources().getResourcePackageName(R.string.app_name));
-		if (new File(DB_PATH).exists() && AppFileManager.getInstance(APP.Companion.getContext()).hasSDCard()) {
+                SampleApplicationLike.getContext().getResources().getResourcePackageName(R.string.app_name));
+		if (new File(DB_PATH).exists() && AppFileManager.getInstance(SampleApplicationLike.getContext()).hasSDCard()) {
 			try {
 				// 如 SQLite 数据库文件不存在，再检查一下 database 目录是否存在
 				File f = new File(DB_PATH);

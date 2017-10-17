@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import com.ppandroid.app.R;
+import com.ppandroid.app.base.SampleApplicationLike;
 import com.ppandroid.app.bean.ET_ReSend;
 import com.ppandroid.app.bean.ErrorBody;
 import com.ppandroid.app.bean.login.MD5Body;
@@ -24,7 +25,6 @@ import com.ppandroid.app.utils.Utils_SharedPreferences;
 import com.ppandroid.app.utils.Utils_Sign;
 import com.ppandroid.app.utils.activitymanager.ActivityManager;
 import com.ppandroid.app.utils.info.Utils_UserInfo;
-import com.ppandroid.im.APP;
 import com.ppandroid.im.bean.BaseBody;
 import com.ppandroid.im.utils.Contants;
 
@@ -168,7 +168,7 @@ public class Http {
 
 	private static void clearInfoAndLogin(Context context) {
 		Utils_UserInfo.clearUserInfo(context);
-		APP.Companion.toLogin();
+		SampleApplicationLike.toLogin();
 		ActivityManager.getActivityManager().popAllActivity();
 		((Activity) context).finish();
 	}

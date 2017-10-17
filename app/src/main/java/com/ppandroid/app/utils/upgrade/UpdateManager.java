@@ -26,13 +26,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ppandroid.app.R;
+import com.ppandroid.app.base.SampleApplicationLike;
 import com.ppandroid.app.bean.ErrorBody;
 import com.ppandroid.app.http.Http;
 import com.ppandroid.app.http.MyCallBack;
 import com.ppandroid.app.utils.Utils_DateFormat;
 import com.ppandroid.app.utils.toast.ToastUtil;
 import com.ppandroid.app.widget.CustomDialog;
-import com.ppandroid.im.APP;
 
 import java.io.File;
 import java.util.Calendar;
@@ -98,7 +98,7 @@ public class UpdateManager {
             PackageInfo info = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
              currVersionName = info.versionName;
 
-            ApplicationInfo appInfo = APP.Companion.getContext().getPackageManager()
+            ApplicationInfo appInfo = SampleApplicationLike.getContext().getPackageManager()
                     .getApplicationInfo(context.getPackageName(),
                             PackageManager.GET_META_DATA);
          /*   String channel=appInfo.metaData.getString("UMENG_CHANNEL");

@@ -14,7 +14,6 @@ import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersisto
 import com.ppandroid.app.AC_Login
 import com.ppandroid.app.R
 import com.ppandroid.app.http.OkHttpUtils
-import com.ppandroid.app.utils.AppExceptionHandler
 import com.ppandroid.app.utils.DebugLog
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle
@@ -28,6 +27,7 @@ import okhttp3.OkHttpClient
 
 /**
  * Created by yeqinfu on 2017/8/1.
+ * 废弃
  */
 
 class APP : Application() {
@@ -85,11 +85,7 @@ class APP : Application() {
 
         context = this
         DebugLog.d("+++++++++++++++++++++++++++++++++++++++++++context is" + context)
-        /*****************************************************************
-         * 闪退处理
-         *****************************************************************/
-        val mReportAppError = AppExceptionHandler.getInstance()
-        mReportAppError.init(this)
+
         /* if (!EventBus.getDefault().isRegistered(this)) {
              EventBus.getDefault().register(this)
          }*/
