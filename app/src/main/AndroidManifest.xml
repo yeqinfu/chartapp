@@ -17,6 +17,12 @@
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <!--读取文件权限-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+
+
     <application
         android:name=".base.SampleApplication"
         android:allowBackup="true"
@@ -73,6 +79,11 @@
             android:screenOrientation="landscape"
             android:name=".home.mine.energyanalysis.totalhorzizontalanalysis.AC_TotalHorzintalanalysis">
         </activity>
+        //bugly升级
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent" />
     </application>
 
 </manifest>

@@ -38,6 +38,10 @@
 #-------------------------------------------------------------------------
 
 #---------------------------------2.第三方包-------------------------------
+#bugly
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}
+-keep class android.support.**{*;}
 #anko
 -dontwarn org.jetbrains.anko.**
 ##leakcanary
