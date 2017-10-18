@@ -91,25 +91,8 @@ class AC_Login : AppCompatActivity() {
         })
     }
 
-    private fun beginLogin(account: String, password: String) {
 
-        var password2=SecurityUtils.decode(password)
-        var url= "user/login/check.json?username=$account&password=$password2"
-        Http.get(this@AC_Login, url, LoginBody::class.java, object : MyCallBack<LoginBody> {
-            override fun onResponse(response: LoginBody) {
-                response?.let {
-                    Utils_UserInfo.saveInfo(this@AC_Login,response)
-                    var it= Intent()
-                    it.setClass(this@AC_Login,AC_Main::class.java)
-                    startActivity(it)
-                    finish()
-                }
-            }
-            override fun onError(error: ErrorBody) {
-                toast(error.message)
-            }
-        })
-    }
+
 
     private fun toast(msg: String) {
         ToastUtil.toast(this@AC_Login,msg)
