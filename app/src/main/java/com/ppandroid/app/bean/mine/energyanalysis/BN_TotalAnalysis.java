@@ -39,10 +39,19 @@ public class BN_TotalAnalysis extends BaseBody {
          */
 
         private String averageKwh;
+        private String dateString;
         private String accurateAverageKwh;
         private String totalKwh;
         private Object accurateTotalKwh;
         private List<StageKwhBean> stageKwh;
+
+        public String getDateString() {
+            return dateString;
+        }
+
+        public void setDateString(String dateString) {
+            this.dateString = dateString;
+        }
 
         public String getAverageKwh() {
             return averageKwh;

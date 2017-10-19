@@ -92,6 +92,9 @@ class FG_HistogramPage : FG_BaseHistoramAnalysisPage(){
                     v_multiple_view?.startAnim()
                     tv_avg?.text = it.message.accurateAverageKwh
                     tv_total?.text = it.message.totalKwh
+                    if (index==3){
+                        tv_time.text=it.message.dateString
+                    }
                 }
             }
 
