@@ -21,6 +21,7 @@ import com.ppandroid.app.AC_Login;
 import com.ppandroid.app.R;
 import com.ppandroid.app.http.OkHttpUtils;
 import com.ppandroid.app.utils.AppExceptionHandler;
+import com.ppandroid.app.utils.DebugLog;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreater;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreater;
@@ -38,6 +39,7 @@ import com.tencent.tinker.loader.app.DefaultApplicationLike;
 
 import java.util.Locale;
 
+import cn.jpush.android.api.JPushInterface;
 import okhttp3.OkHttpClient;
 
 /**
@@ -143,6 +145,13 @@ public class SampleApplicationLike extends DefaultApplicationLike {
     }
 
     private void initConfig() {
+
+        /**极光推送*/
+        JPushInterface.setDebugMode(DebugLog.isDebuggable());
+        JPushInterface.init(getApplication());
+        DebugLog.d("yeqinfu",JPushInterface.getRegistrationID(getApplication())+"===");
+
+
         PersistentCookieJar cookieJar=new PersistentCookieJar(new SetCookieCache(),new SharedPrefsCookiePersistor(context));
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .cookieJar(cookieJar)
