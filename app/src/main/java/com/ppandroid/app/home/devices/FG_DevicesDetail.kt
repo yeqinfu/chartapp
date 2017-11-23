@@ -63,13 +63,13 @@ class FG_DevicesDetail:FG_Base(){
                     var model=FG_AddDevices.Model()
                     model.key="设备型号"
                     model.value=it.message.model
-                    if (modelBody.list==null){
-                        modelBody.list=ArrayList()
-                        modelBody.list?.add(0,model)
+                    if (modelBody?.list==null){
+                        modelBody?.list=ArrayList()
+                        modelBody?.list?.add(0,model)
                     }else{
-                        modelBody.list?.add(0,model)
+                        modelBody?.list?.add(0,model)
                     }
-                    modelBody.list?.let {
+                    modelBody?.list?.let {
                         var adapter=AD_List(activity,it)
                         gv_list.adapter=adapter
 

@@ -121,11 +121,11 @@ public class SampleApplicationLike extends DefaultApplicationLike {
 
             @Override
             public void onPatchRollback() {
-                Log.d(TAG, "补丁回滚");
+                Log.d(TAG, "补丁回滚5");
             }
         };
         //主动检查更新
-        Beta.checkUpgrade();
+        Beta.checkUpgrade(false,true);
     }
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)

@@ -403,15 +403,19 @@ class FG_AddDevices : FG_Base() {
     var chooseAreaId: String = ""
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(event: ET_AddDevices) {
-        if (event.taskId == ET_AddDevices.TASKID_ADD_DEVICES_ABOUT_CATE) {
-            tv_cate.text = event.chooseName
-            chooseCateId = event.chooseId
-        } else if (event.taskId == ET_AddDevices.TASKID_ADD_DEVICES_ABOUT_INSTRUMENT) {
-            chooseInstrumentId = event.chooseId
-            tv_instrument.text = event.chooseName
-        } else if (event.taskId == ET_AddDevices.TASKID_ADD_DEVICES_ABOUT_AREA) {
-            chooseAreaId = event.chooseId
-            tv_area.text = event.chooseName
+        when {
+            event.taskId == ET_AddDevices.TASKID_ADD_DEVICES_ABOUT_CATE -> {
+                tv_cate.text = event.chooseName
+                chooseCateId = event.chooseId
+            }
+            event.taskId == ET_AddDevices.TASKID_ADD_DEVICES_ABOUT_INSTRUMENT -> {
+                chooseInstrumentId = event.chooseId
+                tv_instrument.text = event.chooseName
+            }
+            event.taskId == ET_AddDevices.TASKID_ADD_DEVICES_ABOUT_AREA -> {
+                chooseAreaId = event.chooseId
+                tv_area.text = event.chooseName
+            }
         }
     }
 }

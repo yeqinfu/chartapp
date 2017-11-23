@@ -64,12 +64,6 @@ class APP : Application() {
 
 
 
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
-            return
-        }
-        LeakCanary.install(this)
 
 
         //设置全局的Header构建器
@@ -89,6 +83,12 @@ class APP : Application() {
         /* if (!EventBus.getDefault().isRegistered(this)) {
              EventBus.getDefault().register(this)
          }*/
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return
+        }
+        LeakCanary.install(this)
 
     }
 
