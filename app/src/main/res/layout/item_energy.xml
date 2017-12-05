@@ -38,6 +38,7 @@
 
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_area01"
             android:orientation="vertical"
             android:gravity="center_horizontal"
             android:layout_weight="1"
@@ -62,6 +63,7 @@
 
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/ll_area02"
             android:orientation="vertical"
             android:gravity="center_horizontal"
             android:layout_weight="1"
@@ -93,6 +95,7 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"/>
     <LinearLayout
+         android:id="@+id/ll_first2"
         android:gravity="bottom"
         android:orientation="vertical"
         android:layout_width="match_parent"

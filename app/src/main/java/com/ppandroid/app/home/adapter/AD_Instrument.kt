@@ -14,8 +14,10 @@ import android.widget.BaseAdapter
 import android.widget.ListView
 import android.widget.TextView
 import com.ppandroid.app.R
+import com.ppandroid.app.base.AC_ContentFG
 import com.ppandroid.app.bean.overview.BN_OverView
 import com.ppandroid.app.home.FG_OverView
+import com.ppandroid.app.home.mine.energyanalysis.devicesanalysis.FG_InstrumentDetailAnalysis
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.widget.HorizontalPercentageView
 import org.jetbrains.anko.find
@@ -80,6 +82,12 @@ class AD_Instrument(ac: Activity, list: List<BN_OverView.MessageBean.InstrumentI
         ac?.let {
             var adapter=AD_List(it, list?.get(position)?.instrumentMapList)
             lv_list.adapter=adapter
+            lv_list.setOnItemClickListener { adapterView, view, i, l ->
+                var item= list?.get(position)?.instrumentMapList?.get(i)
+                var bundle= FG_InstrumentDetailAnalysis.createBundle(item?.id?:"",item?.key?:"")
+                var intent=AC_ContentFG.createIntent(ac,FG_InstrumentDetailAnalysis::class.java.name,bundle)
+                ac?.startActivity(intent)
+            }
         }
         return views[position]
     }

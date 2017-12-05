@@ -13,7 +13,9 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.ppandroid.app.R
+import com.ppandroid.app.base.AC_ContentFG
 import com.ppandroid.app.bean.overview.BN_OverView
+import com.ppandroid.app.home.mine.energyanalysis.devicesanalysis.FG_AreaDetailAnalysis
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.widget.HorizontalPercentageView
 import org.jetbrains.anko.find
@@ -86,7 +88,16 @@ class AD_AreaEnergy(ac: Activity, list: List<BN_OverView.MessageBean.OverviewCon
                 v_hp.percentage = Utils_Common.paraseDouble(d).toFloat()/100f
                 v_hp2.colorId= Color.parseColor("#FA6D6F")
                 v_hp.startAnim()
+
+                var ll_first = view.find<LinearLayout>(R.id.ll_first2)
+                ll_first.setOnClickListener {bd->
+                    var bundle= FG_AreaDetailAnalysis.createBundle(it[0].id,it[0].key)
+                    var intent = AC_ContentFG.createIntent(ac, FG_AreaDetailAnalysis::class.java.name,bundle)
+                    ac?.startActivity(intent)
+                }
+
                 var ll_second = view.find<LinearLayout>(R.id.ll_second)
+
                 if (it.size>= 2) {
                     tv_key2.text = it[1]?.key
                     tv_value2.text = it[1]?.value
@@ -95,6 +106,11 @@ class AD_AreaEnergy(ac: Activity, list: List<BN_OverView.MessageBean.OverviewCon
                     v_hp2.colorId= Color.parseColor("#FE8D25")
                     v_hp2.startAnim()
                     ll_second.visibility = View.VISIBLE
+                    ll_second.setOnClickListener {bd->
+                        var bundle= FG_AreaDetailAnalysis.createBundle(it[1].id,it[1].key)
+                        var intent = AC_ContentFG.createIntent(ac, FG_AreaDetailAnalysis::class.java.name,bundle)
+                        ac?.startActivity(intent)
+                    }
                 } else {
                     ll_second.visibility = View.GONE
 

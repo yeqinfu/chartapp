@@ -13,6 +13,7 @@ import android.graphics.drawable.Drawable
 import android.support.v4.view.ViewPager
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ET_Base
@@ -24,6 +25,8 @@ import com.ppandroid.app.home.adapter.AD_Energy
 import com.ppandroid.app.home.adapter.AD_Instrument
 import com.ppandroid.app.home.adapter.AD_Zhongdian
 import com.ppandroid.app.home.mine.energyanalysis.*
+import com.ppandroid.app.home.mine.energyanalysis.devicesanalysis.FG_CateDetailAnalysis
+import com.ppandroid.app.home.mine.energyanalysis.devicesanalysis.FG_DeviceDetailAnalysis
 import com.ppandroid.app.home.overview.FG_OverViewConfig
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
@@ -100,6 +103,7 @@ class FG_OverView : FG_Base() {
             }
 
             override fun onError(error: ErrorBody?) {
+
                 toast(error)
             }
 
@@ -382,30 +386,95 @@ class FG_OverView : FG_Base() {
     }
 
     private fun setEnergyInfo(view: View, list: List<BN_OverView.MessageBean.OverviewConsumptionInformationBean.ClassificationInformationListBean.ClassificationKwhMapListBean>) {
-        var tv_info01 = view.find<TextView>(R.id.tv_info01)
-        tv_info01.text = list[0].key
-        var tv_value01 = view.find<TextView>(R.id.tv_value01)
-        tv_value01.text = list[0].value
+        var ll_01=view.find<LinearLayout>(R.id.ll_01)
+        var v_01=view.find<View>(R.id.v_01)
+        var ll_02=view.find<LinearLayout>(R.id.ll_02)
+        var v_02=view.find<View>(R.id.v_02)
+        var ll_03=view.find<LinearLayout>(R.id.ll_03)
+        var v_03=view.find<View>(R.id.v_03)
+        var ll_04=view.find<LinearLayout>(R.id.ll_04)
+        var v_04=view.find<View>(R.id.v_04)
+        var ll_05=view.find<LinearLayout>(R.id.ll_05)
+        var v_05=view.find<View>(R.id.v_05)
+        if (list.isNotEmpty()){
+            var tv_info01 = view.find<TextView>(R.id.tv_info01)
+            tv_info01.text = list[0].key
+            var tv_value01 = view.find<TextView>(R.id.tv_value01)
+            tv_value01.text = list[0].value
+            ll_01.visibility=View.VISIBLE
+            v_01.visibility=View.VISIBLE
+            toCateAnalysisPage(ll_01,list[0].id,list[0].key)
+        }else{
+            ll_01.visibility=View.GONE
+            v_01.visibility=View.GONE
+        }
 
-        var tv_info02 = view.find<TextView>(R.id.tv_info02)
-        tv_info02.text = list[1].key
-        var tv_value02 = view.find<TextView>(R.id.tv_value02)
-        tv_value02.text = list[1].value
+        if (list.size>=2){
+            var tv_info02 = view.find<TextView>(R.id.tv_info02)
+            tv_info02.text = list[1]?.key
+            var tv_value02 = view.find<TextView>(R.id.tv_value02)
+            tv_value02.text = list[1]?.value
+            ll_02.visibility=View.VISIBLE
+            v_02.visibility=View.VISIBLE
+            toCateAnalysisPage(ll_02,list[1].id,list[1].key)
+        }else{
+            ll_02.visibility=View.GONE
+            v_02.visibility=View.GONE
+        }
 
-        var tv_info03 = view.find<TextView>(R.id.tv_info03)
-        tv_info03.text = list[2].key
-        var tv_value03 = view.find<TextView>(R.id.tv_value03)
-        tv_value03.text = list[2].value
 
-        var tv_info04 = view.find<TextView>(R.id.tv_info04)
-        tv_info04.text = list[3].key
-        var tv_value04 = view.find<TextView>(R.id.tv_value04)
-        tv_value04.text = list[3].value
 
-        var tv_info05 = view.find<TextView>(R.id.tv_info05)
-        tv_info05.text = list[4].key
-        var tv_value05 = view.find<TextView>(R.id.tv_value05)
-        tv_value05.text = list[4].value
+        if (list.size>=3){
+            var tv_info03 = view.find<TextView>(R.id.tv_info03)
+            tv_info03.text = list[2]?.key
+            var tv_value03 = view.find<TextView>(R.id.tv_value03)
+            tv_value03.text = list[2]?.value
+            ll_03.visibility=View.VISIBLE
+            v_03.visibility=View.VISIBLE
+            toCateAnalysisPage(ll_03,list[2].id,list[2].key)
+        }else{
+            ll_03.visibility=View.GONE
+            v_03.visibility=View.GONE
+        }
+
+
+        if (list.size>=4){
+            var tv_info04 = view.find<TextView>(R.id.tv_info04)
+            tv_info04.text = list[3]?.key
+            var tv_value04 = view.find<TextView>(R.id.tv_value04)
+            tv_value04.text = list[3]?.value
+            ll_04.visibility=View.VISIBLE
+            v_04.visibility=View.VISIBLE
+            toCateAnalysisPage(ll_04,list[3].id,list[3].key)
+        }else{
+            ll_04.visibility=View.GONE
+            v_04.visibility=View.GONE
+        }
+
+        if (list.size>=5){
+            var tv_info05 = view.find<TextView>(R.id.tv_info05)
+            tv_info05.text = list[4]?.key
+            var tv_value05 = view.find<TextView>(R.id.tv_value05)
+            tv_value05.text = list[4]?.value
+            ll_05.visibility=View.VISIBLE
+            v_05.visibility=View.VISIBLE
+            toCateAnalysisPage(ll_05,list[4].id,list[4]?.key)
+        }else{
+            ll_05.visibility=View.GONE
+            v_05.visibility=View.GONE
+        }
+
+
+    }
+
+    private fun toCateAnalysisPage(ll: LinearLayout, id:String?,name:String) {
+        id?.let {
+            ll.setOnClickListener {
+                var bundle= FG_DeviceDetailAnalysis.createBundle(id,name)
+                startAC(FG_CateDetailAnalysis::class.java.name,bundle)
+
+            }
+        }
 
     }
 

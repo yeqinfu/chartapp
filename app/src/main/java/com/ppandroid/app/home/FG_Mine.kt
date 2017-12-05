@@ -5,10 +5,12 @@
 
 package com.ppandroid.im
 
+import android.widget.TextView
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ET_Refresh
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.mine.BN_UserInfo
+import com.ppandroid.app.home.mine.aboutme.FG_AboutMe
 import com.ppandroid.app.home.mine.aboutme.FG_Settings
 import com.ppandroid.app.home.mine.energyanalysis.FG_EnergyAnalysis
 import com.ppandroid.app.home.mine.instrument.FG_InstrumentList
@@ -34,6 +36,12 @@ class FG_Mine: FG_Base() {
         refreshLayout.setOnRefreshListener {
            loadContent()
 
+        }
+        var tv=TextView(activity)
+        tv.maxEms
+
+        ll_about_me.setOnClickListener {
+            startAC(FG_AboutMe::class.java.name)
         }
         refreshLayout.isEnableLoadmore=false
         isNeedEventBus=true

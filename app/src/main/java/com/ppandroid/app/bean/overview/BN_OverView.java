@@ -214,6 +214,15 @@ public class BN_OverView extends BaseBody {
                     private String key;
                     private String value;
                     private String ratio;
+                    private String id;
+
+                    public String getId() {
+                        return id;
+                    }
+
+                    public void setId(String id) {
+                        this.id = id;
+                    }
 
                     public String getRatio() {
                         return ratio;
@@ -261,6 +270,15 @@ public class BN_OverView extends BaseBody {
                     private String key;
                     private String value;
                     private String ratio;
+                    private String id;
+
+                    public String getId() {
+                        return id;
+                    }
+
+                    public void setId(String id) {
+                        this.id = id;
+                    }
 
                     public String getRatio() {
                         return ratio;
@@ -309,6 +327,15 @@ public class BN_OverView extends BaseBody {
                 private String key;
                 private String value;
                 private String ratio;
+                private String id;
+
+                public String getId() {
+                    return id;
+                }
+
+                public void setId(String id) {
+                    this.id = id;
+                }
 
                 public String getRatio() {
                     return ratio;
@@ -356,6 +383,15 @@ public class BN_OverView extends BaseBody {
                 private String key;
                 private String value;
                 private String ratio;
+                private String id;
+
+                public String getId() {
+                    return id;
+                }
+
+                public void setId(String id) {
+                    this.id = id;
+                }
 
                 public String getRatio() {
                     return ratio;

@@ -6,15 +6,16 @@
 package com.ppandroid.app.home.mine.energyanalysis.devicesanalysis
 
 import android.app.Activity
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.ppandroid.app.R
-import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.widget.graphical.chart.PieData
 import com.ppandroid.app.widget.popwindow.Pop_DatePicker
@@ -22,6 +23,7 @@ import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_base_devices_analysis_page.*
 import org.jetbrains.anko.find
 import java.util.*
+
 
 /**
  * Created by yeqinfu on 2017/8/31.
@@ -50,7 +52,6 @@ abstract class FG_BaseDevicesAnlysisPage : FG_Base() {
         arguments?.let {
             index = it.getInt("index", 0)
             parentId = it.getString("parentId", "-1")
-            DebugLog.d("yeqinfu", "------FG_BaseAnlysisPage--->" + parentId)
         }
         val c = Calendar.getInstance()
         if (index == 3) {//总
@@ -70,7 +71,39 @@ abstract class FG_BaseDevicesAnlysisPage : FG_Base() {
         }
         loadContent()
         init()
+
+
+        sv_ob.setScrollViewListener { scrollView, x, y, oldx, oldy ->
+            val location = IntArray(2)
+            v_holder.getLocationOnScreen(location)
+            val location2 = IntArray(2)
+            scrollView.getLocationOnScreen(location2)
+
+            if (location[1]<location2[1]){
+                rl_real.y=scrollView.y
+            }else{
+                rl_real.translationY= (-y).toFloat()
+            }
+        }
+
     }
+
+    private fun addWindowView(v:View) {
+        // 获取Service
+        val mWindowManager = activity.getSystemService( Context.WINDOW_SERVICE) as WindowManager
+        // 设置窗口类型，一共有三种Application windows, Sub-windows, System windows
+        // API中以TYPE_开头的常量有23个
+        var mWindowParams= WindowManager.LayoutParams()
+        mWindowParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT
+        // 以下属性在Layout Params中常见重力、坐标，宽高
+        mWindowParams.x = 100
+        mWindowParams.y = 100
+        mWindowParams.width = WindowManager.LayoutParams.WRAP_CONTENT
+        mWindowParams.height = WindowManager.LayoutParams.WRAP_CONTENT
+        // 添加指定视图
+        mWindowManager.addView(v, mWindowParams)
+    }
+
     protected fun setTotalNumber(total:String){
         if (!TextUtils.isEmpty(total)){
             tv_totalKwh?.text="总能耗："+total+"kwh"

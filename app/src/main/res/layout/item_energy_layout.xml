@@ -367,6 +367,7 @@
         android:paddingRight="15dp">
 
         <LinearLayout
+            android:id="@+id/ll_01"
             android:layout_width="match_parent"
             android:layout_height="47dp"
             android:gravity="center_vertical"
@@ -403,11 +404,13 @@
         </LinearLayout>
 
         <View
+            android:id="@+id/v_01"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/color_03"/>
 
         <LinearLayout
+            android:id="@+id/ll_02"
             android:layout_width="match_parent"
             android:layout_height="47dp"
             android:gravity="center_vertical"
@@ -444,11 +447,13 @@
         </LinearLayout>
 
         <View
+            android:id="@+id/v_02"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/color_03"/>
 
         <LinearLayout
+            android:id="@+id/ll_03"
             android:layout_width="match_parent"
             android:layout_height="47dp"
             android:gravity="center_vertical"
@@ -485,11 +490,13 @@
         </LinearLayout>
 
         <View
+            android:id="@+id/v_03"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/color_03"/>
 
         <LinearLayout
+            android:id="@+id/ll_04"
             android:layout_width="match_parent"
             android:layout_height="47dp"
             android:gravity="center_vertical"
@@ -526,11 +533,13 @@
         </LinearLayout>
 
         <View
+            android:id="@+id/v_04"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/color_03"/>
 
         <LinearLayout
+            android:id="@+id/ll_05"
             android:layout_width="match_parent"
             android:layout_height="47dp"
             android:gravity="center_vertical"
@@ -567,6 +576,7 @@
         </LinearLayout>
 
         <View
+            android:id="@+id/v_05"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/color_03"/>

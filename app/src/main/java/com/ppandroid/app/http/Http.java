@@ -252,6 +252,9 @@ public class Http {
 				Gson gson = new Gson();
 				ErrorBody errorBody = gson.fromJson(json, ErrorBody.class);
 				if (errorBody != null) {
+				    if (errorBody.getErrorCode()!=null){
+				        errorBody.setMessage("");
+                    }
 					return errorBody;
 				}
 				else {
