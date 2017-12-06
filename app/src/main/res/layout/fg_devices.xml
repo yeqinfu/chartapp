@@ -10,7 +10,7 @@
               android:background="@color/color_03"
               android:orientation="vertical">
 
-    <RelativeLayout
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:background="@color/white"
@@ -34,7 +34,7 @@
             android:layout_marginRight="15dp"
             android:src="@drawable/icon_setting"/>
 
-    </RelativeLayout>
+    </android.support.design.widget.AppBarLayout>
 
 
 
