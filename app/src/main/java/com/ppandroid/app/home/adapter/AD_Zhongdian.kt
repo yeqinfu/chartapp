@@ -8,6 +8,7 @@ package com.ppandroid.app.home.adapter
 import android.app.Activity
 import android.graphics.Color
 import android.support.v4.view.PagerAdapter
+import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -84,10 +85,14 @@ class AD_Zhongdian(ac: Activity, list: List<BN_OverView.MessageBean.DeviceInform
             var adapter = AD_List(it, list?.get(position)?.deviceKwhMapList)
             lv_list.adapter = adapter
             lv_list.setOnItemClickListener { adapterView, view, i, l ->
+
                 var item= list?.get(position)?.deviceKwhMapList?.get(i)
-                var bundle= FG_DeviceDetailAnalysis.createBundle(item?.id?:"",item?.key?:"")
-                var intent= AC_ContentFG.createIntent(ac, FG_DeviceDetailAnalysis::class.java.name,bundle)
-                ac?.startActivity(intent)
+                if (!TextUtils.isEmpty(item?.id)){
+                    var bundle= FG_DeviceDetailAnalysis.createBundle(item?.id?:"",item?.key?:"")
+                    var intent= AC_ContentFG.createIntent(ac, FG_DeviceDetailAnalysis::class.java.name,bundle)
+                    ac?.startActivity(intent)
+                }
+
             }
         }
         return views[position]

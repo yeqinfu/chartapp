@@ -2,11 +2,11 @@
 <!--
   ~ Created by yeqinfu on 17-9-27 上午9:35
   ~ Copyright (c) JXT All rights reserved.
-  -->
-
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
           package="com.ppandroid.app">
+
     <uses-permission android:name="android.permission.CAMERA"/>
     <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -16,13 +16,11 @@
     <!-- 写入扩展存储，向扩展卡写入数据，用于写入缓存定位数据 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
-    <!--读取文件权限-->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_LOGS" />
-
+    <!-- 读取文件权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
 
     <application
         android:name=".base.SampleApplication"
@@ -32,18 +30,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".AC_Main"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:screenOrientation="portrait"
-            android:name=".AC_Main">
+            android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name=".base.AC_ContentFG"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:screenOrientation="portrait"
-            android:name=".base.AC_ContentFG"/>
+            android:screenOrientation="portrait"/>
         <activity
+            android:name="com.ppandroid.im.base.AC_Base"
             android:configChanges="screenSize|keyboardHidden|orientation"
-            android:screenOrientation="portrait"
-            android:name="com.ppandroid.im.base.AC_Base"/>
+            android:screenOrientation="portrait"/>
         <activity android:name=".AC_Login">
         </activity>
         <activity android:name=".AC_Welcome">
@@ -61,30 +59,30 @@
         <service android:name=".utils.upgrade.NotificationService"/>
 
         <activity
-            android:screenOrientation="landscape"
-            android:name=".home.mine.energyanalysis.horizontalanalysis.AC_CateHorChart">
+            android:name=".home.mine.energyanalysis.horizontalanalysis.AC_CateHorChart"
+            android:screenOrientation="landscape">
         </activity>
         <activity
-            android:screenOrientation="landscape"
-            android:name=".home.mine.energyanalysis.horizontalanalysis.AC_DevicesHorChart">
+            android:name=".home.mine.energyanalysis.horizontalanalysis.AC_DevicesHorChart"
+            android:screenOrientation="landscape">
         </activity>
         <activity
-            android:screenOrientation="landscape"
-            android:name=".home.mine.energyanalysis.horizontalanalysis.AC_AreaHorChart">
+            android:name=".home.mine.energyanalysis.horizontalanalysis.AC_AreaHorChart"
+            android:screenOrientation="landscape">
         </activity>
         <activity
-            android:screenOrientation="landscape"
-            android:name=".home.mine.energyanalysis.horizontalanalysis.AC_InstrumentHorChart">
+            android:name=".home.mine.energyanalysis.horizontalanalysis.AC_InstrumentHorChart"
+            android:screenOrientation="landscape">
         </activity>
         <activity
-            android:screenOrientation="landscape"
-            android:name=".home.mine.energyanalysis.totalhorzizontalanalysis.AC_TotalHorzintalanalysis">
+            android:name=".home.mine.energyanalysis.totalhorzizontalanalysis.AC_TotalHorzintalanalysis"
+            android:screenOrientation="landscape">
         </activity>
-       <!-- //bugly升级-->
+        <!-- //bugly升级 -->
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
-            android:theme="@android:style/Theme.Translucent" />
+            android:theme="@android:style/Theme.Translucent"/>
 
         <!-- ++++++++++++++++++++++++++++++++极光推送 start+++++++++++++++++++++++++++++++++ -->
         <!-- Rich push 核心功能 since 2.0.6 -->
@@ -181,6 +179,8 @@
 
         <!-- </>值来自开发者平台取得的AppKey -->
         <!-- ++++++++++++++++++++++++++++++++极光推送 end+++++++++++++++++++++++++++++++++ -->
+        <activity android:name=".test.TestActivity">
+        </activity>
     </application>
 
 </manifest>

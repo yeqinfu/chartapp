@@ -19,4 +19,5 @@
     <string name="download_complete_flag">download_complete_flag</string>
     <string name="updateDate">updateDate</string>
     <string name="versionName">versionName</string>
+    <string name="login_invalid">登录已过期，请重新登录</string>
 </resources>

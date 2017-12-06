@@ -5,15 +5,17 @@
   -->
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     >
 
-    <com.ppandroid.app.widget.ObservableScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/sv_ob"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+    <com.ppandroid.app.widget.ObservableNestedScrollView
+        android:id="@+id/sv_ob"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
 
         <LinearLayout
@@ -37,11 +39,12 @@
                 android:textColor="@color/color_07"
                 android:textSize="@dimen/second_title"
                 android:textStyle="bold"/>
+
             <View
-                android:layout_margin="20dp"
                 android:id="@+id/v_holder"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:layout_margin="20dp"
                 />
 
             <View
@@ -88,26 +91,25 @@
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
-    </com.ppandroid.app.widget.ObservableScrollView>
+      </com.ppandroid.app.widget.ObservableNestedScrollView>
 
     <RelativeLayout
-        android:background="@color/white"
-        android:layout_marginTop="57dp"
         android:id="@+id/rl_real"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_marginTop="57dp"
+        android:background="@color/white"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         >
 
 
-
         <com.ppandroid.app.widget.MultipleVerticalView
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
             android:id="@+id/v_multiple_view"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
 
             />
 

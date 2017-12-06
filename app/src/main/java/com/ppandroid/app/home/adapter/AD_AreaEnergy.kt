@@ -8,6 +8,7 @@ package com.ppandroid.app.home.adapter
 import android.app.Activity
 import android.graphics.Color
 import android.support.v4.view.PagerAdapter
+import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -91,9 +92,12 @@ class AD_AreaEnergy(ac: Activity, list: List<BN_OverView.MessageBean.OverviewCon
 
                 var ll_first = view.find<LinearLayout>(R.id.ll_first2)
                 ll_first.setOnClickListener {bd->
-                    var bundle= FG_AreaDetailAnalysis.createBundle(it[0].id,it[0].key)
-                    var intent = AC_ContentFG.createIntent(ac, FG_AreaDetailAnalysis::class.java.name,bundle)
-                    ac?.startActivity(intent)
+                    if (!TextUtils.isEmpty(it[0].id)){
+                        var bundle= FG_AreaDetailAnalysis.createBundle(it[0].id,it[0].key)
+                        var intent = AC_ContentFG.createIntent(ac, FG_AreaDetailAnalysis::class.java.name,bundle)
+                        ac?.startActivity(intent)
+                    }
+
                 }
 
                 var ll_second = view.find<LinearLayout>(R.id.ll_second)
@@ -107,9 +111,12 @@ class AD_AreaEnergy(ac: Activity, list: List<BN_OverView.MessageBean.OverviewCon
                     v_hp2.startAnim()
                     ll_second.visibility = View.VISIBLE
                     ll_second.setOnClickListener {bd->
-                        var bundle= FG_AreaDetailAnalysis.createBundle(it[1].id,it[1].key)
-                        var intent = AC_ContentFG.createIntent(ac, FG_AreaDetailAnalysis::class.java.name,bundle)
-                        ac?.startActivity(intent)
+                        if (!TextUtils.isEmpty(it[1].id)){
+                            var bundle= FG_AreaDetailAnalysis.createBundle(it[1].id,it[1].key)
+                            var intent = AC_ContentFG.createIntent(ac, FG_AreaDetailAnalysis::class.java.name,bundle)
+                            ac?.startActivity(intent)
+                        }
+
                     }
                 } else {
                     ll_second.visibility = View.GONE

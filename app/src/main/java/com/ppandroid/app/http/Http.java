@@ -147,7 +147,7 @@ public class Http {
 			getTokenByMD5(context);
 			break;
 		case HttpConstant.RELOAAGIN_MD5_INVALID_ERROR://自动登录已过期，请重新登录
-			toast(context, errorBody.getMessage());
+			toast(context, R.string.login_invalid);
 			clearInfoAndLogin(context);
 			break;
 		case HttpConstant.BLANK_ERROR://校验数据为空 比如验证码输入为空，评论输入为空
