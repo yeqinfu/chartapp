@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by yeqinfu on 17-12-6 下午2:53
+  ~ Copyright (c) JXT All rights reserved.
+  -->
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    >
+
+    <com.ppandroid.app.widget.ObservableNestedScrollView
+        android:id="@+id/sv_ob"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="7dp"
+            android:background="@color/white"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/icon_dd"
+                android:gravity="center"
+                android:text="2014"
+                android:textColor="@color/color_07"
+                android:textSize="@dimen/second_title"
+                android:textStyle="bold"/>
+
+            <View
+                android:id="@+id/v_holder"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="20dp"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="7dp"
+                android:background="@color/color_03"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:paddingLeft="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="名称"
+                    android:textColor="@color/color_04"
+                    android:textSize="@dimen/sub_title"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center_vertical"
+                    android:text="能耗kwh"
+                    android:textColor="@color/color_04"
+                    android:textSize="@dimen/sub_title"/>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_03"/>
+
+            <com.ppandroid.app.widget.MyListView
+                android:id="@+id/lv_list2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </com.ppandroid.app.widget.ObservableNestedScrollView>
+
+    <RelativeLayout
+        android:id="@+id/rl_real"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="57dp"
+        android:background="@color/white"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        >
+
+
+        <com.ppandroid.app.widget.MultipleVerticalView
+            android:id="@+id/v_multiple_view"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+
+            />
+
+        <TextView
+            android:id="@+id/tv_averageKwh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_totalKwh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+</FrameLayout>

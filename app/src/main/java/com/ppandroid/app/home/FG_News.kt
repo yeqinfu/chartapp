@@ -9,9 +9,11 @@ import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.TextView
 import com.ppandroid.app.R
 import com.ppandroid.app.home.news.FG_EnergyList
+import com.ppandroid.app.home.news.FG_FaultHistory
 import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_news.*
@@ -32,11 +34,20 @@ class FG_News :FG_Base(){
         val c = Calendar.getInstance()
         val initDate = c.get(Calendar.YEAR).toString() + "-" + (c.get(Calendar.MONTH) + 1).toString() + "-" + c.get(Calendar.DAY_OF_MONTH)
 
+        /**能耗汇总*/
         var item=BN_Data()
         item.date=initDate
         item.title="能耗汇总"
         item.msg="点击查看"+initDate+"的能耗汇总"
         dataSet.add(item)
+        /**故障报警*/
+        var item2=BN_Data()
+        item2.date=initDate
+        item2.title="故障报警"
+        item2.msg="点击查看故障报警历史"
+        item2.icon=R.drawable.icon_guz
+        dataSet.add(item2)
+
         lv_list.adapter=AD_List(activity,dataSet)
         refreshLayout.setOnRefreshListener { layout->
             DebugLog.d("++++++++++++++++++++++++++refresh yeqinfu")
@@ -45,6 +56,8 @@ class FG_News :FG_Base(){
         lv_list.setOnItemClickListener { _, _, i, _ ->
             if (i==0){
                 startAC(FG_EnergyList::class.java.name)
+            }else if (i==1){
+                startAC(FG_FaultHistory::class.java.name)
             }
         }
     }
@@ -52,6 +65,7 @@ class FG_News :FG_Base(){
         var title:String?=null
         var date:String?=null
         var msg:String?=null
+        var icon:Int?=null
     }
     class  AD_List(mContext: Activity?, dataSet: ArrayList<BN_Data>): BaseAdapter() {
         private var mContext: Activity?=null
@@ -70,6 +84,12 @@ class FG_News :FG_Base(){
                 tv_msg.text=dataSet[pos].msg
                 var tv_date=it.find<TextView>(R.id.tv_date)
                 tv_date.text=dataSet[pos].date
+                var iv_icon=it.find<ImageView>(R.id.iv_icon)
+                if (dataSet[pos].icon==null){
+                    iv_icon.setImageResource(R.drawable.ic_nenghaohz)
+                }else{
+                    dataSet[pos].icon?.let { it1 -> iv_icon.setImageResource(it1) }
+                }
 
             }
 
