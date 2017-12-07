@@ -69,6 +69,14 @@ public class HeadViewLayout extends RelativeLayout {
             tv_back.setTextColor(getResources().getColor(R.color.white));
             tv_center.setTextColor(getResources().getColor(R.color.white));
             tv_right.setTextColor(getResources().getColor(R.color.white));
+        }else if (theme==THEME_ORANGE){
+            Drawable drawable = getResources().getDrawable(R.drawable.back_white);
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+            tv_back.setCompoundDrawables(drawable, null, null, null);
+            tv_back.setTextColor(getResources().getColor(R.color.white));
+            tv_center.setTextColor(getResources().getColor(R.color.white));
+            tv_right.setTextColor(getResources().getColor(R.color.white));
+            setBackgroundResource(R.color.orange);
         }
     }
 
@@ -129,6 +137,8 @@ public class HeadViewLayout extends RelativeLayout {
     private int theme=0;
     public static final int THEME_WHITE=1;
     public static final int THEME_NORMAL=0;
+    /**安全中心桔色*/
+    public static final int THEME_ORANGE=2;
 
     public int getTheme() {
         return theme;

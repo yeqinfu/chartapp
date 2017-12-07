@@ -12,12 +12,17 @@
               android:orientation="vertical">
 
     <include layout="@layout/layout_head_view"/>
+    <ScrollView
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <FrameLayout
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
         <RelativeLayout
+
             android:id="@+id/rl_content"
             android:layout_width="match_parent"
             android:layout_height="200dp"
@@ -69,11 +74,14 @@
                 android:text="正在监测系统..."
                 android:textColor="@color/white"/>
         </RelativeLayout>
+
+
+
         <LinearLayout
             android:layout_marginTop="200dp"
             android:id="@+id/ll_after"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
@@ -81,10 +89,11 @@
             >
 
             <RelativeLayout
+                android:background="@drawable/shape_slid_white_corner_20dp"
+
                 android:layout_width="match_parent"
                 android:layout_height="76dp"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/shape_slid_white_corner_20dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingLeft="15dp">
@@ -124,6 +133,7 @@
 
             </RelativeLayout>
 
+            <!--电力质量检测-->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="76dp"
@@ -167,49 +177,67 @@
 
 
             </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="76dp"
+            <!--风险预警检测-->
+            <LinearLayout
                 android:layout_marginTop="15dp"
                 android:background="@drawable/shape_slid_white_corner_20dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="15dp">
-
-                <ImageView
-                    android:id="@+id/iv_03"
-                    android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:src="@drawable/icon_fxyj"/>
-
-                <TextView
-                    android:id="@+id/tv_03"
-                    android:layout_toRightOf="@+id/iv_03"
-                    android:textColor="@color/color_07"
-                    android:textSize="@dimen/first_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="38dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="76dp"
                     android:gravity="center_vertical"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"
-                    android:text="风险预警检测"/>
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp">
 
-                <TextView
-                    android:layout_below="@+id/tv_03"
-                    android:layout_toRightOf="@+id/iv_03"
-                    android:textColor="@color/color_04"
-                    android:textSize="@dimen/second_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="38dp"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"
-                    android:text="系统检测设备运行完好无风险"/>
+                    <ImageView
+                        android:id="@+id/iv_03"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15dp"
+                        android:src="@drawable/icon_fxyj"/>
+
+                    <TextView
+                        android:id="@+id/tv_03"
+                        android:layout_toRightOf="@+id/iv_03"
+                        android:textColor="@color/color_07"
+                        android:textSize="@dimen/first_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        android:text="风险预警检测"/>
+
+                    <TextView
+                        android:id="@+id/tv_content_03"
+                        android:layout_below="@+id/tv_03"
+                        android:layout_toRightOf="@+id/iv_03"
+                        android:textColor="@color/color_04"
+                        android:textSize="@dimen/second_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="15dp"
+                        android:layout_weight="1"
+                        android:text="系统检测设备运行完好无风险"/>
 
 
-            </RelativeLayout>
+                </RelativeLayout>
+
+                <!--故障列表-->
+                <com.ppandroid.app.widget.MyListView
+                    android:layout_marginLeft="73dp"
+                    android:id="@+id/lv_list03"
+                    android:divider="@null"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
+            </LinearLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="76dp"
@@ -397,6 +425,7 @@
 
         </LinearLayout>
     </FrameLayout>
+    </ScrollView>
 
 
 </LinearLayout>

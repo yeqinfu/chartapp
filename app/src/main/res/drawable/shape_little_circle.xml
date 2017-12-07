@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by yeqinfu on 17-12-7 下午3:09
+  ~ Copyright (c) JXT All rights reserved.
+  -->
+
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+       android:shape="oval"
+    >
+    <solid android:color="@color/color_04"/>
+    <size android:width="8dp"
+          android:height="8dp"/>
+
+</shape>

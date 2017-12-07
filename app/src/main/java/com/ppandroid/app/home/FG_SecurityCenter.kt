@@ -12,7 +12,13 @@ import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
+import android.widget.ArrayAdapter
 import com.ppandroid.app.R
+import com.ppandroid.app.bean.ErrorBody
+import com.ppandroid.app.bean.news.BN_SecurityCenter
+import com.ppandroid.app.http.Http
+import com.ppandroid.app.http.MyCallBack
+import com.ppandroid.app.utils.StatusBarUtils
 import com.ppandroid.app.widget.CheckView
 import com.ppandroid.app.widget.HeadViewLayout
 import com.ppandroid.im.base.FG_Base
@@ -22,15 +28,13 @@ import org.jetbrains.anko.async
 import org.jetbrains.anko.uiThread
 
 
-
-
-
 /**
  * Created by yeqinfu on 2017/8/7.
  * 安全监测中心
  */
 class FG_SecurityCenter:FG_Base(){
     var rotate:RotateAnimation?=null
+    var score=100
     override fun fgRes(): Int= R.layout.fg_security_center
     override fun afterViews() {
         head_view.setBackgroundResource(android.R.color.transparent)
@@ -45,7 +49,7 @@ class FG_SecurityCenter:FG_Base(){
                             isDestroy?.let {
                                 if (it){
                                 }else{
-                                    tv_score.text=(progress*100).toInt().toString()
+                                    tv_score.text=(score*progress).toInt().toString()
                                     if (progress>0&&progress<=0.25){//第一阶段
                                         iv_check.setImageResource(R.drawable.icon_check)
                                         iv_check2.setImageResource(R.drawable.icon_check)
@@ -57,6 +61,8 @@ class FG_SecurityCenter:FG_Base(){
 
                                     if (progress>=0.99){
                                         ll_content.setBackgroundResource(R.color.orange)
+                                        StatusBarUtils.setWindowStatusBarColor(activity,R.color.orange)
+                                        head_view.theme=HeadViewLayout.THEME_ORANGE
                                         rotate?.cancel()
                                         iv_check4.setImageResource(R.drawable.icon_ok)
                                         changeView()
@@ -67,8 +73,37 @@ class FG_SecurityCenter:FG_Base(){
                 }
             }
         }
-        v_check_view.startAnim()
 
+
+        loadContent()
+
+    }
+
+    private fun loadContent() {
+        var url="user/failure/examine.json"
+        Http.get(activity,url, BN_SecurityCenter::class.java,object :MyCallBack<BN_SecurityCenter>{
+            override fun onResponse(response: BN_SecurityCenter?) {
+                response?.let {
+                    score=it.message.score
+                    tv_score.text=score.toString()
+                    if (!it.message.deviceEntityList.isEmpty()){
+                        val adapter = ArrayAdapter<String>(activity, R.layout.simple_list_item_1)
+                        for (item in it.message.deviceEntityList){
+                            adapter.add(item.name)
+                        }
+                        lv_list03.adapter=adapter
+                        tv_content_03.text="系统检测设备"+it.message.deviceEntityList.size+
+                                "个设备存在风险，请尽快排查。"
+                    }
+                    v_check_view.startAnim()
+
+                }
+            }
+            override fun onError(error: ErrorBody?) {
+                toast(error)
+            }
+
+        })
     }
 
     private var isDestroy=false

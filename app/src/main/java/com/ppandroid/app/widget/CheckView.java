@@ -145,6 +145,7 @@ public class CheckView extends View implements Runnable {
         }
     }
 
+
     private void chartAnimation() {
         for (int i = 1; i <= 100; i++) {
             try {
