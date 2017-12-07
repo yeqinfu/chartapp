@@ -1,9 +1,9 @@
 /*
- * Created by yeqinfu on 17-12-4 下午5:36
+ * Created by yeqinfu on 17-12-7 下午3:16
  * Copyright (c) JXT All rights reserved.
  */
 
-package com.ppandroid.app.test
+package com.ppandroid.app.demo
 
 import android.app.Activity
 import android.support.v4.app.Fragment
@@ -22,14 +22,14 @@ class FG_Test :FG_Base(){
 
     override fun afterViews() {
 
-        var adapter=AD_Test(activity,childFragmentManager)
+        var adapter= AD_Test(activity, childFragmentManager)
 
         view_pager2.adapter=adapter
 
 
     }
     class AD_Test(ac: Activity, fm: FragmentManager) : FragmentStatePagerAdapter(fm){
-        override fun getItem(position: Int): Fragment=FG_TestPage()
+        override fun getItem(position: Int): Fragment= FG_TestPage()
         override fun getCount(): Int=3
     }
 }

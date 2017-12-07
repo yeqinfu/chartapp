@@ -3,7 +3,7 @@
  * Copyright (c) JXT All rights reserved.
  */
 
-package com.ppandroid.app.test
+package com.ppandroid.app.demo
 
 import android.widget.ArrayAdapter
 import com.ppandroid.app.R

@@ -13,9 +13,9 @@ import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.utils.activitymanager.ActivityManager
 import com.ppandroid.app.utils.info.Utils_UserInfo
-import com.ppandroid.app.utils.upgrade.UpdateManager
 import com.ppandroid.im.base.FG_Base
 import com.ppandroid.im.bean.BaseBody
+import com.tencent.bugly.beta.Beta
 import kotlinx.android.synthetic.main.fg_settings.*
 import kotlinx.android.synthetic.main.layout_head_view.*
 
@@ -47,7 +47,8 @@ class FG_Settings:FG_Base(){
             }
         }
         tv_check_update.setOnClickListener {
-            UpdateManager.getUpdateManager(activity).checkAppUpdate(false)
+            //主动检查更新
+            Beta.checkUpgrade()
         }
         tv_about_app.setOnClickListener {
             startAC(FG_AboutMe::class.java.name)

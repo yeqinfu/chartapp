@@ -10,6 +10,7 @@ import com.ppandroid.app.R
 import com.ppandroid.app.bean.ET_Refresh
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.mine.BN_UserInfo
+import com.ppandroid.app.home.mine.aboutme.FG_AboutMe
 import com.ppandroid.app.home.mine.aboutme.FG_Settings
 import com.ppandroid.app.home.mine.energyanalysis.FG_EnergyAnalysis
 import com.ppandroid.app.home.mine.instrument.FG_InstrumentList
@@ -18,7 +19,6 @@ import com.ppandroid.app.home.mine.teammanagement.FG_TeamManagement
 import com.ppandroid.app.home.mine.userinfo.FG_UserInfo
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
-import com.ppandroid.app.test.FG_Test
 import com.ppandroid.app.utils.glide.GlideUtils
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_mine.*
@@ -41,8 +41,8 @@ class FG_Mine: FG_Base() {
         tv.maxEms
 
         ll_about_me.setOnClickListener {
-           // startAC(FG_AboutMe::class.java.name)
-            startAC(FG_Test::class.java.name)
+            startAC(FG_AboutMe::class.java.name)
+         //   startAC(FG_Test::class.java.name)
         }
         refreshLayout.isEnableLoadmore=false
         isNeedEventBus=true
