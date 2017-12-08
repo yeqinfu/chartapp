@@ -141,9 +141,9 @@ class AC_Main : AC_Base() {
             if (set.size==0){
                 iv_red_04.visibility= View.GONE
             }
-
+        }else if (event.taskId===ET_RedPoint.TASKID_CHECK_TAB_DEVICES){
+            rg_main_tab.check(R.id.tab_03)
         }
-
     }
 
 

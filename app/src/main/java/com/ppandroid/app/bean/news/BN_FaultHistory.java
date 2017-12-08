@@ -7,6 +7,7 @@ package com.ppandroid.app.bean.news;
 
 import com.ppandroid.im.bean.BaseBody;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -64,7 +65,7 @@ public class BN_FaultHistory extends BaseBody {
             this.failueWarningList = failueWarningList;
         }
 
-        public static class FailueWarningListBean {
+        public static class FailueWarningListBean implements Serializable{
             /**
              * deviceId : 11
              * status : 通讯故障

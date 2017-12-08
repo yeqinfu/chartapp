@@ -14,6 +14,7 @@ import android.widget.TextView
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.news.BN_FaultHistory
+import com.ppandroid.app.home.center.FG_FaultDetail
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.im.base.FG_Base
@@ -69,7 +70,8 @@ class FG_FaultHistory:FG_Base(){
                         pageNumber++
                         totalPage=it.message.totalPage
                         lv_list.setOnItemClickListener { _, _, i, _ ->
-
+                            var b= FG_FaultDetail.createBundle(it.message.failueWarningList[i])
+                            startAC(FG_FaultDetail::class.java.name,b)
                         }
                     }
                 }

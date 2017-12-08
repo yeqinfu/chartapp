@@ -20,6 +20,7 @@ public class ET_RedPoint extends ET_Base {
     /**new tab列表小红点*/
     public static final int TASKID_RED_POINT_SHOW = UUID.randomUUID().hashCode();
     public static final int TASKID_RED_POINT_HIDE = UUID.randomUUID().hashCode();
+    public static final int TASKID_CHECK_TAB_DEVICES= UUID.randomUUID().hashCode();
     public String type="";
     public String msg="";
     public ET_RedPoint(int taskId) {

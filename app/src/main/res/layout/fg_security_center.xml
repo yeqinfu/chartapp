@@ -78,6 +78,7 @@
 
 
         <LinearLayout
+            android:visibility="gone"
             android:layout_marginTop="200dp"
             android:id="@+id/ll_after"
             android:layout_width="match_parent"
@@ -85,7 +86,6 @@
             android:orientation="vertical"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:visibility="gone"
             >
 
             <RelativeLayout
@@ -234,6 +234,29 @@
                     android:divider="@null"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/ll_msg"
+                    android:padding="10dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="@dimen/sub_title"
+                        android:textColor="@color/color_07"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:text="系统多个设备存着风险浪费情况，建议进行排查处理，节能减排从我做起"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:text="进入检查>>"
+                        android:gravity="right"
+                        android:textColor="@color/color_11"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
 
 
             </LinearLayout>
