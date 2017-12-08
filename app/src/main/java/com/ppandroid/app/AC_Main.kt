@@ -14,7 +14,7 @@ import com.ppandroid.app.bean.ET_RedPoint
 import com.ppandroid.app.home.FG_Center
 import com.ppandroid.app.home.FG_Devices
 import com.ppandroid.app.home.FG_News
-import com.ppandroid.app.home.FG_OverView
+import com.ppandroid.app.home.FG_OverViewAll
 import com.ppandroid.im.FG_Mine
 import com.ppandroid.im.base.AC_Base
 import kotlinx.android.synthetic.main.activity_main.*
@@ -81,7 +81,7 @@ class AC_Main : AC_Base() {
             }
             1 -> {
                 if (fragementOver == null) {
-                    fragementOver = FG_OverView()
+                    fragementOver = FG_OverViewAll()
                     fragmentTransaction.add(R.id.ll_content, fragementOver)
                 } else {
                     fragmentTransaction.show(fragementOver)

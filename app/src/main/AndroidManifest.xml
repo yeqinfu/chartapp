@@ -30,8 +30,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:launchMode="singleInstance"
             android:name=".AC_Main"
+            android:launchMode="singleTop"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:screenOrientation="portrait">
         </activity>

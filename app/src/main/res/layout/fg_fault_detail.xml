@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by yeqinfu on 17-12-8 下午4:36
+  ~ Copyright (c) JXT All rights reserved.
+  -->
+
+<LinearLayout
+    android:background="@color/color_03"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/layout_head_view"/>
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="240dp">
+        <ImageView
+            android:id="@+id/iv_img"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:src="@drawable/pic_youling"/>
+        <LinearLayout
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_slid_gray_alpha"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <TextView
+                android:textColor="@color/color_07"
+                android:id="@+id/tv_device_name"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
+            <View
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/color_03"
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:textColor="@color/color_01"
+                android:id="@+id/tv_status001"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </RelativeLayout>
+    <LinearLayout
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="7dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+        <TextView
+            android:textColor="@color/color_07"
+            android:textSize="@dimen/bar_title"
+            android:gravity="center_vertical"
+            android:text="故障时间："
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/tv_time"
+            android:textColor="@color/color_04"
+            android:textSize="@dimen/bar_title"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+        <TextView
+            android:textColor="@color/color_07"
+            android:textSize="@dimen/bar_title"
+            android:gravity="center_vertical"
+            android:text="故障内容："
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/tv_content"
+            android:textColor="@color/color_04"
+            android:textSize="@dimen/bar_title"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+</LinearLayout>

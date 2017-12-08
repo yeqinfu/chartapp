@@ -32,7 +32,6 @@ import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.Utils_Dialog
-import com.ppandroid.app.utils.info.Utils_UserInfo
 import com.ppandroid.app.widget.common.PagerSlidingTab
 import com.ppandroid.app.widget.graphical.demoview.DountChart01View
 import com.ppandroid.app.widget.wheelview.FitChartHalf
@@ -58,7 +57,7 @@ class FG_OverView : FG_Base() {
     }
     override fun afterViews() {
         isNeedEventBus=true
-        tv_company_name.text=Utils_UserInfo.getCompanyName(activity)
+
         Utils_Dialog.showLoading(activity)
         loadOverViewConfig()
         isNeedEventBus = true

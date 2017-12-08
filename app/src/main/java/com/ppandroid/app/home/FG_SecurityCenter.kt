@@ -12,10 +12,12 @@ import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.news.BN_SecurityCenter
+import com.ppandroid.app.home.center.FG_FaultDetail
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.StatusBarUtils
@@ -90,6 +92,10 @@ class FG_SecurityCenter:FG_Base(){
                         val adapter = ArrayAdapter<String>(activity, R.layout.simple_list_item_1)
                         for (item in it.message.deviceEntityList){
                             adapter.add(item.name)
+                        }
+                        lv_list03.onItemClickListener = AdapterView.OnItemClickListener { p0, p1, p2, p3 ->
+                            var b=FG_FaultDetail.createBundle(it.message.deviceEntityList[p2])
+                            startAC(FG_FaultDetail::class.java.name,b)
                         }
                         lv_list03.adapter=adapter
                         tv_content_03.text="系统检测设备"+it.message.deviceEntityList.size+

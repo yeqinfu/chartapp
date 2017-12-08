@@ -7,6 +7,7 @@ package com.ppandroid.app.bean.news;
 
 import com.ppandroid.im.bean.BaseBody;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -64,7 +65,7 @@ public class BN_SecurityCenter extends BaseBody {
             this.deviceEntityList = deviceEntityList;
         }
 
-        public static class DeviceEntityListBean {
+        public static class DeviceEntityListBean implements Serializable{
             /**
              * id : 4
              * deleteStatus : false
