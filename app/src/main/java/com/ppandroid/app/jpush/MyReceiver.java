@@ -11,9 +11,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import com.google.gson.Gson;
+import com.ppandroid.app.base.AC_ContentFG;
+import com.ppandroid.app.bean.ET_RedPoint;
+import com.ppandroid.app.home.news.FG_EnergyList;
+import com.ppandroid.app.home.news.FG_FaultHistory;
 import com.ppandroid.app.utils.DebugLog;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -52,8 +56,7 @@ public class MyReceiver extends BroadcastReceiver {
 				}
 			else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
 				DebugLog.d(TAG, "[MyReceiver] 用户点击打开了通知");
-				String s = bundle.getString(JPushInterface.EXTRA_EXTRA);
-				Gson gson = new Gson();
+				toDetailPage(context,bundle);
 
 
 				/*	//打开自定义的Activity
@@ -84,9 +87,33 @@ public class MyReceiver extends BroadcastReceiver {
 
 	}
 
+    private void toDetailPage(Context context,Bundle bundle) {
+        try {
+            JSONObject json = new JSONObject(bundle.getString(JPushInterface.EXTRA_EXTRA));
+            Iterator<String> it = json.keys();
+            while (it.hasNext()) {
+                String myKey = it.next().toString();
+                if (myKey.equals("type")){
+                    if (json.optString(myKey).equals("2")){//故障报警
+                        Intent intent=AC_ContentFG.createIntent(context, FG_FaultHistory.class.getName());
+                        context.startActivity(intent);
+                        EventBus.getDefault().post(new ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE,"2"));
+
+                    }else  if (json.optString(myKey).equals("1")){//能耗总会
+                        Intent intent=AC_ContentFG.createIntent(context, FG_EnergyList.class.getName());
+                        context.startActivity(intent);
+                        EventBus.getDefault().post(new ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE,"1"));
+                    }
+                }
+
+            }
+        } catch (JSONException e) {
+            DebugLog.e(TAG, "Get message extra JSON error!");
+        }
+    }
 
 
-	// 打印所有的 intent extra 数据
+    // 打印所有的 intent extra 数据
 	private static String printBundle(Bundle bundle) {
 		StringBuilder sb = new StringBuilder();
 		for (String key : bundle.keySet()) {
@@ -109,6 +136,14 @@ public class MyReceiver extends BroadcastReceiver {
 					while (it.hasNext()) {
 						String myKey = it.next().toString();
 						sb.append("\nkey:" + key + ", value: [" + myKey + " - " + json.optString(myKey) + "]");
+						if (myKey.equals("type")){
+						    if (json.optString(myKey).equals("2")){//故障报警
+                                EventBus.getDefault().post(new ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW,"2", (String) bundle.get(JPushInterface.EXTRA_ALERT)));
+                            }else  if (json.optString(myKey).equals("1")){//能耗总会
+                                EventBus.getDefault().post(new ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW,"1"));
+                            }
+                        }
+
 					}
 				} catch (JSONException e) {
 					DebugLog.e(TAG, "Get message extra JSON error!");

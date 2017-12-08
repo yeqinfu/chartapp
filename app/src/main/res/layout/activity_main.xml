@@ -17,63 +17,101 @@
         android:layout_weight="1"
         />
 
-    <RadioGroup
-        android:id="@+id/rg_main_tab"
-        android:layout_width="fill_parent"
-        android:layout_height="56dp"
-        android:background="@color/white"
-        android:orientation="horizontal"
-        >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioGroup
+            android:id="@+id/rg_main_tab"
+            android:layout_width="fill_parent"
+            android:layout_height="56dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            >
 
 
+            <RadioButton
+                android:id="@+id/tab_02"
+                style="@style/ac_main_tab_style"
+                android:checked="true"
+                android:drawableTop="@drawable/selecter_main_overview"
+                android:text="总览"
+                android:textColor="@drawable/selecter_main_text"/>
 
-        <RadioButton
-            android:id="@+id/tab_02"
-            style="@style/ac_main_tab_style"
-            android:checked="true"
-            android:drawableTop="@drawable/selecter_main_overview"
-            android:text="总览"
-            android:textColor="@drawable/selecter_main_text"/>
+            <RadioButton
+                android:id="@+id/tab_03"
+                style="@style/ac_main_tab_style"
+                android:drawableTop="@drawable/selecter_main_devices"
+                android:text="设备"
+                android:textColor="@drawable/selecter_main_text"/>
 
-        <RadioButton
-            android:id="@+id/tab_03"
-            style="@style/ac_main_tab_style"
-            android:drawableTop="@drawable/selecter_main_devices"
-            android:text="设备"
-            android:textColor="@drawable/selecter_main_text"/>
+            <LinearLayout
+                android:id="@+id/tv_center"
+                style="@style/ac_main_tab_style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_center"
+                    />
+            </LinearLayout>
+
+            <RadioButton
+                android:id="@+id/tab_01"
+                style="@style/ac_main_tab_style"
+                android:drawableTop="@drawable/selecter_main_drawable"
+                android:text="消息"
+                android:textColor="@drawable/selecter_main_text"/>
+
+            <RadioButton
+                android:id="@+id/tab_04"
+                style="@style/ac_main_tab_style"
+                android:drawableTop="@drawable/selecter_main_mine"
+
+                android:text="我的"
+                android:textColor="@drawable/selecter_main_text"/>
+        </RadioGroup>
         <LinearLayout
-            android:id="@+id/tv_center"
-            style="@style/ac_main_tab_style"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:gravity="center">
+            android:weightSum="5"
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+            <ImageView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+            <ImageView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+            <ImageView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+            <RelativeLayout
+                android:padding="10dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/iv_red_04"
+                    android:src="@drawable/shape_red_point"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
 
             <ImageView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_center"
-                />
         </LinearLayout>
-
-
-        <RadioButton
-
-            android:id="@+id/tab_01"
-            style="@style/ac_main_tab_style"
-            android:drawableTop="@drawable/selecter_main_drawable"
-            android:text="消息"
-            android:textColor="@drawable/selecter_main_text"/>
-
-        <RadioButton
-            android:id="@+id/tab_04"
-            style="@style/ac_main_tab_style"
-            android:drawableTop="@drawable/selecter_main_mine"
-
-            android:text="我的"
-            android:textColor="@drawable/selecter_main_text"/>
-    </RadioGroup>
+    </FrameLayout>
 
 
 </LinearLayout>

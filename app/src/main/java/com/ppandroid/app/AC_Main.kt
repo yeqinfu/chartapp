@@ -8,7 +8,9 @@ package com.ppandroid.app
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
+import android.view.View
 import com.ppandroid.app.base.AC_ContentFG
+import com.ppandroid.app.bean.ET_RedPoint
 import com.ppandroid.app.home.FG_Center
 import com.ppandroid.app.home.FG_Devices
 import com.ppandroid.app.home.FG_News
@@ -16,15 +18,27 @@ import com.ppandroid.app.home.FG_OverView
 import com.ppandroid.im.FG_Mine
 import com.ppandroid.im.base.AC_Base
 import kotlinx.android.synthetic.main.activity_main.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 
 class AC_Main : AC_Base() {
 
+    override fun onDestroy() {
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this)
+        }
+        super.onDestroy()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setEnablePullToBack(false)
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this)
+        }
 
 
 
@@ -111,6 +125,25 @@ class AC_Main : AC_Base() {
     private fun startAC(fragment: String) {
         var it = AC_ContentFG.createIntent(this, fragment)
         startActivity(it)
+    }
+
+    var set=HashSet<String>()
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    open fun onMessageEvent(event: ET_RedPoint) {
+        if (event.taskId === ET_RedPoint.TASKID_RED_POINT_SHOW_MAIN) {//显示小红点
+            set.add(event.type)
+            if (set.size>0){
+                iv_red_04.visibility= View.VISIBLE
+            }
+
+        }else if (event.taskId === ET_RedPoint.TASKID_RED_POINT_HIDE_MAIN){//隐藏小红点
+            set.remove(event.type)
+            if (set.size==0){
+                iv_red_04.visibility= View.GONE
+            }
+
+        }
+
     }
 
 

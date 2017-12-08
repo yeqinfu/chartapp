@@ -40,6 +40,15 @@ public class LoginBody extends BaseBody {
         private TokenDtoBean tokenDto;
         private String role;
         private String companyName;
+        private String companyId;
+
+        public String getCompanyId() {
+            return companyId;
+        }
+
+        public void setCompanyId(String companyId) {
+            this.companyId = companyId;
+        }
 
         public String getCompanyName() {
             return companyName;

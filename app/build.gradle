@@ -24,7 +24,7 @@ android {
         // 默认是bzw的渠道
         manifestPlaceholders = [
                 JPUSH_PKGNAME: applicationId,
-                JPUSH_APPKEY : "be7564eb9c658eb63ffd6b40",
+                JPUSH_APPKEY : "803da466354c8872b8399815",
                 //JPush上注册的包名对应的appkey. test: 9c454e6dd00ef09d7dbb46c9//aac6c4dbfd3f9835347098a9
                 JPUSH_CHANNEL: "bzw", //用户渠道统计的渠道名称
         ]

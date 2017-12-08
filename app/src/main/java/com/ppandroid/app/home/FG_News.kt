@@ -12,11 +12,15 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.ppandroid.app.R
+import com.ppandroid.app.bean.ET_RedPoint
 import com.ppandroid.app.home.news.FG_EnergyList
 import com.ppandroid.app.home.news.FG_FaultHistory
 import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_news.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import org.jetbrains.anko.find
 import java.util.*
 
@@ -28,9 +32,48 @@ class FG_News :FG_Base(){
 
     var dataSet=ArrayList<BN_Data>()
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    open fun onMessageEvent(event: ET_RedPoint) {
+        if (event.taskId === ET_RedPoint.TASKID_RED_POINT_SHOW) {//显示小红点
+            if (event.type.equals("2")){//显示通讯故障小红点
+                EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW_MAIN,"2"))
+                if (dataSet.size>1){
+                    dataSet[1].msg=event.msg
+                    dataSet[1].showRedPoint=true
+                    adapter?.notifyDataSetChanged()
+                }
 
 
+            }else if (event.type.equals("1")){//显示能耗总会小红点
+                EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW_MAIN,"1"))
+                if (!dataSet.isEmpty()){
+                    dataSet[0].showRedPoint=true
+                    adapter?.notifyDataSetChanged()
+                }
+
+            }
+
+        }else if (event.taskId === ET_RedPoint.TASKID_RED_POINT_HIDE){//隐藏小红点
+            if (event.type.equals("2")){//隐藏通讯故障小红点
+                EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE_MAIN,"2"))
+                if (dataSet.size>1){
+                    dataSet[1].showRedPoint=false
+                    adapter?.notifyDataSetChanged()
+                }
+            }else if (event.type.equals("1")){//隐藏能耗总会小红点
+                EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE_MAIN,"1"))
+                if (!dataSet.isEmpty()){
+                    dataSet[0].showRedPoint=false
+                    adapter?.notifyDataSetChanged()
+                }
+            }
+        }
+
+    }
+
+    var adapter:AD_List?=null
     override fun afterViews() {
+        isNeedEventBus=true
         val c = Calendar.getInstance()
         val initDate = c.get(Calendar.YEAR).toString() + "-" + (c.get(Calendar.MONTH) + 1).toString() + "-" + c.get(Calendar.DAY_OF_MONTH)
 
@@ -47,8 +90,8 @@ class FG_News :FG_Base(){
         item2.msg="点击查看故障报警历史"
         item2.icon=R.drawable.icon_guz
         dataSet.add(item2)
-
-        lv_list.adapter=AD_List(activity,dataSet)
+        adapter=AD_List(activity,dataSet)
+        lv_list.adapter=adapter
         refreshLayout.setOnRefreshListener { layout->
             DebugLog.d("++++++++++++++++++++++++++refresh yeqinfu")
             layout.finishRefresh(1000)
@@ -56,8 +99,12 @@ class FG_News :FG_Base(){
         lv_list.setOnItemClickListener { _, _, i, _ ->
             if (i==0){
                 startAC(FG_EnergyList::class.java.name)
+                /**隐藏小红点*/
+                EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE, "1"))
             }else if (i==1){
                 startAC(FG_FaultHistory::class.java.name)
+                /**隐藏小红点*/
+                EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE, "2"))
             }
         }
     }
@@ -66,6 +113,7 @@ class FG_News :FG_Base(){
         var date:String?=null
         var msg:String?=null
         var icon:Int?=null
+        var showRedPoint:Boolean?=null
     }
     class  AD_List(mContext: Activity?, dataSet: ArrayList<BN_Data>): BaseAdapter() {
         private var mContext: Activity?=null
@@ -89,6 +137,12 @@ class FG_News :FG_Base(){
                     iv_icon.setImageResource(R.drawable.ic_nenghaohz)
                 }else{
                     dataSet[pos].icon?.let { it1 -> iv_icon.setImageResource(it1) }
+                }
+                var iv_red_point=it.find<ImageView>(R.id.iv_red_point)
+                if (dataSet[pos].showRedPoint==true){
+                    iv_red_point.visibility=View.VISIBLE
+                }else{
+                    iv_red_point.visibility=View.GONE
                 }
 
             }

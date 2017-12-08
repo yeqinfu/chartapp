@@ -9,11 +9,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
+import cn.jpush.android.api.JPushInterface
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.login.CaptchaBody
 import com.ppandroid.app.bean.login.LoginBody
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
+import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.SecurityUtils
 import com.ppandroid.app.utils.info.Utils_UserInfo
 import com.ppandroid.app.utils.toast.ToastUtil
@@ -78,6 +80,7 @@ class AC_Login : AppCompatActivity() {
         Http.get(this@AC_Login, url, LoginBody::class.java, object : MyCallBack<LoginBody> {
             override fun onResponse(response: LoginBody) {
                 response?.let {
+                    JPushInterface.setAlias(this@AC_Login, it.message.companyId) { i, s, set -> DebugLog.d("JPushInterface setAlias->" + s) }
                     Utils_UserInfo.saveInfo(this@AC_Login,response)
                     var it= Intent()
                     it.setClass(this@AC_Login,AC_Main::class.java)
