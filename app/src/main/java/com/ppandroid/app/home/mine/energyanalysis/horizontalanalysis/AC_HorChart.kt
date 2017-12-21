@@ -37,6 +37,7 @@ open abstract class AC_HorChart : AC_Base() {
                 replaceFragment(selectedIndex)
             }
         }
+
     }
 
     abstract fun getTopDrawable(i: Int): Int

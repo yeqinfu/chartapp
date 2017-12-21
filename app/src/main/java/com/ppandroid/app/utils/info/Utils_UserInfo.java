@@ -12,6 +12,8 @@ import com.ppandroid.app.bean.login.LoginBody;
 import com.ppandroid.app.bean.login.MD5Body;
 import com.ppandroid.app.utils.Utils_SharedPreferences;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by yeqinfu on 2017/3/16.
  * 用户信息工具类
@@ -59,6 +61,8 @@ public class Utils_UserInfo {
      * @param context
      */
     public static void clearUserInfo(Context context){
+        //clear alias
+        JPushInterface.setAlias(context,"",null);
         Utils_SharedPreferences sp=new Utils_SharedPreferences(context);
         sp.put("userID", "");
         sp.put("MD5", "");

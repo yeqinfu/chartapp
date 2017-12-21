@@ -9,9 +9,11 @@ package com.ppandroid.im.base
 import android.content.res.Configuration
 import android.os.Bundle
 import com.ppandroid.app.base.AC_SwipeBase
+import com.ppandroid.app.base.SampleApplicationLike
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.activitymanager.ActivityManager
+import com.ppandroid.app.utils.info.Utils_UserInfo
 import com.ppandroid.app.utils.toast.ToastUtil
 import com.ppandroid.app.utils.upgrade.UpdateManager
 
@@ -44,6 +46,10 @@ open class AC_Base : AC_SwipeBase() {
         } catch (e: Exception) {
             DebugLog.d("intent", "=print class name exception===========")
         }
+        if (!isLoading){//check login status
+            SampleApplicationLike.toLogin()
+            finish()
+        }
 
     }
 
@@ -54,9 +60,7 @@ open class AC_Base : AC_SwipeBase() {
      */
     val isLoading: Boolean
         get() {
-            val loading = false
-
-            return loading
+            return Utils_UserInfo.isLogined(this)
         }
 
     override fun onResume() {

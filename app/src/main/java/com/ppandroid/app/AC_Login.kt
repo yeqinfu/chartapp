@@ -17,6 +17,7 @@ import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.SecurityUtils
+import com.ppandroid.app.utils.Utils_Dialog
 import com.ppandroid.app.utils.info.Utils_UserInfo
 import com.ppandroid.app.utils.toast.ToastUtil
 import kotlinx.android.synthetic.main.activity_ac__login.*
@@ -34,6 +35,7 @@ class AC_Login : AppCompatActivity() {
         }
         btn_login.setOnClickListener {
 
+            Utils_Dialog.showLoading(AC_Login@this)
             var account=et_account.text.toString()
             var password=et_password.text.toString()
             if (TextUtils.isEmpty(account)){
@@ -80,12 +82,14 @@ class AC_Login : AppCompatActivity() {
         Http.get(this@AC_Login, url, LoginBody::class.java, object : MyCallBack<LoginBody> {
             override fun onResponse(response: LoginBody) {
                 response?.let {
+                    Utils_Dialog.disMissLoading()
                     JPushInterface.setAlias(this@AC_Login, it.message.companyId) { i, s, set -> DebugLog.d("JPushInterface setAlias->" + s) }
                     Utils_UserInfo.saveInfo(this@AC_Login,response)
                     var it= Intent()
                     it.setClass(this@AC_Login,AC_Main::class.java)
                     startActivity(it)
                     finish()
+
                 }
             }
             override fun onError(error: ErrorBody) {

@@ -34,6 +34,7 @@ import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.Utils_Dialog
 import com.ppandroid.app.widget.common.PagerSlidingTab
 import com.ppandroid.app.widget.graphical.demoview.DountChart01View
+import com.ppandroid.app.widget.popwindow.Pop_DatePicker
 import com.ppandroid.app.widget.wheelview.FitChartHalf
 import com.ppandroid.app.widget.wheelview.FitChartValue
 import com.ppandroid.im.base.FG_Base
@@ -370,6 +371,25 @@ class FG_OverView : FG_Base() {
         view.find<TextView>(R.id.tv_more3).setOnClickListener {
             startAC(FG_AreaAnalysis::class.java.name)
         }
+        val c = Calendar.getInstance()
+        select=c.get(Calendar.YEAR).toString() + "-" + (format(c.get(Calendar.MONTH) + 1)) + "-" + format(c.get(Calendar.DAY_OF_MONTH))
+        var tv_time=view.find<TextView>(R.id.tv_time)
+        tv_time.text=select
+        tv_time.setOnClickListener {iit ->
+            var type=0
+            var pop= Pop_DatePicker(activity,type)
+            pop.setInitStr(select)
+            pop.listener=object : Pop_DatePicker.IChooseListener{
+                override fun choose(year: String, month: String, day: String) {
+                    select = "$year-$month-$day"
+                    (iit as TextView).text = select
+                    loadContent()
+                    pop?.dismiss()
+                }
+
+            }
+            pop.showPopupWindow()
+        }
 
         return view
     }
@@ -503,4 +523,18 @@ class FG_OverView : FG_Base() {
     }
 
 
+
+    protected var select = ""
+
+    private fun showDatePop2(){
+
+    }
+
+
+    private fun format(month: Int): String {
+        if (month < 10) {
+            return "0" + month
+        }
+        return month.toString()
+    }
 }

@@ -15,7 +15,7 @@
     <ScrollView
         android:scrollbars="none"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
     <FrameLayout
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
@@ -308,11 +308,12 @@
         </LinearLayout>
 
         <LinearLayout
+            android:paddingBottom="40dp"
             android:layout_marginTop="200dp"
             android:id="@+id/ll_before"
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/holo_red_dark"
             android:orientation="vertical">
 
             <LinearLayout

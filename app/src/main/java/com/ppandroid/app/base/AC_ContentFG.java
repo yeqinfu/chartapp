@@ -27,7 +27,7 @@ public class AC_ContentFG extends AC_Base {
 
 
     public static Intent createIntent(Context context, String fragmentName, String title, Bundle b) {
-        DebugLog.v("intent",fragmentName);
+        DebugLog.v("fragmentName",fragmentName);
         Intent it = new Intent(context, AC_ContentFG.class);
         it.putExtra("fragmentName", fragmentName);
         it.putExtra("title", title);

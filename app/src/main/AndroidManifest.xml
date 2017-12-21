@@ -5,6 +5,7 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
+          android:sharedUserId="com.ppandroid"
           package="com.ppandroid.app">
 
     <uses-permission android:name="android.permission.CAMERA"/>
@@ -43,7 +44,9 @@
             android:name="com.ppandroid.im.base.AC_Base"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:screenOrientation="portrait"/>
-        <activity android:name=".AC_Login">
+        <activity
+            android:launchMode="singleTop"
+            android:name=".AC_Login">
         </activity>
         <activity android:name=".AC_Welcome">
             <intent-filter>

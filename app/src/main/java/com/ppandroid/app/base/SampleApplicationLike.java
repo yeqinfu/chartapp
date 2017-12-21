@@ -22,6 +22,7 @@ import com.ppandroid.app.R;
 import com.ppandroid.app.http.OkHttpUtils;
 import com.ppandroid.app.utils.AppExceptionHandler;
 import com.ppandroid.app.utils.DebugLog;
+import com.ppandroid.app.utils.activitymanager.ActivityManager;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreater;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreater;
@@ -188,6 +189,7 @@ public class SampleApplicationLike extends DefaultApplicationLike {
     }
     //toLogin
     public static void toLogin(){
+        ActivityManager.getActivityManager().popAllActivity();
         Intent it=new Intent();
         it.setClass(context, AC_Login.class);
         it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
