@@ -11,6 +11,7 @@ import android.graphics.Matrix
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.support.v4.view.ViewPager
+import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -93,6 +94,9 @@ class FG_OverView : FG_Base() {
 
     private fun loadContent() {
         var url = "user/overview/index.json"
+        if (!TextUtils.isEmpty(select)){
+            url+="?date="+select
+        }
         Http.get(activity, url, BN_OverView::class.java, object : MyCallBack<BN_OverView> {
             override fun onResponse(response: BN_OverView?) {
                 response?.let {
@@ -508,6 +512,7 @@ class FG_OverView : FG_Base() {
                 refreshLayout.finishRefresh()
                 response?.let {
                     choosed = it.message.choosed
+                    select=""
                     setData()
                     loadContent()
                 }

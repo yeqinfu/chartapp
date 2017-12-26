@@ -122,6 +122,7 @@
                 <action android:name="cn.jpush.android.intent.REPORT"/>
                 <action android:name="cn.jpush.android.intent.PushService"/>
                 <action android:name="cn.jpush.android.intent.PUSH_TIME"/>
+                <action android:name="cn.jpush.android.intent.TAG_ALIAS_CALLBACK"/> <!-- Required  用户注册SDK的intent -->
             </intent-filter>
         </service>
 

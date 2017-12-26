@@ -148,7 +148,7 @@ public class SampleApplicationLike extends DefaultApplicationLike {
     private void initConfig() {
 
         /**极光推送*/
-        JPushInterface.setDebugMode(DebugLog.isDebuggable());
+        JPushInterface.setDebugMode(true);
         JPushInterface.init(getApplication());
         DebugLog.d("yeqinfu",JPushInterface.getRegistrationID(getApplication())+"===");
 

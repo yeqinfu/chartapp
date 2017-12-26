@@ -79,10 +79,8 @@ public class MyReceiver extends BroadcastReceiver {
 			else {
 				DebugLog.d(TAG, "[MyReceiver] Unhandled intent - " + intent.getAction());
 			}
-		} catch (
-
-		Exception e) {
-
+		} catch (Exception e) {
+		    e.printStackTrace();
 		}
 
 	}

@@ -61,8 +61,8 @@ public class Utils_UserInfo {
      * @param context
      */
     public static void clearUserInfo(Context context){
-        //clear alias
-        JPushInterface.setAlias(context,"",null);
+        //clear tags
+        JPushInterface.setTags(context,null,null);
         Utils_SharedPreferences sp=new Utils_SharedPreferences(context);
         sp.put("userID", "");
         sp.put("MD5", "");
