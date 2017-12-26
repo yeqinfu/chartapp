@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by yeqinfu on 17-12-26 下午2:41
+  ~ Copyright (c) JXT All rights reserved.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:paddingTop="10dp"
+              android:gravity="center_horizontal"
+              android:background="@color/color_05"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv_msg_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/shape_slid_gray"
+        android:paddingBottom="2dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="2dp"
+        android:text="2000-fdafsfdsfa"
+        android:textColor="@color/white"
+        android:textSize="10sp"/>
+    <LinearLayout
+        android:paddingLeft="9dp"
+        android:paddingRight="9dp"
+        android:background="@drawable/shape_rect_solid_white_cor_5dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:orientation="vertical"
+        android:minHeight="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_title"
+            android:textSize="@dimen/bar_title"
+            android:textColor="@color/color_07"
+            android:gravity="center_vertical"
+            android:text="近三日对比"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"/>
+        <TextView
+            android:id="@+id/tv_date"
+            android:textSize="@dimen/sub_title"
+            android:text="1212"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <ImageView
+            android:layout_marginTop="8dp"
+            android:src="@drawable/icon_bgnh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:textSize="@dimen/sub_title"
+            android:textColor="@color/color_07"
+            android:layout_marginTop="8dp"
+            android:text="fjdsalfjdksj;a"
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_marginTop="8dp"
+            android:background="@color/color_03"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"/>
+        <TextView
+            android:drawableRight="@drawable/forward_right"
+            android:padding="5dp"
+            android:textSize="@dimen/sub_title"
+            android:textColor="@color/color_07"
+            android:gravity="center_vertical"
+            android:text="查看详情"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"/>
+    </LinearLayout>
+
+</LinearLayout>

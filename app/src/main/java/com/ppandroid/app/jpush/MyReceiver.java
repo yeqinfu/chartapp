@@ -139,6 +139,10 @@ public class MyReceiver extends BroadcastReceiver {
                                 EventBus.getDefault().post(new ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW,"2", (String) bundle.get(JPushInterface.EXTRA_ALERT)));
                             }else  if (json.optString(myKey).equals("1")){//能耗总会
                                 EventBus.getDefault().post(new ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW,"1"));
+                            } else if (json.optString(myKey).equals("3")){//能耗对比
+                                EventBus.getDefault().post(new ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW,"3"));
+                            }else if (json.optString(myKey).equals("4")){//系统消息
+                                EventBus.getDefault().post(new ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW,"4"));
                             }
                         }
 

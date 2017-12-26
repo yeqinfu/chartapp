@@ -89,7 +89,6 @@ class AC_Login : AppCompatActivity() {
                     JPushInterface.setTags(this@AC_Login,tags){ i: Int, s: String?, mutableSet: MutableSet<String> ->
                         DebugLog.d("JPushInterface setTags->" + s)
                     }
-                    // JPushInterface.setAlias(this@AC_Login, it.message.companyId) { i, s, set -> DebugLog.d("JPushInterface setAlias->" + s) }
                     Utils_UserInfo.saveInfo(this@AC_Login,response)
                     var it= Intent()
                     it.setClass(this@AC_Login,AC_Main::class.java)

@@ -45,11 +45,24 @@ class FG_News : FG_Base() {
                     adapter?.notifyDataSetChanged()
                 }
 
-
             } else if (event.type.equals("1")) {//显示能耗总会小红点
                 EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW_MAIN, "1"))
                 if (!dataSet.isEmpty()) {
                     dataSet[0].showRedPoint = true
+                    adapter?.notifyDataSetChanged()
+                }
+
+            }else if (event.type.equals("3")) {//显示能耗对比小红点
+                EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW_MAIN, "3"))
+                if (!dataSet.isEmpty()) {
+                    dataSet[3].showRedPoint = true
+                    adapter?.notifyDataSetChanged()
+                }
+
+            }else if (event.type.equals("4")) {//显示系统消息小红点
+                EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW_MAIN, "4"))
+                if (!dataSet.isEmpty()) {
+                    dataSet[2].showRedPoint = true
                     adapter?.notifyDataSetChanged()
                 }
 
@@ -66,6 +79,18 @@ class FG_News : FG_Base() {
                 EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE_MAIN, "1"))
                 if (!dataSet.isEmpty()) {
                     dataSet[0].showRedPoint = false
+                    adapter?.notifyDataSetChanged()
+                }
+            }else if (event.type.equals("3")) {//隐藏能耗总会小红点
+                EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE_MAIN, "3"))
+                if (!dataSet.isEmpty()) {
+                    dataSet[3].showRedPoint = false
+                    adapter?.notifyDataSetChanged()
+                }
+            }else if (event.type.equals("4")) {//隐藏系统消息小红点
+                EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE_MAIN, "4"))
+                if (!dataSet.isEmpty()) {
+                    dataSet[2].showRedPoint = false
                     adapter?.notifyDataSetChanged()
                 }
             }
