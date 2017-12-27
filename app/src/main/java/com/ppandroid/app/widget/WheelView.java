@@ -379,6 +379,10 @@ public class WheelView extends ScrollView {
 
     public void setSeletion(int position) {
         final int p = position;
+        if (selectedIndex==p+offset){//特殊处理
+            refreshItemView(p * itemHeight);
+
+        }
         selectedIndex = p + offset;
         this.post(new Runnable() {
             @Override

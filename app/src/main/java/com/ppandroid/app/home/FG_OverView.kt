@@ -376,7 +376,9 @@ class FG_OverView : FG_Base() {
             startAC(FG_AreaAnalysis::class.java.name)
         }
         val c = Calendar.getInstance()
-        select=c.get(Calendar.YEAR).toString() + "-" + (format(c.get(Calendar.MONTH) + 1)) + "-" + format(c.get(Calendar.DAY_OF_MONTH))
+        if (select.isEmpty()){
+            select=c.get(Calendar.YEAR).toString() + "-" + (format(c.get(Calendar.MONTH) + 1)) + "-" + format(c.get(Calendar.DAY_OF_MONTH))
+        }
         var tv_time=view.find<TextView>(R.id.tv_time)
         tv_time.text=select
         tv_time.setOnClickListener {iit ->
@@ -512,7 +514,6 @@ class FG_OverView : FG_Base() {
                 refreshLayout.finishRefresh()
                 response?.let {
                     choosed = it.message.choosed
-                    select=""
                     setData()
                     loadContent()
                 }

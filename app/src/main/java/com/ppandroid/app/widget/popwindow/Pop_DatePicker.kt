@@ -5,6 +5,7 @@
 
 package com.ppandroid.app.widget.popwindow
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.text.TextUtils
 import android.view.Gravity
@@ -107,13 +108,16 @@ class Pop_DatePicker(context: Activity, type: Int) : BasePopupWindow(context, Vi
                 yearPos = DEFAULT_MIN_YEAR + selectedIndex
                 yearStr = item ?: ""
                 initDayPickerView()
+                setLastDayPos()
             }
         }
         wv_month?.onWheelViewListener = object : WheelView.OnWheelViewListener() {
             override fun onSelected(selectedIndex: Int, item: String?) {
                 monthPos = selectedIndex
                 monthStr = item ?: ""
+
                 initDayPickerView()
+                setLastDayPos()
             }
         }
 
@@ -131,12 +135,21 @@ class Pop_DatePicker(context: Activity, type: Int) : BasePopupWindow(context, Vi
 
     }
 
+    private fun setLastDayPos() {
+        if (dayList.size>dayPos){
+            wv_day?.setSeletion(dayPos)
+        }else{
+            wv_day?.setSeletion(dayList.size-1)
+        }
+    }
+
 
     fun setInitStr(initStr:String){
         if (!TextUtils.isEmpty(initStr)){
             var list=initStr.split("-")
             if (list.size==3){
                 setInitDate(list[0].toInt(),list[1].toInt(),list[2].toInt())
+                dayStr=list[2]
             }else if (list.size==2){
                 setInitDate(list[0].toInt(),list[1].toInt(),1)
             }else{
@@ -148,7 +161,7 @@ class Pop_DatePicker(context: Activity, type: Int) : BasePopupWindow(context, Vi
 
         var yearPos=year-DEFAULT_MIN_YEAR
         if (yearList.size>yearPos-1){
-            wv_year?.setSeletion(yearPos)
+            wv_year?.setSeletion(yearPos-1)
         }
         if (monthList.size>=month){
             wv_month?.setSeletion(month-1)
@@ -156,6 +169,7 @@ class Pop_DatePicker(context: Activity, type: Int) : BasePopupWindow(context, Vi
         if (dayList.size>=day){
             wv_day?.setSeletion(day-1)
         }
+        dayPos=day-1
 
     }
 
@@ -164,6 +178,7 @@ class Pop_DatePicker(context: Activity, type: Int) : BasePopupWindow(context, Vi
      * Init day item
      */
     private fun initDayPickerView() {
+        dayPos=wv_day?.seletedIndex?:0
         val dayMaxInMonth: Int
         val calendar = Calendar.getInstance()
         dayList = ArrayList()
@@ -207,6 +222,7 @@ class Pop_DatePicker(context: Activity, type: Int) : BasePopupWindow(context, Vi
         return createPopupById(R.layout.pop_date_picker)
     }
 
+    @SuppressLint("WrongViewCast")
     override fun initAnimaView(): View {
         return findViewById(R.id.ll_content)
     }

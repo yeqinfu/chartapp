@@ -157,9 +157,13 @@ class FG_News : FG_Base() {
                 }
                 2 -> {//系统消息
                     startAC(FG_SystemNewList::class.java.name)
+                    /**隐藏小红点*/
+                    EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE, "4"))
                 }
                 3 -> {//能耗对比
                     startAC(FG_EnergyComparison::class.java.name)
+                    /**隐藏小红点*/
+                    EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE, "3"))
                 }
             }
         }
