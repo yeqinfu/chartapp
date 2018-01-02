@@ -57,12 +57,13 @@ class FG_AddDevices : FG_Base() {
     var operatorId: String = ""
     /**page type default:0 添加设备 1 修改设备*/
     private var pageType = "0"
-
+    private var energyClassificationId="1"
     companion object {
-        fun createBundle(operatorId: String): Bundle {
+        fun createBundle(energyClassificationId:String,operatorId: String): Bundle {
             var b = Bundle()
             b.putString("operatorId", operatorId)
             b.putString("pageType", "1")
+            b.putString("energyClassificationId",energyClassificationId)
             return b
         }
     }
@@ -73,6 +74,7 @@ class FG_AddDevices : FG_Base() {
         arguments?.let {
             operatorId = it.getString("operatorId", "")
             pageType = it.getString("pageType", "0")
+            energyClassificationId=it.getString("energyClassificationId","1")
         }
         if (pageType == "1") {
             loadDeviceDetail()
@@ -96,21 +98,27 @@ class FG_AddDevices : FG_Base() {
         ll_add_properties.setOnClickListener {
             lv_content.addView(addPropertiesViews())
         }
+
+        var b=createBundle()
         ll_about_cate.setOnClickListener {
             //添加关联分项
-            startAC(FG_AboutCate::class.java.name)
+            startAC(FG_AboutCate::class.java.name,b)
         }
         ll_about_instrument.setOnClickListener {
             //添加关联仪表
-            startAC(FG_AboutInstrument::class.java.name)
+            startAC(FG_AboutInstrument::class.java.name,b)
         }
         ll_about_area.setOnClickListener {
             //添加关联区域
-            startAC(FG_AboutArea::class.java.name)
+            startAC(FG_AboutArea::class.java.name,b)
 
         }
     }
-
+    fun createBundle(): Bundle {
+        val b = Bundle()
+        b.putString("energyClassificationId", energyClassificationId)
+        return b
+    }
     private fun loadDeviceDetail() {
         var url = "user/sysSet/device/details.json?id=$operatorId"
         get(activity, url, BN_AddDeviceDetail::class.java, object : MyCallBack<BN_AddDeviceDetail> {
@@ -239,6 +247,7 @@ class FG_AddDevices : FG_Base() {
                 if (pageType == "1") {
                     put("id", operatorId)
                 }
+                put("energyClassificationId", energyClassificationId)
                 put("name", et_name.text.toString())
                 put("model", et_model.text.toString())
                 put("deviceAreaId", chooseAreaId)

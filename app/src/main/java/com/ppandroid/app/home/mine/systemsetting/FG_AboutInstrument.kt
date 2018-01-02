@@ -35,12 +35,15 @@ import org.jetbrains.anko.find
 class FG_AboutInstrument : FG_Base(){
     /**当是子页面的时候这个id有用到*/
     private var parentId:String="-1"
+    private var energyClassificationId="1"
+
     companion object {
 
-        fun createBundle(parentId:String): Bundle {
+        fun createBundle(energyClassificationId:String,parentId:String): Bundle {
             DebugLog.d("======3===" + parentId)
             var b= Bundle()
             b.putString("parentId",parentId)
+            b.putString("energyClassificationId",energyClassificationId)
             return b
         }
 
@@ -52,6 +55,7 @@ class FG_AboutInstrument : FG_Base(){
         isNeedEventBus=true
         arguments?.let {
             parentId=it.getString("parentId","-1")
+            energyClassificationId=it.getString("energyClassificationId","1")
         }
         head_view.init(activity)
         head_view.setRightText("保存"){
@@ -78,8 +82,9 @@ class FG_AboutInstrument : FG_Base(){
     private var message: List<BN_SystemSettingPage01.MessageBean>? = null
     private fun loadContent() {
         var url = "user/sysSet/instrument/relation.json"
+        url+="?energyClassificationId="+energyClassificationId
         if (parentId!="-1"){
-            url+="?parentId=$parentId"
+            url+="&parentId=$parentId"
         }
         Http.get(activity, url, BN_SystemSettingPage01::class.java, object : MyCallBack<BN_SystemSettingPage01> {
             override fun onResponse(response: BN_SystemSettingPage01?) {

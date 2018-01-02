@@ -37,11 +37,13 @@ import org.jetbrains.anko.find
 class FG_AboutArea : FG_Base(){
     /**当是子页面的时候这个id有用到*/
     private var parentId:String="-1"
+    private var energyClassificationId="1"
     companion object {
 
-        fun createBundle(parentId:String): Bundle {
+        fun createBundle(energyClassificationId:String,parentId:String): Bundle {
             DebugLog.d("======3===" + parentId)
             var b= Bundle()
+            b.putString("energyClassificationId",energyClassificationId)
             b.putString("parentId",parentId)
             return b
         }
@@ -54,6 +56,7 @@ class FG_AboutArea : FG_Base(){
         isNeedEventBus=true
         arguments?.let {
             parentId=it.getString("parentId","-1")
+            energyClassificationId=it.getString("energyClassificationId","1")
         }
         head_view.init(activity)
         head_view.setRightText("保存"){
@@ -80,8 +83,9 @@ class FG_AboutArea : FG_Base(){
     private var message: List<BN_DeviceArea.MessageBean>? = null
     private fun loadContent() {
         var url = "user/sysSet/deviceArea/search.json"
+        url+="?energyClassificationId="+energyClassificationId
         if (parentId!="-1"){
-            url+="?parentId=$parentId"
+            url+="&parentId=$parentId"
         }
         Http.get(activity, url, BN_DeviceArea::class.java, object : MyCallBack<BN_DeviceArea> {
             override fun onResponse(response: BN_DeviceArea?) {
@@ -91,7 +95,7 @@ class FG_AboutArea : FG_Base(){
                         network_error?.setViewType(NetWorkErrorView.NOT_DATA)
                     } else {
                         network_error?.setViewType(NetWorkErrorView.NORMAL_VIEW)
-                        adapter = AD_List(activity, it.message)
+                        adapter = AD_List(activity, it.message,energyClassificationId)
                         lv_list.adapter = adapter
                     }
 
@@ -114,10 +118,11 @@ class FG_AboutArea : FG_Base(){
     }
 
 
-    class AD_List(ac: Activity, message: List<BN_DeviceArea.MessageBean>) : BaseAdapter() {
+    class AD_List(ac: Activity, message: List<BN_DeviceArea.MessageBean>,energyClassificationId:String) : BaseAdapter() {
         var checkPos = -1
         private var ac: Activity = ac
         private var message: List<BN_DeviceArea.MessageBean> = message
+        private var energyClassificationId=energyClassificationId
         override fun getView(pos: Int, convertView: View?, p2: ViewGroup?): View? {
             var layout: View? = null
             var holder: Holder? = null
@@ -144,7 +149,7 @@ class FG_AboutArea : FG_Base(){
                 } else {
                     holder?.tv_leaf?.visibility = View.VISIBLE
                     holder?.tv_leaf?.setOnClickListener { _ ->
-                        var b = FG_AboutCate.createBundle(""+it.id)
+                        var b = FG_AboutArea.createBundle(energyClassificationId,""+it.id)
                         var it = AC_ContentFG.createIntent(ac, FG_AboutArea::class.java.name, b)
                         ac.startActivity(it)
                     }

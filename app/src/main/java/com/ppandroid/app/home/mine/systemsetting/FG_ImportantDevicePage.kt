@@ -38,9 +38,13 @@ class FG_ImportantDevicePage : FG_Base() {
     override fun fgRes(): Int = R.layout.fg_system_setting_page
 
     override fun afterViews() {
+        arguments?.let {
+            energyClassificationId=it.getString("energyClassificationId","1")
+        }
         isNeedEventBus=true
         loadContent()
         network_error.setListener { loadContent() }
+        sub_title.visibility=View.GONE
 
        /* lv_list.setOnItemLongClickListener { adapterView, view, i, l ->
             message?.let {
@@ -66,7 +70,7 @@ class FG_ImportantDevicePage : FG_Base() {
     private val dialogListener = View.OnClickListener { v ->
         when (v.id) {
             R.id.rl_detail -> {
-                var b=FG_AddDevices.createBundle(operatorId)
+                var b=FG_AddDevices.createBundle(energyClassificationId,operatorId)
                 startAC(FG_AddDevices::class.java.name,b)
                 dialog?.dismiss()
 
@@ -129,8 +133,10 @@ class FG_ImportantDevicePage : FG_Base() {
         })
     }
 
+    var energyClassificationId="1"
     private fun loadContent() {
         var url = "user/sysSet/device/search.json"
+        url+="?energyClassificationId="+energyClassificationId
         Http.get(activity, url, BN_ImportantDevice::class.java, object : MyCallBack<BN_ImportantDevice> {
             override fun onResponse(response: BN_ImportantDevice?) {
                 response?.let {
@@ -145,7 +151,7 @@ class FG_ImportantDevicePage : FG_Base() {
                                 message?.let {
                                     operatorId=it[position].id.toString()
                                     operatorName=it[position].name.toString()
-                                    var b=FG_AddDevices.createBundle(operatorId)
+                                    var b=FG_AddDevices.createBundle(energyClassificationId,operatorId)
                                     startAC(FG_AddDevices::class.java.name,b)
                                 }
                             }

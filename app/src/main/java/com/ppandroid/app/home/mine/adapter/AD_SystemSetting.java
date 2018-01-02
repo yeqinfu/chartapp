@@ -8,6 +8,7 @@ package com.ppandroid.app.home.mine.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -27,10 +28,17 @@ public class AD_SystemSetting extends FragmentStatePagerAdapter {
 	private String[]	arrays_title;
 	private Fragment[]	fragments;
 	private Context		mContext;
-
+    //电 1水2温湿度3监控4
+    private String energyClassificationId="1";
 	public AD_SystemSetting(Activity ac, FragmentManager fm) {
 		super(fm);
 		mContext = ac;
+		initFragment();
+	}
+	public AD_SystemSetting(Activity ac, FragmentManager fm,String energyClassificationId) {
+		super(fm);
+		mContext = ac;
+		this.energyClassificationId=energyClassificationId;
 		initFragment();
 	}
 
@@ -62,5 +70,13 @@ public class AD_SystemSetting extends FragmentStatePagerAdapter {
 		fragments[2] = new FG_DeviceAreaPage();//区域数据
 		fragments[3] = new FG_ImportantDevicePage();//重点设备
 		fragments[4] = new FG_EnergyChargingPage();//能源计费
+        for (int i=0;i<fragments.length;i++){
+            fragments[i].setArguments(createBundle());
+        }
 	}
+	public Bundle createBundle(){
+	    Bundle b=new Bundle();
+	    b.putString("energyClassificationId",energyClassificationId);
+	    return b;
+    }
 }

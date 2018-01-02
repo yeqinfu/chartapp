@@ -44,7 +44,7 @@ class FG_EnergyChargingPage : FG_Base() {
         isNeedEventBus=true
         loadContent()
         network_error.setListener { loadContent() }
-
+        sub_title.visibility=View.GONE
       /*  lv_list.setOnItemLongClickListener { adapterView, view, i, l ->
             message?.let {
                 operatorId=it[i].energyChargingEntity.id.toString()

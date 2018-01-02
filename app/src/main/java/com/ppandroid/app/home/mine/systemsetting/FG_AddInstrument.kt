@@ -57,15 +57,17 @@ class FG_AddInstrument : FG_Base() {
     private var deviceId: String = "-1"
 
     companion object {
-        fun createBundle(objectId: String,parentName:String): Bundle {
+        fun createBundle(energyClassificationId:String,objectId: String,parentName:String): Bundle {
             var b = Bundle()
+            b.putString("energyClassificationId",energyClassificationId)
             b.putString("objectId", objectId)
             b.putString("parentName", parentName)
             b.putString("pageType", "1")
             return b
         }
-        fun createBundle(parentId: String,parentName: String,useless:String): Bundle {
+        fun createBundle(energyClassificationId:String,parentId: String,parentName: String,useless:String): Bundle {
             var b = Bundle()
+            b.putString("energyClassificationId",energyClassificationId)
             b.putString("parentId", parentId)
             b.putString("pageType", "0")
             b.putString("parentName", parentName)
@@ -83,6 +85,7 @@ class FG_AddInstrument : FG_Base() {
             objectId = it.getString("objectId", "")
             parentId = it.getString("parentId", "-1")
             parentName = it.getString("parentName", "")
+            energyClassificationId=it.getString("energyClassificationId","1")
 
         }
 

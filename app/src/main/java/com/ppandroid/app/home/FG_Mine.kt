@@ -13,8 +13,8 @@ import com.ppandroid.app.bean.mine.BN_UserInfo
 import com.ppandroid.app.home.mine.aboutme.FG_AboutMe
 import com.ppandroid.app.home.mine.aboutme.FG_Settings
 import com.ppandroid.app.home.mine.energyanalysis.FG_EnergyAnalysis
-import com.ppandroid.app.home.mine.instrument.FG_InstrumentList
-import com.ppandroid.app.home.mine.systemsetting.FG_SystemSetting
+import com.ppandroid.app.home.mine.instrument.FG_InstrumentAll
+import com.ppandroid.app.home.mine.systemsetting.FG_SystemSettingAll
 import com.ppandroid.app.home.mine.teammanagement.FG_TeamManagement
 import com.ppandroid.app.home.mine.userinfo.FG_UserInfo
 import com.ppandroid.app.http.Http
@@ -47,13 +47,13 @@ class FG_Mine: FG_Base() {
         refreshLayout.isEnableLoadmore=false
         isNeedEventBus=true
         tv_system_setting.setOnClickListener {
-            startAC(FG_SystemSetting::class.java.name)
+            startAC(FG_SystemSettingAll::class.java.name)
         }
         tv_settings.setOnClickListener{
             startAC(FG_Settings::class.java.name)
         }
         tv_instrument_list.setOnClickListener {
-            startAC(FG_InstrumentList::class.java.name)
+            startAC(FG_InstrumentAll::class.java.name)
         }
 
         rl_userinfo.setOnClickListener {

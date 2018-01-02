@@ -45,12 +45,14 @@ class FG_InstrumentPage : FG_Base() {
     /**当是子页面的时候这个id有用到*/
     private var parentId:String=""
     private var parentName:String=""
+    private var energyClassificationId="1"
     companion object {
-        fun createBundle(parentId:String,parentName:String): Bundle {
+        fun createBundle(parentId:String,parentName:String,energyClassificationId:String): Bundle {
             var b=Bundle()
             b.putString("parentName",parentName)
             b.putString("parentId",parentId)
             b.putInt("pageType",1)
+            b.putString("energyClassificationId",energyClassificationId)
             return b
         }
 
@@ -62,8 +64,10 @@ class FG_InstrumentPage : FG_Base() {
             pageType=it.getInt("pageType",0)
             parentId=it.getString("parentId","")
             parentName=it.getString("parentName","")
+            energyClassificationId=it.getString("energyClassificationId","1")
         }
         if (pageType==1){
+            sub_title.visibility=View.VISIBLE
             head_view.visibility=View.VISIBLE
             head_view.setCenterTitle(parentName)
             head_view.init(activity)
@@ -71,6 +75,8 @@ class FG_InstrumentPage : FG_Base() {
                 var b=FG_AddInstrument.createBundle(parentId,parentName,"")
                 startAC(FG_AddInstrument::class.java.name,b)
             })
+        }else{
+            sub_title.visibility=View.GONE
         }
         isNeedEventBus=true
         loadContent()
@@ -121,9 +127,11 @@ class FG_InstrumentPage : FG_Base() {
 
     private fun loadContent() {
         var url = "user/sysSet/instrument/search.json"
+        url+="?energyClassificationId="+energyClassificationId
         if (pageType==1){
-            url+="?parentId=$parentId"
+            url+="&parentId=$parentId"
         }
+
         Http.get(activity, url, BN_SystemSettingPage01::class.java, object : MyCallBack<BN_SystemSettingPage01> {
             override fun onResponse(response: BN_SystemSettingPage01?) {
                 response?.let {
@@ -140,7 +148,7 @@ class FG_InstrumentPage : FG_Base() {
                                 message?.let {
                                     operatorId=it[position].id.toString()
                                     operatorName=it[position].name.toString()
-                                    var b=FG_AddInstrument.createBundle(operatorId,parentName)
+                                    var b=FG_AddInstrument.createBundle(energyClassificationId,operatorId,parentName)
                                     startAC(FG_AddInstrument::class.java.name,b)
                                 }
                             }
@@ -194,7 +202,7 @@ class FG_InstrumentPage : FG_Base() {
     private val dialogListener = View.OnClickListener { v ->
         when (v.id) {
             R.id.rl_detail -> {
-                var b=FG_AddInstrument.createBundle(operatorId,parentName)
+                var b=FG_AddInstrument.createBundle(energyClassificationId,operatorId,parentName)
                 startAC(FG_AddInstrument::class.java.name,b)
                 dialog?.dismiss()
 

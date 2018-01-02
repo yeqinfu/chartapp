@@ -17,7 +17,6 @@ import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_instrument_list.*
-import kotlinx.android.synthetic.main.layout_head_view.*
 import org.jetbrains.anko.find
 
 /**
@@ -25,14 +24,16 @@ import org.jetbrains.anko.find
  */
 class FG_InstrumentList:FG_Base(){
     override fun fgRes(): Int= R.layout.fg_instrument_list
-
+    private var energyClassificationId="1"
     override fun afterViews() {
-        head_view.init(activity)
-        head_view.setCenterTitle("仪表检测")
+        arguments?.let {
+            energyClassificationId=it.getString("energyClassificationId","1")
+        }
         loadContent()
     }
     private fun loadContent(){
         var url="user/instrument/search.json"
+        url+="?energyClassificationId="+energyClassificationId
         Http.get(activity,url,BN_InstrumentList::class.java,object :MyCallBack<BN_InstrumentList>{
             override fun onResponse(response: BN_InstrumentList?) {
                 response?.let {

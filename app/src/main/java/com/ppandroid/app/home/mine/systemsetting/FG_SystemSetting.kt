@@ -6,6 +6,7 @@
 package com.ppandroid.app.home.mine.systemsetting
 
 import android.graphics.Typeface
+import android.os.Bundle
 import android.support.v4.view.ViewPager
 import com.ppandroid.app.R
 import com.ppandroid.app.home.mine.adapter.AD_SystemSetting
@@ -19,15 +20,27 @@ import kotlinx.android.synthetic.main.layout_head_view.*
  */
 class FG_SystemSetting : FG_Base() {
 
+    companion object {
+        fun createBundle(energyClassificationId:String):Bundle{
+            var b= Bundle()
+            b.putString("energyClassificationId",energyClassificationId)
+            return b
+        }
+    }
+    //电 1水2温湿度3监控4
+    private var energyClassificationId="1"
     override fun fgRes(): Int = R.layout.fg_system_setting
 
     override fun afterViews() {
+        arguments?.let {
+            energyClassificationId=it.getString("energyClassificationId","1")
+        }
         head_view.setCenterTitle("系统设置")
         head_view.init(activity)
         head_view.setIvRight(R.drawable.ic_add_model, {
             addModelByPosition()
         })
-        var adapter = AD_SystemSetting(activity, childFragmentManager)
+        var adapter = AD_SystemSetting(activity, childFragmentManager,energyClassificationId)
         view_pager.adapter = adapter
         adapter.notifyDataSetChanged()
         title_indicator.setViewPager(view_pager)
@@ -51,25 +64,31 @@ class FG_SystemSetting : FG_Base() {
     }
 
     private fun addModelByPosition() {
+        var b=createBundle()
         when (Position) {
             0 -> {//仪表添加
-                startAC(FG_AddInstrument::class.java.name)
+                startAC(FG_AddInstrument::class.java.name,b)
             }
             1->{//分项添加
-                startAC(FG_AddDeviceCate::class.java.name)
+                startAC(FG_AddDeviceCate::class.java.name,b)
             }
             2->{//区域添加
-                startAC(FG_AddDeviceArea::class.java.name)
+                startAC(FG_AddDeviceArea::class.java.name,b)
             }
             3->{//设备添加
-                startAC(FG_AddDevices::class.java.name)
+                startAC(FG_AddDevices::class.java.name,b)
             }
             4->{//能源添加
-                startAC(FG_AddEnergyCharging::class.java.name)
+                startAC(FG_AddEnergyCharging::class.java.name,b)
             }
         }
     }
 
     private var Position: Int = 0
+    fun createBundle(): Bundle {
+        val b = Bundle()
+        b.putString("energyClassificationId", energyClassificationId)
+        return b
+    }
 
 }

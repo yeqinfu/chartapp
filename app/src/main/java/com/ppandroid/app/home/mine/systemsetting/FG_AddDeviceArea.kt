@@ -34,22 +34,24 @@ class FG_AddDeviceArea : FG_Base(){
     private var parentId: String = "-1"
     /** 父级名称 */
     private var parentName: String = ""
-
+    private var energyClassificationId="1"
     companion object {
-        fun createBundle(objectId: String,objectName:String,parentId: String,parentName:String): Bundle {
+        fun createBundle(energyClassificationId:String,objectId: String,objectName:String,parentId: String,parentName:String): Bundle {
             var b = Bundle()
             b.putString("objectId", objectId)
             b.putString("objectName", objectName)
             b.putString("parentName", parentName)
             b.putString("parentId", parentId)
             b.putString("pageType", "1")
+            b.putString("energyClassificationId",energyClassificationId)
             return b
         }
-        fun createBundle(parentId: String,parentName: String): Bundle {
+        fun createBundle(energyClassificationId:String,parentId: String,parentName: String): Bundle {
             var b = Bundle()
             b.putString("parentId", parentId)
             b.putString("pageType", "0")
             b.putString("parentName", parentName)
+            b.putString("energyClassificationId",energyClassificationId)
             return b
         }
     }
@@ -62,6 +64,7 @@ class FG_AddDeviceArea : FG_Base(){
             objectName = it.getString("objectName", "")
             parentId = it.getString("parentId", "-1")
             parentName = it.getString("parentName", "")
+            energyClassificationId=it.getString("energyClassificationId","1")
 
         }
         if (pageType == "1") {//修改区域
@@ -98,6 +101,7 @@ class FG_AddDeviceArea : FG_Base(){
             }
             put("name", et_name.text.toString())
             put("parentId", parentId)
+            put("energyClassificationId", energyClassificationId)
         }
         Http.post(activity, url, map, BaseBody::class.java, object : MyCallBack<BaseBody> {
             override fun onResponse(response: BaseBody?) {

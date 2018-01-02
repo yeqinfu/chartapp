@@ -38,21 +38,23 @@ class FG_AboutCate:FG_Base(){
     private var parentId:String="-1"
     companion object {
 
-        fun createBundle(parentId:String): Bundle {
+        fun createBundle(energyClassificationId:String,parentId:String): Bundle {
             DebugLog.d("======3==="+parentId)
             var b=Bundle()
             b.putString("parentId",parentId)
+            b.putString("energyClassificationId",energyClassificationId)
             return b
         }
 
     }
 
     override fun fgRes(): Int= R.layout.fg_about_cate
-
+    private var energyClassificationId="1"
     override fun afterViews() {
         isNeedEventBus=true
         arguments?.let {
             parentId=it.getString("parentId","-1")
+            energyClassificationId=it.getString("energyClassificationId","1")
         }
         head_view.init(activity)
         head_view.setRightText("保存"){
@@ -79,8 +81,9 @@ class FG_AboutCate:FG_Base(){
     private var message: List<BN_DeviceCatePage.MessageBean>? = null
     private fun loadContent() {
         var url = "user/sysSet/deviceCate/search.json"
+        url+="?energyClassificationId="+energyClassificationId
         if (parentId!="-1"){
-            url+="?parentId=$parentId"
+            url+="&parentId=$parentId"
         }
         Http.get(activity, url, BN_DeviceCatePage::class.java, object : MyCallBack<BN_DeviceCatePage> {
             override fun onResponse(response: BN_DeviceCatePage?) {
@@ -90,7 +93,7 @@ class FG_AboutCate:FG_Base(){
                         network_error?.setViewType(NetWorkErrorView.NOT_DATA)
                     } else {
                         network_error?.setViewType(NetWorkErrorView.NORMAL_VIEW)
-                        adapter = AD_List(activity, it.message)
+                        adapter = AD_List(activity, it.message,energyClassificationId)
                         lv_list.adapter = adapter
                     }
 
@@ -113,10 +116,11 @@ class FG_AboutCate:FG_Base(){
     }
 
 
-    class AD_List(ac: Activity, message: List<BN_DeviceCatePage.MessageBean>) : BaseAdapter() {
+    class AD_List(ac: Activity, message: List<BN_DeviceCatePage.MessageBean>,energyClassificationId: String) : BaseAdapter() {
         var checkPos = -1
         private var ac: Activity = ac
         private var message: List<BN_DeviceCatePage.MessageBean> = message
+        private var energyClassificationId=energyClassificationId
         override fun getView(pos: Int, convertView: View?, p2: ViewGroup?): View? {
             var layout: View? = null
             var holder: Holder? = null
@@ -146,7 +150,7 @@ class FG_AboutCate:FG_Base(){
                     holder?.cb_check?.visibility=View.INVISIBLE
                     holder?.tv_leaf?.visibility = View.VISIBLE
                     holder?.tv_leaf?.setOnClickListener { _ ->
-                        var b = FG_AboutCate.createBundle(""+it.id)
+                        var b = FG_AboutCate.createBundle(""+it.id,energyClassificationId)
                         var it = AC_ContentFG.createIntent(ac, FG_AboutCate::class.java.name,b)
                         ac.startActivity(it)
                     }

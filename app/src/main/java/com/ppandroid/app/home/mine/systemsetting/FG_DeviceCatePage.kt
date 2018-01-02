@@ -42,12 +42,14 @@ class FG_DeviceCatePage : FG_Base() {
     /**当是子页面的时候这个id有用到*/
     private var parentId:String="-1"
     private var parentName:String=""
+    private var energyClassificationId="1"
     companion object {
-        fun createBundle(parentId:String,parentName:String): Bundle {
+        fun createBundle(parentId:String,parentName:String,energyClassificationId:String): Bundle {
             var b= Bundle()
             b.putString("parentName",parentName)
             b.putString("parentId",parentId)
             b.putInt("pageType",1)
+            b.putString("energyClassificationId",energyClassificationId)
             return b
         }
 
@@ -61,15 +63,19 @@ class FG_DeviceCatePage : FG_Base() {
             pageType=it.getInt("pageType",0)
             parentId=it.getString("parentId","-1")
             parentName=it.getString("parentName","")
+            energyClassificationId=it.getString("energyClassificationId","1")
         }
         if (pageType==1){
+            sub_title.visibility=View.VISIBLE
             head_view.visibility=View.VISIBLE
             head_view.setCenterTitle(parentName)
             head_view.init(activity)
             head_view.setIvRight(R.drawable.ic_add_model, {
-                var b=FG_AddDeviceCate.createBundle(parentId,parentName)
+                var b=FG_AddDeviceCate.createBundle(energyClassificationId,parentId,parentName)
                 startAC(FG_AddDeviceCate::class.java.name,b)
             })
+        }else{
+            sub_title.visibility=View.GONE
         }
         loadContent()
         network_error.setListener { loadContent() }
@@ -91,7 +97,7 @@ class FG_DeviceCatePage : FG_Base() {
     private val dialogListener = View.OnClickListener { v ->
         when (v.id) {
             R.id.rl_detail -> {
-                var b=FG_AddDeviceCate.createBundle(operatorId,operatorName,parentId,parentName)
+                var b=FG_AddDeviceCate.createBundle(energyClassificationId,operatorId,operatorName,parentId,parentName)
                 startAC(FG_AddDeviceCate::class.java.name,b)
                 dialog?.dismiss()
 
@@ -146,9 +152,11 @@ class FG_DeviceCatePage : FG_Base() {
 
     private fun loadContent() {
         var url = "user/sysSet/deviceCate/search.json"
+        url+="?energyClassificationId="+energyClassificationId
         if (pageType==1){
-            url+="?parentId=$parentId"
+            url+="&parentId=$parentId"
         }
+
         Http.get(activity, url, BN_DeviceCatePage::class.java, object : MyCallBack<BN_DeviceCatePage> {
             override fun onResponse(response: BN_DeviceCatePage?) {
                 response?.let {
@@ -163,7 +171,7 @@ class FG_DeviceCatePage : FG_Base() {
                                 message?.let {
                                     operatorId=it[position].id.toString()
                                     operatorName=it[position].name.toString()
-                                    var b=FG_AddDeviceCate.createBundle(operatorId,operatorName,parentId,parentName)
+                                    var b=FG_AddDeviceCate.createBundle(energyClassificationId,operatorId,operatorName,parentId,parentName)
                                     startAC(FG_AddDeviceCate::class.java.name,b)
                                 }
                             }
@@ -180,7 +188,7 @@ class FG_DeviceCatePage : FG_Base() {
                         lv_list.adapter = adapter
                         lv_list.setOnItemClickListener { adapterView, view, i, l ->
 
-                            var b= FG_DeviceCatePage.createBundle(it.message[i].id.toString(), it.message[i].name)
+                            var b= FG_DeviceCatePage.createBundle(it.message[i].id.toString(), it.message[i].name,energyClassificationId)
                             startAC(FG_DeviceCatePage::class.java.name,b)
                         }
                     }
