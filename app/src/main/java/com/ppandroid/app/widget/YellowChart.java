@@ -6,6 +6,7 @@
 package com.ppandroid.app.widget;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -63,6 +64,12 @@ public class YellowChart extends RelativeLayout {
     private com.ppandroid.app.widget.VerticalView vv_05;
     private com.ppandroid.app.widget.VerticalView vv_06;
     private com.ppandroid.app.widget.VerticalView vv_07;
+
+    public void setTitle(String title){
+        if (tv_title!=null&& !TextUtils.isEmpty(title)){
+            tv_title.setText(title);
+        }
+    }
 
     public void setSumAndAverage(String sum,String average){
         if (tv_weekAverage!=null){

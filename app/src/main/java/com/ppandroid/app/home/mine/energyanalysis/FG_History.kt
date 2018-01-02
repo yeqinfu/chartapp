@@ -25,11 +25,14 @@ import org.jetbrains.anko.find
 /**
  * Created by yeqinfu on 2017/8/30.
  */
-class FG_History:FG_Base(){
-    override fun fgRes(): Int= R.layout.fg_history
-
+class FG_History : FG_Base() {
+    override fun fgRes(): Int = R.layout.fg_history
+    private var energyClassificationId = "1"
     override fun afterViews() {
 
+        arguments?.let {
+            energyClassificationId = it.getString("energyClassificationId", "1")
+        }
         head_view.init(activity)
         head_view.setCenterTitle("历史查询")
         ll_year.setOnClickListener {
@@ -37,13 +40,20 @@ class FG_History:FG_Base(){
         }
     }
 
-    fun loadContent(){
-        var url="user/energy/analysis/getYearHistory.json?year=$select"
-        Http.get(activity,url, BN_History::class.java,object :MyCallBack<BN_History>{
+    fun loadContent() {
+        var url: String = if (energyClassificationId.equals("1")){//电
+            "user/energy/analysis/getYearHistory.json"
+        }else{//水
+            "user/water/analysis/getYearHistory.json"
+        }
+
+        url += "?energyClassificationId=" + energyClassificationId
+        url += "&year=$select"
+        Http.get(activity, url, BN_History::class.java, object : MyCallBack<BN_History> {
             override fun onResponse(response: BN_History?) {
                 response?.let {
-                    var adapter=AD_List(it.message,activity)
-                    lv_list.adapter=adapter
+                    var adapter = AD_List(it.message, activity)
+                    lv_list.adapter = adapter
                 }
             }
 
@@ -54,38 +64,38 @@ class FG_History:FG_Base(){
         })
     }
 
-    class AD_List(message: List<String>,ac:Activity) :BaseAdapter(){
+    class AD_List(message: List<String>, ac: Activity) : BaseAdapter() {
         private var message: List<String> = message
-        private var ac: Activity =ac
+        private var ac: Activity = ac
         override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
-            var layout=ac.layoutInflater.inflate(R.layout.item_history,null)
-            var tv_key=layout.find<TextView>(R.id.tv_key)
-            var tv_value=layout.find<TextView>(R.id.tv_value)
-            tv_key.text=(p0+1).toString()+"月"
-            tv_value.text=message[p0]
+            var layout = ac.layoutInflater.inflate(R.layout.item_history, null)
+            var tv_key = layout.find<TextView>(R.id.tv_key)
+            var tv_value = layout.find<TextView>(R.id.tv_value)
+            tv_key.text = (p0 + 1).toString() + "月"
+            tv_value.text = message[p0]
             return layout
         }
 
-        override fun getItem(p0: Int): Any =message[p0]
+        override fun getItem(p0: Int): Any = message[p0]
 
-        override fun getItemId(p0: Int): Long=p0.toLong()
+        override fun getItemId(p0: Int): Long = p0.toLong()
 
-        override fun getCount(): Int=message.size
+        override fun getCount(): Int = message.size
 
     }
 
 
-    var select=""
+    var select = ""
 
 
-    private fun showDatePop2(){
-        var type=2
-        var pop= Pop_DatePicker(activity,type)
+    private fun showDatePop2() {
+        var type = 2
+        var pop = Pop_DatePicker(activity, type)
         pop.setInitStr(select)
-        pop.listener=object : Pop_DatePicker.IChooseListener{
+        pop.listener = object : Pop_DatePicker.IChooseListener {
             override fun choose(year: String, month: String, day: String) {
                 tv_choose.text = year
-                select=year
+                select = year
                 loadContent()
                 pop?.dismiss()
             }

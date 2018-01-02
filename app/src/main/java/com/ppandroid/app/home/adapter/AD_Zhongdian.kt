@@ -27,6 +27,7 @@ import org.jetbrains.anko.find
  * Created by yeqinfu on 2017/8/11.
  */
 class AD_Zhongdian(ac: Activity, list: List<BN_OverView.MessageBean.DeviceInformationListBean>) : PagerAdapter() {
+    var energyClassificationId="1"
     /**横条图viewpager*/
     var arrays_title = arrayOf(
             "今日",
@@ -88,7 +89,7 @@ class AD_Zhongdian(ac: Activity, list: List<BN_OverView.MessageBean.DeviceInform
 
                 var item= list?.get(position)?.deviceKwhMapList?.get(i)
                 if (!TextUtils.isEmpty(item?.id)){
-                    var bundle= FG_DeviceDetailAnalysis.createBundle(item?.id?:"",item?.key?:"")
+                    var bundle= FG_DeviceDetailAnalysis.createBundle(energyClassificationId,item?.id?:"",item?.key?:"")
                     var intent= AC_ContentFG.createIntent(ac, FG_DeviceDetailAnalysis::class.java.name,bundle)
                     ac?.startActivity(intent)
                 }

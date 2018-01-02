@@ -23,7 +23,11 @@ class FG_InstrumentDetailAnalysisPage : FG_BaseDevicesAnlysisPage() {
     }
 
     override fun loadContent() {
-        var url = "user/energy/analysis/getInstrumentDetail.json?instrumentId=$parentId"
+        var url=if (energyClassificationId=="1"){
+            "user/energy/analysis/getInstrumentDetail.json?instrumentId=$parentId"
+        }else{
+            "user/water/analysis/getInstrumentDetail.json?instrumentId=$parentId"
+        }
         if (index != 3) {//总计
             url += "&dateString=$select"
         }

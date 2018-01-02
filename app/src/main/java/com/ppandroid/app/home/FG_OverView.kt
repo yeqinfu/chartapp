@@ -501,7 +501,7 @@ class FG_OverView : FG_Base() {
     private fun toCateAnalysisPage(ll: LinearLayout, id:String?,name:String) {
         id?.let {
             ll.setOnClickListener {
-                var bundle= FG_DeviceDetailAnalysis.createBundle(id,name)
+                var bundle= FG_DeviceDetailAnalysis.createBundle("1",id,name)
                 startAC(FG_CateDetailAnalysis::class.java.name,bundle)
 
             }

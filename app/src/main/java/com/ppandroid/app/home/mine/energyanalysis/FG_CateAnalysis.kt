@@ -16,25 +16,31 @@ import com.ppandroid.app.home.mine.adapter.AD_BaseAnalysis
  * 分项用电
  */
 class FG_CateAnalysis:FG_BaseAnalysis(){
-
     override fun init() {
 
     }
 
     override fun getAdapter(): PagerAdapter{
-        return AD_Cate(activity,childFragmentManager,parentId)
+        return AD_Cate(energyClassificationId,activity,childFragmentManager,parentId)
     }
 
-    override fun getTitle(): String="分项用电"
+    override fun getTitle(): String{
+       return if (energyClassificationId=="1"){
+           "分项用电"
+       }else{
+           "分项用水"
+       }
+    }
 
-    class AD_Cate(ac: Activity,  fm: FragmentManager,parentId:String) :AD_BaseAnalysis(ac,fm){
+    class AD_Cate(energyClassificationId:String,ac: Activity,  fm: FragmentManager,parentId:String) :AD_BaseAnalysis(ac,fm){
         var parentId:String?=null
+        private var energyClassificationId=energyClassificationId
         init {
             this.parentId=parentId
             initFragment()
         }
         override fun getBundle(index:Int): Bundle {
-            return FG_BaseAnlysisPage.createBundle(index,parentId?:"-1")
+            return FG_BaseAnlysisPage.createBundle(energyClassificationId,index,parentId?:"-1")
 
         }
         override fun getContentFragment(): FG_BaseAnlysisPage {

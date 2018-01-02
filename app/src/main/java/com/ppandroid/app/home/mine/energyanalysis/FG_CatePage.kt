@@ -19,7 +19,12 @@ import kotlinx.android.synthetic.main.fg_base_analysis_page.*
 class FG_CatePage :FG_BaseAnlysisPage(){
 
     override fun loadContent() {
-        var url="user/energy/analysis/getCate.json?dateString=$select"
+        var url=if (energyClassificationId=="1"){
+            "user/energy/analysis/getCate.json?dateString=$select"
+        }else{
+            "user/water/analysis/getCate.json?dateString=$select"
+        }
+
         if (parentId!="-1"){
             url+="&parentId=$parentId"
         }
@@ -32,14 +37,14 @@ class FG_CatePage :FG_BaseAnlysisPage(){
                     v_dount_view?.startAnim()
                     adapter.listener=object :ItemChoosseListener{
                         override fun choose(index: Int) {
-                            var b=FG_BaseAnalysis.createBundle(it.message.analysisCateParamDtoList[index].cateId.toString())
+                            var b=FG_BaseAnalysis.createBundle(energyClassificationId,it.message.analysisCateParamDtoList[index].cateId.toString())
                             startAC(FG_CateAnalysis::class.java.name,b)
                         }
                     }
                     lv_list?.adapter=adapter
                     lv_list?.setOnItemClickListener { adapterView, view, i, l ->
                         var item=it.message.analysisCateParamDtoList[i]
-                        var bundle= FG_DeviceDetailAnalysis.createBundle(item.cateId,item.cateName)
+                        var bundle= FG_DeviceDetailAnalysis.createBundle(energyClassificationId,item.cateId,item.cateName)
                         startAC(FG_CateDetailAnalysis::class.java.name,bundle)
                     }
 
@@ -71,12 +76,22 @@ class FG_CatePage :FG_BaseAnlysisPage(){
     }
 
     override fun init() {
-        when(index){
-            0->  tv_type.text="今日用电"
-            1->  tv_type.text="本月用电"
-            2->  tv_type.text="本年用电"
-            3->  tv_type.text="总用电"
+        if (energyClassificationId=="1"){
+            when(index){
+                0->  tv_type.text="今日用电"
+                1->  tv_type.text="本月用电"
+                2->  tv_type.text="本年用电"
+                3->  tv_type.text="总用电"
+            }
+        }else{
+            when(index){
+                0->  tv_type.text="今日用水"
+                1->  tv_type.text="本月用水"
+                2->  tv_type.text="本年用水"
+                3->  tv_type.text="总用水"
+            }
         }
+
 
     }
 

@@ -25,6 +25,9 @@ import org.jetbrains.anko.find
  * Created by yeqinfu on 2017/8/11.
  */
 class AD_AreaEnergy(ac: Activity, list: List<BN_OverView.MessageBean.OverviewConsumptionInformationBean.AreaInformationListBean>) : PagerAdapter() {
+
+    var energyClassificationId="1"
+
     /**横条图viewpager*/
     private var arrays_title = arrayOf(
             "今日",
@@ -93,7 +96,7 @@ class AD_AreaEnergy(ac: Activity, list: List<BN_OverView.MessageBean.OverviewCon
                 var ll_first = view.find<LinearLayout>(R.id.ll_first2)
                 ll_first.setOnClickListener {bd->
                     if (!TextUtils.isEmpty(it[0].id)){
-                        var bundle= FG_AreaDetailAnalysis.createBundle(it[0].id,it[0].key)
+                        var bundle= FG_AreaDetailAnalysis.createBundle(energyClassificationId,it[0].id,it[0].key)
                         var intent = AC_ContentFG.createIntent(ac, FG_AreaDetailAnalysis::class.java.name,bundle)
                         ac?.startActivity(intent)
                     }
@@ -112,7 +115,7 @@ class AD_AreaEnergy(ac: Activity, list: List<BN_OverView.MessageBean.OverviewCon
                     ll_second.visibility = View.VISIBLE
                     ll_second.setOnClickListener {bd->
                         if (!TextUtils.isEmpty(it[1].id)){
-                            var bundle= FG_AreaDetailAnalysis.createBundle(it[1].id,it[1].key)
+                            var bundle= FG_AreaDetailAnalysis.createBundle(energyClassificationId,it[1].id,it[1].key)
                             var intent = AC_ContentFG.createIntent(ac, FG_AreaDetailAnalysis::class.java.name,bundle)
                             ac?.startActivity(intent)
                         }

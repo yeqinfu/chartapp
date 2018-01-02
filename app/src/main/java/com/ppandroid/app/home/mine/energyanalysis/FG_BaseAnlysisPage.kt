@@ -13,13 +13,13 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.ppandroid.app.R
-import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.widget.HorizontalPercentageView
 import com.ppandroid.app.widget.graphical.chart.PieData
 import com.ppandroid.app.widget.graphical.render.XEnum
 import com.ppandroid.app.widget.popwindow.Pop_DatePicker
 import com.ppandroid.im.base.FG_Base
+import com.ppandroid.im.utils.Contants
 import kotlinx.android.synthetic.main.fg_base_analysis_page.*
 import org.jetbrains.anko.find
 import java.util.*
@@ -35,9 +35,10 @@ abstract class FG_BaseAnlysisPage : FG_Base() {
             return b
         }
 
-        fun createBundle(index: Int, parentId: String): Bundle {
+        fun createBundle(energyClassificationId:String,index: Int, parentId: String): Bundle {
             var b = createBundle(index)
             b.putString("parentId", parentId)
+            b.putString("energyClassificationId", energyClassificationId)
             return b
         }
     }
@@ -46,13 +47,20 @@ abstract class FG_BaseAnlysisPage : FG_Base() {
     //0 日 1 月 2 年 3 总
     protected var index: Int = 0
     protected var parentId = "-1"
-
+    protected var energyClassificationId="1"
     override fun afterViews() {
         v_dount_view.setLabelStyle(XEnum.SliceLabelStyle.INSIDE)
         arguments?.let {
             index = it.getInt("index", 0)
             parentId = it.getString("parentId", "-1")
-            DebugLog.d("yeqinfu", "------FG_BaseAnlysisPage--->" + parentId)
+            energyClassificationId=it.getString("energyClassificationId","1")
+        }
+        if (energyClassificationId=="1"){
+            tv_tag.text="kwh"
+            tag02.text="能耗kwh"
+        }else{
+            tv_tag.text= Contants.m3
+            tag02.text="用水"+Contants.m3
         }
         val c = Calendar.getInstance()
         if (index == 3) {//总

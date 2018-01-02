@@ -12,7 +12,7 @@ import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.mine.BN_UserInfo
 import com.ppandroid.app.home.mine.aboutme.FG_AboutMe
 import com.ppandroid.app.home.mine.aboutme.FG_Settings
-import com.ppandroid.app.home.mine.energyanalysis.FG_EnergyAnalysis
+import com.ppandroid.app.home.mine.energyanalysis.FG_EnergyAnalysisAll
 import com.ppandroid.app.home.mine.instrument.FG_InstrumentAll
 import com.ppandroid.app.home.mine.systemsetting.FG_SystemSettingAll
 import com.ppandroid.app.home.mine.teammanagement.FG_TeamManagement
@@ -63,7 +63,7 @@ class FG_Mine: FG_Base() {
             startAC(FG_TeamManagement::class.java.name)
         }
         tv_energy_analysis.setOnClickListener {
-            startAC(FG_EnergyAnalysis::class.java.name)
+            startAC(FG_EnergyAnalysisAll::class.java.name)
         }
         loadContent()
 

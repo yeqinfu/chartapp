@@ -20,6 +20,7 @@ import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.widget.graphical.chart.PieData
 import com.ppandroid.app.widget.popwindow.Pop_DatePicker
 import com.ppandroid.im.base.FG_Base
+import com.ppandroid.im.utils.Contants
 import kotlinx.android.synthetic.main.fg_base_devices_analysis_page.*
 import org.jetbrains.anko.find
 import java.util.*
@@ -29,6 +30,7 @@ import java.util.*
  * Created by yeqinfu on 2017/8/31.
  */
 abstract class FG_BaseDevicesAnlysisPage : FG_Base() {
+    protected var energyClassificationId="1"
     companion object {
         fun createBundle(index: Int): Bundle {
             var b = Bundle()
@@ -36,9 +38,10 @@ abstract class FG_BaseDevicesAnlysisPage : FG_Base() {
             return b
         }
 
-        fun createBundle(index: Int, parentId: String): Bundle {
+        fun createBundle(energyClassificationId:String,index: Int, parentId: String): Bundle {
             var b = createBundle(index)
             b.putString("parentId", parentId)
+            b.putString("energyClassificationId", energyClassificationId)
             return b
         }
     }
@@ -52,6 +55,12 @@ abstract class FG_BaseDevicesAnlysisPage : FG_Base() {
         arguments?.let {
             index = it.getInt("index", 0)
             parentId = it.getString("parentId", "-1")
+            energyClassificationId=it.getString("energyClassificationId","1")
+        }
+        if (energyClassificationId=="1"){
+            tv_tag.text="能耗kwh"
+        }else{
+            tv_tag.text="用水"+Contants.m3
         }
         val c = Calendar.getInstance()
         if (index == 3) {//总
@@ -106,7 +115,12 @@ abstract class FG_BaseDevicesAnlysisPage : FG_Base() {
 
     protected fun setTotalNumber(total:String){
         if (!TextUtils.isEmpty(total)){
-            tv_totalKwh?.text="总能耗："+total+"kwh"
+            if (energyClassificationId=="1"){
+                tv_totalKwh?.text="总能耗："+total+"kwh"
+            }else{
+                tv_totalKwh?.text="总用水："+total+Contants.m3
+            }
+
 
         }
     }

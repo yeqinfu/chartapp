@@ -17,6 +17,7 @@ import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.widget.graphical.chart.PieData
 import com.ppandroid.app.widget.graphical.demoview.DountChart01View
+import com.ppandroid.im.utils.Contants
 import org.jetbrains.anko.find
 
 /**
@@ -76,9 +77,9 @@ class AD_EnergyWater(ac: Activity, list: List<BN_OverViewWater.MessageBean.Overv
         tv_totalKwh.text = Utils_Common.findNumberFromStr(list?.get(position)?.totalM3 ?: "")
         var d=list?.get(position)?.totalM3?:""
         if (d.contains("万")){
-            tv_kwh.text="万m³"
+            tv_kwh.text="万"+Contants.m3
         }else{
-            tv_kwh.text="m³"
+            tv_kwh.text=Contants.m3
         }
 
         var v_dount_view = views[position].find<DountChart01View>(R.id.v_dount_view)

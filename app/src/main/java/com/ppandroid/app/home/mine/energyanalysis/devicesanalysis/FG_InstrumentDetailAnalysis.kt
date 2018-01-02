@@ -24,9 +24,10 @@ import kotlinx.android.synthetic.main.layout_head_view.*
 class FG_InstrumentDetailAnalysis : FG_BaseAnalysis(){
 
     companion object {
-        fun createBundle(parentId:String,title:String): Bundle {
+        fun createBundle(energyClassificationId:String,parentId:String,title:String): Bundle {
             var b = Bundle()
             b.putString("parentId",parentId)
+            b.putString("energyClassificationId",energyClassificationId)
             b.putString("title",title)
             return b
         }
@@ -40,7 +41,7 @@ class FG_InstrumentDetailAnalysis : FG_BaseAnalysis(){
         }
     }
 
-    override fun getAdapter(): PagerAdapter =AD_DeviceAnalysis(activity,childFragmentManager,parentId)
+    override fun getAdapter(): PagerAdapter =AD_DeviceAnalysis(energyClassificationId,activity,childFragmentManager,parentId)
 
     override fun getTitle(): String{
         var title=""
@@ -49,14 +50,15 @@ class FG_InstrumentDetailAnalysis : FG_BaseAnalysis(){
         }
         return title
     }
-    class AD_DeviceAnalysis(ac: Activity, fm: FragmentManager, parentId:String) : AD_BaseDevicesAnalysis(ac,fm){
+    class AD_DeviceAnalysis(energyClassificationId:String,ac: Activity, fm: FragmentManager, parentId:String) : AD_BaseDevicesAnalysis(ac,fm){
         var parentId:String?=null
+        private var energyClassificationId=energyClassificationId
         init {
             this.parentId=parentId
             initFragment()
         }
         override fun getBundle(index:Int): Bundle {
-            return FG_BaseAnlysisPage.createBundle(index, parentId ?: "-1")
+            return FG_BaseAnlysisPage.createBundle(energyClassificationId,index, parentId ?: "-1")
 
         }
         override fun getContentFragment(): FG_BaseDevicesAnlysisPage {

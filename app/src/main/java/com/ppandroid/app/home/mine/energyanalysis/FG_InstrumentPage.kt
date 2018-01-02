@@ -18,7 +18,11 @@ import kotlinx.android.synthetic.main.fg_base_analysis_page.*
 class FG_InstrumentPage : FG_BaseAnlysisPage(){
 
     override fun loadContent() {
-        var url="user/energy/analysis/getInstrument.json?dateString=$select"
+        var url=if (energyClassificationId=="1"){
+            "user/energy/analysis/getInstrument.json?dateString=$select"
+        }else{
+            "user/water/analysis/getInstrument.json?dateString=$select"
+        }
         if (parentId!="-1"){
             url+="&parentId=$parentId"
         }
@@ -33,7 +37,7 @@ class FG_InstrumentPage : FG_BaseAnlysisPage(){
                     lv_list.adapter = adapter
                     lv_list.setOnItemClickListener { adapterView, view, i, l ->
                         var item=it.message.analysisInstrumentParamDtoList[i]
-                        var bundle= FG_InstrumentDetailAnalysis.createBundle(item.instrumentId,item.instrumentName)
+                        var bundle= FG_InstrumentDetailAnalysis.createBundle(energyClassificationId,item.instrumentId,item.instrumentName)
                         startAC(FG_InstrumentDetailAnalysis::class.java.name,bundle)
                     }
                     v_dount_view.charRender(getValues(k))

@@ -27,6 +27,8 @@ import org.jetbrains.anko.find
  * Created by yeqinfu on 2017/8/11.
  */
 class AD_Instrument(ac: Activity, list: List<BN_OverView.MessageBean.InstrumentInfomationListBean>): PagerAdapter(){
+
+    var energyClassificationId="1"
     /**横条图viewpager*/
     var arrays_title = arrayOf(
             "今日",
@@ -86,7 +88,7 @@ class AD_Instrument(ac: Activity, list: List<BN_OverView.MessageBean.InstrumentI
             lv_list.setOnItemClickListener { adapterView, view, i, l ->
                 var item= list?.get(position)?.instrumentMapList?.get(i)
                 if (!TextUtils.isEmpty(item?.id)){
-                    var bundle= FG_InstrumentDetailAnalysis.createBundle(item?.id?:"",item?.key?:"")
+                    var bundle= FG_InstrumentDetailAnalysis.createBundle(energyClassificationId,item?.id?:"",item?.key?:"")
                     var intent=AC_ContentFG.createIntent(ac,FG_InstrumentDetailAnalysis::class.java.name,bundle)
                     ac?.startActivity(intent)
                 }

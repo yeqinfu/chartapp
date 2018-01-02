@@ -523,11 +523,11 @@ class FG_WaterPage:FG_Base(){
 
 
     }
-
+    var energyClassificationId="2"
     private fun toCateAnalysisPage(ll: LinearLayout, id:String?,name:String) {
         id?.let {
             ll.setOnClickListener {
-                var bundle= FG_DeviceDetailAnalysis.createBundle(id,name)
+                var bundle= FG_DeviceDetailAnalysis.createBundle(energyClassificationId,id,name)
                 startAC(FG_CateDetailAnalysis::class.java.name,bundle)
 
             }

@@ -19,10 +19,12 @@ import kotlinx.android.synthetic.main.layout_head_view.*
  */
 open abstract class FG_BaseAnalysis :FG_Base(){
     protected var parentId="-1"
+    protected var energyClassificationId="1"
     companion object {
-        fun createBundle(parentId:String): Bundle {
+        fun createBundle(energyClassificationId:String,parentId:String): Bundle {
             var b =Bundle()
             b.putString("parentId",parentId)
+            b.putString("energyClassificationId",energyClassificationId)
             return b
         }
     }
@@ -31,6 +33,7 @@ open abstract class FG_BaseAnalysis :FG_Base(){
     override fun afterViews() {
         arguments?.let {
             parentId=it.getString("parentId","-1")
+            energyClassificationId=it.getString("energyClassificationId","1")
         }
         init()
         head_view.init(activity)

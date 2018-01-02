@@ -18,7 +18,11 @@ import kotlinx.android.synthetic.main.fg_base_analysis_page.*
 class FG_AreaPage : FG_BaseAnlysisPage(){
 
     override fun loadContent() {
-        var url="user/energy/analysis/getArea.json?dateString=$select"
+        var url=if (energyClassificationId=="1"){
+            "user/energy/analysis/getArea.json?dateString=$select"
+        }else{
+            "user/water/analysis/getArea.json?dateString=$select"
+        }
         if (parentId!="-1"){
             url+="&parentId=$parentId"
         }
@@ -31,7 +35,7 @@ class FG_AreaPage : FG_BaseAnlysisPage(){
                     v_dount_view.startAnim()
                     adapter.listener = object : ItemChoosseListener {
                         override fun choose(index: Int) {
-                            var b=FG_BaseAnalysis.createBundle(it.message.analysisAreaParamDtoList[index].areaId.toString())
+                            var b=FG_BaseAnalysis.createBundle(energyClassificationId,it.message.analysisAreaParamDtoList[index].areaId.toString())
                             startAC(FG_AreaAnalysis::class.java.name,b)
 
                         }
@@ -39,7 +43,7 @@ class FG_AreaPage : FG_BaseAnlysisPage(){
                     lv_list.adapter = adapter
                     lv_list.setOnItemClickListener { adapterView, view, i, l ->
                         var item=it.message.analysisAreaParamDtoList[i]
-                        var bundle= FG_AreaDetailAnalysis.createBundle(item.areaId,item.areaName)
+                        var bundle= FG_AreaDetailAnalysis.createBundle(energyClassificationId,item.areaId,item.areaName)
                         startAC(FG_AreaDetailAnalysis::class.java.name,bundle)
                     }
                     v_dount_view.charRender(getValues(k))

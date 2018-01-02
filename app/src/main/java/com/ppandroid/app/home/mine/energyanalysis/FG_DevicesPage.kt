@@ -18,7 +18,11 @@ import kotlinx.android.synthetic.main.fg_base_analysis_page.*
 class FG_DevicesPage : FG_BaseAnlysisPage(){
 
     override fun loadContent() {
-        var url="user/energy/analysis/getDevice.json?dateString=$select"
+        var url=if (energyClassificationId=="1"){
+            "user/energy/analysis/getDevice.json?dateString=$select"
+        }else{
+            "user/water/analysis/getDevice.json?dateString=$select"
+        }
         if (parentId!="-1"){
             url+="&parentId=$parentId"
         }
@@ -33,7 +37,7 @@ class FG_DevicesPage : FG_BaseAnlysisPage(){
                     lv_list.adapter = adapter
                     lv_list.setOnItemClickListener { adapterView, view, i, l ->
                         var item=it.message.analysisDeviceParamDtoList[i]
-                        var bundle=FG_DeviceDetailAnalysis.createBundle(item.deviceId,item.deviceName)
+                        var bundle=FG_DeviceDetailAnalysis.createBundle(energyClassificationId,item.deviceId,item.deviceName)
                         startAC(FG_DeviceDetailAnalysis::class.java.name,bundle)
 
                     }

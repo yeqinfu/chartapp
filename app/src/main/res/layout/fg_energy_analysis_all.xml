@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by yeqinfu on 18-1-2 下午2:47
+  ~ Copyright (c) JXT All rights reserved.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:background="@color/color_05"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include layout="@layout/layout_head_view"/>
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_marginTop="7dp"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:id="@+id/ll_01"
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+        <TextView
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/icon_thander_green"
+            android:text="用电分析"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:src="@drawable/forward_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_marginTop="7dp"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:id="@+id/ll_02"
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+        <TextView
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/icon_water"
+            android:text="用水分析"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:src="@drawable/forward_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+</LinearLayout>
