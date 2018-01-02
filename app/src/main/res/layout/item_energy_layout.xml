@@ -24,6 +24,7 @@
             android:src="@drawable/icon_energy"/>
 
         <TextView
+            android:id="@+id/tv_use_water_title"
             android:layout_width="wrap_content"
             android:layout_height="39dp"
             android:layout_marginLeft="10dp"
@@ -75,6 +76,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_energy_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -105,7 +107,7 @@
                     android:layout_height="match_parent"
                     android:gravity="bottom"
                     android:padding="4dp"
-                    android:text="万kwh"
+                    android:text=""
                     android:textColor="@color/color_01"/>
 
             </LinearLayout>
@@ -127,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:text="碳排放：0kg"
+                android:text=""
                 android:textColor="@color/color_04"
                 android:textSize="@dimen/bar_title"/>
 
@@ -266,11 +268,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="37dp"
                 android:gravity="center"
-                android:text="0kwh"
+                android:text=""
                 android:textColor="@color/color_07"
                 android:textSize="@dimen/normal_text"/>
 
             <TextView
+                android:id="@+id/tv_used_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="本月用能"/>
@@ -337,6 +340,7 @@
             android:src="@drawable/icon_share_statistics"/>
 
         <TextView
+            android:id="@+id/tv_title_02"
             android:layout_width="wrap_content"
             android:layout_height="39dp"
             android:layout_marginLeft="10dp"
@@ -635,6 +639,7 @@
             android:src="@drawable/icon_quyu"/>
 
         <TextView
+            android:id="@+id/tv_title_03"
             android:layout_width="wrap_content"
             android:layout_height="39dp"
             android:layout_marginLeft="10dp"

@@ -62,7 +62,6 @@ class FG_OverView : FG_Base() {
 
         Utils_Dialog.showLoading(activity)
         loadOverViewConfig()
-        isNeedEventBus = true
 
         refreshLayout.setOnRefreshListener {
             loadOverViewConfig()
@@ -83,6 +82,7 @@ class FG_OverView : FG_Base() {
         companion object {
             /**刷新 */
             val TASKID_REFRESH = UUID.randomUUID().hashCode()
+            val TASKID_REFRESH_WATER = UUID.randomUUID().hashCode()
         }
 
     }
@@ -411,6 +411,12 @@ class FG_OverView : FG_Base() {
     }
 
     private fun setEnergyInfo(view: View, list: List<BN_OverView.MessageBean.OverviewConsumptionInformationBean.ClassificationInformationListBean.ClassificationKwhMapListBean>) {
+        if (TextUtils.isEmpty(select)){
+            view.find<TextView>(R.id.tv_energy_title).text="今日用电"
+        }else{
+            view.find<TextView>(R.id.tv_energy_title).text=select+"用电"
+        }
+
         var ll_01=view.find<LinearLayout>(R.id.ll_01)
         var v_01=view.find<View>(R.id.v_01)
         var ll_02=view.find<LinearLayout>(R.id.ll_02)

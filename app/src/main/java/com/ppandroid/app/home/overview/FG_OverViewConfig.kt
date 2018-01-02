@@ -5,6 +5,8 @@
 
 package com.ppandroid.app.home.overview
 
+import android.os.Bundle
+import android.text.TextUtils
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.overview.BN_OverViewConfig
@@ -24,7 +26,20 @@ class FG_OverViewConfig:FG_Base(){
     override fun fgRes(): Int= R.layout.fg_over_view_config
     lateinit var adapter:DragAdapter
     lateinit var adapter2:DragAdapter
+
+    companion object {
+        fun createIntent(type:Int): Bundle{
+            var b=Bundle()
+            b.putInt("type",type)
+            return b;
+
+        }
+    }
+    var type=0
     override fun afterViews() {
+        arguments?.let {
+            type=it.getInt("type",0)
+        }
         head_view.setCenterTitle("自定义模块")
         head_view.init(activity)
         head_view.setRightText("保存") {
@@ -38,7 +53,12 @@ class FG_OverViewConfig:FG_Base(){
     }
 
     private fun loadContent() {
-        var url="user/overview/modular.json"
+        var url=""
+        if (type==1){//用水
+            url="user/overview/water/modular.json"
+        }else {//用电
+            url="user/overview/modular.json"
+        }
         Http.get(activity,url, BN_OverViewConfig::class.java,object: MyCallBack<BN_OverViewConfig> {
             override fun onResponse(response: BN_OverViewConfig?) {
                 response?.let {
@@ -79,18 +99,34 @@ class FG_OverViewConfig:FG_Base(){
 
     private fun saveInfo() {
         var list=adapter.ts
-        var url="user/overview/modular/save.json?"
+        var url=""
+        if (type==1){
+            url="user/overview/water/modular/save.json?"
+        }else{
+            url="user/overview/modular/save.json?"
+        }
         var ids=""
         for (item in list){
             ids+=item.id.toString()+","
         }
-        url+="ids="+ids.substring(0,ids.length-1)
+        if(!TextUtils.isEmpty(ids)){
+            url+="ids="+ids.substring(0,ids.length-1)
+        }else{
+            toast("请至少选择一个模块显示")
+            return
+        }
         Http.get(activity,url,BaseBody::class.java,object :MyCallBack<BaseBody>{
             override fun onResponse(response: BaseBody?) {
                 response?.let {
                     if (it.isSuccess){
                         toast("保存成功")
-                        EventBus.getDefault().post(FG_OverView.ET_OverView(FG_OverView.ET_OverView.TASKID_REFRESH))
+                        if (type==1){
+                            EventBus.getDefault().post(FG_OverView.ET_OverView(FG_OverView.ET_OverView.TASKID_REFRESH_WATER))
+
+                        }else{
+                            EventBus.getDefault().post(FG_OverView.ET_OverView(FG_OverView.ET_OverView.TASKID_REFRESH))
+
+                        }
                         finish()
                     }
                 }
