@@ -5,7 +5,6 @@
 
 package com.ppandroid.app.home
 
-import android.animation.ObjectAnimator
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.devices.BN_Devices
@@ -21,9 +20,13 @@ import kotlinx.android.synthetic.main.fg_devices.*
  * Created by yeqinfu on 2017/8/3.
  */
 class FG_Devices : FG_Base() {
+    var energyClassificationId="1"
     override fun fgRes(): Int = R.layout.fg_devices
     override fun afterViews() {
         isNeedEventBus=true
+        arguments?.let {
+            energyClassificationId=it.getString("energyClassificationId","1")
+        }
         loadContent()
         refreshLayout.setOnRefreshListener {
             loadContent()
@@ -40,7 +43,8 @@ class FG_Devices : FG_Base() {
 
 
     private fun loadContent() {
-        var url = "user/device/index.json"
+        var url = "user/device/index.json?energyClassificationId="+energyClassificationId
+
         Http.get(activity, url, BN_Devices::class.java, object : MyCallBack<BN_Devices> {
             override fun onResponse(response: BN_Devices?) {
                 refreshLayout.finishRefresh()
@@ -50,16 +54,14 @@ class FG_Devices : FG_Base() {
                     lv_ex.setOnGroupCollapseListener { var1 ->
                         it.message.deviceCateList[var1].isOpen = false
                         adapter.notifyDataSetChanged()
-                        val animator = ObjectAnimator.ofFloat(iv_setting, "rotation", 0f, 180f)
+                      /*  val animator = ObjectAnimator.ofFloat(iv_setting, "rotation", 0f, 180f)
                         animator.duration = (500)
-                        animator.start()
+                        animator.start()*/
                     }
                     lv_ex.setOnGroupExpandListener { var1 ->
                         it.message.deviceCateList[var1].isOpen = true
                         adapter.notifyDataSetChanged()
-                        val animator = ObjectAnimator.ofFloat(iv_setting, "rotation", 0f, 180f)
-                        animator.duration = (500)
-                        animator.start()
+
                     }
                     for (i in 0 until adapter.groupCount) {
                         lv_ex.expandGroup(i)

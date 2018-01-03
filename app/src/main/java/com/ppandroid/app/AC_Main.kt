@@ -12,7 +12,7 @@ import android.view.View
 import com.ppandroid.app.base.AC_ContentFG
 import com.ppandroid.app.bean.ET_RedPoint
 import com.ppandroid.app.home.FG_Center
-import com.ppandroid.app.home.FG_Devices
+import com.ppandroid.app.home.FG_DevicesAll
 import com.ppandroid.app.home.FG_News
 import com.ppandroid.app.home.FG_OverViewAll
 import com.ppandroid.im.FG_Mine
@@ -89,7 +89,7 @@ class AC_Main : AC_Base() {
             }
             2 -> {
                 if (fragementDevices == null) {
-                    fragementDevices = FG_Devices()
+                    fragementDevices = FG_DevicesAll()
                     fragmentTransaction.add(R.id.ll_content, fragementDevices)
                 } else {
                     fragmentTransaction.show(fragementDevices)

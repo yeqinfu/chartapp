@@ -28,10 +28,19 @@ import org.jetbrains.anko.find
  */
 class FG_EnergyList :FG_Base(){
     override fun fgRes(): Int= R.layout.fg_energy_list
-
+    var energyClassificationId="1"
     override fun afterViews() {
         head_view.init(activity)
-        head_view.setCenterTitle("能耗汇总")
+
+        arguments?.let {
+            energyClassificationId=it.getString("energyClassificationId","1")
+        }
+        var title=if (energyClassificationId.equals("1")){
+            "能耗汇总"
+        }else{
+            "用水量汇总"
+        }
+        head_view.setCenterTitle(title)
         refresh_layout.setOnRefreshListener {
             loadContent(true)
         }
@@ -58,7 +67,11 @@ class FG_EnergyList :FG_Base(){
             refresh_layout.finishLoadmore()
             return
         }
-        var url="user/energy/statistics/get.json?pageNumber=$pageNumber"
+        var url=if (energyClassificationId.equals("1")){
+            "user/energy/statistics/get.json?pageNumber=$pageNumber"
+        }else{
+            "user/water/statistics/get.json?pageNumber=$pageNumber"
+        }
         Http.get(activity,url, BN_EnergyList::class.java,object :MyCallBack<BN_EnergyList>{
             override fun onResponse(response: BN_EnergyList?) {
                 refresh_layout.finishRefresh()

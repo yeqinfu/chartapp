@@ -6,6 +6,8 @@
 package com.ppandroid.app.home
 
 import android.app.Activity
+import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -17,7 +19,6 @@ import com.ppandroid.app.home.news.FG_EnergyComparison
 import com.ppandroid.app.home.news.FG_EnergyList
 import com.ppandroid.app.home.news.FG_FaultHistory
 import com.ppandroid.app.home.news.FG_SystemNewList
-import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_news.*
 import org.greenrobot.eventbus.EventBus
@@ -37,63 +38,27 @@ class FG_News : FG_Base() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     open fun onMessageEvent(event: ET_RedPoint) {
         if (event.taskId === ET_RedPoint.TASKID_RED_POINT_SHOW) {//显示小红点
-            if (event.type.equals("2")) {//显示通讯故障小红点
-                EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW_MAIN, "2"))
-                if (dataSet.size > 1) {
-                    dataSet[1].msg = event.msg
-                    dataSet[1].showRedPoint = true
-                    adapter?.notifyDataSetChanged()
+            //转发通知给主tabs显示小红点
+            EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW_MAIN, event.type))
+            for (item in dataSet){
+                if (item.msgType.equals(event.type)){
+                    if (!TextUtils.isEmpty(event.msg)){//如果消息不为空，相应显示在选项item中
+                        item.msg=event.msg
+                    }
+                    item.showRedPoint=true
                 }
-
-            } else if (event.type.equals("1")) {//显示能耗总会小红点
-                EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW_MAIN, "1"))
-                if (!dataSet.isEmpty()) {
-                    dataSet[0].showRedPoint = true
-                    adapter?.notifyDataSetChanged()
-                }
-
-            }else if (event.type.equals("3")) {//显示能耗对比小红点
-                EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW_MAIN, "3"))
-                if (!dataSet.isEmpty()) {
-                    dataSet[3].showRedPoint = true
-                    adapter?.notifyDataSetChanged()
-                }
-
-            }else if (event.type.equals("4")) {//显示系统消息小红点
-                EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW_MAIN, "4"))
-                if (!dataSet.isEmpty()) {
-                    dataSet[2].showRedPoint = true
-                    adapter?.notifyDataSetChanged()
-                }
-
             }
+            adapter?.notifyDataSetChanged()
 
         } else if (event.taskId === ET_RedPoint.TASKID_RED_POINT_HIDE) {//隐藏小红点
-            if (event.type.equals("2")) {//隐藏通讯故障小红点
-                EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE_MAIN, "2"))
-                if (dataSet.size > 1) {
-                    dataSet[1].showRedPoint = false
-                    adapter?.notifyDataSetChanged()
-                }
-            } else if (event.type.equals("1")) {//隐藏能耗总会小红点
-                EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE_MAIN, "1"))
-                if (!dataSet.isEmpty()) {
-                    dataSet[0].showRedPoint = false
-                    adapter?.notifyDataSetChanged()
-                }
-            }else if (event.type.equals("3")) {//隐藏能耗总会小红点
-                EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE_MAIN, "3"))
-                if (!dataSet.isEmpty()) {
-                    dataSet[3].showRedPoint = false
-                    adapter?.notifyDataSetChanged()
-                }
-            }else if (event.type.equals("4")) {//隐藏系统消息小红点
-                EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE_MAIN, "4"))
-                if (!dataSet.isEmpty()) {
-                    dataSet[2].showRedPoint = false
-                    adapter?.notifyDataSetChanged()
+            //转发通知给主tab取消小红点
+            EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE_MAIN, event.type))
+            for (item in dataSet){
+                if (item.msgType.equals(event.type)){
+                    item.showRedPoint=false
                 }
             }
+            adapter?.notifyDataSetChanged()
         }
 
     }
@@ -106,12 +71,24 @@ class FG_News : FG_Base() {
 
         /**能耗汇总*/
         var item = BN_Data()
+        item.msgType=BN_Data.ENERGY_COLLECT
         item.date = initDate
         item.title = "能耗汇总"
         item.msg = "点击查看" + initDate + "的能耗汇总"
         dataSet.add(item)
+
+        /**水能耗总汇*/
+        var item5 = BN_Data()
+        item5.msgType=BN_Data.POWER_COMPARISON
+        item5.date = initDate
+        item5.title = "用水量汇总"
+        item5.msg =  "点击查看" + initDate + "的用水量汇总"
+        item5.icon = R.drawable.ic_nenghaohz
+        dataSet.add(item5)
+
         /**故障报警*/
         var item2 = BN_Data()
+        item2.msgType=BN_Data.FAILUE_WARNING
         item2.date = initDate
         item2.title = "故障报警"
         item2.msg = "点击查看故障报警历史"
@@ -119,6 +96,7 @@ class FG_News : FG_Base() {
         dataSet.add(item2)
         /**系统消息*/
         var item3 = BN_Data()
+        item3.msgType=BN_Data.SYSTEM
         item3.date = initDate
         item3.title = "系统消息"
         item3.msg = "点击查看系统消息"
@@ -126,6 +104,7 @@ class FG_News : FG_Base() {
         dataSet.add(item3)
         /**能耗对比*/
         var item4 = BN_Data()
+        item4.msgType=BN_Data.POWER_COMPARISON
         item4.date = initDate
         item4.title = "能耗对比"
         item4.msg = "点击查看能耗对比"
@@ -133,43 +112,67 @@ class FG_News : FG_Base() {
         dataSet.add(item4)
 
 
+        /**用水量对比*/
+        var item6 = BN_Data()
+        item6.msgType=BN_Data.POWER_COMPARISON
+        item6.date = initDate
+        item6.title = "用水量对比"
+        item6.msg =  "点击查看用水量对比"
+        item6.icon = R.drawable.icon_nhdb
+        dataSet.add(item6)
+
+
         adapter = AD_List(activity, dataSet)
         lv_list.adapter = adapter
         refreshLayout.setOnRefreshListener { layout ->
-            DebugLog.d("++++++++++++++++++++++++++refresh yeqinfu")
             layout.finishRefresh(1000)
         }
         lv_list.setOnItemClickListener { _, _, i, _ ->
-            when (i) {
-                0 -> {
+            //消息转发给主tab，要求取消小红点
+            EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE, dataSet[i].msgType.toString()))
+            when (dataSet[i].msgType) {
+                BN_Data.ENERGY_COLLECT -> {//能耗汇总
                     startAC(FG_EnergyList::class.java.name)
-                    /**隐藏小红点*/
-                    /**隐藏小红点*/
-                    /**隐藏小红点*/
-                    EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE, "1"))
                 }
-                1 -> {
+                BN_Data.FAILUE_WARNING -> {//故障报警
                     startAC(FG_FaultHistory::class.java.name)
-                    /**隐藏小红点*/
-                    /**隐藏小红点*/
-                    /**隐藏小红点*/
-                    EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE, "2"))
                 }
-                2 -> {//系统消息
+                BN_Data.SYSTEM -> {//系统消息
                     startAC(FG_SystemNewList::class.java.name)
-                    /**隐藏小红点*/
-                    EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE, "4"))
                 }
-                3 -> {//能耗对比
+                BN_Data.POWER_COMPARISON -> {//能耗对比
                     startAC(FG_EnergyComparison::class.java.name)
-                    /**隐藏小红点*/
-                    EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE, "3"))
+                }
+                BN_Data.WATER_COLLECT->{//水能耗总汇
+                    var b=createBundle()
+                    startAC(FG_EnergyList::class.java.name,b)
+                }
+                BN_Data.WATER_COMPARISON->{//水能耗对比
+                    startAC(FG_EnergyComparison::class.java.name,createBundle())
                 }
             }
         }
     }
+    companion object {
+         fun createBundle(): Bundle {
+            var energyClassificationId="2"
+            var b=Bundle()
+            b.putString("energyClassificationId",energyClassificationId)
+            return b
+        }
+    }
 
-    class BN_Data {
+
+    open class BN_Data {
+        companion object {//消息列表类型常量
+            val ENERGY_COLLECT=1//电能耗汇总
+            val FAILUE_WARNING=2//故障报警
+            val POWER_COMPARISON=3//电能耗对比
+            val SYSTEM=4//系统消息
+            val WATER_COLLECT=5//水能耗汇总
+            val WATER_COMPARISON=6//水能耗对比
+        }
+        var msgType=ENERGY_COLLECT
         var title: String? = null
         var date: String? = null
         var msg: String? = null

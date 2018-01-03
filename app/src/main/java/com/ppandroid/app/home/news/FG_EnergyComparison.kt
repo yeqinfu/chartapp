@@ -13,6 +13,7 @@ import com.ppandroid.app.R
 import com.ppandroid.app.base.FG_CommonList
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.news.BN_EnergyComparison
+import com.ppandroid.app.home.FG_News
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import kotlinx.android.synthetic.main.fg_common_list.*
@@ -22,11 +23,22 @@ import org.jetbrains.anko.find
  * Created by yeqinfu on 2017/12/22.
  */
 class FG_EnergyComparison:FG_CommonList<BN_EnergyComparison.MessageBean.ResultBean>(){
+    var energyClassificationId="1"
+    override fun afterViews() {
+        arguments?.let {
+            energyClassificationId=it.getString("energyClassificationId","1")
+        }
+        super.afterViews()
+    }
     override fun getAdapter(activity: Activity, content: ArrayList<BN_EnergyComparison.MessageBean.ResultBean>): AD_CommonList<BN_EnergyComparison.MessageBean.ResultBean>? {
         return AD_EnergyComparison(activity,content)
     }
     override fun loadContent() {
-        var url="/user/message/get.json?type=3&pageNumber=$pageNumber"
+        var url=if (energyClassificationId=="1"){
+            "/user/message/get.json?type="+FG_News.BN_Data.POWER_COMPARISON+"&pageNumber=$pageNumber"
+        }else{
+            "/user/message/get.json?type="+FG_News.BN_Data.WATER_COMPARISON+"&pageNumber=$pageNumber"
+        }
         Http.get(activity,url,BN_EnergyComparison::class.java,object :MyCallBack<BN_EnergyComparison>{
             override fun onResponse(response: BN_EnergyComparison?) {
                 refresh_layout.finishRefresh()
@@ -47,7 +59,13 @@ class FG_EnergyComparison:FG_CommonList<BN_EnergyComparison.MessageBean.ResultBe
 
         })
     }
-    override fun getTitle(): String="能耗对比"
+    override fun getTitle(): String{
+        return if (energyClassificationId.equals("1")){
+            "能耗对比"
+        }else{
+            "水能耗对比"
+        }
+    }
 
     class Holder{
         var tv_msg_date: TextView?=null
