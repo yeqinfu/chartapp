@@ -79,11 +79,11 @@ class FG_News : FG_Base() {
 
         /**水能耗总汇*/
         var item5 = BN_Data()
-        item5.msgType=BN_Data.POWER_COMPARISON
+        item5.msgType=BN_Data.WATER_COLLECT
         item5.date = initDate
         item5.title = "用水量汇总"
         item5.msg =  "点击查看" + initDate + "的用水量汇总"
-        item5.icon = R.drawable.ic_nenghaohz
+        item5.icon = R.drawable.icon_yongsl
         dataSet.add(item5)
 
         /**故障报警*/
@@ -114,7 +114,7 @@ class FG_News : FG_Base() {
 
         /**用水量对比*/
         var item6 = BN_Data()
-        item6.msgType=BN_Data.POWER_COMPARISON
+        item6.msgType=BN_Data.WATER_COMPARISON
         item6.date = initDate
         item6.title = "用水量对比"
         item6.msg =  "点击查看用水量对比"

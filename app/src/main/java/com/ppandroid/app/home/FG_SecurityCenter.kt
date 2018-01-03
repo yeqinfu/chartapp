@@ -96,7 +96,7 @@ class FG_SecurityCenter:FG_Base(){
                                 "个设备存在风险，请尽快排查。"
                         ll_msg.visibility=View.VISIBLE
                         ll_msg.setOnClickListener {
-                         startAC(FG_Devices::class.java.name)
+                         startAC(FG_DevicesAll::class.java.name)
                         }
                     }
                     v_check_view.startAnim()

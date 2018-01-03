@@ -5,6 +5,7 @@
 
 package com.ppandroid.app.home.news
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Color
 import android.view.View
@@ -19,6 +20,7 @@ import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.im.base.FG_Base
+import com.ppandroid.im.utils.Contants
 import kotlinx.android.synthetic.main.fg_energy_list.*
 import kotlinx.android.synthetic.main.layout_head_view.*
 import org.jetbrains.anko.find
@@ -47,7 +49,7 @@ class FG_EnergyList :FG_Base(){
         refresh_layout.setOnLoadmoreListener{
             loadContent(false)
         }
-        adapter= AD_List(activity,content)
+        adapter= AD_List(energyClassificationId,activity,content)
         lv_list.adapter=adapter
         loadContent(true)
     }
@@ -108,15 +110,17 @@ class FG_EnergyList :FG_Base(){
         var iv_type:ImageView?=null
     }
 
-    class AD_List(ac:Activity,list:ArrayList<BN_EnergyList.MessageBean.EnergyConsumptionStatisticsDtoListBean>) : BaseAdapter() {
+    class AD_List(energyClassificationId:String,ac:Activity,list:ArrayList<BN_EnergyList.MessageBean.EnergyConsumptionStatisticsDtoListBean>) : BaseAdapter() {
         private var ac=ac
         private var list=list
+        var energyClassificationId=energyClassificationId
         var colors = arrayOf(
                 "#5EC1FF",
                 "#45E069",
                 "#FFCF3B",
                 "#FF6969"
         )
+        @SuppressLint("SetTextI18n")
         override fun getView(pos: Int, convertView: View?, p2: ViewGroup?): View? {
             DebugLog.d("======="+pos)
             var layout:View?=null
@@ -138,32 +142,38 @@ class FG_EnergyList :FG_Base(){
             }
             holder?.let {
                 it.tv_msg_date?.text=list[pos].recordDate
-                it.tv_date?.text=list[pos].datePeriod+"用电情况，请知晓"
-                it.tv_value?.text=list[pos].totalKwh+"kwh"
+                var tag01="电"
+                var tag02="kwh"
+                if (energyClassificationId.equals("2")){
+                    tag01="水"
+                    tag02=Contants.m3
+                }
+                it.tv_date?.text=list[pos].datePeriod+"用"+tag01+"情况，请知晓"
+                it.tv_value?.text=list[pos].totalKwh+tag02
                 when(list[pos].type){
                     1->{
                         it.iv_type?.setImageResource(R.drawable.ic_day)
                         it.tv_title?.setTextColor(Color.parseColor(colors[0]))
-                        it.tv_title?.text="企业日用能情况汇总"
-                        it.tv_key?.text="今日用电："
+                        it.tv_title?.text="企业日用"+tag01+"情况汇总"
+                        it.tv_key?.text="今日用"+tag01+"："
                     }
                     2->{
                         it.iv_type?.setImageResource(R.drawable.ic_week)
                         it.tv_title?.setTextColor(Color.parseColor(colors[1]))
-                        it.tv_title?.text="企业周用能情况汇总"
-                        it.tv_key?.text="本周用电："
+                        it.tv_title?.text="企业周用"+tag01+"情况汇总"
+                        it.tv_key?.text="本周用"+tag01+"："
                     }
                     3->{
                         it.iv_type?.setImageResource(R.drawable.ic_month)
                         it.tv_title?.setTextColor(Color.parseColor(colors[2]))
-                        it.tv_title?.text="企业月用能情况汇总"
-                        it.tv_key?.text="本月用电："
+                        it.tv_title?.text="企业月用"+tag01+"情况汇总"
+                        it.tv_key?.text="本月用"+tag01+"："
                     }
                     4->{
                         it.iv_type?.setImageResource(R.drawable.ic_year)
                         it.tv_title?.setTextColor(Color.parseColor(colors[3]))
-                        it.tv_title?.text="企业年用能情况汇总"
-                        it.tv_key?.text="本年用电："
+                        it.tv_title?.text="企业年用"+tag01+"情况汇总"
+                        it.tv_key?.text="本年用"+tag01+"："
                     }
 
                 }
