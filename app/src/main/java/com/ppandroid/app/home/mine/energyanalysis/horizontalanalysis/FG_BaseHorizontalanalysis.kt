@@ -17,10 +17,12 @@ import kotlinx.android.synthetic.main.fg_base_horizontal_analysis.*
  * 横向页面基本框架
  */
 open abstract class FG_BaseHorizontalanalysis:FG_Base(){
+    protected var energyClassificationId="1"
     companion object {
-        fun createBundle(parentId:String): Bundle{
+        fun createBundle(energyClassificationId:String,parentId:String): Bundle{
             var b=Bundle()
             b.putString("parentId",parentId)
+            b.putString("energyClassificationId",energyClassificationId)
             return b
         }
     }
@@ -31,6 +33,7 @@ open abstract class FG_BaseHorizontalanalysis:FG_Base(){
     override fun afterViews() {
         arguments?.let {
             parentId=it.getString("parentId","-1")
+            energyClassificationId=it.getString("energyClassificationId","1")
         }
         init()
         var adapter =getAdapter()

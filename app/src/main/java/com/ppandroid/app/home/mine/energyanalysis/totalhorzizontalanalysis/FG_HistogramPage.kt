@@ -29,7 +29,12 @@ class FG_HistogramPage : FG_BaseHistoramAnalysisPage(){
         }
 
         //原来日月年全部调用
-        var url = "user/energy/analysis/getDeviceAllDetail.json"
+        var url =if (energyClassificationId=="1"){
+            "user/energy/analysis/getDeviceAllDetail.json"
+        }else{
+            "user/water/analysis/getDeviceAllDetail.json"
+
+        }
         if (index != 3) {//总计
             url += "?dateString=$select"
         }
@@ -107,7 +112,11 @@ class FG_HistogramPage : FG_BaseHistoramAnalysisPage(){
     }
 
     private fun loadWeekAnalysis() {
-        var url="user/energy/analysis/getWeekAnalysis.json"
+        var url=if (energyClassificationId=="1"){
+            "user/energy/analysis/getWeekAnalysis.json"
+        }else{
+            "user/water/analysis/getWeekAnalysis.json"
+        }
         Http.get(activity,url, BN_EnergyAnalysis::class.java,object :MyCallBack<BN_EnergyAnalysis>{
             override fun onResponse(response: BN_EnergyAnalysis?) {
                 response?.let {

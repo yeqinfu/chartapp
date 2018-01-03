@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
+import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.text.TextUtils
 import android.view.View
@@ -162,7 +163,7 @@ class FG_WaterPage:FG_Base(){
         var view = activity.layoutInflater.inflate(R.layout.item_zhongdian_layout, null)
         view.find<TextView>(R.id.tv_title_05).text="重点设备用水统计"
         view.find<TextView>(R.id.tv_more5).setOnClickListener {
-            startAC(FG_DeviceAnalysis::class.java.name)
+            startAC(FG_DeviceAnalysis::class.java.name,createBundle())
         }
 
         return view
@@ -178,7 +179,7 @@ class FG_WaterPage:FG_Base(){
         var view = activity.layoutInflater.inflate(R.layout.item_instrument_layout, null)
         view.find<TextView>(R.id.tv_title_04).text="仪表用水统计"
         view.find<TextView>(R.id.tv_more4).setOnClickListener {
-            startAC(FG_InstrumentAnalysis::class.java.name)
+            startAC(FG_InstrumentAnalysis::class.java.name,createBundle())
         }
 
         return view
@@ -196,14 +197,15 @@ class FG_WaterPage:FG_Base(){
         view.find<TextView>(R.id.tv_title_03).text="区域用水统计"
 
 
+        var b=createBundle()
         view.find<TextView>(R.id.tv_more).setOnClickListener {
-            startAC(FG_EnergyAnalysis::class.java.name)
+            startAC(FG_EnergyAnalysis::class.java.name,b)
         }
         view.find<TextView>(R.id.tv_more2).setOnClickListener {
-            startAC(FG_CateAnalysis::class.java.name)
+            startAC(FG_CateAnalysis::class.java.name,b)
         }
         view.find<TextView>(R.id.tv_more3).setOnClickListener {
-            startAC(FG_AreaAnalysis::class.java.name)
+            startAC(FG_AreaAnalysis::class.java.name,b)
         }
         val c = Calendar.getInstance()
         if (select.isEmpty()){
@@ -532,7 +534,12 @@ class FG_WaterPage:FG_Base(){
 
             }
         }
+    }
 
+    private fun createBundle(): Bundle {
+        var b=Bundle()
+        b.putString("energyClassificationId",energyClassificationId)
+        return b
     }
 
 }

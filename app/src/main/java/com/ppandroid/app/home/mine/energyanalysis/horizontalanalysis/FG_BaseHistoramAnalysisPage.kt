@@ -18,6 +18,7 @@ import java.util.*
  * Created by yeqinfu on 2017/9/15.
  */
 abstract class FG_BaseHistoramAnalysisPage:FG_Base(){
+    protected var energyClassificationId="1"
     companion object {
         fun createBundle(index: Int): Bundle {
             var b = Bundle()
@@ -25,9 +26,10 @@ abstract class FG_BaseHistoramAnalysisPage:FG_Base(){
             return b
         }
 
-        fun createBundle(index: Int, parentId: String): Bundle {
+        fun createBundle(energyClassificationId:String,index: Int, parentId: String): Bundle {
             var b = createBundle(index)
             b.putString("parentId", parentId)
+            b.putString("energyClassificationId", energyClassificationId)
             return b
         }
     }
@@ -59,6 +61,7 @@ abstract class FG_BaseHistoramAnalysisPage:FG_Base(){
         arguments?.let {
             index = it.getInt("index", 0)
             parentId = it.getString("parentId", "-1")
+            energyClassificationId = it.getString("energyClassificationId", "1")
         }
 
         when(index){

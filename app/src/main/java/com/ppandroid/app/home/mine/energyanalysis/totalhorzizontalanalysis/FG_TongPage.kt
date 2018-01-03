@@ -29,7 +29,11 @@ class FG_TongPage:FG_BaseLineChart(){
             loadWeekContent()
             return
         }
-        var url="user/energy/analysis/getDeviceAllDetailTongbi.json?dateString=$select"
+        var url=if (energyClassificationId=="1"){
+            "user/energy/analysis/getDeviceAllDetailTongbi.json?dateString=$select"
+        }else{
+            "user/water/analysis/getDeviceAllDetailTongbi.json?dateString=$select"
+        }
 
         Http.get(activity,url, BN_TongPage::class.java,object :MyCallBack<BN_TongPage>{
             override fun onResponse(response: BN_TongPage?) {
@@ -72,7 +76,11 @@ class FG_TongPage:FG_BaseLineChart(){
     }
 
     private fun loadWeekContent() {
-        var url="user/energy/analysis/getWeekAnalysisTongbi.json"
+        var url=if (energyClassificationId=="1"){
+            "user/energy/analysis/getWeekAnalysisTongbi.json"
+        }else{
+            "user/water/analysis/getWeekAnalysisTongbi.json"
+        }
 
         Http.get(activity,url, BN_TongPageWeek::class.java,object :MyCallBack<BN_TongPageWeek>{
             override fun onResponse(response: BN_TongPageWeek?) {

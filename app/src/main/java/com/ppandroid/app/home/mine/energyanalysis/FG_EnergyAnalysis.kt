@@ -47,6 +47,7 @@ class FG_EnergyAnalysis :FG_Base(){
         v_yellow_chart.setTitle(title)
         v_yellow_chart.setOnClickListener {
             var intent=Intent()
+            intent.putExtra("energyClassificationId",energyClassificationId)
             intent.setClass(activity,AC_TotalHorzintalanalysis::class.java)
             startActivity(intent)
         }

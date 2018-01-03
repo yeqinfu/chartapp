@@ -23,7 +23,11 @@ class AC_CateHorChart:AC_HorChart(){
 
     private var list: List<BN_CateList.MessageBean>? = null
     private fun loadContent() {
-        var url="user/energy/analysis/getCateList.json"
+        var url=if (energyClassificationId=="1"){
+            "user/energy/analysis/getCateList.json"
+        }else{
+            "user/water/analysis/getCateList.json"
+        }
         Http.get(this,url, BN_CateList::class.java,object :MyCallBack<BN_CateList>{
             override fun onResponse(response: BN_CateList?) {
                 response?.let {
@@ -51,7 +55,7 @@ class AC_CateHorChart:AC_HorChart(){
     override fun getFragmentPage(i: Int): Fragment {
         var fg= FG_CateHistogramAnalysis()
         list?.let {
-            var b=FG_BaseHorizontalanalysis.createBundle(it[i].id.toString())
+            var b=FG_BaseHorizontalanalysis.createBundle(energyClassificationId,it[i].id.toString())
             fg.arguments=b
         }
         return fg

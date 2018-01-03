@@ -22,7 +22,11 @@ class FG_DevicesHistogramAnalysisPage : FG_BaseHistoramAnalysisPage(){
 
 
     override fun loadContent() {
-        var url = "user/energy/analysis/getDeviceDetail.json?deviceId=$parentId"
+        var url =if (energyClassificationId=="1"){
+            "user/energy/analysis/getDeviceDetail.json?deviceId=$parentId"
+        }else{
+            "user/water/analysis/getDeviceDetail.json?deviceId=$parentId"
+        }
         if (index != 3) {//总计
             url += "&dateString=$select"
         }

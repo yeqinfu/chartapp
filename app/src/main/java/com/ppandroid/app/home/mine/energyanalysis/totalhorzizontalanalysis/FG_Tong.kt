@@ -21,10 +21,10 @@ class FG_Tong : FG_BaseHorizontalanalysis(){
     }
 
     override fun getAdapter(): FragmentStatePagerAdapter {
-        return AD_TongPage (activity,childFragmentManager,parentId)
+        return AD_TongPage (energyClassificationId,activity,childFragmentManager,parentId)
     }
 
-    class AD_TongPage(ac: Activity, fm: FragmentManager, parentId:String) : AD_BaseHuanTong(ac,fm){
+    class AD_TongPage(energyClassificationId:String,ac: Activity, fm: FragmentManager, parentId:String) : AD_BaseHuanTong(ac,fm){
         override fun initFragment() {
             this.arrays_title = mContext.resources.getStringArray(R.array.fg_base_h_analysis4)
             fragments = arrayOfNulls(arrays_title.size)
@@ -39,11 +39,12 @@ class FG_Tong : FG_BaseHorizontalanalysis(){
         override fun getContentFragment(): FG_BaseLineChart=FG_TongPage()
 
         var parentId=parentId
+        var energyClassificationId=energyClassificationId
         init {
             initFragment()
         }
         override fun getBundle(index:Int): Bundle {
-            return FG_BaseLineChart.createBundle(index)
+            return FG_BaseLineChart.createBundle(energyClassificationId,index)
 
         }
 

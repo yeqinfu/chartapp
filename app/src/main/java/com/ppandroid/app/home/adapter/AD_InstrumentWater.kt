@@ -8,14 +8,17 @@ package com.ppandroid.app.home.adapter
 import android.app.Activity
 import android.graphics.Color
 import android.support.v4.view.PagerAdapter
+import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ListView
 import android.widget.TextView
 import com.ppandroid.app.R
+import com.ppandroid.app.base.AC_ContentFG
 import com.ppandroid.app.bean.overview.BN_OverViewWater
 import com.ppandroid.app.home.FG_OverView
+import com.ppandroid.app.home.mine.energyanalysis.devicesanalysis.FG_InstrumentDetailAnalysis
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.widget.HorizontalPercentageView
 import org.jetbrains.anko.find
@@ -24,6 +27,8 @@ import org.jetbrains.anko.find
  * Created by yeqinfu on 2017/8/11.
  */
 class AD_InstrumentWater(ac: Activity, list: List<BN_OverViewWater.MessageBean.InstrumentInfomationListBean>): PagerAdapter(){
+
+    var energyClassificationId="2"
     /**横条图viewpager*/
     var arrays_title = arrayOf(
             "今日",
@@ -82,11 +87,11 @@ class AD_InstrumentWater(ac: Activity, list: List<BN_OverViewWater.MessageBean.I
             lv_list.adapter=adapter
             lv_list.setOnItemClickListener { adapterView, view, i, l ->
                 var item= list?.get(position)?.instrumentMapList?.get(i)
-               /* if (!TextUtils.isEmpty(item?.id)){
-                    var bundle= FG_InstrumentDetailAnalysis.createBundle(item?.id ?: "", item?.key ?: "")
+                if (!TextUtils.isEmpty(item?.id?.toString())){
+                    var bundle= FG_InstrumentDetailAnalysis.createBundle(energyClassificationId,item?.id?.toString() ?: "", item?.key ?: "")
                     var intent= AC_ContentFG.createIntent(ac, FG_InstrumentDetailAnalysis::class.java.name, bundle)
                     ac?.startActivity(intent)
-                }*/
+                }
 
             }
         }

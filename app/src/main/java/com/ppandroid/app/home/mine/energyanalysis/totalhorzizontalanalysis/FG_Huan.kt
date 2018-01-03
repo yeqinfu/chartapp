@@ -22,10 +22,10 @@ class FG_Huan : FG_BaseHorizontalanalysis(){
     }
 
     override fun getAdapter(): FragmentStatePagerAdapter {
-        return AD_HuanPage (activity,childFragmentManager,parentId)
+        return AD_HuanPage (energyClassificationId,activity,childFragmentManager,parentId)
     }
 
-    class AD_HuanPage(ac: Activity, fm: FragmentManager, parentId:String) : AD_BaseHuanTong(ac,fm){
+    class AD_HuanPage(energyClassificationId:String,ac: Activity, fm: FragmentManager, parentId:String) : AD_BaseHuanTong(ac,fm){
         override fun initFragment() {
             this.arrays_title = mContext.resources.getStringArray(R.array.fg_base_h_analysis3)
             fragments = arrayOfNulls(arrays_title.size)
@@ -42,11 +42,12 @@ class FG_Huan : FG_BaseHorizontalanalysis(){
         override fun getContentFragment(): FG_BaseLineChart=FG_HuanPage()
 
         var parentId=parentId
+        var energyClassificationId=energyClassificationId
         init {
             initFragment()
         }
         override fun getBundle(index:Int): Bundle {
-            return FG_BaseLineChart.createBundle(index)
+            return FG_BaseLineChart.createBundle(energyClassificationId,index)
 
         }
 

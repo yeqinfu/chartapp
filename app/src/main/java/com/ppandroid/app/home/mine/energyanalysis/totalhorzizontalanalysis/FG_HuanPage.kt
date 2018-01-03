@@ -28,7 +28,11 @@ class FG_HuanPage:FG_BaseLineChart(){
             loadWeekContent()
             return
         }
-        var url="user/energy/analysis/getDeviceAllDetailHuanbi.json?dateString=$select"
+        var url=if (energyClassificationId=="1"){
+            "user/energy/analysis/getDeviceAllDetailHuanbi.json?dateString=$select"
+        }else{
+            "user/water/analysis/getDeviceAllDetailHuanbi.json?dateString=$select"
+        }
         Http.get(activity,url,BN_HuanPage::class.java,object :MyCallBack<BN_HuanPage>{
             override fun onResponse(response: BN_HuanPage?) {
                 response?.let {
@@ -73,7 +77,11 @@ class FG_HuanPage:FG_BaseLineChart(){
     }
 
     private fun loadWeekContent() {
-        var url="user/energy/analysis/getWeekAnalysisHuanbi.json"
+        var url=if (energyClassificationId=="1"){
+            "user/energy/analysis/getWeekAnalysisHuanbi.json"
+        }else{
+            "user/water/analysis/getWeekAnalysisHuanbi.json"
+        }
         Http.get(activity,url, BN_HuanPageWeek::class.java,object :MyCallBack<BN_HuanPageWeek>{
             override fun onResponse(response: BN_HuanPageWeek?) {
                 response?.let {

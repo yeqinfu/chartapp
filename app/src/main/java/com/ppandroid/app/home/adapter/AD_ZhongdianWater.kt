@@ -15,8 +15,10 @@ import android.widget.BaseAdapter
 import android.widget.ListView
 import android.widget.TextView
 import com.ppandroid.app.R
+import com.ppandroid.app.base.AC_ContentFG
 import com.ppandroid.app.bean.overview.BN_OverViewWater
 import com.ppandroid.app.home.FG_OverView
+import com.ppandroid.app.home.mine.energyanalysis.devicesanalysis.FG_DeviceDetailAnalysis
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.widget.HorizontalPercentageView
 import org.jetbrains.anko.find
@@ -25,6 +27,8 @@ import org.jetbrains.anko.find
  * Created by yeqinfu on 2017/8/11.
  */
 class AD_ZhongdianWater(ac: Activity, list: List<BN_OverViewWater.MessageBean.DeviceInformationListBean>) : PagerAdapter() {
+
+    var energyClassificationId="2"
     /**横条图viewpager*/
     var arrays_title = arrayOf(
             "今日",
@@ -86,9 +90,9 @@ class AD_ZhongdianWater(ac: Activity, list: List<BN_OverViewWater.MessageBean.De
 
                 var item= list?.get(position)?.deviceM3MapList?.get(i)
                 if (!TextUtils.isEmpty(item?.key)){
-                /*    var bundle= FG_DeviceDetailAnalysis.createBundle(item?.id ?: "", item?.key ?: "")
+                    var bundle= FG_DeviceDetailAnalysis.createBundle(energyClassificationId,item?.id?.toString() ?: "", item?.key ?: "")
                     var intent= AC_ContentFG.createIntent(ac, FG_DeviceDetailAnalysis::class.java.name, bundle)
-                    ac?.startActivity(intent)*/
+                    ac?.startActivity(intent)
                 }
 
             }

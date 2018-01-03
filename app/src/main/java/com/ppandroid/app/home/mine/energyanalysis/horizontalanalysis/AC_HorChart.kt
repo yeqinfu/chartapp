@@ -15,6 +15,9 @@ import kotlinx.android.synthetic.main.activity_ac__hor_chart.*
 
 
 open abstract class AC_HorChart : AC_Base() {
+    protected var energyClassificationId="1"
+
+
     private var fragments: ArrayList<Fragment>? = null
 
     protected fun setContent(){
@@ -45,6 +48,7 @@ open abstract class AC_HorChart : AC_Base() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ac__hor_chart)
+        energyClassificationId=intent?.getStringExtra("energyClassificationId")?:"1"
         init()
         setEnablePullToBack(false)
     }

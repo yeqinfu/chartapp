@@ -8,12 +8,15 @@ package com.ppandroid.app.home.adapter
 import android.app.Activity
 import android.graphics.Color
 import android.support.v4.view.PagerAdapter
+import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.ppandroid.app.R
+import com.ppandroid.app.base.AC_ContentFG
 import com.ppandroid.app.bean.overview.BN_OverViewWater
+import com.ppandroid.app.home.mine.energyanalysis.devicesanalysis.FG_AreaDetailAnalysis
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.widget.HorizontalPercentageView
 import org.jetbrains.anko.find
@@ -22,6 +25,8 @@ import org.jetbrains.anko.find
  * Created by yeqinfu on 2017/8/11.
  */
 class AD_AreaEnergyWater(ac: Activity, list: List<BN_OverViewWater.MessageBean.OverviewConsumptionInformationBean.AreaInformationListBean>) : PagerAdapter() {
+
+    var energyClassificationId="2"
     /**横条图viewpager*/
     private var arrays_title = arrayOf(
             "今日",
@@ -89,11 +94,11 @@ class AD_AreaEnergyWater(ac: Activity, list: List<BN_OverViewWater.MessageBean.O
 
                 var ll_first = view.find<LinearLayout>(R.id.ll_first2)
                 ll_first.setOnClickListener {bd->
-                   /* if (!TextUtils.isEmpty(it[0].id)){
-                        var bundle= FG_AreaDetailAnalysis.createBundle(it[0].id, it[0].key)
+                    if (!TextUtils.isEmpty(""+it[0].id)){
+                        var bundle= FG_AreaDetailAnalysis.createBundle(energyClassificationId,""+it[0].id, it[0].key)
                         var intent = AC_ContentFG.createIntent(ac, FG_AreaDetailAnalysis::class.java.name, bundle)
                         ac?.startActivity(intent)
-                    }*/
+                    }
 
                 }
 

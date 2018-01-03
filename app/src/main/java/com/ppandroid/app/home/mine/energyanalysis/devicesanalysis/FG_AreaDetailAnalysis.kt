@@ -36,6 +36,7 @@ class FG_AreaDetailAnalysis : FG_BaseAnalysis(){
         //横向分析图
         head_view.setIvRight(R.drawable.ic_fanzhuan){
             var it= Intent()
+            it.putExtra("energyClassificationId",energyClassificationId)
             it.setClass(activity, AC_AreaHorChart::class.java)
             startActivity(it)
         }

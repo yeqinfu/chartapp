@@ -19,9 +19,10 @@ import kotlin.collections.LinkedHashMap
  */
 open abstract class FG_BaseLineChart:FG_Base(){
     companion object {
-        fun createBundle(index: Int): Bundle {
+        fun createBundle(energyClassificationId:String,index: Int): Bundle {
             var b = Bundle()
             b.putInt("index", index)
+            b.putString("energyClassificationId", energyClassificationId)
             return b
         }
 
@@ -40,10 +41,11 @@ open abstract class FG_BaseLineChart:FG_Base(){
     //0 日 1 周 2 月 3 年
     protected var index: Int = 0
     protected var select = ""
-
+    protected var energyClassificationId="1"
     override fun afterViews() {
         arguments?.let {
             index = it.getInt("index", 0)
+            energyClassificationId = it.getString("energyClassificationId", "1")
         }
         val c = Calendar.getInstance()
         val initDate = c.get(Calendar.YEAR).toString() + "-" + format(c.get(Calendar.MONTH) + 1) + "-" + format(c.get(Calendar.DAY_OF_MONTH))

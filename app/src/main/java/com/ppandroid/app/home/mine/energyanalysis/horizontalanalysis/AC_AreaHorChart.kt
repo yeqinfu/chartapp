@@ -23,7 +23,11 @@ class AC_AreaHorChart : AC_HorChart(){
 
     private var list: List<BN_AreaList.MessageBean>? = null
     private fun loadContent() {
-        var url="user/energy/analysis/getAreaList.json"
+        var url=if (energyClassificationId=="1"){
+            "user/energy/analysis/getAreaList.json"
+        }else{
+            "user/water/analysis/getAreaList.json"
+        }
         Http.get(this, url, BN_AreaList::class.java, object : MyCallBack<BN_AreaList> {
             override fun onResponse(response: BN_AreaList?) {
                 response?.let {
@@ -51,7 +55,7 @@ class AC_AreaHorChart : AC_HorChart(){
     override fun getFragmentPage(i: Int): Fragment {
         var fg= FG_AreaHistogramAnalysis()
         list?.let {
-            var b= FG_BaseHorizontalanalysis.createBundle(it[i].id.toString())
+            var b= FG_BaseHorizontalanalysis.createBundle(energyClassificationId,it[i].id.toString())
             fg.arguments=b
         }
         return fg
