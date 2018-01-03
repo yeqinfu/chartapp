@@ -6,6 +6,7 @@
 package com.ppandroid.app.home.news
 
 import android.app.Activity
+import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -29,6 +30,13 @@ class FG_EnergyComparison:FG_CommonList<BN_EnergyComparison.MessageBean.ResultBe
             energyClassificationId=it.getString("energyClassificationId","1")
         }
         super.afterViews()
+        lv_list.setOnItemClickListener { p0, p1, pos, p3 ->
+            var intent= Intent()
+            intent.setClass(activity,AC_RecentComparison::class.java)
+            intent.putExtra("default",content[pos].alert)
+            intent.putExtra("energyClassificationId",energyClassificationId)
+            startActivity(intent)
+        }
     }
     override fun getAdapter(activity: Activity, content: ArrayList<BN_EnergyComparison.MessageBean.ResultBean>): AD_CommonList<BN_EnergyComparison.MessageBean.ResultBean>? {
         return AD_EnergyComparison(activity,content)

@@ -5,8 +5,8 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          android:sharedUserId="com.ppandroid"
-          package="com.ppandroid.app">
+          package="com.ppandroid.app"
+          android:sharedUserId="com.ppandroid">
 
     <uses-permission android:name="android.permission.CAMERA"/>
     <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
@@ -32,8 +32,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".AC_Main"
-            android:launchMode="singleTop"
             android:configChanges="screenSize|keyboardHidden|orientation"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait">
         </activity>
         <activity
@@ -45,8 +45,8 @@
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:screenOrientation="portrait"/>
         <activity
-            android:launchMode="singleTop"
-            android:name=".AC_Login">
+            android:name=".AC_Login"
+            android:launchMode="singleTop">
         </activity>
         <activity android:name=".AC_Welcome">
             <intent-filter>
@@ -185,6 +185,10 @@
         <!-- </>值来自开发者平台取得的AppKey -->
         <!-- ++++++++++++++++++++++++++++++++极光推送 end+++++++++++++++++++++++++++++++++ -->
         <activity android:name=".test.TestActivity">
+        </activity>
+        <activity
+            android:screenOrientation="landscape"
+            android:name=".home.news.AC_RecentComparison">
         </activity>
     </application>
 

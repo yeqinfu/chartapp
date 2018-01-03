@@ -20,6 +20,7 @@ import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.widget.HorizontalPercentageView
 import com.ppandroid.im.base.FG_Base
+import com.ppandroid.im.utils.Contants
 import kotlinx.android.synthetic.main.fg_energy_detail.*
 import kotlinx.android.synthetic.main.layout_head_view.*
 import org.jetbrains.anko.find
@@ -28,10 +29,12 @@ import org.jetbrains.anko.find
  * Created by yeqinfu on 2017/9/21.
  */
 class FG_EnergyDetail : FG_Base() {
+    var energyClassificationId="1"
     companion object {
-        fun createBundle(id: String, title: String): Bundle {
+        fun createBundle(energyClassificationId:String,id: String, title: String): Bundle {
             var b = Bundle()
             b.putString("id", id)
+            b.putString("energyClassificationId", energyClassificationId)
             b.putString("title", title)
             return b
         }
@@ -42,24 +45,35 @@ class FG_EnergyDetail : FG_Base() {
 
     override fun fgRes(): Int = R.layout.fg_energy_detail
 
+    private var tag01="电"
+    private var tag02="kwh"
     override fun afterViews() {
         arguments?.let {
             id = it.getString("id", "")
             title = it.getString("title", "")
+            energyClassificationId = it.getString("energyClassificationId", "1")
+        }
+        if (energyClassificationId=="2"){
+            tag01="水"
+            tag02=Contants.m3
         }
         head_view.init(activity)
-        head_view.setCenterTitle(title + "用能情况")
+        head_view.setCenterTitle(title + "用"+tag01+"情况")
         loadContent()
     }
 
     private fun loadContent() {
-        var url = "user/energy/statistics/getConsumptionList.json?id=$id"
+        var url = if (energyClassificationId=="1"){
+            "user/energy/statistics/getConsumptionList.json?id=$id"
+        }else{
+            "user/water/statistics/getConsumptionList.json?id=$id"
+        }
         Http.get(activity, url, BN_EnergyDetail::class.java, object : MyCallBack<BN_EnergyDetail> {
             override fun onResponse(response: BN_EnergyDetail?) {
                 response?.let {
-                    tv_total_number.text = "总用电量（" + it.message.deviceNumber + "项）"
-                    tv_total_kwh.text = it.message.consumptionSum + "kwh"
-                    var adapter=AD_List(it.message.energyConsumptionDeviceList,activity)
+                    tv_total_number.text = "总用"+tag01+"量（" + it.message.deviceNumber + "项）"
+                    tv_total_kwh.text = it.message.consumptionSum + tag02
+                    var adapter=AD_List(energyClassificationId,it.message.energyConsumptionDeviceList,activity)
                     lv_list.adapter=adapter
 
                 }
@@ -83,9 +97,18 @@ class FG_EnergyDetail : FG_Base() {
         var v_hp2: HorizontalPercentageView? = null
     }
 
-    class AD_List(data: List<BN_EnergyDetail.MessageBean.EnergyConsumptionDeviceListBean>, context: Context) : BaseAdapter() {
+    class AD_List(energyClassificationId:String,data: List<BN_EnergyDetail.MessageBean.EnergyConsumptionDeviceListBean>, context: Context) : BaseAdapter() {
         private var data = data
+        private var energyClassificationId = energyClassificationId
         private var context = context
+        private var tag01="电"
+        private var tag02="kwh"
+        init {
+            if (energyClassificationId=="2"){
+                tag01="水"
+                tag02=Contants.m3
+            }
+        }
         override fun getView(pos: Int, convertView: View?, p2: ViewGroup?): View? {
             var view:View?=null
             var holder:Holder?=null
@@ -108,9 +131,9 @@ class FG_EnergyDetail : FG_Base() {
             holder?.let {
                 var item=data[pos]
                 it.tv_name?.text=item.deviceName
-                it.tv_this_value?.text=item.thisDevice+"kwh"
+                it.tv_this_value?.text=item.thisDevice+tag02
                 it.tv_this_ratio?.text=item.thisDeviceRatio
-                it.tv_last_value?.text=item.lastDevice+"kwh"
+                it.tv_last_value?.text=item.lastDevice+tag02
                 it.tv_last_ratio?.text=item.lastDeviceRatio
                 var a=Utils_Common.parseNumberString(item.thisDevice)
                 var b=Utils_Common.parseNumberString(item.lastDevice)

@@ -95,31 +95,31 @@ public class MyReceiver extends BroadcastReceiver {
 				String myKey = it.next().toString();
 				if (myKey.equals("type")) {
 					//消息转发要求隐藏小红点
-					EventBus.getDefault().post(new ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE, FG_News.BN_Data.Companion.getFAILUE_WARNING() + ""));
-					if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getFAILUE_WARNING())) {//故障报警
+					EventBus.getDefault().post(new ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE, json.optString(myKey)));
+					if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getFAILUE_WARNING()+"")) {//故障报警
 						Intent intent = AC_ContentFG.createIntent(context, FG_FaultHistory.class.getName());
 						context.startActivity(intent);
 					}
-					else if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getENERGY_COLLECT())) {//能耗总会
+					else if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getENERGY_COLLECT()+"")) {//能耗总会
 						Intent intent = AC_ContentFG.createIntent(context, FG_EnergyList.class.getName());
 						context.startActivity(intent);
 					}
-                    else if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getSYSTEM())) {//系统消息
-                        Intent intent = AC_ContentFG.createIntent(context, FG_SystemNewList.class.getName());
-                        context.startActivity(intent);
-                    }
-                    else if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getPOWER_COMPARISON())) {//能耗对比
-                        Intent intent = AC_ContentFG.createIntent(context, FG_EnergyComparison.class.getName());
-                        context.startActivity(intent);
-                    }
-                    else if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getWATER_COMPARISON())) {//水能耗对比
-                        Intent intent = AC_ContentFG.createIntent(context, FG_EnergyComparison.class.getName(),FG_News.Companion.createBundle());
-                        context.startActivity(intent);
-                    }
-                    else if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getWATER_COLLECT())) {//水能耗汇总
-                        Intent intent = AC_ContentFG.createIntent(context, FG_EnergyList.class.getName(),FG_News.Companion.createBundle());
-                        context.startActivity(intent);
-                    }
+					else if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getSYSTEM()+"")) {//系统消息
+						Intent intent = AC_ContentFG.createIntent(context, FG_SystemNewList.class.getName());
+						context.startActivity(intent);
+					}
+					else if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getPOWER_COMPARISON()+"")) {//能耗对比
+						Intent intent = AC_ContentFG.createIntent(context, FG_EnergyComparison.class.getName());
+						context.startActivity(intent);
+					}
+					else if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getWATER_COMPARISON()+"")) {//水能耗对比
+						Intent intent = AC_ContentFG.createIntent(context, FG_EnergyComparison.class.getName(), FG_News.Companion.createBundle());
+						context.startActivity(intent);
+					}
+					else if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getWATER_COLLECT()+"")) {//水能耗汇总
+						Intent intent = AC_ContentFG.createIntent(context, FG_EnergyList.class.getName(), FG_News.Companion.createBundle());
+						context.startActivity(intent);
+					}
 				}
 
 			}
@@ -152,26 +152,7 @@ public class MyReceiver extends BroadcastReceiver {
 						String myKey = it.next().toString();
 						sb.append("\nkey:" + key + ", value: [" + myKey + " - " + json.optString(myKey) + "]");
 						if (myKey.equals("type")) {
-							if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getFAILUE_WARNING())) {//故障报警
-								EventBus.getDefault()
-										.post(new ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW, FG_News.BN_Data.Companion.getFAILUE_WARNING() + "", (String) bundle.get(JPushInterface.EXTRA_ALERT)));
-							}
-							else if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getENERGY_COLLECT())) {//能耗总会
-								EventBus.getDefault().post(new ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW, FG_News.BN_Data.Companion.getENERGY_COLLECT() + ""));
-							}
-							else if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getPOWER_COMPARISON())) {//能耗对比
-								EventBus.getDefault().post(new ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW, FG_News.BN_Data.Companion.getPOWER_COMPARISON() + ""));
-							}
-							else if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getSYSTEM())) {//系统消息
-								EventBus.getDefault().post(new ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW, FG_News.BN_Data.Companion.getSYSTEM() + ""));
-							}
-							else if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getWATER_COLLECT())) {//水汇总
-								EventBus.getDefault().post(new ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW, FG_News.BN_Data.Companion.getWATER_COLLECT() + ""));
-							}
-							else if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getWATER_COMPARISON())) {//水对比
-								EventBus.getDefault().post(new ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW, FG_News.BN_Data.Companion.getWATER_COLLECT() + ""));
-							}
-
+                            EventBus.getDefault().post(new ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW, json.optString(myKey)));
 						}
 
 					}

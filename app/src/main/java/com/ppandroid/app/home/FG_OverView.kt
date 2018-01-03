@@ -538,9 +538,7 @@ class FG_OverView : FG_Base() {
 
     protected var select = ""
 
-    private fun showDatePop2(){
 
-    }
 
 
     private fun format(month: Int): String {

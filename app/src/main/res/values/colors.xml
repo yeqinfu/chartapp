@@ -50,4 +50,11 @@
     <color name="vcolor03">#FFB338</color>
     <color name="vcolor04">#6CC37E</color>
     <color name="vcolor05">#2ED9A4</color>
+
+    <!--三日分析图用到的五个颜色-->
+    <color name="vcolor06">#5EC1FF</color>
+    <color name="vcolor07">#FFCF3B</color>
+    <color name="vcolor08">#FF6969</color>
+    <color name="vcolor09">#45E069</color>
+    <color name="vcolor10">#C02BE5</color>
 </resources>

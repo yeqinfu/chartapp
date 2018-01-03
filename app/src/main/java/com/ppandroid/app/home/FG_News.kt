@@ -19,6 +19,7 @@ import com.ppandroid.app.home.news.FG_EnergyComparison
 import com.ppandroid.app.home.news.FG_EnergyList
 import com.ppandroid.app.home.news.FG_FaultHistory
 import com.ppandroid.app.home.news.FG_SystemNewList
+import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_news.*
 import org.greenrobot.eventbus.EventBus
@@ -41,11 +42,12 @@ class FG_News : FG_Base() {
             //转发通知给主tabs显示小红点
             EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW_MAIN, event.type))
             for (item in dataSet){
-                if (item.msgType.equals(event.type)){
+                if (item.msgType.toString()==(event.type)){
                     if (!TextUtils.isEmpty(event.msg)){//如果消息不为空，相应显示在选项item中
                         item.msg=event.msg
                     }
                     item.showRedPoint=true
+                    DebugLog.d("============================================")
                 }
             }
             adapter?.notifyDataSetChanged()
@@ -54,7 +56,7 @@ class FG_News : FG_Base() {
             //转发通知给主tab取消小红点
             EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE_MAIN, event.type))
             for (item in dataSet){
-                if (item.msgType.equals(event.type)){
+                if (item.msgType.toString() == event.type){
                     item.showRedPoint=false
                 }
             }
@@ -118,7 +120,7 @@ class FG_News : FG_Base() {
         item6.date = initDate
         item6.title = "用水量对比"
         item6.msg =  "点击查看用水量对比"
-        item6.icon = R.drawable.icon_nhdb
+        item6.icon = R.drawable.icon_ysldb
         dataSet.add(item6)
 
 

@@ -85,7 +85,7 @@ class FG_EnergyList :FG_Base(){
                         pageNumber++
                         totalPage=it.message.totalPages
                         lv_list.setOnItemClickListener { _, _, i, _ ->
-                            var b=FG_EnergyDetail.Companion.createBundle(content[i].id.toString(),content[i].datePeriod)
+                            var b=FG_EnergyDetail.Companion.createBundle(energyClassificationId,content[i].id.toString(),content[i].datePeriod)
                             startAC(FG_EnergyDetail::class.java.name,b)
                         }
                     }
