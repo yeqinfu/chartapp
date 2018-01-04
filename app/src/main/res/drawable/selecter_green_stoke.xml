@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by yeqinfu on 18-1-4 上午11:52
+  ~ Copyright (c) JXT All rights reserved.
+  -->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true"
+
+          android:drawable="@drawable/shape_stroke_color01_corner_4dp"
+        />
+    <item android:state_checked="false"
+          android:drawable="@color/white"
+        />
+
+</selector>

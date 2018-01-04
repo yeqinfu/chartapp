@@ -66,6 +66,8 @@ public class MultipleChartView extends View implements Runnable {
 	//画折线对应的画笔
 	private Paint				linePaint;
 	//画折线对应的画笔
+	private Paint				linePointPaint;
+	//画折线对应的画笔
 	private Paint				blackPaint;
 
 	//画折线对应的画笔
@@ -107,7 +109,8 @@ public class MultipleChartView extends View implements Runnable {
 		public double				minValue	= 0.0;						//折线图最小值
 		public double				avg			= 0.0;						//折线图平均值
 		public Map<String, Double>	value		= new LinkedHashMap<>();	//折线对应的数据
-		public int					lineColor	= R.color.vcolor06;			//折线图颜色
+		public int					lineColor	= Color.GREEN;			//折线图颜色
+		public int					linePointColor	=  Color.parseColor("#5EC1FF");			//折线图节点颜色
 	}
 
 	public MultipleChartView(Context context) {
@@ -164,6 +167,12 @@ public class MultipleChartView extends View implements Runnable {
 		xyTextPaint.setColor(xytextcolor);
 		xyTextPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 
+		linePaint = new Paint();
+		linePaint.setAntiAlias(true);
+		linePaint.setStrokeWidth(xylinewidth);
+		linePaint.setStrokeCap(Paint.Cap.ROUND);
+		linePaint.setColor(linecolor);
+		linePaint.setStyle(Paint.Style.STROKE);
 		linePaint = new Paint();
 		linePaint.setAntiAlias(true);
 		linePaint.setStrokeWidth(xylinewidth);
@@ -381,7 +390,8 @@ public class MultipleChartView extends View implements Runnable {
 	 *
 	 * @param canvas
 	 */
-	private void drawBrokenPoint(Canvas canvas, BrokenLine item) {
+	@SuppressLint("ResourceAsColor")
+    private void drawBrokenPoint(Canvas canvas, BrokenLine item) {
 		float dp2 = dpToPx(2);
 		float dp4 = dpToPx(4);
 		float dp7 = dpToPx(7);
@@ -396,7 +406,7 @@ public class MultipleChartView extends View implements Runnable {
 				canvas.drawLine(x, 0, x, yOri, blackPaint);
 			}
 			linePaint.setStyle(Paint.Style.FILL_AND_STROKE);
-			linePaint.setColor(linecolor);
+			linePaint.setColor(item.linePointColor);
 			canvas.drawCircle(x, y, dp2, linePaint);
 
 		}
@@ -667,6 +677,8 @@ public class MultipleChartView extends View implements Runnable {
 
 			}
 		}
+        selectType = 1;
+		invalidate();
 	}
 
 	/**

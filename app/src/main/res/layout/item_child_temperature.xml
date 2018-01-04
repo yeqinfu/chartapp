@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by yeqinfu on 18-1-4 上午11:25
+  ~ Copyright (c) JXT All rights reserved.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/white"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <TextView
+        android:drawablePadding="5dp"
+        android:id="@+id/tv_time"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:drawableRight="@drawable/icon_dd"
+        android:text="2017"
+        android:textColor="@color/color_07"
+        android:textSize="@dimen/second_title"
+        android:textStyle="bold"/>
+  <LinearLayout
+      android:paddingLeft="15dp"
+      android:paddingRight="15dp"
+      android:gravity="center_vertical"
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="40dp">
+
+      <TextView
+          android:textSize="@dimen/second_title"
+          android:textColor="@color/color_07"
+          android:text="24小时温湿度实况"
+          android:layout_width="0dp"
+          android:layout_weight="1"
+          android:layout_height="wrap_content"/>
+
+
+      <RadioGroup
+          android:id="@+id/rg_all"
+          android:orientation="horizontal"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content">
+          <RadioButton
+              android:id="@+id/rb_001"
+              android:checked="true"
+              android:layout_marginRight="10dp"
+              android:paddingLeft="5dp"
+              android:paddingRight="5dp"
+              android:paddingTop="2dp"
+              android:paddingBottom="2dp"
+              android:button="@null"
+              android:background="@drawable/selecter_green_stoke"
+              android:textColor="@drawable/selecter_green_white"
+              android:text="温度"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"/>
+          <RadioButton
+              android:id="@+id/rb_002"
+              android:paddingLeft="5dp"
+              android:paddingRight="5dp"
+              android:paddingTop="2dp"
+              android:paddingBottom="2dp"
+              android:button="@null"
+              android:background="@drawable/selecter_green_stoke"
+              android:textColor="@drawable/selecter_green_white"
+              android:text="相对湿度"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"/>
+
+      </RadioGroup>
+
+  </LinearLayout>
+    
+    <com.ppandroid.app.widget.linechart.MultipleChartView
+        android:layout_marginBottom="10dp"
+        android:id="@+id/v_chart_multi"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"/>
+
+</LinearLayout>

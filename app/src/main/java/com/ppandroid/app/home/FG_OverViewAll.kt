@@ -10,7 +10,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import com.ppandroid.app.R
-import com.ppandroid.app.home.overview.FG_CoalGas
+import com.ppandroid.app.home.overview.FG_Temperature
 import com.ppandroid.app.home.overview.FG_WaterPage
 import com.ppandroid.app.utils.info.Utils_UserInfo
 import com.ppandroid.im.base.FG_Base
@@ -37,18 +37,18 @@ class FG_OverViewAll : FG_Base() {
 
     class AD_OverView(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         var titles = arrayOf(
-                "能耗信息",
-                "煤气用量",
-                "生活用水"
+                "用电信息",
+                "用水信息",
+                "温湿度信息"
         )
 
         override fun getItem(position: Int): Fragment {
             if (position == 0) {
                 return FG_OverView()
             } else if (position == 1) {
-                return FG_CoalGas()
-            } else {
                 return FG_WaterPage()
+            } else {
+                return FG_Temperature()
             }
         }
 

@@ -196,6 +196,8 @@ class FG_WaterPage:FG_Base(){
         view.find<TextView>(R.id.tv_title_02).text="分项用水统计"
         view.find<TextView>(R.id.tv_title_03).text="区域用水统计"
 
+        var iv_title=view.find<ImageView>(R.id.iv_title)
+        iv_title.setImageResource(R.drawable.ic_shuil)
 
         var b=createBundle()
         view.find<TextView>(R.id.tv_more).setOnClickListener {

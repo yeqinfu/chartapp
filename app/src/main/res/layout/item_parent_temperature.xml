@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by yeqinfu on 17-9-27 上午9:35
+  ~ Copyright (c) JXT All rights reserved.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:gravity="center_vertical"
+              android:background="@color/white"
+              android:paddingLeft="13dp"
+              android:layout_width="match_parent"
+              android:layout_height="45dp">
+    <TextView
+        android:id="@+id/parent_title"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical|left"
+        android:layout_height="36dp"
+        android:textSize="@dimen/bar_title"
+        android:singleLine="true"
+        android:textColor="@color/color_07"
+        android:text="这是父item"
+       />
+    <TextView
+        android:textSize="@dimen/number_text"
+        android:layout_marginRight="5dp"
+        android:id="@+id/tv_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:layout_marginRight="15dp"
+        android:id="@+id/iv_arrow"
+        android:src="@drawable/icon_arrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
