@@ -55,4 +55,11 @@
         <item>本周</item>
         <item>本月</item>
     </string-array>
+    <string-array name="array_line_color">
+        <item>#5EC1FF</item>
+        <item>#FFCF3B</item>
+        <item>#FF6969</item>
+        <item>#45E069</item>
+        <item>#C02BE5</item>
+    </string-array>
 </resources>

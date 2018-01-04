@@ -65,8 +65,8 @@ public class MultipleChartView extends View implements Runnable {
 	private Paint				xyTextPaint;
 	//画折线对应的画笔
 	private Paint				linePaint;
-    //画折线对应的画笔
-    private Paint					blackPaint;
+	//画折线对应的画笔
+	private Paint				blackPaint;
 
 	//画折线对应的画笔
 	private Paint				valuePaint;
@@ -102,9 +102,10 @@ public class MultipleChartView extends View implements Runnable {
 	 * 折线图对象
 	 */
 	public static class BrokenLine {
-		public boolean				isShow		= true;					//是否显示折线图
+		public boolean				isShow		= true;						//是否显示折线图
 		public double				maxValue	= 5.0;						//折线图最大值
 		public double				minValue	= 0.0;						//折线图最小值
+		public double				avg			= 0.0;						//折线图平均值
 		public Map<String, Double>	value		= new LinkedHashMap<>();	//折线对应的数据
 		public int					lineColor	= R.color.vcolor06;			//折线图颜色
 	}
@@ -170,11 +171,11 @@ public class MultipleChartView extends View implements Runnable {
 		linePaint.setColor(linecolor);
 		linePaint.setStyle(Paint.Style.STROKE);
 
-        blackPaint = new Paint();
-        blackPaint.setAntiAlias(true);
-        blackPaint.setStrokeWidth(dpToPx(0.5f));
-        blackPaint.setColor(Color.BLACK);
-        blackPaint.setStyle(Paint.Style.FILL);
+		blackPaint = new Paint();
+		blackPaint.setAntiAlias(true);
+		blackPaint.setStrokeWidth(dpToPx(0.5f));
+		blackPaint.setColor(Color.BLACK);
+		blackPaint.setStyle(Paint.Style.FILL);
 
 		valuePaint = new Paint();
 		valuePaint.setAntiAlias(true);
@@ -298,12 +299,11 @@ public class MultipleChartView extends View implements Runnable {
 	}
 
 	private void drawAvg(Canvas canvas) {
+		Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+		mPaint.setColor(getResources().getColor(R.color.color_02));
+		mPaint.setStrokeWidth(3);
+		mPaint.setPathEffect(new DashPathEffect(new float[] { 5, 5 }, 0));
 		if (isShowAvg) {//显示平均线
-			Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-			mPaint.setColor(getResources().getColor(R.color.color_02));
-			mPaint.setStrokeWidth(3);
-			mPaint.setPathEffect(new DashPathEffect(new float[] { 5, 5 }, 0));
-
 			if (avgValue != 0) {
 				float startx = xInit + interval * 0;
 				float starty = (float) (yOri - yOri * (1 - 0.1f) * avgValue / yValue.get(yValue.size() - 1));
@@ -312,12 +312,36 @@ public class MultipleChartView extends View implements Runnable {
 				canvas.drawLine(startx, starty, endx, starty, mPaint);
 			}
 		}
+		//l另外的线 max线 min线
+		for (BN_BrokeLine item : listBrokeLine) {
+                float startx = xInit + interval * 0;
+                float starty = (float) (yOri - yOri * (1 - 0.1f) * item.value / yValue.get(yValue.size() - 1));
+                float endx = xInit + interval * xValue.size();
+                drawFloatTextBox(canvas, endx - interval, starty, item.text);
+                canvas.drawLine(startx, starty, endx, starty, mPaint);
+		}
+
 	}
 
 	/** 是否显示平均值 */
 	private boolean	isShowAvg	= true;
 	private double	avgValue	= 0;
 	private String	avgText		= "";
+
+	public static class BN_BrokeLine {
+		public double	value	= 0.0;
+		public String	text;
+	}
+
+	private List<BN_BrokeLine> listBrokeLine = new ArrayList<>();
+
+	public List<BN_BrokeLine> getListBrokeLine() {
+		return listBrokeLine;
+	}
+
+	public void setListBrokeLine(List<BN_BrokeLine> listBrokeLine) {
+		this.listBrokeLine = listBrokeLine;
+	}
 
 	public String getAvgText() {
 		return avgText;
@@ -352,7 +376,6 @@ public class MultipleChartView extends View implements Runnable {
 
 	}
 
-
 	/**
 	 * 绘制折线对应的点
 	 *
@@ -378,6 +401,7 @@ public class MultipleChartView extends View implements Runnable {
 
 		}
 	}
+
 	/**
 	 * 绘制显示Y值的浮动框
 	 *
@@ -629,17 +653,17 @@ public class MultipleChartView extends View implements Runnable {
 		float eventY = event.getY();
 		for (int i = 0; i < xValue.size(); i++) {
 			for (BrokenLine item : valueList) {
-                if (i < item.value.size()) {
-                    //节点
-                    float x = xInit + interval * i;
-                    float y = (float) (yOri - yOri * (1 - 0.1f) * item.value.get(xValue.get(i)) / yValue.get(yValue.size() - 1));
-                    if (eventX >= x - dp8 && eventX <= x + dp8 && eventY >= y - dp8 && eventY <= y + dp8 && selectIndex != i + 1) {//每个节点周围8dp都是可点击区域
-                        selectIndex = i + 1;
-                        selectType = 0;
-                        invalidate();
-                        return;
-                    }
-                }
+				if (i < item.value.size()) {
+					//节点
+					float x = xInit + interval * i;
+					float y = (float) (yOri - yOri * (1 - 0.1f) * item.value.get(xValue.get(i)) / yValue.get(yValue.size() - 1));
+					if (eventX >= x - dp8 && eventX <= x + dp8 && eventY >= y - dp8 && eventY <= y + dp8 && selectIndex != i + 1) {//每个节点周围8dp都是可点击区域
+						selectIndex = i + 1;
+						selectType = 0;
+						invalidate();
+						return;
+					}
+				}
 
 			}
 		}
@@ -687,8 +711,6 @@ public class MultipleChartView extends View implements Runnable {
 		invalidate();
 	}
 
-
-
 	public void setXYvalues(List<String> xValue, List<Double> yValue, String xLength) {
 		this.xValue = xValue;
 		this.yValue = yValue;
@@ -698,8 +720,6 @@ public class MultipleChartView extends View implements Runnable {
 		xOri = (int) (dp2 + textYWdith + dp2 + xylinewidth);//dp2是y轴文本距离左边，以及距离y轴的距离
 		xInit = xOri + dpToPx(5);
 	}
-
-
 
 	public void setValue(ArrayList<BrokenLine> valueList, List<String> xValue, List<Double> yValue, String xLength) {
 		this.valueList = valueList;
@@ -720,7 +740,6 @@ public class MultipleChartView extends View implements Runnable {
 	public List<Double> getyValue() {
 		return yValue;
 	}
-
 
 	/**
 	 * 获取丈量文本的矩形
@@ -784,10 +803,10 @@ public class MultipleChartView extends View implements Runnable {
 		for (int i = 0; i <= max; i++) {
 			try {
 				Thread.sleep(5);
-                for (BrokenLine item:valueList) {
-                    int index1 = i > allValue1.size() ? allValue1.size() : i;
-                }
-                int index1 = i > allValue1.size() ? allValue1.size() : i;
+				for (BrokenLine item : valueList) {
+					int index1 = i > allValue1.size() ? allValue1.size() : i;
+				}
+				int index1 = i > allValue1.size() ? allValue1.size() : i;
 				int index2 = i > allValue2.size() ? allValue2.size() : i;
 				//TODO 生成动画暂时不做
 				postInvalidate();
