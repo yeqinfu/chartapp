@@ -91,14 +91,35 @@ class FG_SecurityCenter:FG_Base(){
                         for (item in it.message.deviceEntityList){
                             adapter.add(item.name)
                         }
-                        lv_list03.adapter=adapter
-                        tv_content_03.text="系统检测设备"+it.message.deviceEntityList.size+
+                        lv_list02.adapter=adapter
+                        tv_content02.text="系统检测设备"+it.message.deviceEntityList.size+
                                 "个设备存在风险，请尽快排查。"
-                        ll_msg.visibility=View.VISIBLE
-                        ll_msg.setOnClickListener {
+                        ll_msg2.visibility=View.VISIBLE
+                        ll_msg2.setOnClickListener {
                          startAC(FG_DevicesAll::class.java.name)
                         }
                     }
+                    if (!it.message.waterDeviceEntityList.isEmpty()){
+                        val adapter = ArrayAdapter<String>(activity, R.layout.simple_list_item_1)
+                        for (item in it.message.waterDeviceEntityList){
+                            adapter.add(item.name)
+                        }
+                        lv_list03.adapter=adapter
+                        tv_content_03.text="系统检测设备"+it.message.waterDeviceEntityList.size+
+                                "个设备存在风险，请尽快排查。"
+                        ll_msg.visibility=View.VISIBLE
+                        ll_msg.setOnClickListener {
+                            startAC(FG_DevicesAll::class.java.name)
+                        }
+                    }
+                    if (!it.message.waterDeviceEntityList.isEmpty()||!it.message.deviceEntityList.isEmpty()){
+                        rl_001.visibility=View.GONE
+                        rl_004.visibility=View.GONE
+                    }else{
+                        rl_001.visibility=View.VISIBLE
+                        rl_004.visibility=View.VISIBLE
+                    }
+
                     v_check_view.startAnim()
 
                 }
