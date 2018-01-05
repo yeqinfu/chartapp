@@ -140,6 +140,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/ll_002"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
@@ -227,6 +228,7 @@
 
                 <!--水表风险检测-->
                 <LinearLayout
+                    android:id="@+id/ll_003"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"

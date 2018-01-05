@@ -115,6 +115,13 @@ class FG_SecurityCenter:FG_Base(){
                     if (!it.message.waterDeviceEntityList.isEmpty()||!it.message.deviceEntityList.isEmpty()){
                         rl_001.visibility=View.GONE
                         rl_004.visibility=View.GONE
+                        if (it.message.deviceEntityList.isEmpty()){
+                            ll_002.visibility=View.GONE
+                        }
+                        if (it.message.waterDeviceEntityList.isEmpty()){
+                            ll_003.visibility=View.GONE
+                        }
+
                     }else{
                         rl_001.visibility=View.VISIBLE
                         rl_004.visibility=View.VISIBLE

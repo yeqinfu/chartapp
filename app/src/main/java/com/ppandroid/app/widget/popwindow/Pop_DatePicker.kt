@@ -159,7 +159,8 @@ class Pop_DatePicker(context: Activity, type: Int) : BasePopupWindow(context, Vi
     }
     fun setInitDate(year: Int, month: Int, day: Int) {
 
-        var yearPos=year-DEFAULT_MIN_YEAR
+        yearPos=year-DEFAULT_MIN_YEAR
+        yearStr=year.toString()
         if (yearList.size>yearPos-1){
             wv_year?.setSeletion(yearPos-1)
         }
@@ -170,6 +171,7 @@ class Pop_DatePicker(context: Activity, type: Int) : BasePopupWindow(context, Vi
             wv_day?.setSeletion(day-1)
         }
         dayPos=day-1
+
 
     }
 
