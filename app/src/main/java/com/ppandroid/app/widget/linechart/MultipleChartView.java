@@ -548,7 +548,7 @@ public class MultipleChartView extends View implements Runnable {
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			startX = event.getX();
-			break;
+            return clickAction(event);
 		case MotionEvent.ACTION_MOVE:
 			if (interval * xValue.size() > width - xOri) {//当期的宽度不足以呈现全部数据
 				float dis = event.getX() - startX;
@@ -566,7 +566,6 @@ public class MultipleChartView extends View implements Runnable {
 			}
 			break;
 		case MotionEvent.ACTION_UP:
-			clickAction(event);
 			scrollAfterActionUp();
 			this.getParent().requestDisallowInterceptTouchEvent(false);
 			recycleVelocityTracker();
@@ -576,7 +575,7 @@ public class MultipleChartView extends View implements Runnable {
 			recycleVelocityTracker();
 			break;
 		}
-		return false;
+		return true;
 	}
 
 	//是否正在滑动
@@ -657,7 +656,7 @@ public class MultipleChartView extends View implements Runnable {
 	 *
 	 * @param event
 	 */
-	private void clickAction(MotionEvent event) {
+	private boolean clickAction(MotionEvent event) {
 		int dp8 = dpToPx(8);
 		float eventX = event.getX();
 		float eventY = event.getY();
@@ -671,7 +670,7 @@ public class MultipleChartView extends View implements Runnable {
 						selectIndex = i + 1;
 						selectType = 0;
 						invalidate();
-						return;
+						return true;
 					}
 				}
 
@@ -679,6 +678,7 @@ public class MultipleChartView extends View implements Runnable {
 		}
         selectType = 1;
 		invalidate();
+		return false;
 	}
 
 	/**
