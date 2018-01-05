@@ -30,6 +30,8 @@ import java.util.*
 
 /**
  * Created by yeqinfu on 2017/8/3.
+ * 小红点逻辑都是存在内存中的，没有考虑当充满小红点的时候，杀进程，小红点就都
+ * 消失的情况，如果需要，则存到db中
  */
 class FG_News : FG_Base() {
     override fun fgRes(): Int = R.layout.fg_news

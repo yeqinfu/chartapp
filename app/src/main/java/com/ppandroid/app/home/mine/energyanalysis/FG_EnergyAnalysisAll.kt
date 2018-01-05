@@ -28,5 +28,6 @@ class FG_EnergyAnalysisAll : FG_Base() {
             startAC(FG_EnergyAnalysis::class.java.name,b)
         }
 
+
     }
 }

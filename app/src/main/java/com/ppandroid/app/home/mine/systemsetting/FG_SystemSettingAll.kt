@@ -26,6 +26,10 @@ class FG_SystemSettingAll : FG_Base() {
             var b=FG_SystemSetting.Companion.createBundle("2")
             startAC(FG_SystemSetting::class.java.name,b)
         }
+        ll_03.setOnClickListener {
+            var b=FG_SystemSetting.Companion.createBundle("3")
+            startAC(FG_SystemSetting::class.java.name,b)
+        }
 
     }
 }

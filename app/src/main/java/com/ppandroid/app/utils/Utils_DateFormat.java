@@ -7,6 +7,7 @@ package com.ppandroid.app.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -51,8 +52,14 @@ public class Utils_DateFormat {
 		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");
 		return sdf.format(date);
 	}
-
-	public static String dateFormat(Date date) {
+    public static Date getBeforeDay(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, -1);
+        date = calendar.getTime();
+        return date;
+    }
+    public static String dateFormat(Date date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		return sdf.format(date);
 	}

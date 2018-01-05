@@ -56,6 +56,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_marginTop="7dp"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:id="@+id/ll_03"
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+        <TextView
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/icon_water"
+            android:text="温湿度设备"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:src="@drawable/forward_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
 
 </LinearLayout>

@@ -98,6 +98,7 @@ class AC_Login : AppCompatActivity() {
                 }
             }
             override fun onError(error: ErrorBody) {
+                Utils_Dialog.disMissLoading()
                 toast(error.message)
             }
         })

@@ -107,7 +107,7 @@ class FG_AddInstrument : FG_Base() {
             postInfo()
         }
         tv_choose_instruemnt.setOnClickListener {
-            var b = FG_ChooseInstrument.createBundle(deviceId.toLong())
+            var b = FG_ChooseInstrument.createBundle(energyClassificationId?:"1",deviceId.toLong())
             startAC(FG_ChooseInstrument::class.java.name, b)
         }
         tv_choose_class.setOnClickListener {
@@ -210,7 +210,7 @@ class FG_AddInstrument : FG_Base() {
             et_name.error = "请输入别名"
             return
         }
-        if (TextUtils.isEmpty(et_position.text)) {
+       /* if (TextUtils.isEmpty(et_position.text)) {
             toast("请输入位置")
             et_position.error = "请输入位置"
 
@@ -232,7 +232,7 @@ class FG_AddInstrument : FG_Base() {
             toast("请输入编码地址")
             et_codeAddress.error = "请输入编码地址"
             return
-        }
+        }*/
 
         code = et_code.text.toString()
         name = et_name.text.toString()

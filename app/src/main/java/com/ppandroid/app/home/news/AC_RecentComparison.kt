@@ -51,6 +51,12 @@ class AC_RecentComparison : AC_Base() {
         } else {
             selectList.put("1", defalutDate)
         }
+        //增加前两天数据
+        var nowDate=Utils_DateFormat.dateFormat(selectList.get("1"))
+        var before01=Utils_DateFormat.getBeforeDay(nowDate)
+        var before02=Utils_DateFormat.getBeforeDay(before01)
+        selectList.put("2",Utils_DateFormat.dateFormat(before01))
+        selectList.put("3",Utils_DateFormat.dateFormat(before02))
 
         refrestTitle()
         loadContent()

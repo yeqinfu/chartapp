@@ -35,22 +35,25 @@ class FG_InstrumentAll : FG_Base() {
     class AD_InstrumentAll(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         var titles = arrayOf(
                 "用电仪表",
-                "用水仪表"
+                "用水仪表",
+                "温湿度仪表"
         )
 
         override fun getItem(position: Int): Fragment {
             var b= Bundle()
             if (position==0){
                 b.putString("energyClassificationId","1")
-            }else{
+            }else if (position==1){
                 b.putString("energyClassificationId","2")
+            }else {
+                b.putString("energyClassificationId", "3")
             }
             var fg=FG_InstrumentList()
             fg.arguments=b
             return fg
         }
 
-        override fun getCount(): Int = 2
+        override fun getCount(): Int = 3
 
         override fun getPageTitle(position: Int): CharSequence {
             return titles[position]

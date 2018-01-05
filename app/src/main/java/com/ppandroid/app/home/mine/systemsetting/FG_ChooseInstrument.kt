@@ -31,17 +31,22 @@ import org.jetbrains.anko.find
  */
 class FG_ChooseInstrument : FG_Base() {
     override fun fgRes(): Int = R.layout.fg_choose_instruemnt
-
+    private var energyClassificationId="1"
     companion object {
-        fun createBundle(chooseId:Long):Bundle{
+        fun createBundle(energyClassificationId:String,chooseId:Long):Bundle{
             var b=Bundle()
+            b.putString("energyClassificationId",energyClassificationId)
             b.putLong("chooseId",chooseId)
             return b
         }
     }
     private var chooseId:Long=-1L
     override fun afterViews() {
-        chooseId=arguments.getLong("chooseId",-1L)
+        arguments?.let {
+            chooseId=it.getLong("chooseId",-1L)
+            energyClassificationId=it.getString("energyClassificationId","1")
+        }
+
         loadContent()
         head_view.init(activity)
         head_view.setCenterTitle("选择重点设备")
@@ -58,6 +63,7 @@ class FG_ChooseInstrument : FG_Base() {
     lateinit var body: BN_ChooseInstrument
     private fun loadContent() {
         var url = "user/sysSet/instrument/device.json"
+        url+="?energyClassificationId="+energyClassificationId
         Http.get(activity, url, BN_ChooseInstrument::class.java, object : MyCallBack<BN_ChooseInstrument> {
             override fun onResponse(response: BN_ChooseInstrument?) {
                 response?.let {

@@ -32,15 +32,18 @@ class FG_DevicesAll:FG_Base() {
     class AD_DevicesAll(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         var titles = arrayOf(
                 "用电设备",
-                "用水设备"
+                "用水设备",
+                "温湿度设备"
         )
 
         override fun getItem(position: Int): Fragment {
             var b= Bundle()
             if (position==0){
                 b.putString("energyClassificationId","1")
-            }else{
+            }else if (position==1){
                 b.putString("energyClassificationId","2")
+            }else{
+                b.putString("energyClassificationId","3")
             }
 
             var fg=FG_Devices()
@@ -48,7 +51,7 @@ class FG_DevicesAll:FG_Base() {
             return fg
         }
 
-        override fun getCount(): Int = 2
+        override fun getCount(): Int = 3
 
         override fun getPageTitle(position: Int): CharSequence {
             return titles[position]

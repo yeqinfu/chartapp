@@ -576,7 +576,7 @@ public class MultipleChartView extends View implements Runnable {
 			recycleVelocityTracker();
 			break;
 		}
-		return true;
+		return false;
 	}
 
 	//是否正在滑动
