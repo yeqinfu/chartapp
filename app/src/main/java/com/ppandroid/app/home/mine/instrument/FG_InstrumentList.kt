@@ -41,7 +41,13 @@ class FG_InstrumentList:FG_Base(){
                     lv_list.adapter=adapter
                     lv_list.setOnItemClickListener { _, _, i, _ ->
                         var b=FG_InstrumentDetail.createBundle(it.message[i].id,it.message[i].name)
-                        startAC(FG_InstrumentDetail::class.java.name,b)
+                        if (energyClassificationId.equals("2")){//水
+                            startAC(FG_WaterInstrumentDetail::class.java.name,b)
+                        }else if (energyClassificationId.equals("3")){
+                            startAC(FG_TemperatureInstrumentDetail::class.java.name,b)
+                        }else{
+                            startAC(FG_InstrumentDetail::class.java.name,b)
+                        }
 
                     }
 

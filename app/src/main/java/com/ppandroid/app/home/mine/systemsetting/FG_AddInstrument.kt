@@ -7,6 +7,7 @@ package com.ppandroid.app.home.mine.systemsetting
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ET_Base
 import com.ppandroid.app.bean.ErrorBody
@@ -78,6 +79,7 @@ class FG_AddInstrument : FG_Base() {
     override fun fgRes(): Int = R.layout.fg_add_instrument
 
     override fun afterViews() {
+
         /**第一步必须先加载能源分类，因为modified的时候要根据id查到分类名称*/
         loadEnergyClasses()
         arguments?.let {
@@ -88,7 +90,7 @@ class FG_AddInstrument : FG_Base() {
             energyClassificationId=it.getString("energyClassificationId","1")
 
         }
-
+        initView()
         if (pageType == "1") {//修改仪表
             head_view.setCenterTitle("修改仪表")
             tv_parent_name.text=parentName
@@ -114,6 +116,55 @@ class FG_AddInstrument : FG_Base() {
             showPopChoose()
         }
 
+    }
+
+    /**
+     * 本页面是新建设备，水设备，温湿度设备共用页面，页面内容有差别，在这里做显示隐藏操作
+     *
+     */
+    private fun initView() {
+
+        if (energyClassificationId=="2"){//新建水仪表设备
+            /**
+             * 隐藏负荷 和倍率 隐藏温湿度专用的上下阈值
+             * */
+            ll_charge.visibility= View.GONE
+            v_charge.visibility= View.GONE
+            ll_rate.visibility= View.GONE
+            v_rate.visibility= View.GONE
+
+
+            v_temprature.visibility= View.GONE
+            tv_temprature.visibility= View.GONE
+            ll_temperature_content.visibility= View.GONE
+
+
+            v_humidity.visibility= View.GONE
+            tv_humidity.visibility= View.GONE
+            ll_humidity_content.visibility= View.GONE
+
+        }else if (energyClassificationId=="3"){//温湿度
+            /**
+             * 隐藏负荷 和倍率
+             * */
+            ll_charge.visibility= View.GONE
+            v_charge.visibility= View.GONE
+            ll_rate.visibility= View.GONE
+            v_rate.visibility= View.GONE
+
+        }else{//用电设备
+            /**
+             * 隐藏阈值
+             * */
+            v_temprature.visibility= View.GONE
+            tv_temprature.visibility= View.GONE
+            ll_temperature_content.visibility= View.GONE
+
+
+            v_humidity.visibility= View.GONE
+            tv_humidity.visibility= View.GONE
+            ll_humidity_content.visibility= View.GONE
+        }
     }
 
     /**

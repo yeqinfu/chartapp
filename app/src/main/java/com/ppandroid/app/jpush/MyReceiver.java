@@ -98,26 +98,32 @@ public class MyReceiver extends BroadcastReceiver {
 					EventBus.getDefault().post(new ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE, json.optString(myKey)));
 					if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getFAILUE_WARNING()+"")) {//故障报警
 						Intent intent = AC_ContentFG.createIntent(context, FG_FaultHistory.class.getName());
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						context.startActivity(intent);
 					}
 					else if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getENERGY_COLLECT()+"")) {//能耗总会
 						Intent intent = AC_ContentFG.createIntent(context, FG_EnergyList.class.getName());
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						context.startActivity(intent);
 					}
 					else if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getSYSTEM()+"")) {//系统消息
 						Intent intent = AC_ContentFG.createIntent(context, FG_SystemNewList.class.getName());
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						context.startActivity(intent);
 					}
 					else if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getPOWER_COMPARISON()+"")) {//能耗对比
 						Intent intent = AC_ContentFG.createIntent(context, FG_EnergyComparison.class.getName());
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						context.startActivity(intent);
 					}
 					else if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getWATER_COMPARISON()+"")) {//水能耗对比
 						Intent intent = AC_ContentFG.createIntent(context, FG_EnergyComparison.class.getName(), FG_News.Companion.createBundle());
+						intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						context.startActivity(intent);
 					}
 					else if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getWATER_COLLECT()+"")) {//水能耗汇总
 						Intent intent = AC_ContentFG.createIntent(context, FG_EnergyList.class.getName(), FG_News.Companion.createBundle());
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						context.startActivity(intent);
 					}
 				}

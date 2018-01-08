@@ -17,10 +17,13 @@ import kotlinx.android.synthetic.main.layout_head_view.*
  * 设备详情
  */
 class FG_DevicesInfo :FG_Base(){
+    var energyClassificationId="1"
+
     companion object {
-        fun createIntent(name:String,deviceId:String): Bundle {
+        fun createIntent(energyClassificationId:String,name:String,deviceId:String): Bundle {
             var b=Bundle()
             b.putString("name",name)
+            b.putString("energyClassificationId",energyClassificationId)
             b.putString("deviceId",deviceId)
             return b
         }
@@ -34,11 +37,12 @@ class FG_DevicesInfo :FG_Base(){
         arguments?.let {
             name=it.getString("name","")
             deviceId=it.getString("deviceId","")
+            energyClassificationId=it.getString("energyClassificationId","1")
         }
         head_view.setCenterTitle(name)
         head_view.init(activity)
 
-        var adapter = AD_DevicesInfo(activity, childFragmentManager,deviceId)
+        var adapter = AD_DevicesInfo(activity, childFragmentManager,deviceId,energyClassificationId)
         view_pager.adapter = adapter
         adapter.notifyDataSetChanged()
         title_indicator.setViewPager(view_pager)

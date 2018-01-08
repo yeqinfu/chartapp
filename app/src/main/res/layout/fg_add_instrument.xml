@@ -203,11 +203,13 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/v_charge"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/color_03"/>
             <!--负荷-->
             <LinearLayout
+                android:id="@+id/ll_charge"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="center_vertical"
@@ -237,11 +239,13 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/v_rate"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/color_03"/>
             <!--倍率-->
             <LinearLayout
+                android:id="@+id/ll_rate"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="center_vertical"
@@ -351,11 +355,187 @@
 
             </LinearLayout>
 
+
+
+            <!--温度-->
+            <View
+                android:id="@+id/v_temprature"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_03"/>
+            <TextView
+                android:id="@+id/tv_temprature"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/color_03"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:text="温度报警阈值"
+                android:textColor="@color/color_04"
+                android:textSize="@dimen/sub_title"/>
+            <!--温度-->
+            <LinearLayout
+                android:id="@+id/ll_temperature_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="温度上限"
+                        android:textColor="@color/color_07"
+                        android:textSize="@dimen/bar_title"/>
+
+                    <EditText
+                        android:id="@+id/tv_max_temprature"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="@string/input_msg"
+                        android:textColor="@color/color_04"
+                        android:textColorHint="@color/color_06"
+                        android:textSize="@dimen/bar_title"/>
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:text="°C"
+                        android:textColor="@color/color_04"
+                        android:textSize="@dimen/bar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="温度下限"
+                        android:textColor="@color/color_07"
+                        android:textSize="@dimen/bar_title"/>
+
+                    <EditText
+                        android:id="@+id/tv_min_temprature"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="@string/input_msg"
+                        android:textColor="@color/color_04"
+                        android:textColorHint="@color/color_06"
+                        android:textSize="@dimen/bar_title"/>
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:text="°C"
+                        android:textColor="@color/color_04"
+                        android:textSize="@dimen/bar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+            <!--湿度-->
+            <View
+                android:id="@+id/v_humidity"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_03"/>
+            <TextView
+                android:id="@+id/tv_humidity"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/color_03"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:text="湿度报警阈值"
+                android:textColor="@color/color_04"
+                android:textSize="@dimen/sub_title"/>
+            <!--湿度-->
+            <LinearLayout
+                android:id="@+id/ll_humidity_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="湿度上限"
+                        android:textColor="@color/color_07"
+                        android:textSize="@dimen/bar_title"/>
+
+                    <EditText
+                        android:id="@+id/tv_max_humidity"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="@string/input_msg"
+                        android:textColor="@color/color_04"
+                        android:textColorHint="@color/color_06"
+                        android:textSize="@dimen/bar_title"/>
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:text="%"
+                        android:textColor="@color/color_04"
+                        android:textSize="@dimen/bar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="湿度下限"
+                        android:textColor="@color/color_07"
+                        android:textSize="@dimen/bar_title"/>
+
+                    <EditText
+                        android:id="@+id/tv_min_humidity"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="@string/input_msg"
+                        android:textColor="@color/color_04"
+                        android:textColorHint="@color/color_06"
+                        android:textSize="@dimen/bar_title"/>
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:text="%"
+                        android:textColor="@color/color_04"
+                        android:textSize="@dimen/bar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/color_03"/>
-
 
         </LinearLayout>
     </ScrollView>

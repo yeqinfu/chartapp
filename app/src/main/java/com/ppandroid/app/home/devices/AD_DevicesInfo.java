@@ -5,7 +5,6 @@
 
 package com.ppandroid.app.home.devices;
 
-
 import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -23,11 +22,13 @@ public class AD_DevicesInfo extends FragmentStatePagerAdapter {
 	private Fragment[]	fragments;
 	private Context		mContext;
 
+	private String		energyClassificationId	= "1";
+	private String		id						= "-1";
 
-    private String id="-1";
-	public AD_DevicesInfo(Activity ac, FragmentManager fm,String id) {
+	public AD_DevicesInfo(Activity ac, FragmentManager fm, String id, String energyClassificationId) {
 		super(fm);
-        this.id=id;
+		this.id = id;
+		this.energyClassificationId = energyClassificationId;
 		mContext = ac;
 		initFragment();
 	}
@@ -55,10 +56,19 @@ public class AD_DevicesInfo extends FragmentStatePagerAdapter {
 	public void initFragment() {
 		this.arrays_title = mContext.getResources().getStringArray(R.array.fg_devices_info);
 		fragments = new Fragment[arrays_title.length];
-		fragments[0] = new FG_DevicesMonitor();//数据监测
-        fragments[0].setArguments(FG_DevicesMonitor.Companion.createBundle(id));
-		fragments[1] = new FG_DevicesDetail();//账台信息
-        fragments[1].setArguments(FG_DevicesDetail.Companion.createBundle(id));
+		if (energyClassificationId.equals("2")) {//水
+			fragments[0] = new FG_WaterMonitor();//数据监测
+		}
+		else if (energyClassificationId.equals("3")) {
+			fragments[0] = new FG_TemperatureMonitor();//数据监测
+		}
+		else {
+			fragments[0] = new FG_DevicesMonitor();//数据监测
+		}
 
-    }
+		fragments[0].setArguments(FG_DevicesMonitor.Companion.createBundle(id));
+		fragments[1] = new FG_DevicesDetail();//账台信息
+		fragments[1].setArguments(FG_DevicesDetail.Companion.createBundle(id));
+
+	}
 }

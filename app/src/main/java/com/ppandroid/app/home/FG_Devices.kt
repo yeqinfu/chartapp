@@ -68,7 +68,7 @@ class FG_Devices : FG_Base() {
                     }
                     lv_ex.setOnChildClickListener { expandableListView, view, i, j, l ->
                         var item=it.message.deviceCateList[i].deviceList[j]
-                        var b=FG_DevicesInfo.Companion.createIntent(item.name,item.id.toString())
+                        var b=FG_DevicesInfo.Companion.createIntent(energyClassificationId,item.name,item.id.toString())
                         startAC(FG_DevicesInfo::class.java.name,b)
                         false
                     }

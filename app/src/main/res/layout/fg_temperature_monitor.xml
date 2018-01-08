@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by yeqinfu on 18-1-8 下午4:37
+  ~ Copyright (c) JXT All rights reserved.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/color_03"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv_lastModifyTime"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:background="@color/color_03"
+        android:drawableLeft="@drawable/icon_time"
+        android:drawablePadding="9dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="22dp"/>
+    <!--水能耗-->
+    <TextView
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="27dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="22dp"
+        android:text="温湿度"
+        android:textColor="@color/color_04"
+        android:textSize="@dimen/sub_title"/>
+    <LinearLayout
+        android:layout_marginTop="0.5dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="42dp">
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="22dp"
+            android:text="温度"
+            android:textColor="@color/color_04"
+            android:textSize="@dimen/bar_title"/>
+        <TextView
+            android:id="@+id/tv_temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="100"
+            android:textColor="@color/color_01"
+            android:textSize="@dimen/bar_title"/>
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="°C"
+            android:textColor="@color/color_04"
+            android:textSize="@dimen/bar_title"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="0.5dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="42dp">
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="22dp"
+            android:text="相对湿度"
+            android:textColor="@color/color_04"
+            android:textSize="@dimen/bar_title"/>
+        <TextView
+            android:id="@+id/tv_humidity"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="100"
+            android:textColor="@color/color_01"
+            android:textSize="@dimen/bar_title"/>
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="%"
+            android:textColor="@color/color_04"
+            android:textSize="@dimen/bar_title"/>
+
+    </LinearLayout>
+
+</LinearLayout>

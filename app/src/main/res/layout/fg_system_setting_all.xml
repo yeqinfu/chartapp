@@ -68,7 +68,7 @@
         android:layout_height="56dp">
         <TextView
             android:drawablePadding="10dp"
-            android:drawableLeft="@drawable/icon_water"
+            android:drawableLeft="@drawable/icon_wsdsz"
             android:text="温湿度设备"
             android:layout_width="0dp"
             android:layout_weight="1"

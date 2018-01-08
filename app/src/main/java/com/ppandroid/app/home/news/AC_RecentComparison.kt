@@ -17,6 +17,7 @@ import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.utils.Utils_DateFormat
+import com.ppandroid.app.utils.Utils_Dialog
 import com.ppandroid.app.widget.linechart.MultipleChartView
 import com.ppandroid.app.widget.popwindow.Pop_DatePicker
 import com.ppandroid.im.base.AC_Base
@@ -47,16 +48,16 @@ class AC_RecentComparison : AC_Base() {
         var defalutDate = intent.getStringExtra("default")
         energyClassificationId = intent.getStringExtra("energyClassificationId")
         if (TextUtils.isEmpty(defalutDate)) {
-            selectList.put("1", Utils_DateFormat.dateFormat(Date()))
+            selectList.put("3", Utils_DateFormat.dateFormat(Date()))
         } else {
-            selectList.put("1", defalutDate)
+            selectList.put("3", defalutDate)
         }
         //增加前两天数据
-        var nowDate=Utils_DateFormat.dateFormat(selectList.get("1"))
+        var nowDate=Utils_DateFormat.dateFormat(selectList.get("3"))
         var before01=Utils_DateFormat.getBeforeDay(nowDate)
         var before02=Utils_DateFormat.getBeforeDay(before01)
         selectList.put("2",Utils_DateFormat.dateFormat(before01))
-        selectList.put("3",Utils_DateFormat.dateFormat(before02))
+        selectList.put("1",Utils_DateFormat.dateFormat(before02))
 
         refrestTitle()
         loadContent()
@@ -222,6 +223,7 @@ class AC_RecentComparison : AC_Base() {
 
 
     private fun loadContent() {
+        Utils_Dialog.showLoading(this@AC_RecentComparison)
         var url = if (energyClassificationId == "1") {
             "user/energy/analysis/getDeviceByDateArray.json?dateString="
         } else {
@@ -234,6 +236,7 @@ class AC_RecentComparison : AC_Base() {
         Http.get(this@AC_RecentComparison, url, BN_RecentComparison::class.java, object : MyCallBack<BN_RecentComparison> {
             @SuppressLint("ResourceAsColor")
             override fun onResponse(response: BN_RecentComparison?) {
+                Utils_Dialog.disMissLoading()
                 response?.let {
                     var xValue=ArrayList<String>()
                     //取出横坐标值
@@ -260,6 +263,7 @@ class AC_RecentComparison : AC_Base() {
                         var targetMax=0.0
                         var targetMin=Utils_Common.parseNumberString(item.stageKwh[0].value)
                         target.lineColor= Color.parseColor(colors[index])
+                        target.linePointColor= Color.parseColor(colors[index])
                         for(child in item.stageKwh){
                             var value=Utils_Common.parseNumberString(child.value)
                             if (value>targetMax){
@@ -318,6 +322,7 @@ class AC_RecentComparison : AC_Base() {
             }
 
             override fun onError(error: ErrorBody?) {
+                Utils_Dialog.disMissLoading()
                 toast(error)
             }
 
