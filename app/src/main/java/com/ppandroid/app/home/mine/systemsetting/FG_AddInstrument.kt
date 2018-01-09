@@ -54,6 +54,14 @@ class FG_AddInstrument : FG_Base() {
     private var rate: String? = null
     /** 编码地址  */
     private var codeAddress: String? = null
+    /** 最大温度  */
+    private var max_temprature: String? = null
+    /** 最小温度  */
+    private var min_temprature: String? = null
+    /** 最大湿度  */
+    private var max_humidity: String? = null
+    /** 最小湿度  */
+    private var min_humidity: String? = null
     /** 重点设备id  */
     private var deviceId: String = "-1"
 
@@ -291,6 +299,11 @@ class FG_AddInstrument : FG_Base() {
         charge = et_charge.text.toString()
         rate = et_rate.text.toString()
         codeAddress = et_codeAddress.text.toString()
+        max_temprature = tv_max_temprature.text.toString()
+        min_temprature = tv_min_temprature.text.toString()
+        max_humidity = tv_max_humidity.text.toString()
+        min_humidity = tv_min_humidity.text.toString()
+        codeAddress = et_codeAddress.text.toString()
 
         var map = TreeMap<String, String>()
         map.apply {
@@ -306,6 +319,11 @@ class FG_AddInstrument : FG_Base() {
             put("codeAddress", codeAddress.toString())
             put("deviceId", deviceId.toString())
             put("energyClassificationId", energyClassificationId.toString())
+
+            put("max", max_temprature.toString())
+            put("min", min_temprature.toString())
+            put("max1", max_humidity.toString())
+            put("min1", min_humidity.toString())
         }
         var url = "user/sysSet/instrument/add.json"
         Http.post(activity, url, map, BaseBody::class.java, object : MyCallBack<BaseBody> {
