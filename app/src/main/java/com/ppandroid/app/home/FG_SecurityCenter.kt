@@ -101,7 +101,8 @@ class FG_SecurityCenter:FG_Base(){
                                 "个设备存在风险，请尽快排查。"
                         ll_msg2.visibility=View.VISIBLE
                         ll_msg2.setOnClickListener {
-                         startAC(FG_DevicesAll::class.java.name)
+                            var b=FG_DevicesAll.createBundle(0)
+                         startAC(FG_DevicesAll::class.java.name,b)
                         }
                     }
                     if (!it.message.waterDeviceEntityList.isEmpty()){
@@ -114,7 +115,8 @@ class FG_SecurityCenter:FG_Base(){
                                 "个设备存在风险，请尽快排查。"
                         ll_msg.visibility=View.VISIBLE
                         ll_msg.setOnClickListener {
-                            startAC(FG_DevicesAll::class.java.name)
+                            var b=FG_DevicesAll.createBundle(1)
+                            startAC(FG_DevicesAll::class.java.name,b)
                         }
                     }
                     if (!it.message.temperatureDeviceEntityList.isEmpty()){
@@ -127,7 +129,8 @@ class FG_SecurityCenter:FG_Base(){
                                 "个设备存在风险，请尽快排查。"
                         ll_msg5.visibility=View.VISIBLE
                         ll_msg5.setOnClickListener {
-                            startAC(FG_DevicesAll::class.java.name)
+                            var b=FG_DevicesAll.createBundle(2)
+                            startAC(FG_DevicesAll::class.java.name,b)
                         }
                     }
                     if (!it.message.waterDeviceEntityList.isEmpty()||!it.message.deviceEntityList.isEmpty()||!it.message.temperatureDeviceEntityList.isEmpty()){

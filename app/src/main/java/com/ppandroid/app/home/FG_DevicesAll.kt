@@ -18,12 +18,24 @@ import kotlinx.android.synthetic.main.fg_devices_all.*
  * Created by yeqinfu on 2018/1/3.
  */
 class FG_DevicesAll:FG_Base() {
+    companion object {
+        fun createBundle(selectTab:Int):Bundle{
+            var b=Bundle()
+            b.putInt("selectTab",selectTab)
+            return b
+        }
+    }
     override fun fgRes(): Int= R.layout.fg_devices_all
 
+    var selectTab=0
     override fun afterViews() {
+        arguments?.let {
+            selectTab=it.getInt("selectTab",0)
+        }
         var adapter = AD_DevicesAll(childFragmentManager)
         view_pager.adapter = adapter
         view_pager.offscreenPageLimit = 3
+        view_pager.currentItem = selectTab
         sliding_tabs.setupWithViewPager(view_pager)
         sliding_tabs.tabMode = TabLayout.MODE_FIXED
         adapter.notifyDataSetChanged()
