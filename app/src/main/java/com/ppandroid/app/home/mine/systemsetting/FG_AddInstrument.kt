@@ -16,6 +16,7 @@ import com.ppandroid.app.bean.mine.systemsetting.BN_AddInstrumentDetail
 import com.ppandroid.app.bean.mine.systemsetting.ET_SyStemSetting
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
+import com.ppandroid.app.utils.Devices
 import com.ppandroid.app.widget.popwindow.Pop_ChooseSimple
 import com.ppandroid.im.base.FG_Base
 import com.ppandroid.im.bean.BaseBody
@@ -95,7 +96,7 @@ class FG_AddInstrument : FG_Base() {
             objectId = it.getString("objectId", "")
             parentId = it.getString("parentId", "-1")
             parentName = it.getString("parentName", "")
-            energyClassificationId=it.getString("energyClassificationId","1")
+            energyClassificationId=it.getString("energyClassificationId", Devices.ELECTRIC)
 
         }
         initView()

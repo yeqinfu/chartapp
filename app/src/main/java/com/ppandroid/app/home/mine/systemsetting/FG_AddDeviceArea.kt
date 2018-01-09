@@ -12,6 +12,7 @@ import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.mine.systemsetting.ET_SyStemSetting
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
+import com.ppandroid.app.utils.Devices
 import com.ppandroid.im.base.FG_Base
 import com.ppandroid.im.bean.BaseBody
 import kotlinx.android.synthetic.main.fg_add_device_area.*
@@ -34,7 +35,7 @@ class FG_AddDeviceArea : FG_Base(){
     private var parentId: String = "-1"
     /** 父级名称 */
     private var parentName: String = ""
-    private var energyClassificationId="1"
+    private var energyClassificationId= Devices.ELECTRIC
     companion object {
         fun createBundle(energyClassificationId:String,objectId: String,objectName:String,parentId: String,parentName:String): Bundle {
             var b = Bundle()

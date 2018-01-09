@@ -19,6 +19,7 @@ import com.ppandroid.app.bean.news.BN_EnergyList
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.DebugLog
+import com.ppandroid.app.utils.Devices
 import com.ppandroid.im.base.FG_Base
 import com.ppandroid.im.utils.Contants
 import kotlinx.android.synthetic.main.fg_energy_list.*
@@ -30,14 +31,14 @@ import org.jetbrains.anko.find
  */
 class FG_EnergyList :FG_Base(){
     override fun fgRes(): Int= R.layout.fg_energy_list
-    var energyClassificationId="1"
+    var energyClassificationId= Devices.ELECTRIC
     override fun afterViews() {
         head_view.init(activity)
 
         arguments?.let {
-            energyClassificationId=it.getString("energyClassificationId","1")
+            energyClassificationId=it.getString("energyClassificationId",Devices.ELECTRIC)
         }
-        var title=if (energyClassificationId.equals("1")){
+        var title=if (energyClassificationId.equals(Devices.ELECTRIC)){
             "能耗汇总"
         }else{
             "用水量汇总"
@@ -69,7 +70,7 @@ class FG_EnergyList :FG_Base(){
             refresh_layout.finishLoadmore()
             return
         }
-        var url=if (energyClassificationId.equals("1")){
+        var url=if (energyClassificationId.equals(Devices.ELECTRIC)){
             "user/energy/statistics/get.json?pageNumber=$pageNumber"
         }else{
             "user/water/statistics/get.json?pageNumber=$pageNumber"

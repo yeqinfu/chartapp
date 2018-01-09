@@ -22,6 +22,7 @@ import com.ppandroid.app.home.mine.adapter.AD_SlideDeleteBase
 import com.ppandroid.app.home.mine.adapter.OnClickListenerDetailOrDelete
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
+import com.ppandroid.app.utils.Devices
 import com.ppandroid.app.widget.CustomDialog
 import com.ppandroid.im.base.FG_Base
 import com.ppandroid.im.bean.BaseBody
@@ -45,7 +46,7 @@ class FG_InstrumentPage : FG_Base() {
     /**当是子页面的时候这个id有用到*/
     private var parentId:String=""
     private var parentName:String=""
-    private var energyClassificationId="1"
+    private var energyClassificationId= Devices.ELECTRIC
     companion object {
         fun createBundle(parentId:String,parentName:String,energyClassificationId:String): Bundle {
             var b=Bundle()

@@ -17,6 +17,7 @@ import com.ppandroid.app.R
 import com.ppandroid.app.base.AC_ContentFG
 import com.ppandroid.app.bean.overview.BN_OverView
 import com.ppandroid.app.home.mine.energyanalysis.devicesanalysis.FG_AreaDetailAnalysis
+import com.ppandroid.app.utils.Devices
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.widget.HorizontalPercentageView
 import org.jetbrains.anko.find
@@ -26,7 +27,7 @@ import org.jetbrains.anko.find
  */
 class AD_AreaEnergy(ac: Activity, list: List<BN_OverView.MessageBean.OverviewConsumptionInformationBean.AreaInformationListBean>) : PagerAdapter() {
 
-    var energyClassificationId="1"
+    var energyClassificationId= Devices.ELECTRIC
 
     /**横条图viewpager*/
     private var arrays_title = arrayOf(

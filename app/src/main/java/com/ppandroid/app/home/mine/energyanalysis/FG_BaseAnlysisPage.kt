@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.ppandroid.app.R
+import com.ppandroid.app.utils.Devices
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.widget.HorizontalPercentageView
 import com.ppandroid.app.widget.graphical.chart.PieData
@@ -47,15 +48,15 @@ abstract class FG_BaseAnlysisPage : FG_Base() {
     //0 日 1 月 2 年 3 总
     protected var index: Int = 0
     protected var parentId = "-1"
-    protected var energyClassificationId="1"
+    protected var energyClassificationId= Devices.ELECTRIC
     override fun afterViews() {
         v_dount_view.setLabelStyle(XEnum.SliceLabelStyle.INSIDE)
         arguments?.let {
             index = it.getInt("index", 0)
             parentId = it.getString("parentId", "-1")
-            energyClassificationId=it.getString("energyClassificationId","1")
+            energyClassificationId=it.getString("energyClassificationId",Devices.ELECTRIC)
         }
-        if (energyClassificationId=="1"){
+        if (energyClassificationId==Devices.ELECTRIC){
             tv_tag.text="kwh"
             tag02.text="能耗kwh"
         }else{

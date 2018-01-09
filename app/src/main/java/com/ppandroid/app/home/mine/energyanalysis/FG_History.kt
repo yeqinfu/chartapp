@@ -15,6 +15,7 @@ import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.mine.energyanalysis.BN_History
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
+import com.ppandroid.app.utils.Devices
 import com.ppandroid.app.widget.popwindow.Pop_DatePicker
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_history.*
@@ -27,11 +28,11 @@ import org.jetbrains.anko.find
  */
 class FG_History : FG_Base() {
     override fun fgRes(): Int = R.layout.fg_history
-    private var energyClassificationId = "1"
+    private var energyClassificationId = Devices.ELECTRIC
     override fun afterViews() {
 
         arguments?.let {
-            energyClassificationId = it.getString("energyClassificationId", "1")
+            energyClassificationId = it.getString("energyClassificationId", Devices.ELECTRIC)
         }
         head_view.init(activity)
         head_view.setCenterTitle("历史查询")
@@ -41,7 +42,7 @@ class FG_History : FG_Base() {
     }
 
     fun loadContent() {
-        var url: String = if (energyClassificationId.equals("1")){//电
+        var url: String = if (energyClassificationId.equals(Devices.ELECTRIC)){//电
             "user/energy/analysis/getYearHistory.json"
         }else{//水
             "user/water/analysis/getYearHistory.json"

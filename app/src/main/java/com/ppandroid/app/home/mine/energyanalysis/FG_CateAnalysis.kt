@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v4.view.PagerAdapter
 import com.ppandroid.app.home.mine.adapter.AD_BaseAnalysis
+import com.ppandroid.app.utils.Devices
 
 /**
  * Created by yeqinfu on 2017/8/31.
@@ -25,7 +26,7 @@ class FG_CateAnalysis:FG_BaseAnalysis(){
     }
 
     override fun getTitle(): String{
-       return if (energyClassificationId=="1"){
+       return if (energyClassificationId== Devices.ELECTRIC){
            "分项用电"
        }else{
            "分项用水"

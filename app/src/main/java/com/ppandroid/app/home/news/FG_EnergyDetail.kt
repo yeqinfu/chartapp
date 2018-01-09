@@ -17,6 +17,7 @@ import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.news.BN_EnergyDetail
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
+import com.ppandroid.app.utils.Devices
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.widget.HorizontalPercentageView
 import com.ppandroid.im.base.FG_Base
@@ -29,7 +30,7 @@ import org.jetbrains.anko.find
  * Created by yeqinfu on 2017/9/21.
  */
 class FG_EnergyDetail : FG_Base() {
-    var energyClassificationId="1"
+    var energyClassificationId= Devices.ELECTRIC
     companion object {
         fun createBundle(energyClassificationId:String,id: String, title: String): Bundle {
             var b = Bundle()
@@ -51,7 +52,7 @@ class FG_EnergyDetail : FG_Base() {
         arguments?.let {
             id = it.getString("id", "")
             title = it.getString("title", "")
-            energyClassificationId = it.getString("energyClassificationId", "1")
+            energyClassificationId = it.getString("energyClassificationId", Devices.ELECTRIC)
         }
         if (energyClassificationId=="2"){
             tag01="水"
@@ -63,7 +64,7 @@ class FG_EnergyDetail : FG_Base() {
     }
 
     private fun loadContent() {
-        var url = if (energyClassificationId=="1"){
+        var url = if (energyClassificationId==Devices.ELECTRIC){
             "user/energy/statistics/getConsumptionList.json?id=$id"
         }else{
             "user/water/statistics/getConsumptionList.json?id=$id"

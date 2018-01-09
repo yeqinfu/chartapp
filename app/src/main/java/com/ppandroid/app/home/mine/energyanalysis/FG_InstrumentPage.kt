@@ -10,6 +10,7 @@ import com.ppandroid.app.bean.mine.energyanalysis.BN_InstrumentPage
 import com.ppandroid.app.home.mine.energyanalysis.devicesanalysis.FG_InstrumentDetailAnalysis
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
+import com.ppandroid.app.utils.Devices
 import kotlinx.android.synthetic.main.fg_base_analysis_page.*
 
 /**
@@ -18,7 +19,7 @@ import kotlinx.android.synthetic.main.fg_base_analysis_page.*
 class FG_InstrumentPage : FG_BaseAnlysisPage(){
 
     override fun loadContent() {
-        var url=if (energyClassificationId=="1"){
+        var url=if (energyClassificationId==Devices.ELECTRIC){
             "user/energy/analysis/getInstrument.json?dateString=$select"
         }else{
             "user/water/analysis/getInstrument.json?dateString=$select"

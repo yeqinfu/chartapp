@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import com.ppandroid.app.R
+import com.ppandroid.app.utils.Devices
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_base_analysis.*
 import kotlinx.android.synthetic.main.layout_head_view.*
@@ -19,7 +20,7 @@ import kotlinx.android.synthetic.main.layout_head_view.*
  */
 open abstract class FG_BaseAnalysis :FG_Base(){
     protected var parentId="-1"
-    protected var energyClassificationId="1"
+    protected var energyClassificationId= Devices.ELECTRIC
     companion object {
         fun createBundle(energyClassificationId:String,parentId:String): Bundle {
             var b =Bundle()
@@ -33,7 +34,7 @@ open abstract class FG_BaseAnalysis :FG_Base(){
     override fun afterViews() {
         arguments?.let {
             parentId=it.getString("parentId","-1")
-            energyClassificationId=it.getString("energyClassificationId","1")
+            energyClassificationId=it.getString("energyClassificationId",Devices.ELECTRIC)
         }
         init()
         head_view.init(activity)

@@ -13,6 +13,7 @@ import com.ppandroid.app.bean.mine.energyanalysis.BN_EnergyAnalysis
 import com.ppandroid.app.home.mine.energyanalysis.totalhorzizontalanalysis.AC_TotalHorzintalanalysis
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
+import com.ppandroid.app.utils.Devices
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_energy_analysis.*
 import kotlinx.android.synthetic.main.layout_head_view.*
@@ -23,7 +24,7 @@ import kotlinx.android.synthetic.main.yellowchartview.*
  * 能耗分析
  */
 class FG_EnergyAnalysis :FG_Base(){
-    private var energyClassificationId="1"
+    private var energyClassificationId= Devices.ELECTRIC
     override fun fgRes(): Int= R.layout.fg_energy_analysis
     fun createBundle(): Bundle {
         val b = Bundle()
@@ -32,14 +33,14 @@ class FG_EnergyAnalysis :FG_Base(){
     }
     override fun afterViews() {
         arguments?.let {
-            energyClassificationId=it.getString("energyClassificationId","1")
+            energyClassificationId=it.getString("energyClassificationId",Devices.ELECTRIC)
         }
         head_view.init(activity)
         head_view.setCenterTitle("能耗分析")
         head_view.setRightText("历史"){
             startAC(FG_History::class.java.name,createBundle())
         }
-        var title=if (energyClassificationId == "1"){
+        var title=if (energyClassificationId == Devices.ELECTRIC){
              "用电分析"
         }else{
              "用水分析"
@@ -67,7 +68,7 @@ class FG_EnergyAnalysis :FG_Base(){
         loadContent()
     }
     private fun loadContent(){
-        var url: String = if (energyClassificationId.equals("1")){//电
+        var url: String = if (energyClassificationId.equals(Devices.ELECTRIC)){//电
             "user/energy/analysis/getWeekAnalysis.json"
         }else{//水
             "user/water/analysis/getWeekAnalysis.json"

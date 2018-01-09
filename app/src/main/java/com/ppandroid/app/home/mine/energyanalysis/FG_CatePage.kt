@@ -11,6 +11,7 @@ import com.ppandroid.app.home.mine.energyanalysis.devicesanalysis.FG_CateDetailA
 import com.ppandroid.app.home.mine.energyanalysis.devicesanalysis.FG_DeviceDetailAnalysis
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
+import com.ppandroid.app.utils.Devices
 import kotlinx.android.synthetic.main.fg_base_analysis_page.*
 
 /**
@@ -19,7 +20,7 @@ import kotlinx.android.synthetic.main.fg_base_analysis_page.*
 class FG_CatePage :FG_BaseAnlysisPage(){
 
     override fun loadContent() {
-        var url=if (energyClassificationId=="1"){
+        var url=if (energyClassificationId==Devices.ELECTRIC){
             "user/energy/analysis/getCate.json?dateString=$select"
         }else{
             "user/water/analysis/getCate.json?dateString=$select"
@@ -76,7 +77,7 @@ class FG_CatePage :FG_BaseAnlysisPage(){
     }
 
     override fun init() {
-        if (energyClassificationId=="1"){
+        if (energyClassificationId==Devices.ELECTRIC){
             when(index){
                 0->  tv_type.text="今日用电"
                 1->  tv_type.text="本月用电"

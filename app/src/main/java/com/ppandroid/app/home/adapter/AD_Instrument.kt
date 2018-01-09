@@ -19,6 +19,7 @@ import com.ppandroid.app.base.AC_ContentFG
 import com.ppandroid.app.bean.overview.BN_OverView
 import com.ppandroid.app.home.FG_OverView
 import com.ppandroid.app.home.mine.energyanalysis.devicesanalysis.FG_InstrumentDetailAnalysis
+import com.ppandroid.app.utils.Devices
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.widget.HorizontalPercentageView
 import org.jetbrains.anko.find
@@ -28,7 +29,7 @@ import org.jetbrains.anko.find
  */
 class AD_Instrument(ac: Activity, list: List<BN_OverView.MessageBean.InstrumentInfomationListBean>): PagerAdapter(){
 
-    var energyClassificationId="1"
+    var energyClassificationId= Devices.ELECTRIC
     /**横条图viewpager*/
     var arrays_title = arrayOf(
             "今日",

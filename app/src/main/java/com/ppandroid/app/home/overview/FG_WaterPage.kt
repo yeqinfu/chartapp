@@ -32,6 +32,7 @@ import com.ppandroid.app.home.mine.energyanalysis.devicesanalysis.FG_DeviceDetai
 import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.DebugLog
+import com.ppandroid.app.utils.Devices
 import com.ppandroid.app.utils.Utils_Dialog
 import com.ppandroid.app.widget.common.PagerSlidingTab
 import com.ppandroid.app.widget.graphical.demoview.DountChart01View
@@ -527,7 +528,7 @@ class FG_WaterPage:FG_Base(){
 
 
     }
-    var energyClassificationId="2"
+    var energyClassificationId=Devices.WATER
     private fun toCateAnalysisPage(ll: LinearLayout, id:String?,name:String) {
         id?.let {
             ll.setOnClickListener {
