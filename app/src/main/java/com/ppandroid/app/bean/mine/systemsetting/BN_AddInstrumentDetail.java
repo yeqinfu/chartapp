@@ -13,8 +13,9 @@ import com.ppandroid.im.bean.BaseBody;
 
 public class BN_AddInstrumentDetail extends BaseBody {
 
+
     /**
-     * message : {"companyId":1,"level":1,"parentId":-1,"code":"87T04","energyClassificationId":1,"energyClassificationName":"电","name":"CH01-1约克离心式制冷机","position":"一楼空调室","charge":null,"rate":"1","codeAddress":"987654321","deviceId":1,"deviceName":"CH01-1离心式制冷机","status":0,"helfCount":1}
+     * message : {"companyId":2,"level":1,"parentId":-1,"code":"237","energyClassificationId":3,"energyClassificationName":"温湿度","name":"6664","position":"","charge":"","rate":"","codeAddress":"","deviceId":-1,"deviceName":null,"status":-1,"helfCount":0,"max":56,"min":8,"max1":8,"min1":9}
      */
 
     private MessageBean message;
@@ -29,21 +30,25 @@ public class BN_AddInstrumentDetail extends BaseBody {
 
     public static class MessageBean {
         /**
-         * companyId : 1
+         * companyId : 2
          * level : 1
          * parentId : -1
-         * code : 87T04
-         * energyClassificationId : 1
-         * energyClassificationName : 电
-         * name : CH01-1约克离心式制冷机
-         * position : 一楼空调室
-         * charge : null
-         * rate : 1
-         * codeAddress : 987654321
-         * deviceId : 1
-         * deviceName : CH01-1离心式制冷机
-         * status : 0
-         * helfCount : 1
+         * code : 237
+         * energyClassificationId : 3
+         * energyClassificationName : 温湿度
+         * name : 6664
+         * position :
+         * charge :
+         * rate :
+         * codeAddress :
+         * deviceId : -1
+         * deviceName : null
+         * status : -1
+         * helfCount : 0
+         * max : 56
+         * min : 8
+         * max1 : 8
+         * min1 : 9
          */
 
         private int companyId;
@@ -61,6 +66,10 @@ public class BN_AddInstrumentDetail extends BaseBody {
         private String deviceName;
         private int status;
         private int helfCount;
+        private double max;
+        private double min;
+        private double max1;
+        private double min1;
 
         public int getCompanyId() {
             return companyId;
@@ -180,6 +189,38 @@ public class BN_AddInstrumentDetail extends BaseBody {
 
         public void setHelfCount(int helfCount) {
             this.helfCount = helfCount;
+        }
+
+        public double getMax() {
+            return max;
+        }
+
+        public void setMax(int max) {
+            this.max = max;
+        }
+
+        public double getMin() {
+            return min;
+        }
+
+        public void setMin(double min) {
+            this.min = min;
+        }
+
+        public double getMax1() {
+            return max1;
+        }
+
+        public void setMax1(double max1) {
+            this.max1 = max1;
+        }
+
+        public double getMin1() {
+            return min1;
+        }
+
+        public void setMin1(int min1) {
+            this.min1 = min1;
         }
     }
 }

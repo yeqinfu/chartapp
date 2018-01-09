@@ -81,6 +81,15 @@ public class BN_FaultHistory extends BaseBody {
             private String devicePhoto;
             private String warningTime;
             private String failueTime;
+            private String mark;
+
+            public String getMark() {
+                return mark;
+            }
+
+            public void setMark(String mark) {
+                this.mark = mark;
+            }
 
             public int getDeviceId() {
                 return deviceId;

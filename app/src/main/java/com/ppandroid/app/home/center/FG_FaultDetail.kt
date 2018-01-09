@@ -6,6 +6,7 @@
 package com.ppandroid.app.home.center
 
 import android.os.Bundle
+import android.text.TextUtils
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.news.BN_FaultHistory
 import com.ppandroid.app.utils.glide.GlideUtils
@@ -37,7 +38,11 @@ class FG_FaultDetail:FG_Base(){
             tv_device_name.text=item.deviceName
             tv_status001.text=item.status
             tv_time.text=item.failueTime
-            tv_content.text=item.status
+            tv_content.text=if (TextUtils.isEmpty(item.mark)){
+                item.status
+            }else{
+                item.mark
+            }
         }
     }
 

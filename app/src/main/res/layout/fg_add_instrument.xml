@@ -394,7 +394,7 @@
                         android:textSize="@dimen/bar_title"/>
 
                     <EditText
-                        android:id="@+id/tv_max_temprature"
+                        android:id="@+id/et_max_temprature"
                         android:layout_width="0dp"
                         android:inputType="numberDecimal"
                         android:layout_height="match_parent"
@@ -425,7 +425,7 @@
                         android:textSize="@dimen/bar_title"/>
 
                     <EditText
-                        android:id="@+id/tv_min_temprature"
+                        android:id="@+id/et_min_temprature"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -486,7 +486,7 @@
                         android:textSize="@dimen/bar_title"/>
 
                     <EditText
-                        android:id="@+id/tv_max_humidity"
+                        android:id="@+id/et_max_humidity"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -517,7 +517,7 @@
                         android:textSize="@dimen/bar_title"/>
 
                     <EditText
-                        android:id="@+id/tv_min_humidity"
+                        android:id="@+id/et_min_humidity"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"

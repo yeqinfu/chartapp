@@ -195,6 +195,12 @@ class FG_AddInstrument : FG_Base() {
                     et_rate.setText(it.message.rate)
                     et_codeAddress.setText(it.message.codeAddress)
                     tv_choose_instruemnt.text=it.message.deviceName
+
+                    et_max_temprature.setText(it.message.max.toString())
+                    et_min_temprature.setText(it.message.min.toString())
+                    et_max_humidity.setText(it.message.max1.toString())
+                    et_min_humidity.setText(it.message.min1.toString())
+
                     deviceId=it.message.deviceId?.toString()
 
 
@@ -299,10 +305,10 @@ class FG_AddInstrument : FG_Base() {
         charge = et_charge.text.toString()
         rate = et_rate.text.toString()
         codeAddress = et_codeAddress.text.toString()
-        max_temprature = tv_max_temprature.text.toString()
-        min_temprature = tv_min_temprature.text.toString()
-        max_humidity = tv_max_humidity.text.toString()
-        min_humidity = tv_min_humidity.text.toString()
+        max_temprature = et_max_temprature.text.toString()
+        min_temprature = et_min_temprature.text.toString()
+        max_humidity = et_max_humidity.text.toString()
+        min_humidity = et_min_humidity.text.toString()
         codeAddress = et_codeAddress.text.toString()
 
         var map = TreeMap<String, String>()

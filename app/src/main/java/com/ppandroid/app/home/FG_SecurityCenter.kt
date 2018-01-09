@@ -55,6 +55,7 @@ class FG_SecurityCenter:FG_Base(){
                                         iv_check2.setImageResource(R.drawable.icon_check)
                                         iv_check3.setImageResource(R.drawable.icon_check)
                                         iv_check4.setImageResource(R.drawable.icon_check)
+                                        iv_check5.setImageResource(R.drawable.icon_check)
                                         excuteAnimation()
                                     }
 
@@ -64,7 +65,11 @@ class FG_SecurityCenter:FG_Base(){
                                         StatusBarUtils.setWindowStatusBarColor(activity,R.color.orange)
                                         head_view.theme=HeadViewLayout.THEME_ORANGE
                                         rotate?.cancel()
+                                        iv_check.setImageResource(R.drawable.icon_ok)
+                                        iv_check2.setImageResource(R.drawable.icon_ok)
+                                        iv_check3.setImageResource(R.drawable.icon_ok)
                                         iv_check4.setImageResource(R.drawable.icon_ok)
+                                        iv_check5.setImageResource(R.drawable.icon_ok)
                                         changeView()
                                     }
                                 }
@@ -112,7 +117,20 @@ class FG_SecurityCenter:FG_Base(){
                             startAC(FG_DevicesAll::class.java.name)
                         }
                     }
-                    if (!it.message.waterDeviceEntityList.isEmpty()||!it.message.deviceEntityList.isEmpty()){
+                    if (!it.message.temperatureDeviceEntityList.isEmpty()){
+                        val adapter = ArrayAdapter<String>(activity, R.layout.simple_list_item_1)
+                        for (item in it.message.temperatureDeviceEntityList){
+                            adapter.add(item.name)
+                        }
+                        lv_list05.adapter=adapter
+                        tv_content_05.text="系统检测设备"+it.message.temperatureDeviceEntityList.size+
+                                "个设备存在风险，请尽快排查。"
+                        ll_msg5.visibility=View.VISIBLE
+                        ll_msg5.setOnClickListener {
+                            startAC(FG_DevicesAll::class.java.name)
+                        }
+                    }
+                    if (!it.message.waterDeviceEntityList.isEmpty()||!it.message.deviceEntityList.isEmpty()||!it.message.temperatureDeviceEntityList.isEmpty()){
                         rl_001.visibility=View.GONE
                         rl_004.visibility=View.GONE
                         if (it.message.deviceEntityList.isEmpty()){
@@ -120,6 +138,9 @@ class FG_SecurityCenter:FG_Base(){
                         }
                         if (it.message.waterDeviceEntityList.isEmpty()){
                             ll_003.visibility=View.GONE
+                        }
+                        if (it.message.temperatureDeviceEntityList.isEmpty()){
+                            ll_005.visibility=View.GONE
                         }
 
                     }else{
@@ -157,6 +178,7 @@ class FG_SecurityCenter:FG_Base(){
             iv_check2.startAnimation(this)
             iv_check3.startAnimation(this)
             iv_check4.startAnimation(this)
+            iv_check5.startAnimation(this)
         }
     }
 
