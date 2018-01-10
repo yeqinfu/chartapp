@@ -148,6 +148,7 @@ class FG_AddEmployee : FG_Base() {
     var list = ArrayList<String>()
     private fun showChoosePositionDialog() {
         if (list.isEmpty()){
+            toast("权限列表为空")
             return
         }
         var pop = Pop_ChooseSimple(activity, list)
@@ -180,10 +181,10 @@ class FG_AddEmployee : FG_Base() {
             toast("请输入职位")
             return
         }
-        if (TextUtils.isEmpty(roleId)) {
+       /* if (TextUtils.isEmpty(roleId)) {
             toast("请选择权限类型")
             return
-        }
+        }*/
 
         var url = "user/team/department/employee/add.json?departmentId=$parentId&roleId=$roleId&realName=$name&mobile=$phone&job=$job"
 

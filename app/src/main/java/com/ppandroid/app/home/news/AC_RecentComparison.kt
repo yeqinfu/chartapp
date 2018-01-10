@@ -288,6 +288,11 @@ class AC_RecentComparison : AC_Base() {
                         avgTotal+=target.avg
                     }
                     avg=avgTotal/listValue.size
+
+                    var maxLine=MultipleChartView.BN_BrokeLine()
+                    maxLine.value=max
+                    maxLine.text="最大值："+max
+
                     //向上取整纵坐标六等分
                     max=Math.ceil(max)
                     val df = DecimalFormat("######0.00")
@@ -306,9 +311,7 @@ class AC_RecentComparison : AC_Base() {
                     chartview.isShowAvg=true
                     //最大线，最小线
                     var listBrokenLine= ArrayList<MultipleChartView.BN_BrokeLine>()
-                    var maxLine=MultipleChartView.BN_BrokeLine()
-                    maxLine.value=max
-                    maxLine.text="最大值："+max
+
                     listBrokenLine.add(maxLine)
 
                     var minLine=MultipleChartView.BN_BrokeLine()

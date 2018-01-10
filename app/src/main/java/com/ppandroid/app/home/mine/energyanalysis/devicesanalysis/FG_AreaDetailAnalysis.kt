@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.layout_head_view.*
  */
 class FG_AreaDetailAnalysis : FG_BaseAnalysis(){
 
+    var i="!"
     companion object {
         fun createBundle(energyClassificationId:String,parentId:String,title:String): Bundle {
             var b = Bundle()
