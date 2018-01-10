@@ -62,6 +62,7 @@ class AC_Login : AppCompatActivity() {
         Http.get(this@AC_Login,url, CaptchaBody::class.java,object :MyCallBack<CaptchaBody>{
             override fun onResponse(response: CaptchaBody?) {
                 response?.let {
+
                     var password2=SecurityUtils.decode(password)
                     password2 += it.message
                     var sign=SecurityUtils.decode(password2)

@@ -72,6 +72,9 @@ class FG_EnergyDetail : FG_Base() {
         Http.get(activity, url, BN_EnergyDetail::class.java, object : MyCallBack<BN_EnergyDetail> {
             override fun onResponse(response: BN_EnergyDetail?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     tv_total_number.text = "总用"+tag01+"量（" + it.message.deviceNumber + "项）"
                     tv_total_kwh.text = it.message.consumptionSum + tag02
                     var adapter=AD_List(energyClassificationId,it.message.energyConsumptionDeviceList,activity)

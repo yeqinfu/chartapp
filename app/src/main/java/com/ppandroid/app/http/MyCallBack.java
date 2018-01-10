@@ -15,4 +15,5 @@ import com.ppandroid.im.bean.BaseBody;
 public interface MyCallBack<T extends BaseBody> {
 	void onResponse(T response);
 	void  onError(ErrorBody error);
+
 }

@@ -34,6 +34,9 @@ class FG_AboutMe :FG_Base(){
         Http.get(activity,url,BN_AboutMe::class.java,object :MyCallBack<BN_AboutMe>{
             override fun onResponse(response: BN_AboutMe?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     tv_company_name.text=it.message.companyName
                     tv_address.text=it.message.companyAddress
                     tv_phone.text=it.message.companyPhone

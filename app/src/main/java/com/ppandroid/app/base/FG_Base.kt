@@ -29,8 +29,20 @@ import java.net.URLEncoder
 
 /**
  * 功能性base 不放业务base逻辑
+ * README:
+ * 在很多请求代码中callback会有一个判断
+ *   if (!isAdded){return}
+ *   为什么会增加这个判断呢，首先这个判断是非常的愚蠢的，但是又找不到代替方法
+ *   因为网络请求需要时间，然而如果这个callback在执行回调的时候，fragment已经
+ *   detath了，那么activity这个变量（getActivity方法）返回就为空了。kt代码中
+ *   activity似乎是当成一个不会空的对象了。所以增加这个判断保证不会抛出
+ *   activity==null的异常如果维护者找到合适的替代方法，全局替换或者删除这个代
+ *   码就行了。很多东西都是设置了TODO，但是却不会去todo。 &( ^___^ )&
+ *   在这边举一个例子：分项用电有四个tab，都是fragment，快速切换1，4tab，那么
+ *   fragment会被回收和创造，而网络却不及时，可以重现问题。
  */
 abstract class FG_Base : Fragment() {
+
     protected lateinit var sp: Utils_SharedPreferences
     protected abstract fun fgRes(): Int
     protected abstract fun afterViews()

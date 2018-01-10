@@ -124,6 +124,9 @@ class FG_AddDevices : FG_Base() {
         get(activity, url, BN_AddDeviceDetail::class.java, object : MyCallBack<BN_AddDeviceDetail> {
             override fun onResponse(response: BN_AddDeviceDetail?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     et_name.setText(it.message.name)
                     et_model.setText(it.message.model)
                     it.message.photo?.let {
@@ -265,6 +268,9 @@ class FG_AddDevices : FG_Base() {
                     override fun onResponse(response: BaseBody?) {
                         Utils_Dialog.disMissLoading()
                         response?.let {
+                            if (!isAdded){
+                                return
+                            }
                             if (pageType=="1"){
                                 toast("修改成功")
                             }else{

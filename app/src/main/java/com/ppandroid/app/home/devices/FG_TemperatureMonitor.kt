@@ -32,6 +32,9 @@ class FG_TemperatureMonitor:FG_Base(){
         Http.get(activity,url, BN_TemperatureMonitor::class.java,object :MyCallBack<BN_TemperatureMonitor>{
             override fun onResponse(response: BN_TemperatureMonitor?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     tv_humidity.text=it.message.humidity.toString()
                     tv_temperature.text=it.message.temperature.toString()
                     tv_lastModifyTime.text=it.message.lastModifyTime.toString()

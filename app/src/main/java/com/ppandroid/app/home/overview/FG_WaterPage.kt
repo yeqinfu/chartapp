@@ -65,6 +65,9 @@ class FG_WaterPage:FG_Base(){
                 Utils_Dialog.disMissLoading()
                 refreshLayout.finishRefresh()
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     choosed = it.message.choosed
                     setData()
                     loadContent()
@@ -142,6 +145,9 @@ class FG_WaterPage:FG_Base(){
         Http.get(activity, url, BN_OverViewWater::class.java, object : MyCallBack<BN_OverViewWater> {
             override fun onResponse(response: BN_OverViewWater?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     body = it
                     setValue()
                 }

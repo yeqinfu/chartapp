@@ -75,6 +75,9 @@ class FG_AddTeam : FG_Base(){
         Http.get(activity,url,BaseBody::class.java,object :MyCallBack<BaseBody>{
             override fun onResponse(response: BaseBody?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     toast("删除成功")
                     EventBus.getDefault().post(ET_Refresh(ET_Refresh.TASKID_REFRESH_TEAM_MANAGEMENT))
                     EventBus.getDefault().post(ET_Refresh(ET_Refresh.TASKID_REFRESH_TEAM_DETAIL))
@@ -101,6 +104,9 @@ class FG_AddTeam : FG_Base(){
         Http.get(activity,url,BaseBody::class.java,object :MyCallBack<BaseBody>{
             override fun onResponse(response: BaseBody?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     toast("添加成功")
                     EventBus.getDefault().post(ET_Refresh(ET_Refresh.TASKID_REFRESH_TEAM_MANAGEMENT))
                     EventBus.getDefault().post(ET_Refresh(ET_Refresh.TASKID_REFRESH_TEAM_DETAIL_REFRESH))

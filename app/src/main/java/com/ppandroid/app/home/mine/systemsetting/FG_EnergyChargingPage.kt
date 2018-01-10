@@ -112,6 +112,9 @@ class FG_EnergyChargingPage : FG_Base() {
         Http.get(activity, url, BaseBody::class.java, object : MyCallBack<BaseBody> {
             override fun onResponse(response: BaseBody?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     if (it.isSuccess) {
                         toast("删除成功")
                         loadContent()
@@ -131,6 +134,9 @@ class FG_EnergyChargingPage : FG_Base() {
         Http.get(activity, url, BN_EnergyChargingPage::class.java, object : MyCallBack<BN_EnergyChargingPage> {
             override fun onResponse(response: BN_EnergyChargingPage?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     if (response.message.isEmpty()) {
                         network_error?.setViewType(NetWorkErrorView.NOT_DATA)
                     } else {

@@ -44,6 +44,9 @@ class FG_DevicesMonitor :FG_Base(){
         Http.get(activity,url,BN_DevicesMonitor::class.java,object :MyCallBack<BN_DevicesMonitor>{
             override fun onResponse(response: BN_DevicesMonitor?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     var body = it.message
                     body?.let {
                         tv_lastModifyTime.text = "最后更新时间：" + it.lastModifyTime

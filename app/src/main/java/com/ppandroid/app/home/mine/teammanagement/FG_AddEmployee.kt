@@ -64,6 +64,9 @@ class FG_AddEmployee : FG_Base() {
         Http.get(activity,url,BN_Role::class.java,object :MyCallBack<BN_Role>{
             override fun onResponse(response: BN_Role?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     for(item in it.message){
                         list.add(item.name)
                         map.put(item.name,item.id.toString())
@@ -129,6 +132,9 @@ class FG_AddEmployee : FG_Base() {
         Http.get(activity, url, BaseBody::class.java, object : MyCallBack<BaseBody> {
             override fun onResponse(response: BaseBody?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     EventBus.getDefault().post(ET_Refresh(ET_Refresh.TASKID_REFRESH_TEAM_MANAGEMENT))
                     EventBus.getDefault().post(ET_Refresh(ET_Refresh.TASKID_REFRESH_TEAM_DETAIL_REFRESH))
                     toast("删除成功")
@@ -194,6 +200,9 @@ class FG_AddEmployee : FG_Base() {
         Http.get(activity, url, BaseBody::class.java, object : MyCallBack<BaseBody> {
             override fun onResponse(response: BaseBody?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     toast("添加成功")
                     EventBus.getDefault().post(ET_Refresh(ET_Refresh.TASKID_REFRESH_TEAM_MANAGEMENT))
                     EventBus.getDefault().post(ET_Refresh(ET_Refresh.TASKID_REFRESH_TEAM_DETAIL_REFRESH))

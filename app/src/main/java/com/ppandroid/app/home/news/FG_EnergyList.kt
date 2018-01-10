@@ -80,6 +80,9 @@ class FG_EnergyList :FG_Base(){
                 refresh_layout.finishRefresh()
                 refresh_layout.finishLoadmore()
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     if (!it.message.energyConsumptionStatisticsDtoList.isEmpty()){
                         content.addAll(it.message.energyConsumptionStatisticsDtoList)
                         adapter?.notifyDataSetChanged()

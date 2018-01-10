@@ -112,6 +112,7 @@ class Pop_ChooseArea(context: Activity) : BasePopupWindow(context, ViewGroup.Lay
         Http.get(mContext, url, BN_Area::class.java, object : MyCallBack<BN_Area> {
             override fun onResponse(response: BN_Area?) {
                 response?.let {
+
                     when (currentStep) {
                         0 -> provinceList = it.message
                         1 -> cityList = it.message

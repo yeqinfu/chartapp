@@ -88,6 +88,9 @@ class FG_AboutCate:FG_Base(){
         Http.get(activity, url, BN_DeviceCatePage::class.java, object : MyCallBack<BN_DeviceCatePage> {
             override fun onResponse(response: BN_DeviceCatePage?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     message=it.message
                     if (response.message.isEmpty()) {
                         network_error?.setViewType(NetWorkErrorView.NOT_DATA)

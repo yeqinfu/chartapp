@@ -33,6 +33,9 @@ class FG_WaterMonitor :FG_Base(){
             override fun onResponse(response: BN_WaterMonitor?) {
 
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     tv_number.text=it.message.m3.toString()
                     tv_lastModifyTime.text=it.message.lastModifyTime.toString()
                 }

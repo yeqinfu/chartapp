@@ -78,6 +78,9 @@ class FG_Demo02 : FG_Base() {
         Http.get(activity, url, BaseBody::class.java, object : MyCallBack<BaseBody> {
             override fun onResponse(response: BaseBody?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     if (it.isSuccess) {
                         toast("退出成功")
                         Utils_UserInfo.clearUserInfo(activity)

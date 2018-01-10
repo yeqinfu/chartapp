@@ -64,6 +64,9 @@ class FG_FaultHistory:FG_Base(){
                 refresh_layout.finishRefresh()
                 refresh_layout.finishLoadmore()
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     if (!it.message.failueWarningList.isEmpty()){
                         content.addAll(it.message.failueWarningList)
                         adapter?.notifyDataSetChanged()

@@ -31,6 +31,7 @@ class AC_InstrumentHorChart : AC_HorChart(){
         Http.get(this, url, BN_AreaList::class.java, object : MyCallBack<BN_AreaList> {
             override fun onResponse(response: BN_AreaList?) {
                 response?.let {
+
                     list = it.message
                     defaultCountPage = it.message.size
                     setContent()

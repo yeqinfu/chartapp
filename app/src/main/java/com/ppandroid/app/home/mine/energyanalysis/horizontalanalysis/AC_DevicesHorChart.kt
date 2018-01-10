@@ -33,6 +33,7 @@ class AC_DevicesHorChart : AC_HorChart(){
         Http.get(this, url, BN_DevicesList::class.java, object : MyCallBack<BN_DevicesList> {
             override fun onResponse(response: BN_DevicesList?) {
                 response?.let {
+
                     list = it.message
                     defaultCountPage = it.message.size
                     setContent()

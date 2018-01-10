@@ -31,6 +31,9 @@ class FG_InstrumentPage : FG_BaseAnlysisPage(){
         Http.get(activity, url, BN_InstrumentPage::class.java, object : MyCallBack<BN_InstrumentPage> {
             override fun onResponse(response: BN_InstrumentPage?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     var k=getList(it)
                     tv_totalKwh.text = it.message.analysisDeviceSum
                     var adapter = AD_List(activity, k, isHaveChild)

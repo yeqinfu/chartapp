@@ -63,6 +63,9 @@ class FG_ModifiedPassword:FG_Base(){
         Http.post(activity,url,map,BaseBody::class.java,object :MyCallBack<BaseBody>{
             override fun onResponse(response: BaseBody?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     if (it.isSuccess){
                         toast("修改成功")
                         finish()

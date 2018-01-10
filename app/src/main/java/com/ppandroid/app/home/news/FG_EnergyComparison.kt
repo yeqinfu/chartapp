@@ -52,6 +52,7 @@ class FG_EnergyComparison:FG_CommonList<BN_EnergyComparison.MessageBean.ResultBe
                 refresh_layout.finishRefresh()
                 refresh_layout.finishLoadmore()
                 response?.let {
+
                     if (it.message?.result?.isEmpty() == false){
                         content.addAll(it.message.result)
                         adapter?.notifyDataSetChanged()

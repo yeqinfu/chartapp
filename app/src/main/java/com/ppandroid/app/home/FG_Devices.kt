@@ -49,6 +49,9 @@ class FG_Devices : FG_Base() {
             override fun onResponse(response: BN_Devices?) {
                 refreshLayout.finishRefresh()
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     val adapter = AD_ExList(it.message.deviceCateList, activity)
                     lv_ex.setAdapter(adapter)
                     lv_ex.setOnGroupCollapseListener { var1 ->

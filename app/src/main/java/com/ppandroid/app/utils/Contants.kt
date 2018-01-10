@@ -27,8 +27,8 @@ class Contants {
 
    //var baseUrl = "http://192.168.25.110:9010/"
   // var baseUrl = "http://120.76.40.63:9010/"
-  //var baseUrl = "http://192.168.25.127/"
-     var baseUrl = "http://192.168.25.203:80/"
+  var baseUrl = "http://192.168.25.127/"
+  //  var baseUrl = "http://192.168.25.203:80/"
 
         //单位常量
         var m3="m³"

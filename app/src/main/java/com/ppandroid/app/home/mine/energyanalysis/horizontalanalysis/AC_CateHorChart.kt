@@ -31,6 +31,7 @@ class AC_CateHorChart:AC_HorChart(){
         Http.get(this,url, BN_CateList::class.java,object :MyCallBack<BN_CateList>{
             override fun onResponse(response: BN_CateList?) {
                 response?.let {
+
                     list=it.message
                     defaultCountPage=it.message.size
                     setContent()

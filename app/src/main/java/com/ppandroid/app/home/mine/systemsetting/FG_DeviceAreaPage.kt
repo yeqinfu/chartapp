@@ -141,6 +141,9 @@ class FG_DeviceAreaPage : FG_Base() {
         Http.get(activity, url, BaseBody::class.java, object : MyCallBack<BaseBody> {
             override fun onResponse(response: BaseBody?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     if (it.isSuccess) {
                         toast("删除成功")
                         loadContent()
@@ -166,6 +169,9 @@ class FG_DeviceAreaPage : FG_Base() {
         Http.get(activity, url, BN_DeviceArea::class.java, object : MyCallBack<BN_DeviceArea> {
             override fun onResponse(response: BN_DeviceArea?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     if (response.message.isEmpty()) {
                         network_error?.setViewType(NetWorkErrorView.NOT_DATA)
                     } else {

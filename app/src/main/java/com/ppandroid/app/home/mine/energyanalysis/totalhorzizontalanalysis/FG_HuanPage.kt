@@ -36,6 +36,9 @@ class FG_HuanPage:FG_BaseLineChart(){
         Http.get(activity,url,BN_HuanPage::class.java,object :MyCallBack<BN_HuanPage>{
             override fun onResponse(response: BN_HuanPage?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     var sum=it.message.thisAnalysisDeviceDetailDto.totalKwh?.toString()?:""
                     var radio=it.message.huanbiRatio
                     var avg=it.message.thisAnalysisDeviceDetailDto.accurateAverageKwh
@@ -85,6 +88,9 @@ class FG_HuanPage:FG_BaseLineChart(){
         Http.get(activity,url, BN_HuanPageWeek::class.java,object :MyCallBack<BN_HuanPageWeek>{
             override fun onResponse(response: BN_HuanPageWeek?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     var sum=it.message.thisAnalysisWeekParamDto.weekSum?.toString()?:""
                     var radio=it.message.huanbiRatio
                     var avg=it.message.thisAnalysisWeekParamDto.weekAverage

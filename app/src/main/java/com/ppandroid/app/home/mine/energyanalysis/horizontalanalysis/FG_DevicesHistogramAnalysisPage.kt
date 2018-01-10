@@ -33,6 +33,9 @@ class FG_DevicesHistogramAnalysisPage : FG_BaseHistoramAnalysisPage(){
         Http.get(activity, url, BN_DevicesDetailAnalysisPage::class.java, object : MyCallBack<BN_DevicesDetailAnalysisPage> {
             override fun onResponse(response: BN_DevicesDetailAnalysisPage?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     /**柱状图*/
                     var list = ArrayList<BN_Vertical>()
                     /**柱状图最大值*/

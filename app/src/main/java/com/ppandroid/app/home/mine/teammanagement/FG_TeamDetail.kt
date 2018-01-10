@@ -65,6 +65,9 @@ class FG_TeamDetail : FG_Base() {
         Http.get(activity, url, BN_TeamDetail::class.java, object : MyCallBack<BN_TeamDetail> {
             override fun onResponse(response: BN_TeamDetail?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     it.message.departmentList?.let {
                         var teamAdapter = AD_Team(it, activity)
                         lv_list_team.adapter = teamAdapter

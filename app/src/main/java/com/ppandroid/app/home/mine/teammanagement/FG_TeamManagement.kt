@@ -78,6 +78,9 @@ class FG_TeamManagement : FG_Base() {
         Http.get(activity, url, BN_TeamManagement::class.java, object : MyCallBack<BN_TeamManagement> {
             override fun onResponse(response: BN_TeamManagement?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     var adapter = AD_Team(it.message, activity)
                     lv_list.adapter = adapter
                     lv_list.setOnItemClickListener { _, _, i, _ ->

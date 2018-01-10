@@ -41,6 +41,9 @@ class FG_HistogramPage : FG_BaseHistoramAnalysisPage(){
         Http.get(activity, url, BN_TotalAnalysis::class.java, object : MyCallBack<BN_TotalAnalysis> {
             override fun onResponse(response: BN_TotalAnalysis?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     /**柱状图*/
                     var list = ArrayList<BN_Vertical>()
                     /**柱状图最大值*/
@@ -120,6 +123,9 @@ class FG_HistogramPage : FG_BaseHistoramAnalysisPage(){
         Http.get(activity,url, BN_EnergyAnalysis::class.java,object :MyCallBack<BN_EnergyAnalysis>{
             override fun onResponse(response: BN_EnergyAnalysis?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     /**柱状图*/
                     var list = ArrayList<BN_Vertical>()
                     /**柱状图最大值*/

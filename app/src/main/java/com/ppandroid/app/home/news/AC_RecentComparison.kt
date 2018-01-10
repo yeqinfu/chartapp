@@ -30,6 +30,8 @@ import kotlin.collections.HashMap
 class AC_RecentComparison : AC_Base() {
 
     private var selectList = HashMap<String, String>()
+
+
     var energyClassificationId = "1"
     protected var select = ""
     private fun format(month: Int): String {
@@ -229,8 +231,10 @@ class AC_RecentComparison : AC_Base() {
         } else {
             "user/water/analysis/getDeviceByDateArray.json?dateString="
         }
+        var colorIndexList=ArrayList<String>()
         for ((key, value) in selectList) {
             url += value + ","
+            colorIndexList.add(key)
         }
         url = url.substring(0, url.length - 1)
         Http.get(this@AC_RecentComparison, url, BN_RecentComparison::class.java, object : MyCallBack<BN_RecentComparison> {
@@ -238,6 +242,7 @@ class AC_RecentComparison : AC_Base() {
             override fun onResponse(response: BN_RecentComparison?) {
                 Utils_Dialog.disMissLoading()
                 response?.let {
+
                     var xValue=ArrayList<String>()
                     //取出横坐标值
                     it.message[0]?.let {
@@ -262,8 +267,16 @@ class AC_RecentComparison : AC_Base() {
                         var target= MultipleChartView.BrokenLine()
                         var targetMax=0.0
                         var targetMin=Utils_Common.parseNumberString(item.stageKwh[0].value)
-                        target.lineColor= Color.parseColor(colors[index])
-                        target.linePointColor= Color.parseColor(colors[index])
+
+
+
+
+                        if (index<=colorIndexList.size){
+                            var i=colorIndexList[index].toInt()
+                            target.lineColor= Color.parseColor(colors[i-1])
+                            target.linePointColor= Color.parseColor(colors[i-1])
+                        }
+
                         for(child in item.stageKwh){
                             var value=Utils_Common.parseNumberString(child.value)
                             if (value>targetMax){

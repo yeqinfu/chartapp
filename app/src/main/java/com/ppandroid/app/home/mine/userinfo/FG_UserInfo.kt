@@ -89,6 +89,9 @@ class FG_UserInfo : FG_Base() {
         Http.post(activity,url,params,BaseBody::class.java,object :MyCallBack<BaseBody>{
             override fun onResponse(response: BaseBody?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     Utils_Dialog.disMissLoading()
                     toast("保存成功")
                     EventBus.getDefault().post(ET_Refresh(ET_Refresh.TASKID_REFRESH_MINE))
@@ -256,6 +259,9 @@ class FG_UserInfo : FG_Base() {
         Http.get(activity, url, BN_UserInfo::class.java, object : MyCallBack<BN_UserInfo> {
             override fun onResponse(response: BN_UserInfo?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     et_name.setText(it.message.employeeEntity.realName)
                     et_name.setSelection(it.message.employeeEntity.realName.length)
                     tv_account.text = it.message.employeeEntity.mobile

@@ -67,6 +67,9 @@ class FG_ChooseInstrument : FG_Base() {
         Http.get(activity, url, BN_ChooseInstrument::class.java, object : MyCallBack<BN_ChooseInstrument> {
             override fun onResponse(response: BN_ChooseInstrument?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     body = it
                     adapter = AD_List(activity, it.message)
                     if (chooseId!=-1L){

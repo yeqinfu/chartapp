@@ -38,6 +38,9 @@ class FG_TongPage:FG_BaseLineChart(){
         Http.get(activity,url, BN_TongPage::class.java,object :MyCallBack<BN_TongPage>{
             override fun onResponse(response: BN_TongPage?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     var sum=it.message.thisAnalysisDeviceDetailDto.totalKwh?.toString()?:""
                     var radio=it.message.tongbiRatio
                     var avg=it.message.thisAnalysisDeviceDetailDto.accurateAverageKwh
@@ -85,6 +88,9 @@ class FG_TongPage:FG_BaseLineChart(){
         Http.get(activity,url, BN_TongPageWeek::class.java,object :MyCallBack<BN_TongPageWeek>{
             override fun onResponse(response: BN_TongPageWeek?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     var sum=it.message.thisAnalysisWeekParamDto.weekSum?.toString()?:""
                     var radio=it.message.tongbiRatio
                     var avg=it.message.thisAnalysisWeekParamDto.weekAverage

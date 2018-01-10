@@ -78,6 +78,9 @@ class FG_Temperature :FG_Base(){
                 refreshLayout.finishRefresh()
                 refreshLayout.finishLoadmore()
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     if (!it.message.devicePage.result.isEmpty()){
                         content.addAll(it.message.devicePage.result)
                         adapter?.notifyDataSetChanged()
@@ -258,6 +261,7 @@ class FG_Temperature :FG_Base(){
             Http.get(ac,url, BN_TemperatureItem::class.java,object :MyCallBack<BN_TemperatureItem>{
                 override fun onResponse(response: BN_TemperatureItem?) {
                     response?.let {
+
                         if (it.message.temperatureList.isEmpty()){
                             toast("当前日期无数据")
                         }else{

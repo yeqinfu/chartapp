@@ -32,6 +32,9 @@ class FG_CatePage :FG_BaseAnlysisPage(){
         Http.get(activity,url, BN_CatePage::class.java,object : MyCallBack<BN_CatePage> {
             override fun onResponse(response: BN_CatePage?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     tv_totalKwh?.text=it.message.analysisCateSum
                     var k=getList(it)
                     var adapter=AD_List(activity,k,isHaveChild)

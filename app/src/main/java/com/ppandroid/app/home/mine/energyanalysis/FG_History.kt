@@ -53,6 +53,9 @@ class FG_History : FG_Base() {
         Http.get(activity, url, BN_History::class.java, object : MyCallBack<BN_History> {
             override fun onResponse(response: BN_History?) {
                 response?.let {
+                    if (!isAdded){
+                        return
+                    }
                     var adapter = AD_List(it.message, activity)
                     lv_list.adapter = adapter
                 }
