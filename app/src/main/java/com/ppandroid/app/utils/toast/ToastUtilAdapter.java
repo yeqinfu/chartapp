@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.ppandroid.app.base.SampleApplicationLike;
+import com.ppandroid.app.utils.DebugLog;
 import com.ppandroid.app.utils.activitymanager.ActivityManager;
 
 /**
@@ -115,6 +116,8 @@ public class ToastUtilAdapter {
             public void onActivityDestroyed(Activity activity) {
                 if (activity==mContext){
                     mContext=null;
+                    toast=null;
+                    DebugLog.d("================destroy"+activity);
                 }
 
             }

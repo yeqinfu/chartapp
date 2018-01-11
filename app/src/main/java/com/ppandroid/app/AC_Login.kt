@@ -58,7 +58,7 @@ class AC_Login : AppCompatActivity() {
 
         btn_login.setOnClickListener {
 
-            Utils_Dialog.showLoading(AC_Login@this)
+
             var account=et_account.text.toString()
             var password=et_password.text.toString()
             if (TextUtils.isEmpty(account)){
@@ -69,7 +69,7 @@ class AC_Login : AppCompatActivity() {
                 toast("密码不能为空")
                 return@setOnClickListener
             }
-
+            Utils_Dialog.showLoading(AC_Login@this)
             if (checkbox.isChecked){
                 Utils_UserInfo.saveTempAccount(this,account)
             }
