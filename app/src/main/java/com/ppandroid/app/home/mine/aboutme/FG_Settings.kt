@@ -90,6 +90,10 @@ class FG_Settings:FG_Base(){
             }
 
             override fun onError(error: ErrorBody?) {
+                Utils_UserInfo.clearUserInfo(activity)
+                toLogin()
+                ActivityManager.getActivityManager().popAllActivity()
+                finish()
                 toast(error?.message)
             }
 

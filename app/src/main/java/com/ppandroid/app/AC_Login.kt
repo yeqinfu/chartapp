@@ -9,6 +9,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
+import android.view.View
+import android.widget.AdapterView
 import cn.jpush.android.api.JPushInterface
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.login.CaptchaBody
@@ -20,6 +22,7 @@ import com.ppandroid.app.utils.SecurityUtils
 import com.ppandroid.app.utils.Utils_Dialog
 import com.ppandroid.app.utils.info.Utils_UserInfo
 import com.ppandroid.app.utils.toast.ToastUtil
+import com.ppandroid.im.utils.Contants
 import kotlinx.android.synthetic.main.activity_ac__login.*
 
 class AC_Login : AppCompatActivity() {
@@ -33,6 +36,25 @@ class AC_Login : AppCompatActivity() {
             checkbox.isChecked=true
             et_account.setSelection(tempAccount.length)//将光标移至文字末尾
         }
+        var envArray=resources.getStringArray(R.array.array_env)
+        if (BuildConfig.BUILD_TYPE == "debug"){
+            ll_env.visibility= View.VISIBLE
+            spinner2.onItemSelectedListener=object :AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    toast("选择一个环境")
+                }
+
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, pos: Int, p3: Long) {
+                    var item=envArray[pos]
+                    Contants.baseUrl=item
+                    toast("更改成功！请重新登录")
+                }
+
+            }
+        }else{
+            ll_env.visibility= View.GONE
+        }
+
         btn_login.setOnClickListener {
 
             Utils_Dialog.showLoading(AC_Login@this)
@@ -73,6 +95,7 @@ class AC_Login : AppCompatActivity() {
 
             override fun onError(error: ErrorBody?) {
                 toast(error?.message?:"")
+                Utils_Dialog.disMissLoading()
             }
 
         })

@@ -128,6 +128,31 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/ll_env"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginBottom="5dp"
+            android:text="这是只会出现在debug版本的环境选择器"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner2"
+
+            android:entries="@array/array_env"
+            />
+
+    </LinearLayout>
+
+
 
 
 </LinearLayout>

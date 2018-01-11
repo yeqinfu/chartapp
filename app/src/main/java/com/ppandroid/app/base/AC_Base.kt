@@ -15,7 +15,6 @@ import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.activitymanager.ActivityManager
 import com.ppandroid.app.utils.info.Utils_UserInfo
 import com.ppandroid.app.utils.toast.ToastUtil
-import com.ppandroid.app.utils.upgrade.UpdateManager
 
 
 /**
@@ -66,10 +65,7 @@ open class AC_Base : AC_SwipeBase() {
     override fun onResume() {
         super.onResume()
         ActivityManager.getActivityManager().pushActivity(this)
-        /**如果还没有检查过版本，这边进行检查版本*/
-        if (!UpdateManager.getUpdateManager(this@AC_Base).checkFlag) {
-            UpdateManager.getUpdateManager(this@AC_Base).checkAppUpdate(true)
-        }
+
 
 
     }

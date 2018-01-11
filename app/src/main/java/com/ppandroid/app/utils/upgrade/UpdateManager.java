@@ -41,6 +41,7 @@ import java.util.Calendar;
 /**
  * Created by yeqinfu on 2017/3/24.
  * 升级管理类
+ * 这边的context对象设置为static会导致内存泄漏。要改进
  */
 
 public class UpdateManager {

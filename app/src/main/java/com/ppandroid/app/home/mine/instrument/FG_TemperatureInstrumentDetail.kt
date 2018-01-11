@@ -42,9 +42,9 @@ class FG_TemperatureInstrumentDetail : FG_Base(){
                     if (!isAdded){
                         return
                     }
-                    tv_humidity.text=it.message.humidity.toString()
-                    tv_temperature.text=it.message.temperature.toString()
-                    tv_lastModifyTime.text=it.message.lastModifyTime.toString()
+                    tv_humidity.text=it.message.humidity?.toString()
+                    tv_temperature.text=it.message.temperature?.toString()
+                    tv_lastModifyTime.text=it.message.lastModifyTime?.toString()
                 }
             }
 

@@ -62,4 +62,10 @@
         <item>#45E069</item>
         <item>#C02BE5</item>
     </string-array>
+    <string-array name="array_env">
+        <item>http://192.168.25.110:9010/</item>
+        <item>http://120.76.40.63:9010/</item>
+        <item>http://192.168.25.127/</item>
+        <item>http://192.168.25.203:80/</item>
+    </string-array>
 </resources>
