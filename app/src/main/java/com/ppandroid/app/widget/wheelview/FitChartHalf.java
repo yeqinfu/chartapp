@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
 import com.ppandroid.app.R;
-import com.ppandroid.app.utils.DebugLog;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -101,7 +100,6 @@ public class FitChartHalf extends View {
 
     void setAnimationSeek(float value) {
         animationProgress = value;
-        DebugLog.d("yeqinfu invalidate--->"+value);
         invalidate();
     }
 
@@ -242,7 +240,6 @@ public class FitChartHalf extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        DebugLog.d("yeqinfu--->onDraw");
         renderBack(canvas);
         renderValues(canvas);
     }
@@ -317,8 +314,6 @@ public class FitChartHalf extends View {
         animatorSet.setInterpolator(new DecelerateInterpolator());
         animatorSet.setTarget(this);
         animatorSet.play(animator);
-        DebugLog.d("yeqinfu===========start amin)==>"+chartValues.size());
         animatorSet.start();
-        DebugLog.d("yeqinfu===========end amin)==>"+chartValues.size());
     }
 }

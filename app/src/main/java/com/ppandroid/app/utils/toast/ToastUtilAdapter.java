@@ -8,12 +8,10 @@ package com.ppandroid.app.utils.toast;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.ppandroid.app.base.SampleApplicationLike;
-import com.ppandroid.app.utils.DebugLog;
 import com.ppandroid.app.utils.activitymanager.ActivityManager;
 
 /**
@@ -30,10 +28,8 @@ public class ToastUtilAdapter {
 	private static ToastUtilAdapter	instance;
 
 	private Toast					toast;
-	private Handler					handler;
 
 	private ToastUtilAdapter() {
-		handler = new Handler();
 	}
 
 	public static ToastUtilAdapter getInstance() {
@@ -52,23 +48,20 @@ public class ToastUtilAdapter {
 		if (TextUtils.isEmpty(toastMsg)) {
 			return;
 		}
-		handler.post(new Runnable() {
-			@Override
-			public void run() {
-			    if (mContext==null){
-			        mContext=getContext();
-                    toast = Toast.makeText(mContext, toastMsg, Toast.LENGTH_SHORT);
-                }else{
-			        if (ActivityManager.getActivityManager().isInStack(mContext)){//如果上次保留的mContext还在栈内
-                        toast.setText(toastMsg);
-                        toast.setDuration(Toast.LENGTH_SHORT);
-                    }else{//不在栈内移除引用从新new一个toast对象
-                        mContext=getContext();
-                        toast = Toast.makeText(mContext, toastMsg, Toast.LENGTH_SHORT);
-                    }
-                }
+        if (mContext==null){
+            mContext=getContext();
+            toast = Toast.makeText(mContext, toastMsg, Toast.LENGTH_SHORT);
+        }else{
+            if (ActivityManager.getActivityManager().isInStack(mContext)){//如果上次保留的mContext还在栈内
+                toast.setText(toastMsg);
+                toast.setDuration(Toast.LENGTH_SHORT);
+            }else{//不在栈内移除引用从新new一个toast对象
+                mContext=getContext();
+                toast = Toast.makeText(mContext, toastMsg, Toast.LENGTH_SHORT);
+            }
+        }
 
-				/*	
+				/*
 				这个是旧代码的单例写法，会导致第一个使用的Activity如AC_Login上下文泄漏
 				if (toast == null) {
 						 toast = Toast.makeText(getContext(), toastMsg, Toast.LENGTH_SHORT);
@@ -77,10 +70,7 @@ public class ToastUtilAdapter {
 						toast.setText(toastMsg);
 						toast.setDuration(Toast.LENGTH_SHORT);
 					}*/
-                DebugLog.d("======================="+mContext);
-				toast.show();
-			}
-		});
+        toast.show();
 	}
 
 	/**
@@ -125,7 +115,6 @@ public class ToastUtilAdapter {
             public void onActivityDestroyed(Activity activity) {
                 if (activity==mContext){
                     mContext=null;
-                    DebugLog.d("====================释放==============="+activity);
                 }
 
             }
