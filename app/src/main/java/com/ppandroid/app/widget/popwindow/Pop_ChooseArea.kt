@@ -124,7 +124,7 @@ class Pop_ChooseArea(context: Activity) : BasePopupWindow(context, ViewGroup.Lay
             }
 
             override fun onError(error: ErrorBody?) {
-                ToastUtil.toast(mContext, error?.message)
+                ToastUtil.toast(error?.message)
             }
 
         })

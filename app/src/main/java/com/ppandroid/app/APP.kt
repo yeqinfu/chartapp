@@ -49,6 +49,7 @@ class APP : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        context = this
 
         //持久化cookie
         val cookieJar = PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(this))
@@ -77,7 +78,7 @@ class APP : Application() {
             ClassicsFooter(context).setSpinnerStyle(SpinnerStyle.Translate)
         }
 
-        context = this
+
         DebugLog.d("+++++++++++++++++++++++++++++++++++++++++++context is" + context)
 
         /* if (!EventBus.getDefault().isRegistered(this)) {

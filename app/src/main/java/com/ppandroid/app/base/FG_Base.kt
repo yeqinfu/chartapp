@@ -117,14 +117,14 @@ abstract class FG_Base : Fragment() {
     protected fun toast(msg: String?) {
         msg?.let {
             if (!TextUtils.isEmpty(msg)) {
-                ToastUtil.toast(activity, it)
+                ToastUtil.toast(it)
             }
         }
 
     }
 
     protected fun toast(resId: Int) {
-        ToastUtil.toast(activity, resId)
+        ToastUtil.toast(resId)
     }
 
     companion object {

@@ -285,7 +285,7 @@ class FG_Temperature :FG_Base(){
         protected fun toast(msg: String?) {
             msg?.let {
                 if (!TextUtils.isEmpty(msg)) {
-                    ToastUtil.toast(ac, it)
+                    ToastUtil.toast(it)
                 }
             }
 

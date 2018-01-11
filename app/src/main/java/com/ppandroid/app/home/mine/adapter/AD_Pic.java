@@ -59,7 +59,7 @@ public class AD_Pic extends BaseAdapter {
             public void onClick(View v) {
                 Bitmaps.remove(position);
                 notifyDataSetChanged();
-                ToastUtil.toast(mContext, "删除成功");
+                ToastUtil.toast( "删除成功");
             }
         });
 

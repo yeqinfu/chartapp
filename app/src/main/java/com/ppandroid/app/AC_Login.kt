@@ -20,6 +20,7 @@ import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.SecurityUtils
 import com.ppandroid.app.utils.Utils_Dialog
+import com.ppandroid.app.utils.activitymanager.ActivityManager
 import com.ppandroid.app.utils.info.Utils_UserInfo
 import com.ppandroid.app.utils.toast.ToastUtil
 import com.ppandroid.im.utils.Contants
@@ -132,6 +133,19 @@ class AC_Login : AppCompatActivity() {
 
 
     private fun toast(msg: String) {
-        ToastUtil.toast(this@AC_Login,msg)
+        ToastUtil.toast(msg)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ActivityManager.getActivityManager().pushActivity(this)
+    }
+
+
+    override fun onDestroy() {
+        ActivityManager.getActivityManager().popActivity(this)
+        super.onDestroy()
+        DebugLog.d("===================================ac_login destroy==========="+this)
+        System.gc()
     }
 }

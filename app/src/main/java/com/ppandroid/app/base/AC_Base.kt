@@ -84,11 +84,11 @@ open class AC_Base : AC_SwipeBase() {
     }
 
     protected fun toast(msg: String) {
-        ToastUtil.toast(this,msg)
+        ToastUtil.toast(msg)
     }
 
     protected fun toast(resId: Int) {
-        ToastUtil.toast(this,resId)
+        ToastUtil.toast(resId)
     }
     protected fun toast(error: ErrorBody?) {
         toast(error?.message ?: "")

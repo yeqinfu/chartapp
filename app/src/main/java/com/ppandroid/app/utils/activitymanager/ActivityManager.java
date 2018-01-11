@@ -24,6 +24,18 @@ public class ActivityManager {
     private ActivityManager() {
     }
 
+    /**
+     * 判断当前activity是否在当前栈中
+     * @param activity
+     * @return
+     */
+    public static boolean isInStack(Activity activity){
+        int i=activityStack.search(activity);
+        if (i!=-1){
+            return true;
+        }
+        return false;
+    }
     public static ActivityManager getActivityManager() {
         if (instance == null) {
             instance = new ActivityManager();

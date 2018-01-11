@@ -131,7 +131,7 @@ public class UpdateManager {
 
                 @Override
                 public void onError(ErrorBody error) {
-                    ToastUtil.toast(context,error.getMessage());
+                    ToastUtil.toast(error.getMessage());
                 }
             });
 
