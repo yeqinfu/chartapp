@@ -29,7 +29,6 @@ import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.BitmapUtils
 import com.ppandroid.app.utils.Utils_Bitmap
 import com.ppandroid.app.utils.Utils_Common
-import com.ppandroid.app.utils.Utils_Dialog
 import com.ppandroid.app.utils.glide.GlideUtils
 import com.ppandroid.app.widget.CustomDialog
 import com.ppandroid.im.base.FG_Base
@@ -242,7 +241,6 @@ class FG_AddDevices : FG_Base() {
         var gson = Gson()
         var modelBody=ModelBody()
         modelBody.list=list
-        Utils_Dialog.showLoading(activity)
         var url = "user/sysSet/device/add.json"
         async {
             var map = TreeMap<String, String>()
@@ -266,7 +264,6 @@ class FG_AddDevices : FG_Base() {
             uiThread {
                 Http.post(activity, url, map, BaseBody::class.java, object : MyCallBack<BaseBody> {
                     override fun onResponse(response: BaseBody?) {
-                        Utils_Dialog.disMissLoading()
                         response?.let {
                             if (!isAdded){
                                 return
@@ -282,7 +279,6 @@ class FG_AddDevices : FG_Base() {
                     }
 
                     override fun onError(error: ErrorBody?) {
-                        Utils_Dialog.disMissLoading()
                         toast(error)
                     }
 

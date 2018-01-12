@@ -23,7 +23,6 @@ import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.BitmapUtils
 import com.ppandroid.app.utils.Utils_Bitmap
 import com.ppandroid.app.utils.Utils_Common
-import com.ppandroid.app.utils.Utils_Dialog
 import com.ppandroid.app.utils.glide.GlideUtils
 import com.ppandroid.app.widget.CustomDialog
 import com.ppandroid.app.widget.popwindow.Pop_ChooseArea
@@ -71,7 +70,6 @@ class FG_UserInfo : FG_Base() {
         }
         val params = TreeMap<String, String>()
 
-        Utils_Dialog.showLoading(activity)
         bitmap?.let {
             val photo = Utils_Bitmap.bitmapToBase64(it)
             params.put("photoFile",photo)
@@ -92,7 +90,6 @@ class FG_UserInfo : FG_Base() {
                     if (!isAdded){
                         return
                     }
-                    Utils_Dialog.disMissLoading()
                     toast("保存成功")
                     EventBus.getDefault().post(ET_Refresh(ET_Refresh.TASKID_REFRESH_MINE))
                     finish()
@@ -100,7 +97,6 @@ class FG_UserInfo : FG_Base() {
             }
 
             override fun onError(error: ErrorBody?) {
-                Utils_Dialog.disMissLoading()
                 toast(error)
             }
 

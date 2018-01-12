@@ -25,6 +25,7 @@ import com.ppandroid.app.utils.Utils_SharedPreferences;
 import com.ppandroid.app.utils.Utils_Sign;
 import com.ppandroid.app.utils.activitymanager.ActivityManager;
 import com.ppandroid.app.utils.info.Utils_UserInfo;
+import com.ppandroid.app.widget.loading.Utils_DialogMetaball;
 import com.ppandroid.im.bean.BaseBody;
 import com.ppandroid.im.utils.Contants;
 
@@ -49,6 +50,7 @@ import static org.jetbrains.anko.DialogsKt.toast;
 public class Http {
 
 	public static <T extends BaseBody> void get(final Context context, String url, final Class<T> tt, final MyCallBack<T> callBack) {
+        Utils_DialogMetaball.showLoading(context);
 		final WeakReference<Context> mWeakContext = new WeakReference<Context>(context);
 		url = addBaseParams(context, url);
 		if (!url.startsWith("http")) {
@@ -58,14 +60,17 @@ public class Http {
 		OkHttpUtils.get().url(url).build().execute(new StringCallback() {
 			@Override
 			public void onError(Call call, Exception e, int id) {
+                Utils_DialogMetaball.disMissLoading();
 				e.printStackTrace();
 				ErrorBody errorBody = new ErrorBody();
 				errorBody.setMessage(e.getMessage());
 				callBack.onError(errorBody);
+
 			}
 
 			@Override
 			public void onResponse(String response, int id) {
+                Utils_DialogMetaball.disMissLoading();
 				DebugLog.i("httpget==>" + response + "\n\n");
 				if (isGoodJson(response)) {
 					ErrorBody errorBody = parseErrorBody(response);
@@ -84,12 +89,14 @@ public class Http {
 					body.setMessage("json解析异常");
 					callBack.onError(body);
 				}
+
 			}
 		});
 	}
 
 	public static <T extends BaseBody> void post(final Context context, String url, Map<String, String> params, final Class<T> tt, final MyCallBack<T> callBack) {
 		params = addBaseParams(context, params);
+        Utils_DialogMetaball.showLoading(context);
 		final WeakReference<Context> mWeakContext = new WeakReference<Context>(context);
 		if (!url.startsWith("http")) {
 			url = Contants.Companion.getBaseUrl() + url;
@@ -98,11 +105,13 @@ public class Http {
 		OkHttpUtils.post().params(params).url(url).build().execute(new StringCallback() {
 			@Override
 			public void onError(Call call, Exception e, int id) {
+                Utils_DialogMetaball.disMissLoading();
 				e.printStackTrace();
 			}
 
 			@Override
 			public void onResponse(String response, int id) {
+                Utils_DialogMetaball.disMissLoading();
 				DebugLog.i("httpget==>" + response + "\n\n");
 				if (isGoodJson(response)) {
 					ErrorBody errorBody = parseErrorBody(response);

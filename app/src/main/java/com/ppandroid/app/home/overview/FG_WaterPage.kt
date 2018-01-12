@@ -33,7 +33,6 @@ import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.Devices
-import com.ppandroid.app.utils.Utils_Dialog
 import com.ppandroid.app.widget.common.PagerSlidingTab
 import com.ppandroid.app.widget.graphical.demoview.DountChart01View
 import com.ppandroid.app.widget.popwindow.Pop_DatePicker
@@ -62,7 +61,6 @@ class FG_WaterPage:FG_Base(){
         var url = "user/overview/water/modular.json"
         Http.get(activity, url, BN_OverViewConfig::class.java, object : MyCallBack<BN_OverViewConfig> {
             override fun onResponse(response: BN_OverViewConfig?) {
-                Utils_Dialog.disMissLoading()
                 refreshLayout.finishRefresh()
                 response?.let {
                     if (!isAdded){
@@ -76,7 +74,6 @@ class FG_WaterPage:FG_Base(){
 
             override fun onError(error: ErrorBody?) {
                 refreshLayout.finishRefresh()
-                Utils_Dialog.disMissLoading()
                 toast(error?.message ?: "")
             }
 
@@ -85,7 +82,6 @@ class FG_WaterPage:FG_Base(){
 
     override fun afterViews() {
         isNeedEventBus=true
-        Utils_Dialog.showLoading(activity)
         loadOverViewConfig()
         refreshLayout.setOnRefreshListener {
             loadOverViewConfig()

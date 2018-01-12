@@ -17,7 +17,6 @@ import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.Utils_Common
 import com.ppandroid.app.utils.Utils_DateFormat
-import com.ppandroid.app.utils.Utils_Dialog
 import com.ppandroid.app.widget.linechart.MultipleChartView
 import com.ppandroid.app.widget.popwindow.Pop_DatePicker
 import com.ppandroid.im.base.AC_Base
@@ -225,7 +224,6 @@ class AC_RecentComparison : AC_Base() {
 
 
     private fun loadContent() {
-        Utils_Dialog.showLoading(this@AC_RecentComparison)
         var url = if (energyClassificationId == "1") {
             "user/energy/analysis/getDeviceByDateArray.json?dateString="
         } else {
@@ -240,7 +238,6 @@ class AC_RecentComparison : AC_Base() {
         Http.get(this@AC_RecentComparison, url, BN_RecentComparison::class.java, object : MyCallBack<BN_RecentComparison> {
             @SuppressLint("ResourceAsColor")
             override fun onResponse(response: BN_RecentComparison?) {
-                Utils_Dialog.disMissLoading()
                 response?.let {
 
                     var xValue=ArrayList<String>()
@@ -338,7 +335,6 @@ class AC_RecentComparison : AC_Base() {
             }
 
             override fun onError(error: ErrorBody?) {
-                Utils_Dialog.disMissLoading()
                 toast(error)
             }
 

@@ -19,7 +19,6 @@ import com.ppandroid.app.http.Http
 import com.ppandroid.app.http.MyCallBack
 import com.ppandroid.app.utils.DebugLog
 import com.ppandroid.app.utils.SecurityUtils
-import com.ppandroid.app.utils.Utils_Dialog
 import com.ppandroid.app.utils.activitymanager.ActivityManager
 import com.ppandroid.app.utils.info.Utils_UserInfo
 import com.ppandroid.app.utils.toast.ToastUtil
@@ -69,7 +68,6 @@ class AC_Login : AppCompatActivity() {
                 toast("密码不能为空")
                 return@setOnClickListener
             }
-            Utils_Dialog.showLoading(AC_Login@this)
             if (checkbox.isChecked){
                 Utils_UserInfo.saveTempAccount(this,account)
             }
@@ -96,7 +94,6 @@ class AC_Login : AppCompatActivity() {
 
             override fun onError(error: ErrorBody?) {
                 toast(error?.message?:"")
-                Utils_Dialog.disMissLoading()
             }
 
         })
@@ -108,7 +105,6 @@ class AC_Login : AppCompatActivity() {
             override fun onResponse(response: LoginBody) {
                 DebugLog.d("================onResponse=======================")
                 response?.let {
-                    Utils_Dialog.disMissLoading()
                     var tags=HashSet<String>()
                     tags.add(it.message.companyId)
                     JPushInterface.setTags(this@AC_Login,tags){ i: Int, s: String?, mutableSet: MutableSet<String> ->
@@ -123,7 +119,6 @@ class AC_Login : AppCompatActivity() {
                 }
             }
             override fun onError(error: ErrorBody) {
-                Utils_Dialog.disMissLoading()
                 toast(error.message)
             }
         })
