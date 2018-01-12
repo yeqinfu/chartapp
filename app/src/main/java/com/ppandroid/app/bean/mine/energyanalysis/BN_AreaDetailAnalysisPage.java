@@ -40,6 +40,15 @@ public class BN_AreaDetailAnalysisPage extends BaseBody {
         private List<StageKwhBean> stageKwh;
         private String accurateAverageKwh;
         private String totalKwh;
+        private String dateString;
+
+        public String getDateString() {
+            return dateString;
+        }
+
+        public void setDateString(String dateString) {
+            this.dateString = dateString;
+        }
 
         public String getAccurateAverageKwh() {
             return accurateAverageKwh;

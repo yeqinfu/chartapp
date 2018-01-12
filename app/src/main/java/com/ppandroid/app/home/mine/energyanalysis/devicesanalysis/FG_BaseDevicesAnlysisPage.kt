@@ -123,7 +123,7 @@ abstract class FG_BaseDevicesAnlysisPage : FG_Base() {
         }
 
     }
-    protected fun setDateString(dateString:String){
+    protected fun setDateString(dateString:String?){
         if (!TextUtils.isEmpty(dateString)&&index==3)
         tv_time.text=dateString
     }

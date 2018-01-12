@@ -76,7 +76,15 @@ public class Http {
 					ErrorBody errorBody = parseErrorBody(response);
 					if (errorBody == null) {
 						Gson gson = new Gson();
-						callBack.onResponse(gson.fromJson(response, tt));
+						try {
+                            callBack.onResponse(gson.fromJson(response, tt));
+                        }catch (Exception e){
+						    DebugLog.e("===============");
+						    DebugLog.e(response);
+                            DebugLog.e("===============");
+						    e.printStackTrace();
+                        }
+
 					}
 					else {
 						callBack.onError(errorBody);

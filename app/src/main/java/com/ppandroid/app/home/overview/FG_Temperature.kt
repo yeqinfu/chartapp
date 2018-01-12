@@ -13,10 +13,7 @@ import android.graphics.Matrix
 import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseExpandableListAdapter
-import android.widget.ImageView
-import android.widget.RadioGroup
-import android.widget.TextView
+import android.widget.*
 import com.ppandroid.app.R
 import com.ppandroid.app.bean.ErrorBody
 import com.ppandroid.app.bean.overview.BN_Temperature
@@ -201,6 +198,10 @@ class FG_Temperature :FG_Base(){
                     notifyDataSetChanged()
                 }
             }
+            var rb_001=view.find<RadioButton>(R.id.rb_001)
+            rb_001.isChecked = content[parentPos].isShowTemp
+
+
             var xValue=ArrayList<String>()
             var yMax=0.0
             //值集合

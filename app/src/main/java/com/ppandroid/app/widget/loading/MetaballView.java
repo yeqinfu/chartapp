@@ -285,7 +285,7 @@ public class MetaballView extends View {
 
     private void startAnimation() {
         wa = new MoveAnimation();
-        wa.setDuration(2500);
+        wa.setDuration(1000);
         wa.setInterpolator(new AccelerateDecelerateInterpolator());
         wa.setRepeatCount(Animation.INFINITE);
         wa.setRepeatMode(Animation.REVERSE);

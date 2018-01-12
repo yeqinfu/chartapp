@@ -341,8 +341,8 @@ public class BN_Temperature extends BaseBody {
                      */
 
                     private int hour;
-                    private int temperature;
-                    private int humidity;
+                    private double temperature;
+                    private double humidity;
 
                     public int getHour() {
                         return hour;
@@ -352,19 +352,19 @@ public class BN_Temperature extends BaseBody {
                         this.hour = hour;
                     }
 
-                    public int getTemperature() {
+                    public double getTemperature() {
                         return temperature;
                     }
 
-                    public void setTemperature(int temperature) {
+                    public void setTemperature(double temperature) {
                         this.temperature = temperature;
                     }
 
-                    public int getHumidity() {
+                    public double getHumidity() {
                         return humidity;
                     }
 
-                    public void setHumidity(int humidity) {
+                    public void setHumidity(double humidity) {
                         this.humidity = humidity;
                     }
                 }
