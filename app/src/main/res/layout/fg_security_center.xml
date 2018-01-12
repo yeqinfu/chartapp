@@ -151,7 +151,6 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="76dp"
-                        android:layout_marginTop="15dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:paddingLeft="15dp">

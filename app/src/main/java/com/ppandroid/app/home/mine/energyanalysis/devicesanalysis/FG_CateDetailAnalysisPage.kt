@@ -84,7 +84,7 @@ class FG_CateDetailAnalysisPage : FG_BaseDevicesAnlysisPage() {
                                 bn.bottomText = "" + yue
                             }
                         } else {//总的
-                            bn.bottomText = select
+                            bn.bottomText = Utils_Common.findNumberFromStr(it.message.stageKwh[j].key)
                         }
                         bn.totalHeight = max.toFloat()
                         bn.realHeight = item.toFloat()
