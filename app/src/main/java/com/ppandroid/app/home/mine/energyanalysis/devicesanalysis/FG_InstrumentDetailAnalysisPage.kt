@@ -83,7 +83,7 @@ class FG_InstrumentDetailAnalysisPage : FG_BaseDevicesAnlysisPage() {
                                 bn.bottomText = "" + yue
                             }
                         } else {//总的
-                            bn.bottomText = select
+                            bn.bottomText = Utils_Common.findNumberFromStr(it.message.stageKwh[j].key)
                         }
                         bn.totalHeight = max.toFloat()
                         bn.realHeight = item.toFloat()
@@ -95,6 +95,7 @@ class FG_InstrumentDetailAnalysisPage : FG_BaseDevicesAnlysisPage() {
                     v_multiple_view?.startAnim()
                     lv_list?.adapter = AD_List(activity, list2)
                     setTotalNumber(it.message.totalKwh)
+                    setDateString(it.message.dateString)
                 }
             }
 

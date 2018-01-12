@@ -36,9 +36,13 @@ class FG_SystemNewList :FG_Base(){
          var url="/user/message/get.json?type=4"
          Http.get(activity,url,BaseBody::class.java,object :MyCallBack<BaseBody>{
              override fun onResponse(response: BaseBody?) {
+                 refresh_layout.finishLoadmore()
+                 refresh_layout.finishRefresh()
              }
 
              override fun onError(error: ErrorBody?) {
+                 refresh_layout.finishLoadmore()
+                 refresh_layout.finishRefresh()
              }
 
          })

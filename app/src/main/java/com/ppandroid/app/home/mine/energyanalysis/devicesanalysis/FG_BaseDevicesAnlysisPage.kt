@@ -120,9 +120,12 @@ abstract class FG_BaseDevicesAnlysisPage : FG_Base() {
             }else{
                 tv_totalKwh?.text="总用水："+total+Contants.m3
             }
-
-
         }
+
+    }
+    protected fun setDateString(dateString:String){
+        if (!TextUtils.isEmpty(dateString)&&index==3)
+        tv_time.text=dateString
     }
 
     abstract fun init()

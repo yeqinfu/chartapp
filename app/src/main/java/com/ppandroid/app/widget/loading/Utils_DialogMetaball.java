@@ -41,9 +41,13 @@ public class Utils_DialogMetaball {
     }
     public static void disMissLoading(){
         if (dialog!=null){
-            dialog.get().dismiss();
-            dialog.clear();
-            dialog=null;
+            try {
+                dialog.get().dismiss();
+                dialog.clear();
+                dialog=null;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 
