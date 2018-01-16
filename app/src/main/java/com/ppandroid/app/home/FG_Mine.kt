@@ -69,7 +69,7 @@ class FG_Mine: FG_Base() {
 
     }
 
-    public fun loadContent(){
+     fun loadContent(){
         var url="user/personal/get.json"
         Http.get(activity,url, BN_UserInfo::class.java,object :MyCallBack<BN_UserInfo>{
             override fun onResponse(response: BN_UserInfo?) {
