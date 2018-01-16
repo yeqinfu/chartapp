@@ -109,6 +109,7 @@ abstract class FG_BaseAnlysisPage : FG_Base() {
                 }
                 tv_time.text = select
                 loadContent()
+                setText()
                 pop?.dismiss()
             }
 
@@ -231,5 +232,23 @@ abstract class FG_BaseAnlysisPage : FG_Base() {
         fun choose(index: Int)
     }
 
+
+    protected fun setText(){
+        if (energyClassificationId==Devices.ELECTRIC){
+            when(index){
+                0->  tv_type.text=select+"日用电"
+                1->  tv_type.text=select+"月用电"
+                2->  tv_type.text=select+"年用电"
+                3->  tv_type.text="总用电"
+            }
+        }else{
+            when(index){
+                0->  tv_type.text=select+"日用水"
+                1->  tv_type.text=select+"月用水"
+                2->  tv_type.text=select+"年用水"
+                3->  tv_type.text="总用水"
+            }
+        }
+    }
 
 }

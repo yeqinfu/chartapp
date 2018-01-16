@@ -73,12 +73,7 @@ class FG_DevicesPage : FG_BaseAnlysisPage(){
     }
 
     override fun init() {
-        when(index){
-            0->  tv_type.text="今日用电"
-            1->  tv_type.text="本月用电"
-            2->  tv_type.text="本年用电"
-            3->  tv_type.text="总用电"
-        }
+        setText()
 
     }
 
