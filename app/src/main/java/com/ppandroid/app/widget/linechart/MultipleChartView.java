@@ -733,6 +733,9 @@ public class MultipleChartView extends View implements Runnable {
 		xInit = xOri + dpToPx(5);
 	}
 
+	public void notifyDataChange(){
+	    invalidate();
+    }
 	public void setValue(ArrayList<BrokenLine> valueList, List<String> xValue, List<Double> yValue, String xLength) {
 		this.valueList = valueList;
 		this.xValue = xValue;

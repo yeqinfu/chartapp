@@ -62,22 +62,87 @@ class AC_RecentComparison : AC_Base() {
 
         refrestTitle()
         loadContent()
-        fg_01.setOnClickListener {
+        iv_01.setOnClickListener {
             showPop("1")
         }
-        fg_02.setOnClickListener {
+        iv_02.setOnClickListener {
             showPop("2")
         }
-        fg_03.setOnClickListener {
+        iv_03.setOnClickListener {
             showPop("3")
         }
-        fg_04.setOnClickListener {
+        iv_04.setOnClickListener {
             showPop("4")
         }
-        fg_05.setOnClickListener {
+        iv_05.setOnClickListener {
             showPop("5")
         }
-        fg_01.setOnLongClickListener { view->
+        rl_time01.setOnClickListener { //点击改标界面状态和折线的显示数量
+            selectList["1"]?.let {
+                var item=listValue[0]
+                if (item.isShow){
+                    item.isShow=!item.isShow
+                    v_select01.visibility=View.INVISIBLE
+                }else{
+                    v_select01.visibility=View.VISIBLE
+                    item.isShow=!item.isShow
+                }
+                chartview.notifyDataChange()
+            }
+        }
+        rl_time02.setOnClickListener { //点击改标界面状态和折线的显示数量
+            selectList["2"]?.let {
+                var item=listValue[1]
+                if (item.isShow){
+                    item.isShow=!item.isShow
+                    v_select02.visibility=View.INVISIBLE
+                }else{
+                    v_select02.visibility=View.VISIBLE
+                    item.isShow=!item.isShow
+                }
+                chartview.notifyDataChange()
+            }
+        }
+        rl_time03.setOnClickListener { //点击改标界面状态和折线的显示数量
+            selectList["3"]?.let {
+                var item=listValue[2]
+                if (item.isShow){
+                    item.isShow=!item.isShow
+                    v_select03.visibility=View.INVISIBLE
+                }else{
+                    v_select03.visibility=View.VISIBLE
+                    item.isShow=!item.isShow
+                }
+                chartview.notifyDataChange()
+            }
+        }
+        rl_time04.setOnClickListener { //点击改标界面状态和折线的显示数量
+            selectList["4"]?.let {
+                var item=listValue[3]
+                if (item.isShow){
+                    item.isShow=!item.isShow
+                    v_select04.visibility=View.INVISIBLE
+                }else{
+                    v_select04.visibility=View.VISIBLE
+                    item.isShow=!item.isShow
+                }
+                chartview.notifyDataChange()
+            }
+        }
+        rl_time05.setOnClickListener { //点击改标界面状态和折线的显示数量
+            selectList["5"]?.let {
+                var item=listValue[4]
+                if (item.isShow){
+                    item.isShow=!item.isShow
+                    v_select05.visibility=View.INVISIBLE
+                }else{
+                    v_select05.visibility=View.VISIBLE
+                    item.isShow=!item.isShow
+                }
+                chartview.notifyDataChange()
+            }
+        }
+        rl_time01.setOnLongClickListener { view->
             selectList["1"]?.let {
                 rl_time01.visibility = View.VISIBLE
                 iv_del01.visibility = View.VISIBLE
@@ -85,7 +150,7 @@ class AC_RecentComparison : AC_Base() {
             }
             true
         }
-        fg_02.setOnLongClickListener { view->
+        rl_time02.setOnLongClickListener { view->
             selectList["2"]?.let {
                 rl_time02.visibility = View.VISIBLE
                 iv_del02.visibility = View.VISIBLE
@@ -93,7 +158,7 @@ class AC_RecentComparison : AC_Base() {
             }
             true
         }
-        fg_03.setOnLongClickListener { view->
+        rl_time03.setOnLongClickListener { view->
             selectList["3"]?.let {
                 rl_time03.visibility = View.VISIBLE
                 iv_del03.visibility = View.VISIBLE
@@ -101,7 +166,7 @@ class AC_RecentComparison : AC_Base() {
             }
             true
         }
-        fg_04.setOnLongClickListener { view->
+        rl_time04.setOnLongClickListener { view->
             selectList["4"]?.let {
                 rl_time04.visibility = View.VISIBLE
                 iv_del04.visibility = View.VISIBLE
@@ -109,7 +174,7 @@ class AC_RecentComparison : AC_Base() {
             }
             true
         }
-        fg_05.setOnLongClickListener { view->
+        rl_time05.setOnLongClickListener { view->
             selectList["5"]?.let {
                 rl_time05.visibility = View.VISIBLE
                 iv_del05.visibility = View.VISIBLE
@@ -192,7 +257,7 @@ class AC_RecentComparison : AC_Base() {
         }
         pop.showPopupWindow()
     }
-
+    var listValue=ArrayList<MultipleChartView.BrokenLine>()
     private fun refrestTitle() {
         rl_time01.visibility = View.GONE
         rl_time02.visibility = View.GONE
@@ -256,7 +321,7 @@ class AC_RecentComparison : AC_Base() {
                     /**yValue根据最大值六等分获得*/
                     var yValue=ArrayList<Double>()
                     //值集合
-                    var listValue=ArrayList<MultipleChartView.BrokenLine>()
+
                     var colors =resources.getStringArray(R.array.array_line_color)
                     var avgTotal=0.0
                     for ((index,item) in it.message.withIndex()){
