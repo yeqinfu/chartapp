@@ -61,6 +61,9 @@ class FG_WaterPage:FG_Base(){
         var url = "user/overview/water/modular.json"
         Http.get(activity, url, BN_OverViewConfig::class.java, object : MyCallBack<BN_OverViewConfig> {
             override fun onResponse(response: BN_OverViewConfig?) {
+                if (!isAdded){
+                    return
+                }
                 refreshLayout.finishRefresh()
                 response?.let {
                     if (!isAdded){
@@ -73,6 +76,9 @@ class FG_WaterPage:FG_Base(){
             }
 
             override fun onError(error: ErrorBody?) {
+                if (!isAdded){
+                    return
+                }
                 refreshLayout.finishRefresh()
                 toast(error?.message ?: "")
             }

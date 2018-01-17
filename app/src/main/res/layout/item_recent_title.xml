@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by yeqinfu on 18-1-17 下午2:11
+  ~ Copyright (c) JXT All rights reserved.
+  -->
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fg_01"
+    android:background="@color/white"
+    android:layout_weight="1"
+    android:layout_width="0dp"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/iv_01"
+        android:layout_gravity="center"
+        android:src="@drawable/icon_addtime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rl_time01"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <View
+            android:id="@+id/v_select01"
+            android:background="@color/vcolor06"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+        <TextView
+            android:id="@+id/tv_date01"
+            android:text="2014"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/iv_del01"
+            android:visibility="gone"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+
+            android:layout_alignParentRight="true"
+            android:src="@drawable/icon_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+
+    </RelativeLayout>
+    <View
+        android:background="@color/color_05"
+        android:layout_width="0.5dp"
+        android:layout_height="match_parent"/>
+</FrameLayout>

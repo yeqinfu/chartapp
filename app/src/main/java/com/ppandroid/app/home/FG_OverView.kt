@@ -514,6 +514,9 @@ class FG_OverView : FG_Base() {
         var url = "user/overview/modular.json"
         Http.get(activity, url, BN_OverViewConfig::class.java, object : MyCallBack<BN_OverViewConfig> {
             override fun onResponse(response: BN_OverViewConfig?) {
+                if (!isAdded){
+                    return
+                }
                 refreshLayout.finishRefresh()
                 response?.let {
                     choosed = it.message.choosed
@@ -523,6 +526,9 @@ class FG_OverView : FG_Base() {
             }
 
             override fun onError(error: ErrorBody?) {
+                if (!isAdded){
+                    return
+                }
                 refreshLayout.finishRefresh()
                 toast(error?.message ?: "")
             }

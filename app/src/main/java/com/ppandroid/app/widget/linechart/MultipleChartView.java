@@ -104,13 +104,14 @@ public class MultipleChartView extends View implements Runnable {
 	 * 折线图对象
 	 */
 	public static class BrokenLine {
-		public boolean				isShow		= true;						//是否显示折线图
-		public double				maxValue	= 5.0;						//折线图最大值
-		public double				minValue	= 0.0;						//折线图最小值
-		public double				avg			= 0.0;						//折线图平均值
-		public Map<String, Double>	value		= new LinkedHashMap<>();	//折线对应的数据
-		public int					lineColor	= Color.GREEN;			//折线图颜色
-		public int					linePointColor	=  Color.parseColor("#5EC1FF");			//折线图节点颜色
+		public int					index			= 0;
+		public boolean				isShow			= true;							//是否显示折线图
+		public double				maxValue		= 5.0;							//折线图最大值
+		public double				minValue		= 0.0;							//折线图最小值
+		public double				avg				= 0.0;							//折线图平均值
+		public Map<String, Double>	value			= new LinkedHashMap<>();		//折线对应的数据
+		public int					lineColor		= Color.GREEN;					//折线图颜色
+		public int					linePointColor	= Color.parseColor("#5EC1FF");	//折线图节点颜色
 	}
 
 	public MultipleChartView(Context context) {
@@ -323,11 +324,11 @@ public class MultipleChartView extends View implements Runnable {
 		}
 		//l另外的线 max线 min线
 		for (BN_BrokeLine item : listBrokeLine) {
-                float startx = xInit + interval * 0;
-                float starty = (float) (yOri - yOri * (1 - 0.1f) * item.value / yValue.get(yValue.size() - 1));
-                float endx = xInit + interval * xValue.size();
-                drawFloatTextBox(canvas, endx - interval, starty, item.text);
-                canvas.drawLine(startx, starty, endx, starty, mPaint);
+			float startx = xInit + interval * 0;
+			float starty = (float) (yOri - yOri * (1 - 0.1f) * item.value / yValue.get(yValue.size() - 1));
+			float endx = xInit + interval * xValue.size();
+			drawFloatTextBox(canvas, endx - interval, starty, item.text);
+			canvas.drawLine(startx, starty, endx, starty, mPaint);
 		}
 
 	}
@@ -391,7 +392,7 @@ public class MultipleChartView extends View implements Runnable {
 	 * @param canvas
 	 */
 	@SuppressLint("ResourceAsColor")
-    private void drawBrokenPoint(Canvas canvas, BrokenLine item) {
+	private void drawBrokenPoint(Canvas canvas, BrokenLine item) {
 		float dp2 = dpToPx(2);
 		float dp4 = dpToPx(4);
 		float dp7 = dpToPx(7);
@@ -548,7 +549,7 @@ public class MultipleChartView extends View implements Runnable {
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			startX = event.getX();
-            return clickAction(event);
+			return clickAction(event);
 		case MotionEvent.ACTION_MOVE:
 			if (interval * xValue.size() > width - xOri) {//当期的宽度不足以呈现全部数据
 				float dis = event.getX() - startX;
@@ -676,7 +677,7 @@ public class MultipleChartView extends View implements Runnable {
 
 			}
 		}
-        selectType = 1;
+		selectType = 1;
 		invalidate();
 		return false;
 	}
@@ -733,9 +734,10 @@ public class MultipleChartView extends View implements Runnable {
 		xInit = xOri + dpToPx(5);
 	}
 
-	public void notifyDataChange(){
-	    invalidate();
-    }
+	public void notifyDataChange() {
+		invalidate();
+	}
+
 	public void setValue(ArrayList<BrokenLine> valueList, List<String> xValue, List<Double> yValue, String xLength) {
 		this.valueList = valueList;
 		this.xValue = xValue;

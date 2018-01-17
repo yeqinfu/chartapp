@@ -33,10 +33,13 @@
 
 
     <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/ll_title_content"
+        android:weightSum="5"
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
-        <FrameLayout
+      <!--  <FrameLayout
             android:id="@+id/fg_01"
             android:layout_weight="1"
             android:layout_width="0dp"
@@ -255,7 +258,7 @@
                     android:layout_height="wrap_content"/>
 
             </RelativeLayout>
-        </FrameLayout>
+        </FrameLayout>-->
 
     </LinearLayout>
     <View

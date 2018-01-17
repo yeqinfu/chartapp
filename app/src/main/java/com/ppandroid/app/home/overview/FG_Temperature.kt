@@ -108,6 +108,9 @@ class FG_Temperature :FG_Base(){
             }
 
             override fun onError(error: ErrorBody?) {
+                if (!isAdded){
+                    return
+                }
                 refreshLayout.finishRefresh()
                 refreshLayout.finishLoadmore()
                 toast(error)
