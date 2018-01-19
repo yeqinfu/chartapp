@@ -40,7 +40,7 @@ public class MyReceiver extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 		try {
 			Bundle bundle = intent.getExtras();
-			DebugLog.d(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
+			DebugLog.d(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(context,bundle));
 
 			if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
 				String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
@@ -95,7 +95,9 @@ public class MyReceiver extends BroadcastReceiver {
 				String myKey = it.next().toString();
 				if (myKey.equals("type")) {
 					//消息转发要求隐藏小红点
-					EventBus.getDefault().post(new ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE, json.optString(myKey)));
+                    /**新增逻辑，把消息放到sp中作为伪数据库存储。增加之后，ET_RedPoin的type字段就不做使用*/
+                    Utils_SharePreferenceData.removeTypeMsg(context,json.optString(myKey));
+					EventBus.getDefault().post(new ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW_MAIN));
 					if (json.optString(myKey).equals(FG_News.BN_Data.Companion.getFAILUE_WARNING()+"")) {//故障报警
 						Intent intent = AC_ContentFG.createIntent(context, FG_FaultHistory.class.getName());
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -135,7 +137,7 @@ public class MyReceiver extends BroadcastReceiver {
 	}
 
 	// 打印所有的 intent extra 数据
-	private static String printBundle(Bundle bundle) {
+	private static String printBundle(Context context,Bundle bundle) {
 		StringBuilder sb = new StringBuilder();
 		for (String key : bundle.keySet()) {
 			if (key.equals(JPushInterface.EXTRA_NOTIFICATION_ID)) {
@@ -158,7 +160,9 @@ public class MyReceiver extends BroadcastReceiver {
 						String myKey = it.next().toString();
 						sb.append("\nkey:" + key + ", value: [" + myKey + " - " + json.optString(myKey) + "]");
 						if (myKey.equals("type")) {
-                            EventBus.getDefault().post(new ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW, json.optString(myKey)));
+                            /**新增逻辑，把消息放到sp中作为伪数据库存储。增加之后，ET_RedPoin的type字段就不做使用*/
+                            Utils_SharePreferenceData.putTypeMsg(context,json.optString(myKey));
+                            EventBus.getDefault().post(new ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW_MAIN));
 						}
 
 					}

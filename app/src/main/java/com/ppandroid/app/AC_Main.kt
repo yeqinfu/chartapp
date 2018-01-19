@@ -15,6 +15,7 @@ import com.ppandroid.app.home.FG_Center
 import com.ppandroid.app.home.FG_DevicesAll
 import com.ppandroid.app.home.FG_News
 import com.ppandroid.app.home.FG_OverViewAll
+import com.ppandroid.app.jpush.Utils_SharePreferenceData
 import com.ppandroid.im.FG_Mine
 import com.ppandroid.im.base.AC_Base
 import kotlinx.android.synthetic.main.activity_main.*
@@ -40,7 +41,8 @@ class AC_Main : AC_Base() {
             EventBus.getDefault().register(this)
         }
 
-
+        /**查询是否有未读消息*/
+        EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW_MAIN))
 
         rg_main_tab.setOnCheckedChangeListener { _, i ->
             when (i) {
@@ -127,20 +129,16 @@ class AC_Main : AC_Base() {
         startActivity(it)
     }
 
-    var set=HashSet<String>()
     @Subscribe(threadMode = ThreadMode.MAIN)
     open fun onMessageEvent(event: ET_RedPoint) {
         if (event.taskId === ET_RedPoint.TASKID_RED_POINT_SHOW_MAIN) {//显示小红点
-            set.add(event.type)
+            var set=Utils_SharePreferenceData.getHashSet(this)
             if (set.size>0){
                 iv_red_04.visibility= View.VISIBLE
-            }
-
-        }else if (event.taskId === ET_RedPoint.TASKID_RED_POINT_HIDE_MAIN){//隐藏小红点
-            set.remove(event.type)
-            if (set.size==0){
+            }else{
                 iv_red_04.visibility= View.GONE
             }
+
         }else if (event.taskId===ET_RedPoint.TASKID_CHECK_TAB_DEVICES){
             rg_main_tab.check(R.id.tab_03)
         }

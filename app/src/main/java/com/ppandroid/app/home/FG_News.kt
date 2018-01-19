@@ -7,7 +7,6 @@ package com.ppandroid.app.home
 
 import android.app.Activity
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -19,7 +18,7 @@ import com.ppandroid.app.home.news.FG_EnergyComparison
 import com.ppandroid.app.home.news.FG_EnergyList
 import com.ppandroid.app.home.news.FG_FaultHistory
 import com.ppandroid.app.home.news.FG_SystemNewList
-import com.ppandroid.app.utils.DebugLog
+import com.ppandroid.app.jpush.Utils_SharePreferenceData
 import com.ppandroid.im.base.FG_Base
 import kotlinx.android.synthetic.main.fg_news.*
 import org.greenrobot.eventbus.EventBus
@@ -40,36 +39,19 @@ class FG_News : FG_Base() {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     open fun onMessageEvent(event: ET_RedPoint) {
-        if (event.taskId === ET_RedPoint.TASKID_RED_POINT_SHOW) {//显示小红点
-            //转发通知给主tabs显示小红点
-            EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW_MAIN, event.type))
+        if (event.taskId === ET_RedPoint.TASKID_RED_POINT_SHOW_MAIN) {//显示小红点
             for (item in dataSet){
-                if (item.msgType.toString()==(event.type)){
-                    if (!TextUtils.isEmpty(event.msg)){//如果消息不为空，相应显示在选项item中
-                        item.msg=event.msg
-                    }
-                    item.showRedPoint=true
-                    DebugLog.d("============================================")
-                }
-            }
-            adapter?.notifyDataSetChanged()
-
-        } else if (event.taskId === ET_RedPoint.TASKID_RED_POINT_HIDE) {//隐藏小红点
-            //转发通知给主tab取消小红点
-            EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE_MAIN, event.type))
-            for (item in dataSet){
-                if (item.msgType.toString() == event.type){
-                    item.showRedPoint=false
-                }
+                var result=Utils_SharePreferenceData.isContains(activity,item.msgType.toString())
+                item.showRedPoint=result
             }
             adapter?.notifyDataSetChanged()
         }
-
     }
 
     var adapter: AD_List? = null
     override fun afterViews() {
         isNeedEventBus = true
+
         val c = Calendar.getInstance()
         val initDate = c.get(Calendar.YEAR).toString() + "-" + (c.get(Calendar.MONTH) + 1).toString() + "-" + c.get(Calendar.DAY_OF_MONTH)
 
@@ -129,11 +111,15 @@ class FG_News : FG_Base() {
         adapter = AD_List(activity, dataSet)
         lv_list.adapter = adapter
         refreshLayout.setOnRefreshListener { layout ->
+            /**查询是否有未读消息*/
+            EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW_MAIN))
             layout.finishRefresh(1000)
         }
+        refreshLayout.isEnableLoadmore=false
         lv_list.setOnItemClickListener { _, _, i, _ ->
-            //消息转发给主tab，要求取消小红点
-            EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_HIDE, dataSet[i].msgType.toString()))
+            Utils_SharePreferenceData.removeTypeMsg(activity, dataSet[i].msgType.toString())
+            /**更新小红点*/
+            EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW_MAIN))
             when (dataSet[i].msgType) {
                 BN_Data.ENERGY_COLLECT -> {//能耗汇总
                     startAC(FG_EnergyList::class.java.name)
@@ -156,6 +142,9 @@ class FG_News : FG_Base() {
                 }
             }
         }
+
+        /**查询是否有未读消息*/
+        EventBus.getDefault().post(ET_RedPoint(ET_RedPoint.TASKID_RED_POINT_SHOW_MAIN))
     }
     companion object {
          fun createBundle(): Bundle {
