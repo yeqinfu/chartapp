@@ -22,6 +22,7 @@ public class BN_OverView extends BaseBody {
 
     private MessageBean message;
 
+
     public MessageBean getMessage() {
         return message;
     }
