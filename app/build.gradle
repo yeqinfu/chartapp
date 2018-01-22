@@ -21,10 +21,11 @@ android {
         versionCode Integer.parseInt(project.VERSION_CODE)
         versionName project.VERSION_NAME
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        println("=============defaultConfig===============")
         // 默认是bzw的渠道
         manifestPlaceholders = [
                 JPUSH_PKGNAME: applicationId,
-                JPUSH_APPKEY : "be7564eb9c658eb63ffd6b40",
+                JPUSH_APPKEY : "803da466354c8872b8399815",
                 //JPush上注册的包名对应的appkey. test: be7564eb9c658eb63ffd6b40//803da466354c8872b8399815
                 JPUSH_CHANNEL: "bzw", //用户渠道统计的渠道名称
         ]
@@ -49,6 +50,11 @@ android {
     }
     buildTypes {
         release {
+            manifestPlaceholders=[
+                    JPUSH_APPKEY : "803da466354c8872b8399815",
+                    //JPush上注册的包名对应的appkey. test: be7564eb9c658eb63ffd6b40//803da466354c8872b8399815
+            ]
+            print(manifestPlaceholders.get("JPUSH_APPKEY")+"====manifestPlaceholders")
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.BZWConfigs
@@ -66,6 +72,11 @@ android {
         }
 
         debug {
+            manifestPlaceholders=[
+                    JPUSH_APPKEY : "be7564eb9c658eb63ffd6b40",
+                    //JPush上注册的包名对应的appkey. test: be7564eb9c658eb63ffd6b40//803da466354c8872b8399815
+            ]
+            print(manifestPlaceholders.get("JPUSH_APPKEY")+"====manifestPlaceholders")
             debuggable true
             signingConfig signingConfigs.BZWConfigs
             minifyEnabled false
