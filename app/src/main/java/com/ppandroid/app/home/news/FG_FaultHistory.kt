@@ -61,12 +61,10 @@ class FG_FaultHistory:FG_Base(){
         var url="user/failure/history.json?pageNumber=$pageNumber"
         Http.get(activity,url, BN_FaultHistory::class.java,object : MyCallBack<BN_FaultHistory> {
             override fun onResponse(response: BN_FaultHistory?) {
-                refresh_layout.finishRefresh()
-                refresh_layout.finishLoadmore()
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+
+                response?.safeRun {
+                    refresh_layout.finishRefresh()
+                    refresh_layout.finishLoadmore()
                     if (!it.message.failueWarningList.isEmpty()){
                         content.addAll(it.message.failueWarningList)
                         adapter?.notifyDataSetChanged()

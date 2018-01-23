@@ -66,10 +66,8 @@ class FG_ChooseInstrument : FG_Base() {
         url+="?energyClassificationId="+energyClassificationId
         Http.get(activity, url, BN_ChooseInstrument::class.java, object : MyCallBack<BN_ChooseInstrument> {
             override fun onResponse(response: BN_ChooseInstrument?) {
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+                response?.safeRun {
+
                     body = it
                     adapter = AD_List(activity, it.message)
                     if (chooseId!=-1L){

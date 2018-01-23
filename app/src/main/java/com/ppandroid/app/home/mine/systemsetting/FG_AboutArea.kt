@@ -89,10 +89,8 @@ class FG_AboutArea : FG_Base(){
         }
         Http.get(activity, url, BN_DeviceArea::class.java, object : MyCallBack<BN_DeviceArea> {
             override fun onResponse(response: BN_DeviceArea?) {
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+                response?.safeRun {
+
                     message = it.message
                     if (response.message.isEmpty()) {
                         network_error?.setViewType(NetWorkErrorView.NOT_DATA)

@@ -32,10 +32,8 @@ class FG_WaterMonitor :FG_Base(){
         Http.get(activity,url, BN_WaterMonitor::class.java,object :MyCallBack<BN_WaterMonitor>{
             override fun onResponse(response: BN_WaterMonitor?) {
 
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+                response?.safeRun {
+
                     tv_number.text=it.message.m3.toString()
                     tv_lastModifyTime.text=it.message.lastModifyTime.toString()
                 }

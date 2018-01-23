@@ -61,10 +61,7 @@ class FG_OverViewConfig:FG_Base(){
         }
         Http.get(activity,url, BN_OverViewConfig::class.java,object: MyCallBack<BN_OverViewConfig> {
             override fun onResponse(response: BN_OverViewConfig?) {
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+                response?.safeRun {
                     adapter.setDatas(it.message.choosed)
                     drag_list.adapter=adapter
                     adapter2.setDatas(it.message.noChoosed)
@@ -120,10 +117,8 @@ class FG_OverViewConfig:FG_Base(){
         }
         Http.get(activity,url,BaseBody::class.java,object :MyCallBack<BaseBody>{
             override fun onResponse(response: BaseBody?) {
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+                response?.safeRun {
+
                     if (it.isSuccess){
                         toast("保存成功")
                         if (type==1){

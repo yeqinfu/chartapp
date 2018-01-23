@@ -31,10 +31,8 @@ class FG_InstrumentHistogramAnalysisPage : FG_BaseHistoramAnalysisPage(){
         }
         Http.get(activity, url, BN_InstrumentDetailAnalysisPage::class.java, object : MyCallBack<BN_InstrumentDetailAnalysisPage> {
             override fun onResponse(response: BN_InstrumentDetailAnalysisPage?) {
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+                response?.safeRun {
+
                     /**柱状图*/
                     var list = ArrayList<BN_Vertical>()
                     /**柱状图最大值*/

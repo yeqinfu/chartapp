@@ -76,14 +76,10 @@ class FG_EnergyAnalysis :FG_Base(){
         url+="?energyClassificationId="+energyClassificationId
         Http.get(activity,url, BN_EnergyAnalysis::class.java,object :MyCallBack<BN_EnergyAnalysis>{
             override fun onResponse(response: BN_EnergyAnalysis?) {
-                response?.let {
-                    if (!isAdded){
-                        return
+                    response?.safeRun {
+                        v_yellow_chart?.setSumAndAverage(it.message.weekSum,it.message.weekAverage)
+                        v_yellow_chart?.startAnim(it.message.deviceSumString)
                     }
-                    v_yellow_chart?.setSumAndAverage(it.message.weekSum,it.message.weekAverage)
-                    v_yellow_chart?.startAnim(it.message.deviceSumString)
-
-                }
             }
 
             override fun onError(error: ErrorBody?) {

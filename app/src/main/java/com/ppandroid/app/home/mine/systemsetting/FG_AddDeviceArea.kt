@@ -106,22 +106,19 @@ class FG_AddDeviceArea : FG_Base(){
         }
         Http.post(activity, url, map, BaseBody::class.java, object : MyCallBack<BaseBody> {
             override fun onResponse(response: BaseBody?) {
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
-                    if (it.isSuccess) {
-                        EventBus.getDefault().post(ET_SyStemSetting(ET_SyStemSetting.TASKID_REFRESH_DEVICE_AREA_PAGE))
-                        if (pageType == "1") {
-                            toast("修改成功")
+                    response?.safeRun {
+                        if (it.isSuccess) {
+                            EventBus.getDefault().post(ET_SyStemSetting(ET_SyStemSetting.TASKID_REFRESH_DEVICE_AREA_PAGE))
+                            if (pageType == "1") {
+                                toast("修改成功")
+                            } else {
+                                toast("添加成功")
+                            }
+                            finish()
                         } else {
-                            toast("添加成功")
+                            toast(it.title)
                         }
-                        finish()
-                    } else {
-                        toast(it.title)
                     }
-                }
             }
 
             override fun onError(error: ErrorBody?) {

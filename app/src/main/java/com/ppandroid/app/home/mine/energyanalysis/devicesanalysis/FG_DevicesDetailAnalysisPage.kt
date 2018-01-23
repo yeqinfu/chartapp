@@ -33,10 +33,8 @@ class FG_DevicesDetailAnalysisPage : FG_BaseDevicesAnlysisPage() {
         }
         Http.get(activity, url, BN_DevicesDetailAnalysisPage::class.java, object : MyCallBack<BN_DevicesDetailAnalysisPage> {
             override fun onResponse(response: BN_DevicesDetailAnalysisPage?) {
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+                response?.safeRun {
+
                     /**柱状图*/
                     var list = ArrayList<BN_Vertical>()
                     /**底层列表*/

@@ -36,10 +36,8 @@ class FG_InstrumentList:FG_Base(){
         url+="?energyClassificationId="+energyClassificationId
         Http.get(activity,url,BN_InstrumentList::class.java,object :MyCallBack<BN_InstrumentList>{
             override fun onResponse(response: BN_InstrumentList?) {
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+                response?.safeRun {
+
                     var adapter=AD_List(activity,it.message)
                     lv_list.adapter=adapter
                     lv_list.setOnItemClickListener { _, _, i, _ ->

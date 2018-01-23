@@ -61,14 +61,8 @@ class FG_WaterPage:FG_Base(){
         var url = "user/overview/water/modular.json"
         Http.get(activity, url, BN_OverViewConfig::class.java, object : MyCallBack<BN_OverViewConfig> {
             override fun onResponse(response: BN_OverViewConfig?) {
-                if (!isAdded){
-                    return
-                }
-                refreshLayout.finishRefresh()
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+                response?.safeRun {
+                    refreshLayout.finishRefresh()
                     choosed = it.message.choosed
                     setData()
                     loadContent()
@@ -76,11 +70,12 @@ class FG_WaterPage:FG_Base(){
             }
 
             override fun onError(error: ErrorBody?) {
-                if (!isAdded){
-                    return
+
+                error?.safeRun {
+                    refreshLayout.finishRefresh()
+                    toast(it.message ?: "")
                 }
-                refreshLayout.finishRefresh()
-                toast(error?.message ?: "")
+
             }
 
         })
@@ -146,10 +141,7 @@ class FG_WaterPage:FG_Base(){
         }
         Http.get(activity, url, BN_OverViewWater::class.java, object : MyCallBack<BN_OverViewWater> {
             override fun onResponse(response: BN_OverViewWater?) {
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+                response?.safeRun {
                     body = it
                     setValue()
                 }

@@ -48,10 +48,8 @@ class FG_Devices : FG_Base() {
         Http.get(activity, url, BN_Devices::class.java, object : MyCallBack<BN_Devices> {
             override fun onResponse(response: BN_Devices?) {
                 refreshLayout.finishRefresh()
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+                response?.safeRun {
+
                     val adapter = AD_ExList(it.message.deviceCateList, activity)
                     lv_ex.setAdapter(adapter)
                     lv_ex.setOnGroupCollapseListener { var1 ->

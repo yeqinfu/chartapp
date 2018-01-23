@@ -42,59 +42,61 @@ import org.jetbrains.anko.find
  */
 class FG_InstrumentPage : FG_Base() {
     /**default:0代表viewpager 1 代表点击item进去的详情*/
-    private var pageType=0
+    private var pageType = 0
     /**当是子页面的时候这个id有用到*/
-    private var parentId:String=""
-    private var parentName:String=""
-    private var energyClassificationId= Devices.ELECTRIC
+    private var parentId: String = ""
+    private var parentName: String = ""
+    private var energyClassificationId = Devices.ELECTRIC
+
     companion object {
-        fun createBundle(parentId:String,parentName:String,energyClassificationId:String): Bundle {
-            var b=Bundle()
-            b.putString("parentName",parentName)
-            b.putString("parentId",parentId)
-            b.putInt("pageType",1)
-            b.putString("energyClassificationId",energyClassificationId)
+        fun createBundle(parentId: String, parentName: String, energyClassificationId: String): Bundle {
+            var b = Bundle()
+            b.putString("parentName", parentName)
+            b.putString("parentId", parentId)
+            b.putInt("pageType", 1)
+            b.putString("energyClassificationId", energyClassificationId)
             return b
         }
 
     }
+
     override fun fgRes(): Int = R.layout.fg_system_setting_page
 
     override fun afterViews() {
         arguments?.let {
-            pageType=it.getInt("pageType",0)
-            parentId=it.getString("parentId","")
-            parentName=it.getString("parentName","")
-            energyClassificationId=it.getString("energyClassificationId","1")
+            pageType = it.getInt("pageType", 0)
+            parentId = it.getString("parentId", "")
+            parentName = it.getString("parentName", "")
+            energyClassificationId = it.getString("energyClassificationId", "1")
         }
-        if (pageType==1){
-            sub_title.visibility=View.VISIBLE
-            head_view.visibility=View.VISIBLE
+        if (pageType == 1) {
+            sub_title.visibility = View.VISIBLE
+            head_view.visibility = View.VISIBLE
             head_view.setCenterTitle(parentName)
             head_view.init(activity)
             head_view.setIvRight(R.drawable.ic_add_model, {
-                var b=FG_AddInstrument.createBundle(parentId,parentName,"")
-                startAC(FG_AddInstrument::class.java.name,b)
+                var b = FG_AddInstrument.createBundle(parentId, parentName, "")
+                startAC(FG_AddInstrument::class.java.name, b)
             })
-        }else{
-            sub_title.visibility=View.GONE
+        } else {
+            sub_title.visibility = View.GONE
         }
-        isNeedEventBus=true
+        isNeedEventBus = true
         loadContent()
         network_error.setListener { loadContent() }
 
-       /* lv_list.setOnItemLongClickListener { adapterView, view, i, l ->
-            message?.let {
-                operatorId=it[i].id.toString()
-                operatorName=it[i].name.toString()
-                showChooseDialog()
-            }
-            true
-        }*/
+        /* lv_list.setOnItemLongClickListener { adapterView, view, i, l ->
+             message?.let {
+                 operatorId=it[i].id.toString()
+                 operatorName=it[i].name.toString()
+                 showChooseDialog()
+             }
+             true
+         }*/
     }
 
-    private var operatorId=""
-    private var operatorName=""
+    private var operatorId = ""
+    private var operatorName = ""
     private fun showConfirmDialog() {
         val builder = AlertDialog.Builder(activity).setMessage("确定删除吗？").setCancelable(false)
         builder.setPositiveButton("确定") { _, _ ->
@@ -111,10 +113,7 @@ class FG_InstrumentPage : FG_Base() {
         var url = "user/sysSet/instrument/delete.json?id=" + id
         Http.get(activity, url, BaseBody::class.java, object : MyCallBack<BaseBody> {
             override fun onResponse(response: BaseBody?) {
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+                response?.safeRun {
                     if (it.isSuccess) {
                         toast("删除成功")
                         loadContent()
@@ -131,17 +130,15 @@ class FG_InstrumentPage : FG_Base() {
 
     private fun loadContent() {
         var url = "user/sysSet/instrument/search.json"
-        url+="?energyClassificationId="+energyClassificationId
-        if (pageType==1){
-            url+="&parentId=$parentId"
+        url += "?energyClassificationId=" + energyClassificationId
+        if (pageType == 1) {
+            url += "&parentId=$parentId"
         }
 
         Http.get(activity, url, BN_SystemSettingPage01::class.java, object : MyCallBack<BN_SystemSettingPage01> {
             override fun onResponse(response: BN_SystemSettingPage01?) {
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+
+                response?.safeRun {
                     if (response.message.isEmpty()) {
                         network_error?.setViewType(NetWorkErrorView.NOT_DATA)
                     } else {
@@ -153,28 +150,28 @@ class FG_InstrumentPage : FG_Base() {
                         adapter.setOnClickListenerEditOrDelete(object : OnClickListenerDetailOrDelete {
                             override fun OnClickListenerDetail(position: Int) {
                                 message?.let {
-                                    operatorId=it[position].id.toString()
-                                    operatorName=it[position].name.toString()
-                                    var b=FG_AddInstrument.createBundle(energyClassificationId,operatorId,parentName)
-                                    startAC(FG_AddInstrument::class.java.name,b)
+                                    operatorId = it[position].id.toString()
+                                    operatorName = it[position].name.toString()
+                                    var b = FG_AddInstrument.createBundle(energyClassificationId, operatorId, parentName)
+                                    startAC(FG_AddInstrument::class.java.name, b)
                                 }
                             }
 
                             override fun OnClickListenerDelete(position: Int) {
                                 message?.let {
-                                    operatorId=it[position].id.toString()
-                                    operatorName=it[position].name.toString()
+                                    operatorId = it[position].id.toString()
+                                    operatorName = it[position].name.toString()
                                     showConfirmDialog()
                                 }
                             }
 
                         })
 
-                       /* lv_list.setOnItemClickListener { adapterView, view, i, l ->
+                        /* lv_list.setOnItemClickListener { adapterView, view, i, l ->
 
-                            var b= createBundle(it.message[i].id.toString(),it.message[i].name)
-                            startAC(FG_InstrumentPage::class.java.name,b)
-                        }*/
+                             var b= createBundle(it.message[i].id.toString(),it.message[i].name)
+                             startAC(FG_InstrumentPage::class.java.name,b)
+                         }*/
                     }
 
                 }
@@ -209,8 +206,8 @@ class FG_InstrumentPage : FG_Base() {
     private val dialogListener = View.OnClickListener { v ->
         when (v.id) {
             R.id.rl_detail -> {
-                var b=FG_AddInstrument.createBundle(energyClassificationId,operatorId,parentName)
-                startAC(FG_AddInstrument::class.java.name,b)
+                var b = FG_AddInstrument.createBundle(energyClassificationId, operatorId, parentName)
+                startAC(FG_AddInstrument::class.java.name, b)
                 dialog?.dismiss()
 
             }
@@ -221,7 +218,6 @@ class FG_InstrumentPage : FG_Base() {
 
         }
     }
-
 
 
     class Holder {
@@ -286,7 +282,6 @@ class FG_InstrumentPage : FG_Base() {
         }
 
     }
-
 
 
 }

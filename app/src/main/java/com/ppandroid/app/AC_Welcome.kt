@@ -16,7 +16,9 @@ class AC_Welcome : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ac__welcome)
 
+
         var it= Intent()
+
         if (Utils_UserInfo.isLogined(this)){
             it.setClass(this,AC_Main::class.java)
         }else{
@@ -25,10 +27,25 @@ class AC_Welcome : AppCompatActivity() {
         startActivity(it)
        finish()
 
+        var d=Intent()
+        var re=d?.let{_->
+            haha(it)
+        }
+        val list: MutableList<String> = mutableListOf("A", "B", "C")
+        val change: Any
+        change = with(list) {
+            add("D")
+            add("E")
+            this.add("F")
+            size
+        }
+
+    }
+    fun haha(i:Intent){}
+    inline fun <T, R> T.let(f: (T) -> R): R {
+       return  f(this)
     }
 
-    override fun onResume() {
-        super.onResume()
+    inline fun <T, R> with(receiver: T, f: T.() -> R): R = receiver.f()
 
-    }
 }

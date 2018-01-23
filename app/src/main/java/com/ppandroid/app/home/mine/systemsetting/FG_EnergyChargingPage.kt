@@ -37,23 +37,22 @@ import org.jetbrains.anko.find
 class FG_EnergyChargingPage : FG_Base() {
 
 
-
     override fun fgRes(): Int = R.layout.fg_system_setting_page
 
     override fun afterViews() {
-        isNeedEventBus=true
+        isNeedEventBus = true
         loadContent()
         network_error.setListener { loadContent() }
-        sub_title.visibility=View.GONE
-      /*  lv_list.setOnItemLongClickListener { adapterView, view, i, l ->
-            message?.let {
-                operatorId=it[i].energyChargingEntity.id.toString()
-                code=it[i].energyChargingEntity.code.toString()
-                energyClassificationId=it[i].energyChargingEntity.classificationId.toString()
-                showChooseDialog()
-            }
-            false
-        }*/
+        sub_title.visibility = View.GONE
+        /*  lv_list.setOnItemLongClickListener { adapterView, view, i, l ->
+              message?.let {
+                  operatorId=it[i].energyChargingEntity.id.toString()
+                  code=it[i].energyChargingEntity.code.toString()
+                  energyClassificationId=it[i].energyChargingEntity.classificationId.toString()
+                  showChooseDialog()
+              }
+              false
+          }*/
     }
 
 
@@ -65,10 +64,10 @@ class FG_EnergyChargingPage : FG_Base() {
     }
 
 
-    private var operatorId=""
-    private var energyClassificationId=""
-    private var energyClassificationName=""
-    private var code=""
+    private var operatorId = ""
+    private var energyClassificationId = ""
+    private var energyClassificationName = ""
+    private var code = ""
     private var dialog: CustomDialog? = null
     private fun showChooseDialog() {
         val mView = LayoutInflater.from(activity).inflate(R.layout.dialog_choose_modified_or_del, null)
@@ -81,8 +80,8 @@ class FG_EnergyChargingPage : FG_Base() {
     private val dialogListener = View.OnClickListener { v ->
         when (v.id) {
             R.id.rl_detail -> {
-                var b=FG_AddEnergyCharging.createBundle(operatorId,energyClassificationId,energyClassificationName,code)
-                startAC(FG_AddEnergyCharging::class.java.name,b)
+                var b = FG_AddEnergyCharging.createBundle(operatorId, energyClassificationId, energyClassificationName, code)
+                startAC(FG_AddEnergyCharging::class.java.name, b)
                 dialog?.dismiss()
 
             }
@@ -111,10 +110,7 @@ class FG_EnergyChargingPage : FG_Base() {
         var url = "user/sysSet/energyCharging/delete.json?id=" + id
         Http.get(activity, url, BaseBody::class.java, object : MyCallBack<BaseBody> {
             override fun onResponse(response: BaseBody?) {
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+                response?.safeRun {
                     if (it.isSuccess) {
                         toast("删除成功")
                         loadContent()
@@ -133,10 +129,7 @@ class FG_EnergyChargingPage : FG_Base() {
         var url = "user/sysSet/energyCharging/search.json"
         Http.get(activity, url, BN_EnergyChargingPage::class.java, object : MyCallBack<BN_EnergyChargingPage> {
             override fun onResponse(response: BN_EnergyChargingPage?) {
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+                response?.safeRun {
                     if (response.message.isEmpty()) {
                         network_error?.setViewType(NetWorkErrorView.NOT_DATA)
                     } else {
@@ -147,28 +140,26 @@ class FG_EnergyChargingPage : FG_Base() {
                         adapter.setOnClickListenerEditOrDelete(object : OnClickListenerDetailOrDelete {
                             override fun OnClickListenerDetail(position: Int) {
                                 message?.let {
-                                    operatorId=it[position].energyChargingEntity.id.toString()
-                                    code=it[position].energyChargingEntity.code.toString()
-                                    energyClassificationId=it[position].energyChargingEntity.classificationId.toString()
-                                    energyClassificationName=it[position].classificationName.toString()
-                                    var b=FG_AddEnergyCharging.createBundle(operatorId,energyClassificationId,energyClassificationName,code)
-                                    startAC(FG_AddEnergyCharging::class.java.name,b)
+                                    operatorId = it[position].energyChargingEntity.id.toString()
+                                    code = it[position].energyChargingEntity.code.toString()
+                                    energyClassificationId = it[position].energyChargingEntity.classificationId.toString()
+                                    energyClassificationName = it[position].classificationName.toString()
+                                    var b = FG_AddEnergyCharging.createBundle(operatorId, energyClassificationId, energyClassificationName, code)
+                                    startAC(FG_AddEnergyCharging::class.java.name, b)
                                 }
                             }
 
                             override fun OnClickListenerDelete(position: Int) {
                                 message?.let {
-                                    operatorId=it[position].energyChargingEntity.id.toString()
-                                    code=it[position].energyChargingEntity.code.toString()
-                                    energyClassificationName=it[position].classificationName.toString()
-                                    energyClassificationId=it[position].energyChargingEntity.classificationId.toString()
+                                    operatorId = it[position].energyChargingEntity.id.toString()
+                                    code = it[position].energyChargingEntity.code.toString()
+                                    energyClassificationName = it[position].classificationName.toString()
+                                    energyClassificationId = it[position].energyChargingEntity.classificationId.toString()
                                     showConfirmDialog()
                                 }
                             }
 
                         })
-
-
                     }
                 }
             }
@@ -216,9 +207,9 @@ class FG_EnergyChargingPage : FG_Base() {
                 holder.tv_delete = layout.find(R.id.tv_delete)
                 layout.tag = holder
             }
-            holder?.tv_name?.text =  message?.get(pos)?.energyChargingName
-            holder?.tv_level?.text =  message?.get(pos)?.classificationName
-            holder?.tv_number?.text =  message?.get(pos)?.energyChargingEntity?.code
+            holder?.tv_name?.text = message?.get(pos)?.energyChargingName
+            holder?.tv_level?.text = message?.get(pos)?.classificationName
+            holder?.tv_number?.text = message?.get(pos)?.energyChargingEntity?.code
             holder?.tv_delete?.setOnClickListener {
                 onClickListenerDetailOrDelete?.OnClickListenerDelete(pos)
             }

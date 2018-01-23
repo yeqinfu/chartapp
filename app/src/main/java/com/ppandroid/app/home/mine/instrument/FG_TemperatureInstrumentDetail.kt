@@ -38,10 +38,8 @@ class FG_TemperatureInstrumentDetail : FG_Base(){
         var url="user/instrument/record/temperature.json?id=$id"
         Http.get(activity, url, BN_TemperatureIntrDetail::class.java, object : MyCallBack<BN_TemperatureIntrDetail> {
             override fun onResponse(response: BN_TemperatureIntrDetail?) {
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+                response?.safeRun {
+
                     tv_humidity.text=it.message.humidity?.toString()
                     tv_temperature.text=it.message.temperature?.toString()
                     tv_lastModifyTime.text=it.message.lastModifyTime?.toString()

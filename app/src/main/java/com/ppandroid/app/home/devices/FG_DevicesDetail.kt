@@ -49,10 +49,8 @@ class FG_DevicesDetail:FG_Base(){
         var url="user/device/info.json?id=$id"
         Http.get(activity,url,BN_DevicesDetail::class.java,object :MyCallBack<BN_DevicesDetail>{
             override fun onResponse(response: BN_DevicesDetail?) {
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+                response?.safeRun {
+
                     tv_device_name.text=it.message.name
                     when {
                         it.message.status == 2 -> tv_status001.setTextColor(Color.parseColor("#5ec1ff"))

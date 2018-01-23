@@ -109,10 +109,8 @@ class FG_AddEnergyCharging : FG_Base() {
         var url = "user/sysSet/energyClassification/energyCharging.json"
         Http.get(activity, url, BN_EnergyClasses::class.java, object : MyCallBack<BN_EnergyClasses> {
             override fun onResponse(response: BN_EnergyClasses?) {
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+                response?.safeRun {
+
                     for (item in it.message) {
                         list.add(item.name)
                         listMap.put(item.name, item.id)
@@ -149,10 +147,8 @@ class FG_AddEnergyCharging : FG_Base() {
         }
         Http.post(activity, url, map, BaseBody::class.java, object : MyCallBack<BaseBody> {
             override fun onResponse(response: BaseBody?) {
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+                response?.safeRun {
+
                     if (it.isSuccess) {
                         EventBus.getDefault().post(ET_SyStemSetting(ET_SyStemSetting.TASKID_REFRESH_ENERGY_CHARGING))
                         if (pageType == "1") {

@@ -31,32 +31,30 @@ class FG_CatePage :FG_BaseAnlysisPage(){
         }
         Http.get(activity,url, BN_CatePage::class.java,object : MyCallBack<BN_CatePage> {
             override fun onResponse(response: BN_CatePage?) {
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
-                    tv_totalKwh?.text=it.message.analysisCateSum
-                    var k=getList(it)
-                    var adapter=AD_List(activity,k,isHaveChild)
-                    v_dount_view?.startAnim()
-                    adapter.listener=object :ItemChoosseListener{
-                        override fun choose(index: Int) {
-                            var b=FG_BaseAnalysis.createBundle(energyClassificationId,it.message.analysisCateParamDtoList[index].cateId.toString())
-                            startAC(FG_CateAnalysis::class.java.name,b)
+                    response?.safeRun {
+                        tv_totalKwh?.text=it.message.analysisCateSum
+                        var k=getList(it)
+                        var adapter=AD_List(activity,k,isHaveChild)
+                        v_dount_view?.startAnim()
+                        adapter.listener=object :ItemChoosseListener{
+                            override fun choose(index: Int) {
+                                var b=FG_BaseAnalysis.createBundle(energyClassificationId,it.message.analysisCateParamDtoList[index].cateId.toString())
+                                startAC(FG_CateAnalysis::class.java.name,b)
+                            }
+                        }
+                        lv_list?.adapter=adapter
+                        lv_list?.setOnItemClickListener { adapterView, view, i, l ->
+                            var item=it.message.analysisCateParamDtoList[i]
+                            var bundle= FG_DeviceDetailAnalysis.createBundle(energyClassificationId,item.cateId,item.cateName)
+                            startAC(FG_CateDetailAnalysis::class.java.name,bundle)
+                        }
+
+                        v_dount_view?.charRender(getValues(k))
+                        if (index==3){
+                            tv_time.text = it.message.dateString
                         }
                     }
-                    lv_list?.adapter=adapter
-                    lv_list?.setOnItemClickListener { adapterView, view, i, l ->
-                        var item=it.message.analysisCateParamDtoList[i]
-                        var bundle= FG_DeviceDetailAnalysis.createBundle(energyClassificationId,item.cateId,item.cateName)
-                        startAC(FG_CateDetailAnalysis::class.java.name,bundle)
-                    }
 
-                    v_dount_view?.charRender(getValues(k))
-                    if (index==3){
-                        tv_time.text = it.message.dateString
-                    }
-                }
             }
 
             override fun onError(error: ErrorBody?) {

@@ -77,10 +77,8 @@ class FG_Demo02 : FG_Base() {
         var url="user/logout.json?id="+ Utils_UserInfo.getUserId(activity) +"&md5="+ Utils_UserInfo.getUserMD5(activity)
         Http.get(activity, url, BaseBody::class.java, object : MyCallBack<BaseBody> {
             override fun onResponse(response: BaseBody?) {
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+                response?.safeRun {
+
                     if (it.isSuccess) {
                         toast("退出成功")
                         Utils_UserInfo.clearUserInfo(activity)

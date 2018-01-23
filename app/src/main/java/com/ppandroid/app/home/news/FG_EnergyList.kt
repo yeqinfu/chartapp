@@ -77,12 +77,10 @@ class FG_EnergyList :FG_Base(){
         }
         Http.get(activity,url, BN_EnergyList::class.java,object :MyCallBack<BN_EnergyList>{
             override fun onResponse(response: BN_EnergyList?) {
-                refresh_layout.finishRefresh()
-                refresh_layout.finishLoadmore()
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+
+                response?.safeRun {
+                    refresh_layout.finishRefresh()
+                    refresh_layout.finishLoadmore()
                     if (!it.message.energyConsumptionStatisticsDtoList.isEmpty()){
                         content.addAll(it.message.energyConsumptionStatisticsDtoList)
                         adapter?.notifyDataSetChanged()

@@ -29,10 +29,8 @@ class FG_AreaPage : FG_BaseAnlysisPage(){
         }
         Http.get(activity, url, BN_AreaPage::class.java, object : MyCallBack<BN_AreaPage> {
             override fun onResponse(response: BN_AreaPage?) {
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+                response?.safeRun {
+
                     tv_totalKwh.text = it.message.analysisAreaSum
                     var k=getList(it)
                     var adapter = AD_List(activity, k, isHaveChild)

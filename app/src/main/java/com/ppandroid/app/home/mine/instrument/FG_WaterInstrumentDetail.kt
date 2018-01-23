@@ -38,10 +38,8 @@ class FG_WaterInstrumentDetail:FG_Base(){
         var url="user/instrument/record/water.json?id=$id"
         Http.get(activity,url, BN_WaterIntrumentDetail::class.java,object :MyCallBack<BN_WaterIntrumentDetail>{
             override fun onResponse(response: BN_WaterIntrumentDetail?) {
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+                response?.safeRun {
+
                     tv_number.text=it.message.m3.toString()
                     tv_lastModifyTime.text=it.message.lastModifyTime.toString()
                 }

@@ -72,12 +72,10 @@ class FG_Temperature :FG_Base(){
         var url="user/overview/temperature/index.json?pageNumber=$pageNumber&pageSize=$pageSize"
         Http.get(activity,url, BN_Temperature::class.java,object :MyCallBack<BN_Temperature>{
             override fun onResponse(response: BN_Temperature?) {
-                refreshLayout.finishRefresh()
-                refreshLayout.finishLoadmore()
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
+
+                response?.safeRun {
+                    refreshLayout.finishRefresh()
+                    refreshLayout.finishLoadmore()
                     if (!it.message.devicePage.result.isEmpty()){
                         content.addAll(it.message.devicePage.result)
                         adapter?.notifyDataSetChanged()
@@ -108,12 +106,12 @@ class FG_Temperature :FG_Base(){
             }
 
             override fun onError(error: ErrorBody?) {
-                if (!isAdded){
-                    return
+                error?.safeRun {
+                    refreshLayout.finishRefresh()
+                    refreshLayout.finishLoadmore()
+                    toast(error)
                 }
-                refreshLayout.finishRefresh()
-                refreshLayout.finishLoadmore()
-                toast(error)
+
             }
 
         })

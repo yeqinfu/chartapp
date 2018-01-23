@@ -64,38 +64,34 @@ class FG_TeamDetail : FG_Base() {
         var url = "user/team/department/employee.json?departmentId=$id"
         Http.get(activity, url, BN_TeamDetail::class.java, object : MyCallBack<BN_TeamDetail> {
             override fun onResponse(response: BN_TeamDetail?) {
-                response?.let {
-                    if (!isAdded){
-                        return
-                    }
-                    it.message.departmentList?.let {
-                        var teamAdapter = AD_Team(it, activity)
-                        lv_list_team.adapter = teamAdapter
-                        lv_list_team.setOnItemClickListener { _, _, i, _ ->
-                            var b = FG_TeamDetail.createBundle(it[i].name.toString(), it[i].id.toString())
-                            startAC(FG_TeamDetail::class.java.name, b)
+                    response?.let {
+                        it.message.departmentList?.let {
+                            var teamAdapter = AD_Team(it, activity)
+                            lv_list_team.adapter = teamAdapter
+                            lv_list_team.setOnItemClickListener { _, _, i, _ ->
+                                var b = FG_TeamDetail.createBundle(it[i].name.toString(), it[i].id.toString())
+                                startAC(FG_TeamDetail::class.java.name, b)
+
+                            }
 
                         }
+                        it.message.employeeList?.let {
+                            var employeeAdapter = AD_Employee(it, activity)
+                            lv_list_emp.adapter = employeeAdapter
+                            lv_list_emp.setOnItemClickListener { _, _, i, _ ->
+                                var b=FG_AddEmployee.createBundle(
+                                        it[i].id?.toString(),
+                                        it[i].departmentId?.toString(),
+                                        it[i].roleId?.toString(),
+                                        it[i].realName?:"",
+                                        it[i].mobile?:"",
+                                        it[i].job?:""
+                                )
+                                startAC(FG_AddEmployee::class.java.name,b)
 
-                    }
-                    it.message.employeeList?.let {
-                        var employeeAdapter = AD_Employee(it, activity)
-                        lv_list_emp.adapter = employeeAdapter
-                        lv_list_emp.setOnItemClickListener { _, _, i, _ ->
-                            var b=FG_AddEmployee.createBundle(
-                                    it[i].id?.toString(),
-                                    it[i].departmentId?.toString(),
-                                    it[i].roleId?.toString(),
-                                    it[i].realName?:"",
-                                    it[i].mobile?:"",
-                                    it[i].job?:""
-                                    )
-                            startAC(FG_AddEmployee::class.java.name,b)
-
+                            }
                         }
                     }
-
-                }
             }
 
             override fun onError(error: ErrorBody?) {
