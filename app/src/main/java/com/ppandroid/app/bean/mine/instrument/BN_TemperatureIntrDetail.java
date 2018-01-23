@@ -44,8 +44,8 @@ public class BN_TemperatureIntrDetail extends BaseBody {
         private int companyId;
         private int deviceId;
         private long recordTime;
-        private int temperature;
-        private int humidity;
+        private double temperature;
+        private double humidity;
         private String statusString;
         private int status;
         private int id;
@@ -82,7 +82,7 @@ public class BN_TemperatureIntrDetail extends BaseBody {
             this.recordTime = recordTime;
         }
 
-        public int getTemperature() {
+        public double getTemperature() {
             return temperature;
         }
 
@@ -90,7 +90,7 @@ public class BN_TemperatureIntrDetail extends BaseBody {
             this.temperature = temperature;
         }
 
-        public int getHumidity() {
+        public double getHumidity() {
             return humidity;
         }
 
